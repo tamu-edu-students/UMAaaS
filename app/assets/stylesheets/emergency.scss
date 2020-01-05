@@ -1,0 +1,481 @@
+// Place all the styles related to the emergency controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html,body{
+  padding:10;
+  margin:10;
+  height: 100%;
+  background-color: white;
+ 
+}
+
+.header1 {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 60px !important;
+  color: #500000 !important;
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  Justify-content: space-evenly;
+  flex-direction: column;
+  padding: 35px;
+
+  flex-wrap: wrap;  
+
+  align-items: center;
+ -webkit-flex-flow: row wrap;
+  flex-start: center;
+
+}
+
+.tamu{
+  background: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: white !important;
+
+  padding: 25px;
+  width: 900px;
+  height: 200px;
+  margin-top: 5px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  
+  color:#500000;
+  font-weight: bold;
+
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+
+  box-shadow: 10px 5px 18px grey;
+
+}
+
+
+
+
+.europe{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: white !important;
+
+
+  background: white;
+  padding: 25px;
+  width: 900px;
+  height: 250px;
+  margin-top: 5px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+
+  color:#500000;
+  font-weight: bold;
+  
+
+  text-align: left;
+  line-height: 19px;
+
+ -webkit-flex-flow: row wrap;
+
+
+  box-shadow: 10px 5px 18px grey;
+
+}
+
+.south_america{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: white !important;
+
+
+  background: white;
+  padding: 25px;
+  width: 900px;
+  height: 200px;
+  margin-top: 5px;
+  
+
+  font-size: 20px;
+  align-items: center;
+
+  color:#500000;
+  font-weight: bold;
+  
+  justify-content: center;
+  text-align: left;
+  line-height: 19px;
+
+ -webkit-flex-flow: row wrap;
+
+
+  box-shadow: 10px 5px 18px grey;
+
+}
+.asia{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: white !important;
+
+
+  background: white;
+  padding: 25px;
+  width: 900px;
+  height: 200px;
+  margin-top: 5px;
+  
+
+  font-size: 20px;
+  align-items: center;
+
+  color:#500000;
+  font-weight: bold;
+  
+  justify-content: center;
+  text-align: left;
+  line-height: 19px;
+
+ -webkit-flex-flow: row wrap;
+
+
+  box-shadow: 10px 5px 18px grey;
+
+}
+
+.africa{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: white !important;
+
+
+  background: white;
+  padding: 25px;
+  width: 900px;
+  height: 200px;
+  margin-top: 5px;
+  
+
+  font-size: 20px;
+  align-items: center;
+
+  color:#500000;
+  font-weight: bold;
+  
+  justify-content: center;
+  text-align: left;
+  line-height: 19px;
+
+ -webkit-flex-flow: row wrap;
+
+
+  box-shadow: 10px 5px 18px grey;
+
+}
+
+.column_1{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -50px;
+  //left: 80px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column_2{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -230px;
+  left: 425px; 
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  
+  text-align: center;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column3{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -30px;
+  //left: 400px; 
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column4{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -230px;
+  left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column5{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -30px;
+  //left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column6{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -230px;
+  left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+.column7{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -30px;
+  //left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column8{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -230px;
+  left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column9{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -30px;
+  //left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+
+.column10{
+  padding: 25px;
+  width: 450px;
+  height: 200px;
+  //margin-top: 5px;
+  position:relative;
+  top: -230px;
+  left: 425px;
+  
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  
+  text-align: left;
+  line-height: 20px;
+
+ -webkit-flex-flow: row wrap;
+
+}
+// a:link{
+//   font-size: 15px;
+//   //color: #500000; //this affects the link for the login page
+//   text-decoration: none !important;
+// }
+
+//this affects the link for the contact page in the top header
+//a:visited {
+//  font-size: 20px;
+//  color: #500000;
+//  text-decoration: none !important;
+//}
+
+/* mouse over link */
+a:hover {
+  font-size: 15px;
+  color: #500000;
+  text-decoration: none !important;
+}
+
+/* selected link */
+a:active {
+  font-size: 15px;
+  color: #500000;
+  text-decoration: none !important;
+
+}
+
+.link_phone{
+  font-size:15px;
+  //color: grey;
+  text-decoration: none !important;
+  display: inline-block;
+  //width: 100px;
+}
+
+.link_email{
+  font-size:15px;
+  //color: grey;
+  text-decoration: none !important;
+  display: inline-block;
+}
+
+.link_tamu{
+  font-size:15px;
+  color: #500000;
+  text-decoration: underline !important;
+  display: inline-block;
+}
+
+.text{
+  font-size: 15px;
+  color: grey;
+  text-decoration: none !important;
+  display: inline-block;
+}
+
+.intl_text{
+  font-size: 15px;
+  color: grey;
+  text-decoration: none !important;
+  display: inline-block;
+  //align-text: left;
+}
+
+.intl_num{
+  font-size: 15px;
+  color: #500000;
+  text-decoration: none !important;
+  display: inline-block;
+  //align-text: left;
+}
+
+.text_title{
+  font-size: 20px;
+  color: #500000 !important;
+  text-align: center;
+}
+
+
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");

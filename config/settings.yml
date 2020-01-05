@@ -1,0 +1,12 @@
+default: &default
+  client_id: '826565649927-pvr26un99dduiv0271mm0v77b8ija8ra.apps.googleusercontent.com'
+  client_secret: '9MqOoItGC1eSs61obEE4wRf6'
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

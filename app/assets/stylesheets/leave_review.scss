@@ -1,0 +1,328 @@
+// Place all the styles related to the leave_review controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.review_header {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 60px !important;
+    color: black !important;
+    text-align: left; 
+}
+
+.rating_header {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px !important;
+    color: black !important;
+    text-align: left; 
+}
+
+
+.review_ratings{
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+}
+
+.price_style{
+    display: flex;
+    width: 500px;
+}
+
+.textbox_style{
+    display: flex;
+    width: 500px;
+}
+
+.tags_label{
+    display: flex;
+    width: 500px;
+}
+
+.tags {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.review_buttons{
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+
+// Button Styles 
+.btn-primary-review { 
+    background-color: #500000 !important;
+    border-color: #500000 !important;
+    color: white !important;
+    //color: #500000 !important;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/*.glyphicon-thumbs-up {
+    color: #500000
+}*/
+
+.hidden{
+    display: none;
+}
+
+.btn-primary-review:hover { 
+    background-color: #6b0000 !important;
+    border-color: #6b0000 !important;
+}
+
+.btn-primary-review:not(:disabled):not(.disabled).active, .btn-primary-review:not(:disabled):not(.disabled):active {
+    background-color: #240101 !important;
+    //background-color: #500000 !important;
+}
+
+
+.reviews-card { 
+    width: 64%; 
+    background-color: white; 
+    box-shadow: 5px 5px 20px #9e9e9e;
+    padding: 30px; 
+}
+
+.page-body { 
+    display: flex; 
+    justify-content: center; 
+}
+
+.tags-section { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    flex-wrap: wrap !important;
+    justify-content: center !important; 
+}
+
+.tags-row {
+    display: flex;
+    flex-direction: row;
+//    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 15px; 
+}
+
+.big-row { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+//    align-items: center; 
+    margin-bottom: 15px; 
+
+}
+
+.tags-text { 
+    margin-bottom: 0 !important;
+    margin-right: 20px; 
+    width: 200px; 
+//    font-size: 1.5em; 
+}
+
+
+.column-1 { 
+//    width: 25%; 
+    display: flex !important; 
+//    flex-direction: column;
+    //justify-content: space-between !important;
+    font-size: 1.5em; 
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+
+.column-2 {
+//    width: 50%; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: space-between !important;
+    font-size: 1.5em; 
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100px; 
+}
+
+.comment {
+    width: 100%;
+}
+
+.rate { 
+    display: flex !important; 
+    flex-direction: row !important; 
+    flex-wrap: wrap !important;
+    justify-content: space-between !important; 
+    margin-bottom: 20px;  
+}
+
+.rate-row { 
+    display: flex;
+    width: 48%;
+    font-size: 1.5em;
+    align-items: center;
+}
+
+.buttons-section { 
+    display: flex !important; 
+    flex-direction: row !important; 
+    flex-wrap: wrap !important;
+    justify-content: space-between!important; 
+}
+
+.action-buttons { 
+    color: #500000 !important; 
+    background-color: white !important; 
+    border: none !important;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    padding: 5px;
+    font-size: 1.4em; 
+    
+}
+
+.action-buttons:hover {
+    background-color: #500000 !important; 
+    color: white !important; 
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.4em !important;
+}
+
+
+/******* Gigs Out of 5 Rating Styless ********/
+.rating {
+    float:left;
+//    display: flex; 
+//    flex-direction: row-reverse;
+//    justify-content: space-between;
+//    width: 130px;
+    margin-left: 20px; 
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip:rect(0,0,0,0);
+}
+
+.label { 
+    width: 40px !important;  
+    float: right; 
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    width: 1.1em; // if you want to have them closer or further apart
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 150%;
+    line-height:1.2;
+    color:#ddd;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #500000;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #500000;
+    text-shadow: 1px 1px 2px grey;
+}
+
+/* Hover after already checked */
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #500000;
+    text-shadow: 1px 1px 2px grey;
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+/******* Price Out of 5 Rating Styless ********/
+.price {
+    float:left;
+//    display: flex; 
+//    flex-direction: row-reverse;
+//    justify-content: space-between;
+//    width: 130px;
+    margin-left: 20px; 
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.price:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip:rect(0,0,0,0);
+}
+
+.price:not(:checked) > label {
+    float: right;
+    width: 0.8em; // if you want to have them closer or further apart
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 150%;
+    line-height:1.2;
+    color:#ddd;
+}
+
+.price:not(:checked) > label:before {
+    content: '$ ';
+}
+
+.price > input:checked ~ label {
+    color: #500000;
+}
+
+.price:not(:checked) > label:hover,
+.price:not(:checked) > label:hover ~ label {
+    color: #500000;
+    text-shadow: 1px 1px 2px grey;
+}
+
+/* Hover after already checked */
+.price > input:checked + label:hover,
+.price > input:checked + label:hover ~ label,
+.price > input:checked ~ label:hover,
+.price > input:checked ~ label:hover ~ label,
+.price > label:hover ~ input:checked ~ label {
+    color: #500000;
+    text-shadow: 1px 1px 2px grey;
+}
+
+.price > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");

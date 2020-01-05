@@ -1,0 +1,183 @@
+<h1 class="header1">Leave a Review</h1>
+<div class="page-body">
+<div class="reviews-card"> 
+    <%= form_for(@review) do |f| %>
+        <div id="review_business_id_block" style="display: none">
+            <%= f.label :business_id %>
+            <%= f.text_field :business_id, value: params[:id]%>
+        </div>
+        <div id="review_user_email_block" style="display: none">
+            <%= f.label :user_email %>
+            <%if logged_in?%>
+                <%= f.text_field :user_email, value: current_user.email%>
+            <%else%>
+                <%= f.text_field :user_email, value: "not logged in"%>
+            <%end%>
+        </div>
+        <div id="review_user_name_block" style="display: none">
+            <%= f.label :name %>
+            <%if logged_in?%>
+                <%= f.text_field :name, value: current_user.name%>
+            <%else%>
+                <%= f.text_field :name, value: "No Name"%>
+            <%end%>
+        </div>
+    <!--Out of 5 Ratings-->
+        <div class="rate"> 
+            <div id="review_rating_block" class="rate-row">
+                <%= f.label :rating, "Rating:", :class => "label" %>
+                <fieldset class="rating">
+                      <%= f.radio_button(:rating, "5") %> <%= f.label(:rating.to_s + "_5" ) %> 
+                      <%= f.radio_button(:rating, "4") %> <%= f.label(:rating.to_s + "_4" ) %> 
+                      <%= f.radio_button(:rating, "3") %> <%= f.label(:rating.to_s + "_3" ) %> 
+                      <%= f.radio_button(:rating, "2") %> <%= f.label(:rating.to_s + "_2" ) %> 
+                      <%= f.radio_button(:rating, "1") %> <%= f.label(:rating.to_s + "_1" ) %>
+                </fieldset>
+            </div>
+            <div id="review_price_block" class="rate-row">
+                <%= f.label :price, "Price:", :class => "label" %>
+                <fieldset class="price">
+                      <%= f.radio_button(:price, "5") %> <%= f.label(:price.to_s + "_5" ) %> 
+                      <%= f.radio_button(:price, "4") %> <%= f.label(:price.to_s + "_4" ) %> 
+                      <%= f.radio_button(:price, "3") %> <%= f.label(:price.to_s + "_3" ) %> 
+                      <%= f.radio_button(:price, "2") %> <%= f.label(:price.to_s + "_2" ) %> 
+                      <%= f.radio_button(:price, "1") %> <%= f.label(:price.to_s + "_1" ) %>
+                </fieldset>
+            </div>
+            <div id="review_safety_block" class="rate-row">
+                <%= f.label :safety, "Safety:", :class => "label" %>
+                <fieldset class="rating">
+                      <%= f.radio_button(:safety, "5") %> <%= f.label(:safety.to_s + "_5" ) %> 
+                      <%= f.radio_button(:safety, "4") %> <%= f.label(:safety.to_s + "_4" ) %> 
+                      <%= f.radio_button(:safety, "3") %> <%= f.label(:safety.to_s + "_3" ) %> 
+                      <%= f.radio_button(:safety, "2") %> <%= f.label(:safety.to_s + "_2" ) %> 
+                      <%= f.radio_button(:safety, "1") %> <%= f.label(:safety.to_s + "_1" ) %>
+                </fieldset>
+            </div>
+            <div id="review_service_block" class="rate-row">
+                <%= f.label :service, "Service:", :class => "label" %>
+                <fieldset class="rating">
+                      <%= f.radio_button(:service, "5") %> <%= f.label(:service.to_s + "_5" ) %> 
+                      <%= f.radio_button(:service, "4") %> <%= f.label(:service.to_s + "_4" ) %> 
+                      <%= f.radio_button(:service, "3") %> <%= f.label(:service.to_s + "_3" ) %> 
+                      <%= f.radio_button(:service, "2") %> <%= f.label(:service.to_s + "_2" ) %> 
+                      <%= f.radio_button(:service, "1") %> <%= f.label(:service.to_s + "_1" ) %>
+                </fieldset>
+            </div>
+        </div>
+        
+       <div class="tags-section"> 
+            <div id="review_cash_only_block" class="tags-row">
+                <div class=column-1>
+                    <%= f.label :cash_only, "Do they only accept Cash?", value: true, class: "tags-text" %><br />
+                </div>
+                <div class=column-2>
+                    <div>
+                        <%= f.radio_button :cash_only, true, :checked => false, :value => true %>
+                        <span>Yes</span>
+                    </div>
+                    <div> 
+                        <%= f.radio_button :cash_only, false, :checked => false, :value => false %>
+                        <span>No</span>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="review_english_block" class="tags-row">
+                <div class=column-1>
+                    <%= f.label :english, "Do they speak English?", value: true, class: "tags-text" %><br />
+                </div>
+                <div class=column-2>
+                    <div>
+                        <%= f.radio_button :english, true, :checked => false, :value => true %>
+                        <span>Yes</span>
+                    </div>
+                    <div>
+                        <%= f.radio_button :english, false, :checked => false, :value => false %>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+            <div id="review_tips_block" class="tags-row">
+                <div class=column-1>
+                    <%= f.label :tips, "Are you expected to tip?", value: true, class: "tags-text" %><br />
+                </div>
+                <div class=column-2>
+                    <div>
+                        <%= f.radio_button :tips, true, :checked => false, :value => true %>
+                        <span>Yes</span>
+                    </div>
+                    <div>
+                        <%= f.radio_button :tips, false, :checked => false, :value => false %>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+            <div id="review_wifi_block" class="tags-row">
+                <div class=column-1>
+                    <%= f.label :wifi, "Do they have WiFi?", value: true, class: "tags-text" %><br />
+                </div>
+                <div class=column-2>
+                    <div>
+                        <%= f.radio_button :wifi, true, :checked => false, :value => true %>
+                        <span>Yes</span>
+                    </div>
+                    <div>
+                        <%= f.radio_button :wifi, false, :checked => false, :value => false %>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+            <div id="review_wheelchair_block" class="tags-row">
+                <div class=column-1>
+                    <%= f.label :wheelchair, "Is it wheelchair accessible?", value: true, class: "tags-text" %><br />
+                </div>
+                <div class=column-2>
+                     <div>
+                        <%= f.radio_button :wheelchair, true, :checked => false, :value => true %>
+                        <span>Yes</span>
+                    </div>
+                    <div>
+                        <%= f.radio_button :wheelchair, false, :checked => false, :value => false %>
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+            <div id="anonymous_block" class="tags-row">
+                <div class="column-1">
+                    <label class="tags-text">Would you like to submit anonymously?
+                    </label>
+                </div>
+                <div class="column-2">
+                    <div>
+                        <input type="radio" id="review_anonymous_yes">
+                        <span>Yes</span>
+                    </div>
+                    <div>
+                        <input type="radio" id="review_anonymous_no">
+                        <span>No</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="review_comment_block" class="tags-row">
+                <div class=column-1>
+                    <%= f.label :comment, "Comment:", class: "tags-text" %>
+                </div>
+            </div>
+            <div id="review_comment_block" class="tags-row">
+                <%= f.text_area :comment, :class => "comment"%>
+            </div>
+
+            <div class="buttons-section">
+                 <%= link_to 'Back', review_path(id: params[:id]), class: "action-buttons" %>
+                <%= f.submit "Submit", disabled: false, class: "action-buttons"%>
+            </div>
+            
+        </div>
+        
+        
+    <%end%>
+   
+</div>
+</div>

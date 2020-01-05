@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Reviews</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Yanone+Kaffeesatz:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+  </head>
+
+    <body>
+        <nav class="nav">
+            <%= link_to "WHOOP!", reviews_path(), :id => "tamu_logo_link", :class => "logo" %>
+              <div class="nav-actions"> 
+                <%=link_to "CONTACT", reviews_emergency_path(), :id => "contact", :class => "link nav-links"%>
+                <% if logged_in? %>
+                  <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link nav-links"%>
+                  <%if !current_user.img.nil?%>
+                    <%= image_tag current_user.img, class: "img-circle", height: '50', width: '50'%>
+                  <%end%>
+                <%else%>
+                  <%=link_to "LOGIN", login_path(), :id => "login", :class => "link nav-links"%>
+                <%end%>
+              </div>
+           
+
+        <!-- Mobile Drop Down Menu -->
+        <div class="container overlay">
+             <!-- Mobile Menu - only visable under 750px width-->
+            <button class="navbar-toggle pull-right  menu-button" type="button" data-toggle="collapse" data-target="#dropdown-menu">
+                <i class="material-icons b"> menu </i>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse container" id="dropdown-menu">
+                <ul class="m">
+                    <li> <%=link_to "CONTACT", reviews_emergency_path(), :id => "contact_mobile", :class => "dropdown-item"%> </li>
+                    <% if logged_in? %>
+                        <li> <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link dropdown-item"%> </li> 
+                    <%else%>
+                       <li> <%=link_to "LOGIN", login_path(), :id => "login_mobile", :class => "link dropdown-item"%> </li>
+                    <%end%>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <% if flash[:notice] %>
+      <%= content_tag :div, flash["notice"], class: "alert alert-info" %>
+    <% end %>
+    <%= yield %>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

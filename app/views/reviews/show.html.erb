@@ -1,0 +1,462 @@
+<div class="show page">
+	<div class="show-card" >
+		<div class="structure-1" >
+			<div class="show-image" >
+				<%= image_tag @yelp_review_info["image_url"], size: "220" %>
+			</div>
+			<div class="show-text-box" >
+				<div class="show-sub-text-box show-business-info" >
+					<div class="show-title-box left" >
+							<div class="show-sub-item title" >
+								<%= content_tag :h1, @name %>
+							</div>
+							<div class="show-sub-item" >
+								<%= content_tag :p, @is_open %>
+							</div>
+							<div class="show-sub-item" >
+								<%= content_tag :p, @show_alias %>
+							</div>
+							<div class="show-sub-item" id="price-info">
+								<% if @avg_user_price < 0.5%>
+									<%= content_tag :p, "No Price Information" %>
+								<% elsif @avg_user_price < 1.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif @avg_user_price < 2.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif @avg_user_price < 3.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif @avg_user_price < 4.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif @avg_user_price > 4.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% end %>
+							</div>
+							<div class="break"> </div>
+							<div class="show-sub-text-box" %>
+								<%= content_tag :p, @display_address %>
+							</div>
+
+					</div>
+						<div class="show-title-box right" >
+							<div class="structure-split" >
+								<div class="show-rating" >
+									<% if @avg_user_rating < 0.5 %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+									<% elsif @avg_user_rating < 1.5 %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+									<% elsif @avg_user_rating < 2.5 %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+									<% elsif @avg_user_rating < 3.5 %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif @avg_user_rating < 4.5 %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif @avg_user_rating > 4.5 %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+										<%= image_tag("gigs_maroon.svg", size: "20") %>
+								<% end %>
+							</div>
+							<div class="show-button" >
+								<div id="leave_review">
+									<%= link_to 'Leave A Review', {controller: "reviews", action: "leave_review", id: params[:id]}, class: "action-buttons" %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="show-sub-text-box show-business-hours" >
+					<% @hours.each_key do |day| %>
+						<div class="show-sub-item">
+							<%= content_tag :h3, day %>
+							<%= content_tag :p, @hours[day] %>
+						</div>
+					<% end %>
+					<div class="show-sub-item" >
+						<%= content_tag :h3, "Contact:" %>
+						<%= content_tag :p, @display_phone %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="structure-2" >
+			<div class="sub-structure-2" >
+				<h2>Aggie Reviews: </h2>
+			</div>
+			<div class="sub-structure-2" >
+				<div class="structure-item" >
+					<%= content_tag :h3, "Service: " %>
+					<% if @avg_user_service == -1 %>
+						<%= content_tag :h3, "No Aggie Service Reviews" %>
+					<% elsif @avg_user_service < 0.5 %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+					<% elsif @avg_user_service < 1.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+					<% elsif @avg_user_service < 2.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+					<% elsif @avg_user_service < 3.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+				<% elsif @avg_user_service < 4.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+				<% elsif @avg_user_service > 4.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+				<% end %>
+				</div>
+				<div class="structure-item" >
+					<%= content_tag :h3, "Safety: "%>
+					<% if @avg_user_safety == -1 %>
+						<%= content_tag :h3, "No Aggie Safety Reviews" %>
+					<% elsif @avg_user_safety < 0.5 %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+					<% elsif @avg_user_safety < 1.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+					<% elsif @avg_user_safety < 2.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+					<% elsif @avg_user_safety < 3.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+				<% elsif @avg_user_safety < 4.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_grey.svg", size: "20") %>
+				<% elsif @avg_user_safety > 4.5 %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+						<%= image_tag("gigs_maroon.svg", size: "20") %>
+				<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="structure-3" >
+			<div class="sub-structure-3" >
+				<div class="sub-item">
+					<% if @user_tags.include? "cash_only"%>
+						<%= image_tag("gigs_maroon.svg", size: "25") %>
+						<%= content_tag :p, "Cash Only" %>
+					<% end %>
+				</div>
+				<div class="sub-item">
+					<% if @user_tags.include? "english" %>
+						<%= image_tag("circle-check_maroon.svg", size: "25") %>
+						<%= content_tag :p, "Speaks English" %>
+					<% end %>
+				</div>
+				<div class="sub-item">
+					<% if @user_tags.include? "tips" %>
+						<%= image_tag("dollar-sign_maroon.svg", size: "25") %>
+						<%= content_tag :p, "Tips Encouraged" %>
+					<% end %>
+				</div>
+				<div class="sub-item">
+					<% if @user_tags.include? "wifi" %>
+						<%= image_tag("wifi_maroon.svg", size: "25") %>
+						<%= content_tag :p, "WiFi" %>
+					<% end %>
+				</div>
+				<div class="sub-item">
+					<% if @user_tags.include? "wheelchair" %>
+						<%= image_tag("wheelchair_maroon.svg", size: "25") %>
+						<%= content_tag :p, "Wheelchair Accessible" %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- All user cards for business -->
+	<% if @user_reviews.length != 0 %>
+		<div id="cards">
+			<% @user_reviews.each_with_index do |result, index| %>
+				<div class="show-user-card">
+					<div class="gen-info-bar column">
+						<div class="email-box">
+							<%= content_tag :h2, result["name"].nil? ? "Anonymous" : result["name"] %>
+						</div>
+						<div class="rating-box">
+							<div class="rating-imgs" >
+								<% if result["rating"].nil? %>
+									<%= content_tag :h4, "No User Rating"%>
+								<% elsif result["rating"] == 0 %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["rating"] == 1 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["rating"] == 2 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["rating"] == 3 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["rating"] == 4 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["rating"] == 5 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+								<% end %>
+							</div>
+						</div>
+					</div>
+					<div class="comment-bar column">
+						<%= content_tag :p, result["comment"] == "" ? '"No Comment"' : '"' + result["comment"] + '"' %>
+					</div>
+					<div class="rating-bar column">
+						<div class="structure-item" >
+							<div class="sub-item" >
+								<%= content_tag :h4, "Safety: " %>
+							</div>
+							<div class="sub-item2" >
+								<% if result["safety"].nil? %>
+									<%= content_tag :h4, "No User Safety Rating"%>
+								<% elsif result["safety"] ==0 %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["safety"] == 1 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["safety"] == 2 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["safety"] == 3 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["safety"] == 4 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["safety"] == 5 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+								<% end %>
+							</div>
+						</div>
+						<div class="structure-item" >
+							<div class="sub-item" >
+								<%= content_tag :h4, "Price:" %>
+							</div>
+							<div class="sub-item2" >
+								<% if result["price"].nil? %>
+									<%= content_tag :h4, "No User Price Rating"%>
+								<% elsif result["price"] < 0.5%>
+									<%= content_tag :p, "No Price Information" %>
+								<% elsif result["price"] < 1.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif result["price"] < 2.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif result["price"] < 3.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif result["price"] < 4.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% elsif result["price"] > 4.5%>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+									<%= image_tag("dollar-sign_grey.svg", size: "20") %>
+								<% end %>
+							</div>
+						</div>
+						<div class="structure-item" >
+							<div class="sub-item" >
+								<%= content_tag :h4, "Service: " %>
+							</div>
+							<div class="sub-item2" >
+								<% if result["service"].nil? %>
+									<%= content_tag :h4, "No User Service Rating"%>
+								<% elsif result["service"] ==0 %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["service"] == 1 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["service"] == 2 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["service"] == 3 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["service"] == 4 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif result["service"] == 5 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+								<% end %>
+							</div>
+						</div>
+					</div>
+					<div class="structure-3 column" >
+						<div class="sub-structure-3" >
+							<div class="sub-item">
+								<% if !result["cash_only"].nil? && result["cash_only"] == true %>
+									<%= image_tag("gigs_maroon.svg", size: "25") %>
+									<%= content_tag :p, "Cash Only" %>
+								<% end %>
+							</div>
+							<div class="sub-item">
+								<% if !result["english"].nil? && result["english"] == true %>
+									<%= image_tag("circle-check_maroon.svg", size: "25") %>
+									<%= content_tag :p, "Speaks English" %>
+								<% end %>
+							</div>
+							<div class="sub-item">
+								<% if !result["tips"].nil? && result["tips"] == true %>
+									<%= image_tag("dollar-sign_maroon.svg", size: "25") %>
+									<%= content_tag :p, "Tips Encouraged" %>
+								<% end %>
+							</div>
+							<div class="sub-item">
+								<% if !result["wifi"].nil? && result["wifi"] == true %>
+									<%= image_tag("wifi_maroon.svg", size: "25") %>
+									<%= content_tag :p, "WiFi" %>
+								<% end %>
+							</div>
+							<div class="sub-item">
+								<% if !result["wheelchair"].nil? && result["wheelchair"] == true %>
+									<%= image_tag("wheelchair_maroon.svg", size: "25") %>
+									<%= content_tag :p, "Wheelchair Accessible" %>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	<% else %>
+		<%= content_tag :h1, "No User Reviews", :id => "no_reviews_header"%>
+	<% end %>
+</div>

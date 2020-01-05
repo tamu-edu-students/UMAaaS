@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="342" height="76.78" viewBox="0 0 342 76.78">
+  <g id="Component_18_1" data-name="Component 18 – 1" transform="translate(0)">
+    <g id="TAM-Logo-white">
+      <path id="Path_1" data-name="Path 1" d="M163.238,84.32h-9.855l-.235.485L146.39,98.82,139.615,84.8l-.229-.485h-10.4v6.487h2.4v20.067H128.86v6.492h11.828v-6.492h-2.611V96.636l7.552,15.525.766,1.583.777-1.583L154.8,96.6v14.272h-2.532v6.492H164.1v-6.492h-2.6V90.807h2.6V84.32Z" transform="translate(-70.299 -59.126)" fill="#fff"/>
+      <path id="Path_2" data-name="Path 2" d="M59.205,110.764v6.487H46.449v-6.487h1.962l-1.453-3.344H36.443l-1.453,3.344h1.861v6.487H24.1v-6.487h3.633l8.743-20.156H34.542v-6.5H48.607v6.5H46.93l8.748,20.162h3.527ZM41.7,95.283l-2.443,5.634h4.914Z" transform="translate(-24.1 -59.033)" fill="#fff"/>
+      <path id="Path_3" data-name="Path 3" d="M114.5,39.11H42.6V59.952H56.8v-8H71.936v49.781H63.92V115.89H94.168V101.735H86.152V51.955h15.037v7.908h14.294V39.11Z" transform="translate(-32.259 -39.11)" fill="#fff"/>
+      <path id="Path_4" data-name="Path 4" d="M124.15,159.571l3-3.071v8.443l-3-2.864Z" transform="translate(-68.222 -91.083)" fill="#b1b3b6"/>
+      <path id="Path_5" data-name="Path 5" d="M112.836,110.293l-3,2.942V51.63l3,2.981Z" transform="translate(-61.911 -44.653)" fill="#b1b3b6"/>
+      <path id="Path_6" data-name="Path 6" d="M50.721,47.3,47.63,44.31h65.615L109.366,47.3Z" transform="translate(-34.477 -41.412)" fill="#b1b3b6"/>
+      <path id="Path_7" data-name="Path 7" d="M165.486,60.7l-3-2.853V50.242l3-3.082Z" transform="translate(-85.13 -42.674)" fill="#b1b3b6"/>
+      <path id="Path_8" data-name="Path 8" d="M140.77,169.318a2.907,2.907,0,1,1,2.907,2.9A2.9,2.9,0,0,1,140.77,169.318Zm5.109,0a2.2,2.2,0,1,0-2.2,2.335,2.232,2.232,0,0,0,2.2-2.335Zm-3.32-1.672h1.224c.788,0,1.213.279,1.213.964a.82.82,0,0,1-.855.919l.889,1.438H144.4l-.861-1.438h-.369v1.415h-.6Zm.615,1.4h.559c.363,0,.676-.045.676-.485s-.352-.451-.665-.451h-.559Z" transform="translate(-75.552 -95.475)" fill="#fff"/>
+    </g>
+    <line id="Line_1" data-name="Line 1" y2="76" transform="translate(114.5 0.5)" fill="none" stroke="#fff" stroke-width="2"/>
+    <text id="Texas_A_M_University_WHOOP" data-name="Texas A&amp;M University
+WHOOP" transform="translate(135 26)" fill="#fff" font-size="18" font-family="OpenSans-Semibold, Open Sans" font-weight="600"><tspan x="0" y="0">TEXAS A&amp;M UNIVERSITY</tspan><tspan font-size="30" font-family="OpenSans, Open Sans" font-weight="400"><tspan x="0" y="37">WHOOP</tspan></tspan></text>
+  </g>
+</svg>
