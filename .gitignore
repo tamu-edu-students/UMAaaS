@@ -27,6 +27,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/config/environments/development.rb
+/config/webpack/environment.js
 /public/packs
 /public/packs-test
 /node_modules

@@ -2,8 +2,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     config = YAML::load(File.open("#{Rails.root.to_s}/config/settings.yml"))
   
   # change this
-    provider :google_oauth2, '826565649927-pvr26un99dduiv0271mm0v77b8ija8ra.apps.googleusercontent.com',
-                            '9MqOoItGC1eSs61obEE4wRf6',
+    provider :google_oauth2, '971181149334-d9avbf8shp6ku8vgpvlkbntcohonhh5s.apps.googleusercontent.com',
+                            '5UgDl6FSacW1DYobM11yPhJt',
                             image_size: 150,
                             skip_jwt: true
 end

@@ -1,6 +1,6 @@
 default: &default
-  client_id: '826565649927-pvr26un99dduiv0271mm0v77b8ija8ra.apps.googleusercontent.com'
-  client_secret: '9MqOoItGC1eSs61obEE4wRf6'
+  client_id: '971181149334-d9avbf8shp6ku8vgpvlkbntcohonhh5s.apps.googleusercontent.com'
+  client_secret: '5UgDl6FSacW1DYobM11yPhJt'
 
 development:
   <<: *default
