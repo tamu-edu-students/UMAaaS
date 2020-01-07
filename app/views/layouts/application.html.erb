@@ -17,7 +17,7 @@
         <nav class="nav">
             <%= link_to "WHOOP!", reviews_path(), :id => "tamu_logo_link", :class => "logo" %>
               <div class="nav-actions"> 
-                <%=link_to "PROGRAM", programs_index_path(), :id => "program", :class => "link nav-links"%>
+                <%=link_to "PROGRAMS", programs_path(), :id => "program", :class => "link nav-links"%>
                 <%=link_to "CONTACT", reviews_emergency_path(), :id => "contact", :class => "link nav-links"%>
                 <% if logged_in? %>
                   <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link nav-links"%>

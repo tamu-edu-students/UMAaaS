@@ -1,0 +1,23 @@
+<div class="page-header">Edit Study Abroad Program</div>
+<%= form_tag program_path(@program), :method => :put do %>
+<table class="programs-edit-table">
+    <tbody>
+        <tr>
+            <td><%= label :program, :name, 'Program Name' %></td>
+        </tr>
+        <tr>
+            <td><%= text_field :program, :name %></td>
+        </tr>
+        <tr>
+            <td><%= label :program, :region, 'Region' %></td>
+        </tr>
+        <tr>
+            <td><%= text_field :program, :region %></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><%= submit_tag 'Save' %></td>
+        </tr>
+    </tfoot>
+<% end %>
