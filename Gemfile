@@ -48,7 +48,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'sqlite3', '~> 1.4'
-  gem 'simplecov'
 end
 
 group :development do
