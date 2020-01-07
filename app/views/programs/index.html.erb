@@ -1,11 +1,26 @@
-<h1>Programs#index</h1>
-<p>Find me in app/views/programs/index.html.erb</p>
-<table>
-    <% @programs.each_entry do |program| %>    
-    <tr>
-        <td>
-            tests <%= program.name %>
-        </td>
-    </tr>
-    <% end %>
+<div class="page-header">Study Abroad Programs</div>
+<table class="programs-table">
+    <thead>
+        <tr>
+            <td>Program Name</td>
+            <td>Region</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @programs.each do |program| %>    
+        <tr>
+            <td><%= program.name %></td>
+            <td><%= program.region %></td>
+            <td><%= link_to 'Edit', edit_program_path(program) %></td>
+            <td><%= link_to 'Delete', program_path(program), :method => :delete %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan=4><%= link_to 'Add new program', new_program_path %></td>
+        </tr>
+    </tfoot>
 </table>
