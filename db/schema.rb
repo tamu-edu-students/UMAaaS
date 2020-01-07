@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_233128) do
+ActiveRecord::Schema.define(version: 2020_01_07_112948) do
+
+  create_table "programs", force: :cascade do |t|
+    t.string "name"
+    t.string "region"
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.string "business_id"

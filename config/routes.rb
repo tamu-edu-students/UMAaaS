@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'programs/index'
   get 'reviews/index'
   get 'reviews/leave_review/:id', to: 'reviews#leave_review', as: 'leave_review'
   get 'sessions/create'
