@@ -45,7 +45,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'factory_bot'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '4.0.0.beta3'
   gem 'simplecov'
   gem 'sqlite3', '~> 1.4'
 end
