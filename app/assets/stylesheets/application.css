@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+.page-header{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.programs-table{
+    margin: 0 auto;
+}
+
+.programs-table td{
+    border: 1px solid #666;
+    padding: 1px 10px;
+    font-size: 18px;
+}
+
+.programs-table tfoot td{
+    border: 0px;
+}
+
+.programs-edit-table{
+    margin: 0 auto;
+}
+
+.programs-edit-table td{
+    padding: 1px 10px;
+    font-size: 18px;
+}
+
+.programs-edit-table tfoot td{
+    border: 0px;
+    padding-top: 8px;
+}

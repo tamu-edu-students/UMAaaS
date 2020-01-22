@@ -7,6 +7,8 @@
 
 #   Character.create(name: 'Luke', movie: movies.first)
 
-reviews.each do |review|
-  Review.create!(review)
-end
+#reviews.each do |review|
+#  Review.create!(review)
+#end
+
+Program.create!(:name => "Singapore CSCE Wintermester", :region => "Asia")

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'programs/index'
+  get 'programs', to: 'programs#index'
   get 'reviews/index'
   get 'reviews/leave_review/:id', to: 'reviews#leave_review', as: 'leave_review'
   get 'sessions/create'
@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get "/logout", to: "sessions#destroy"
   resource :session, only: [:create, :destroy]
   resources :reviews
+  resources :programs
   root 'reviews#index'
 end
