@@ -18,6 +18,9 @@ module NavigationHelpers
 	
 	    when /^the emergency\s?page$/
             '/reviews/emergency'
+        
+        when /^the programs\s?page$/
+            '/programs/index'
             
         when /^the review\s?page$/
             'reviews/leave_review/os-fZ4atEmOxbIo36kG9gA'
