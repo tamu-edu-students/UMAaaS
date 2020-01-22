@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/home/ubuntu/environment/tripAgvisor/features/support/paths.rb": [
+      "/home/ubuntu/environment/tripagvisor/features/support/paths.rb": [
         null,
         null,
         null,
@@ -15,16 +15,14 @@
         null,
         null,
         1,
-        20,
+        19,
         null,
         null,
         11,
         null,
         null,
         3,
-        null,
-        null,
-        1,
+
         null,
         null,
         3,
@@ -46,7 +44,7 @@
         null,
         1
       ],
-      "/home/ubuntu/environment/tripAgvisor/features/support/selectors.rb": [
+      "/home/ubuntu/environment/tripagvisor/features/support/selectors.rb": [
         null,
         null,
         null,
@@ -92,7 +90,7 @@
         null,
         1
       ],
-      "/home/ubuntu/environment/tripAgvisor/features/step_definitions/web_steps.rb": [
+      "/home/ubuntu/environment/tripagvisor/features/step_definitions/web_steps.rb": [
         null,
         null,
         null,
@@ -143,7 +141,7 @@
         null,
         null,
         1,
-        20,
+        19,
         null,
         null,
         null,
@@ -234,8 +232,8 @@
         null,
         null,
         1,
-        36,
-        36,
+        35,
+        35,
         null,
         0,
         null,
@@ -426,31 +424,31 @@
         null,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/controllers/application_controller.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/controllers/application_controller.rb": [
         1,
         1,
         null,
         1,
-        66,
+        64,
         null,
         1,
         0,
         null,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/helpers/application_helper.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/helpers/emergency_helper.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/helpers/emergency_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/helpers/programs_helper.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/helpers/programs_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/helpers/reviews_helper.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/helpers/reviews_helper.rb": [
         null,
         null,
         null,
@@ -675,11 +673,11 @@
         null,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/helpers/sessions_helper.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/helpers/sessions_helper.rb": [
         1,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/controllers/reviews_controller.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/controllers/reviews_controller.rb": [
         1,
         1,
         1,
@@ -702,7 +700,23 @@
         null,
         null,
         null,
+
         4,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        4,
+        null,
+        4,
+        0,
+        null,
+        null,
+        null,
         4,
         0,
         0,
@@ -773,10 +787,95 @@
         null,
         4,
         null,
+        4,
+        null,
+        4,
+        null,
+        4,
+        null,
+        4,
+        null,
+        null,
+        null,
+        4,
+        null,
+        null,
+        null,
+        4,
+        null,
+        0,
         null,
         null,
         null,
         null,
+        4,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        4,
+        4,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        4,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        4,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        4,
+        null,
+        0,
+        null,
+        null,
+        4,
+        null,
+        4,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        4,
+        0,
+        null,
+        4,
+        28,
+        28,
+        28,
+        28,
+        null,
+        null,
+        28,
+        null,
+        0,
+        null,
+        null,
+        28,
+        null,
+        28,
+        null,
+        28,
         null,
         0,
         null,
@@ -893,16 +992,11 @@
         null,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/models/review.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/models/review.rb": [
         1,
         null
       ],
-      "/home/ubuntu/environment/tripAgvisor/app/models/application_record.rb": [
-        1,
-        1,
-        null
-      ],
-      "/home/ubuntu/environment/tripAgvisor/app/controllers/programs_controller.rb": [
+      "/home/ubuntu/environment/tripagvisor/app/models/application_record.rb": [
         1,
         1,
         1,
@@ -916,7 +1010,7 @@
         null
       ]
     },
-    "timestamp": 1579714045
+    "timestamp": 1579558739
   },
   "RSpec": {
     "coverage": {
