@@ -10,7 +10,14 @@ class SessionsController < ApplicationController
         user.id        = user_info["uid"]
         user.name      = user_info["info"]["name"]
         user.email     = user_info["info"]["email"]
-        user.img = user_info["info"]["image"]
+        user.img       = user_info["info"]["image"]
+        if(user.email == Rails.configuration.admin_email)
+            user.isAdmin = "true"
+        else
+            user.isAdmin = "false"
+        end
+    
+        puts "putting into session: " + user.isAdmin
     
         session[:user] = Marshal.dump user
 

@@ -16,8 +16,14 @@
     <body>
         <nav class="nav">
             <%= link_to "WHOOP!", reviews_path(), :id => "tamu_logo_link", :class => "logo" %>
-              <div class="nav-actions"> 
-                <%=link_to "PROGRAMS", programs_path(), :id => "program", :class => "link nav-links"%>
+              <div class="nav-actions">
+                <%if logged_in?%>
+                  <%if current_user.isAdmin%>
+                    <%=link_to "PROGRAMS", programs_path(), :id => "program", :class => "link nav-links"%>
+                  <%else%>
+                    <div id="test"><%= current_user.isAdmin%></div>
+                  <%end%>
+                <%end%>
                 <%=link_to "CONTACT", reviews_emergency_path(), :id => "contact", :class => "link nav-links"%>
                 <% if logged_in? %>
                   <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link nav-links"%>

@@ -1,4 +1,12 @@
 class ProgramsController < ApplicationController
+  before_action :requireAdmin
+  
+  def requireAdmin
+    if logged_in?
+      redirect_to root_path and return unless current_user.isAdmin
+    end
+  end
+  
   def index
     puts "TESTING"
     @programs = Program.all
