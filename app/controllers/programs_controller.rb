@@ -4,6 +4,8 @@ class ProgramsController < ApplicationController
   def requireAdmin
     if logged_in?
       redirect_to root_path and return unless current_user.isAdmin
+    else
+      redirect_to root_path and return
     end
   end
   
