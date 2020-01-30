@@ -1,0 +1,19 @@
+<div class="page-header">Users</div>
+<table class="programs-table">
+    <thead>
+        <tr>
+            <td>User Name</td>
+            <td>Email</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>    
+        <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

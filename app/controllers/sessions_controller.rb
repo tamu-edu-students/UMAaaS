@@ -5,6 +5,13 @@ class SessionsController < ApplicationController
         if params[:hd] != 'tamu.edu'
             redirect_to root_path and return
         end
+        
+        dbUser = User.where(email: user_info["info"]["email"])
+        if(dbUser.exists?)
+            puts "DB USER EXISTS"
+        else
+            dbUser = User.create(uid: user_info["uid"], name: user_info["info"]["name"], email: user_info["info"]["email"])
+        end
 
         user           = User.new
         user.id        = user_info["uid"]
@@ -16,8 +23,6 @@ class SessionsController < ApplicationController
         else
             user.isAdmin = "false"
         end
-    
-        puts "putting into session: " + user.isAdmin
     
         session[:user] = Marshal.dump user
 

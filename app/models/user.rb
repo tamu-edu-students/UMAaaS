@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-    attr_accessor :id, :name, :email, :img, :isAdmin
+    #attr_accessor :id, :name, :email, :img, :isAdmin
+    attr_accessor :img, :isAdmin
+    
 
     def marshal_dump
         [@id, @name, @email, @isAdmin, @img]
