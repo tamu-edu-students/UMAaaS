@@ -4,7 +4,7 @@
         <tr>
             <td>User Name</td>
             <td>Email</td>
-            <td></td>
+            <td>Is Admin?</td>
             <td></td>
         </tr>
     </thead>
@@ -13,6 +13,9 @@
         <tr>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
+            <td><%= check_box_tag 'admin', '1', user.admin, :disabled => true %></td>
+            <td><%= user.programs_id %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
         </tr>
         <% end %>
     </tbody>

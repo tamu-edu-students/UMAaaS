@@ -20,6 +20,10 @@
     font-weight: bold;
 }
 
+.logo{
+    height: 50px;
+}
+
 .programs-table{
     margin: 0 auto;
 }
