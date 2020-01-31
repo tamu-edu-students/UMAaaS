@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resource :session, only: [:create, :destroy]
   resources :reviews
   resources :programs
+  resources :users
   root 'reviews#index'
 end

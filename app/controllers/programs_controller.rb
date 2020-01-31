@@ -1,9 +1,10 @@
 class ProgramsController < ApplicationController
+  #has_many :users
   before_action :requireAdmin
   
   def requireAdmin
     if logged_in?
-      redirect_to root_path and return unless current_user.isAdmin
+      redirect_to root_path and return unless current_user.admin
     else
       redirect_to root_path and return
     end

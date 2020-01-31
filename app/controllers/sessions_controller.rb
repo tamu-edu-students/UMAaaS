@@ -2,8 +2,13 @@ class SessionsController < ApplicationController
     def create
         user_info = request.env["omniauth.auth"]
 
-        if params[:hd] != 'tamu.edu'
-            redirect_to root_path and return
+        #if params[:hd] != 'tamu.edu'
+        #    redirect_to root_path and return
+        #end
+        
+        dbUser = User.find_by email: user_info["info"]["email"]
+        if(dbUser.nil?)
+            dbUser = User.create(uid: user_info["uid"], name: user_info["info"]["name"], email: user_info["info"]["email"])
         end
 
         user           = User.new
@@ -12,14 +17,16 @@ class SessionsController < ApplicationController
         user.email     = user_info["info"]["email"]
         user.img       = user_info["info"]["image"]
         if(user.email == Rails.configuration.admin_email)
-            user.isAdmin = "true"
+            dbUser.admin = true
+            dbUser.save
+            user.admin = true
         else
-            user.isAdmin = "false"
+            user.admin = false
         end
     
-        puts "putting into session: " + user.isAdmin
-    
-        session[:user] = Marshal.dump user
+        session[:user] = user.id
+        session[:user_admin] = user.admin
+        session[:user_img] = user.img
 
         redirect_to(root_path) and return
     end
