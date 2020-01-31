@@ -1,0 +1,24 @@
+<div class="page-header">Edit User</div>
+<%= form_tag user_path(@user), :method => :put do %>
+<table class="user-edit-table">
+    <tbody>
+        <tr>
+            <td><%= @user.name %></td>
+        </tr>
+        <tr>
+            <td><%= @user.email %></td>
+        </tr>
+        <tr>
+            <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
+                <%= @programs.each do |program| %>
+                    <option value="<%= program.id %>"><%= program.name %></option>
+                <% end %>
+            </select></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><%= submit_tag 'Save' %></td>
+        </tr>
+    </tfoot>
+<% end %>
