@@ -309,7 +309,7 @@ img{
     background-position: center bottom;
     background-blend-mode: overlay;
     overflow: hidden;
-    height: 100%;
+    height: calc(100% - 50px);
 }
 
 #joint-search-bar { // Search Bar Container (Sets Size)

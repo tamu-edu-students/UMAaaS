@@ -11,5 +11,10 @@ Rails.application.routes.draw do
   resources :reviews
   resources :programs
   resources :users
+  get 'users/:id/promote', to: 'users#promote'
+  get 'users/:id/demote', to: 'users#demote'
+  get 'p', to: 'portals#index', as: "portals"
+  get 'p/redirect', to: 'portals#program_redirect', as: 'program_redirect'
+  get 'p/:id', to: 'portals#view', as: "portal"
   root 'reviews#index'
 end

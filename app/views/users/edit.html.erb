@@ -11,7 +11,7 @@
         <tr>
             <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
                 <%= @programs.each do |program| %>
-                    <option value="<%= program.id %>"><%= program.name %></option>
+                    <option value="<%= program.id %>" <%= if @user.program_id == program.id then "selected" end %>><%= program.name %></option>
                 <% end %>
             </select></td>
         </tr>
@@ -22,3 +22,8 @@
         </tr>
     </tfoot>
 <% end %>
+<%= if @user.admin then
+    link_to 'Remove Admin', :controller => :users, :action => :demote
+else
+    link_to 'Make Admin', :controller => :users, :action => :promote
+end%>
