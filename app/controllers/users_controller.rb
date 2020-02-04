@@ -14,8 +14,10 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     if(params[:program_id].to_i > 0) then
       @user.update_attributes(:program_id => params[:program_id])
+      session[:user_program_id] = params[:program_id]
     else
       @user.update_attributes(:program_id => nil)
+      session[:user_program_id] = nil
     end
     flash[:notice] = "#{@user.name} was successfully updated."
     redirect_to users_path
