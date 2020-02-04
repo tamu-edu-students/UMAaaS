@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def promote
     user = User.find params[:id]
     if(user.nil?) then
-      flash[:notice] = "Error promoting user"
+      flash[:alert] = "Error promoting user"
       redirect_to users_pth
     else
       user.admin = true
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def demote
     user = User.find params[:id]
     if(user.nil?) then
-      flash[:notice] = "Error demoting user"
+      flash[:alert] = "Error demoting user"
       redirect_to users_pth
     else
       user.admin = false

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
         user_info = request.env["omniauth.auth"]
 
         if params[:hd] != 'tamu.edu'
-            flash[:notice] = "Must login with @tamu.edu email address!"
+            flash[:alert] = "Must login with @tamu.edu email address!"
             redirect_to root_path and return
         end
         
