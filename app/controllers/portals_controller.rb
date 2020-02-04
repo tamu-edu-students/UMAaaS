@@ -4,7 +4,7 @@ class PortalsController < ApplicationController
         
         if logged_in?
             #if logged in and the user already has a program selected, then automatically go that program portal
-            program = Program.find session[:user_program_id]
+            program = Program.find session[:user_program_id] unless session[:user_program_id].nil?
             if(not program.nil?) then
                 redirect_to portal_path(program.id)
             end
