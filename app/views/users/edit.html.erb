@@ -1,0 +1,29 @@
+<div class="page-header">Edit User</div>
+<%= form_tag user_path(@user), :method => :put do %>
+<table class="user-edit-table">
+    <tbody>
+        <tr>
+            <td><%= @user.name %></td>
+        </tr>
+        <tr>
+            <td><%= @user.email %></td>
+        </tr>
+        <tr>
+            <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
+                <%= @programs.each do |program| %>
+                    <option value="<%= program.id %>" <%= if @user.program_id == program.id then "selected" end %>><%= program.name %></option>
+                <% end %>
+            </select></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><%= submit_tag 'Save' %></td>
+        </tr>
+    </tfoot>
+<% end %>
+<%= if @user.admin then
+    link_to 'Remove Admin', :controller => :users, :action => :demote
+else
+    link_to 'Make Admin', :controller => :users, :action => :promote
+end%>

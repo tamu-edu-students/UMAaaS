@@ -1,5 +1,4 @@
 class ProgramsController < ApplicationController
-  #has_many :users
   before_action :requireAdmin
   
   def requireAdmin
@@ -11,12 +10,10 @@ class ProgramsController < ApplicationController
   end
   
   def index
-    puts "TESTING"
     @programs = Program.all
-    puts @programs.nil?
-    @programs.each do |program|
-      puts "Region: "
-    end
+    #@programs.each do |program|
+    #  puts "Region: "
+    #end
   end
   
   def new

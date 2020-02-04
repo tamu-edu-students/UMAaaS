@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
         user_info = request.env["omniauth.auth"]
 
         if params[:hd] != 'tamu.edu'
+            flash[:alert] = "Must login with @tamu.edu email address!"
             redirect_to root_path and return
         end
         
@@ -11,27 +12,23 @@ class SessionsController < ApplicationController
             dbUser = User.create(uid: user_info["uid"], name: user_info["info"]["name"], email: user_info["info"]["email"])
         end
 
-        user           = User.new
-        user.id        = user_info["uid"]
-        user.name      = user_info["info"]["name"]
-        user.email     = user_info["info"]["email"]
-        user.img       = user_info["info"]["image"]
-        if(user.email == Rails.configuration.admin_email)
+        if(user_info["info"]["email"] == Rails.configuration.admin_email)
             dbUser.admin = true
             dbUser.save
-            user.admin = true
-        else
-            user.admin = false
         end
     
-        session[:user] = user.id
-        session[:user_admin] = user.admin
-        session[:user_img] = user.img
+        session[:user] = dbUser.id
+        session[:user_admin] = dbUser.admin
+        session[:user_img] = user_info["info"]["image"]
+        session[:user_program_id] = dbUser.program_id
 
         redirect_to(root_path) and return
     end
     def destroy
         session.delete :user
+        session.delete :user_admin
+        session.delete :user_img
+        session.delete :user_program_id
         redirect_to root_path
     end
 end

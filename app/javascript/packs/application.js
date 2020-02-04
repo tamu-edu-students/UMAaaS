@@ -16,3 +16,13 @@ require("jquery")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+/*global $*/
+
+$(function(){
+
+  $("#index-search-box select").change(function(){
+      var selectedId = $(this).find(":selected").val();
+      if(selectedId != 0) $("#index-search-box-form").submit();
+  });
+
+});
