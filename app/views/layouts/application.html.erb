@@ -27,7 +27,7 @@
                 <% if logged_in? %>
                   <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link nav-links"%>
                   <%if !current_user.img.nil?%>
-                    <%= image_tag current_user.img, class: "img-circle", height: '50', width: '50'%>
+                    <%= link_to image_tag(current_user.img, class: "img-circle", height: '50', width: '50'), edit_user_path(current_user)%>
                   <%end%>
                 <%else%>
                   <%=link_to "LOGIN", login_path(), :id => "login", :class => "link nav-links"%>

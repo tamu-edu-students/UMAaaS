@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
         cu = User.new
         cu.admin = session[:user_admin]
         cu.img = session[:user_img]
+        cu.id = session[:user]
         return cu
     end
 end
