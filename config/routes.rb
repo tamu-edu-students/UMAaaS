@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :users
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
+  get 'users/:id/ban', to: 'users#ban'
+  get 'users/:id/unban', to: 'users#unban'
   get 'p', to: 'portals#index', as: "portals"
   get 'p/redirect', to: 'portals#program_redirect', as: 'program_redirect'
   get 'p/:id', to: 'portals#view', as: "portal"

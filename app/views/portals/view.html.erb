@@ -1,3 +1,10 @@
+<div id="portal-switch-programs"><%= form_tag program_redirect_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--Switch Programs--</option>
+                <%= @programs.each do |program| %>
+                    <% if program.id != @program.id then %>
+                       <option value="<%= program.id %>"><%= program.name %></option>
+                    <%end%>
+                <% end %>
+            </select><%end%></div>
 <div id="portal-header"><%= @program.name %></div>
 <div id="flex-container">
  <div id="column1" class="flex-item"><div class="portal-column-title">Tips</div><div class="portal-tip">tip 1</div><div class="portal-tip">tip 2</div></div>

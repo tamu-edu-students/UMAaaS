@@ -1,8 +1,28 @@
 class UsersController < ApplicationController
+  before_action :requireAdmin
+  
+  def requireAdmin
+    if logged_in?
+      redirect_to root_path and return unless (current_user.admin || session[:user].to_i == params[:id].to_i)
+    else
+      redirect_to root_path and return
+    end
+  end
   
   def index
-      @users = User.left_outer_joins(:program).select("users.*,programs.name as program_name").all
-      #puts @users.program_name
+      if not params[:p].nil? then
+        @users = User.left_outer_joins(:program).select("users.*,programs.name as program_name").where(users: {program_id: params[:p]})
+      else
+        @users = User.left_outer_joins(:program).select("users.*,programs.name as program_name").all
+      end
+      
+      if params[:b] != "true" then
+        @users = @users.where(banned: false)
+      end
+      
+      @programs = Program.all
+      @selectedProgram = params[:p].to_i
+      @showBanned = params[:b] == "true"
   end
   
   def edit
@@ -30,8 +50,8 @@ class UsersController < ApplicationController
   def promote
     user = User.find params[:id]
     if(user.nil?) then
-      flash[:alert] = "Error promoting user"
-      redirect_to users_pth
+      flash[:alert] = "Error promoting user: user not found."
+      redirect_to users_path
     else
       user.admin = true
       user.save
@@ -40,12 +60,12 @@ class UsersController < ApplicationController
     end
   end
   
-    #demote user from admin
+  #demote user from admin
   def demote
     user = User.find params[:id]
     if(user.nil?) then
-      flash[:alert] = "Error demoting user"
-      redirect_to users_pth
+      flash[:alert] = "Error demoting user: user not found."
+      redirect_to users_path
     else
       user.admin = false
       user.save
@@ -53,4 +73,33 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
+  
+  #ban user
+  def ban
+    user = User.find params[:id]
+    if(user.nil?) then
+      flash[:alert] = "Error banning user: user not found."
+      redirect_to users_path
+    else
+      user.banned = true
+      user.save
+      flash[:notice] = "#{user.name} has been banned."
+      redirect_to users_path
+    end
+  end
+  
+  #unban user
+  def unban
+    user = User.find params[:id]
+    if(user.nil?) then
+      flash[:alert] = "Error unbanning user: user not found."
+      redirect_to users_path
+    else
+      user.banned = false
+      user.save
+      flash[:notice] = "#{user.name} has been unbanned."
+      redirect_to users_path
+    end
+  end
+  
 end

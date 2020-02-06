@@ -31,5 +31,6 @@ class PortalsController < ApplicationController
     
     def view
         @program = Program.find params[:id]
+        @programs = Program.all
     end
 end

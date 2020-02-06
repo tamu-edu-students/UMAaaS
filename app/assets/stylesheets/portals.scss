@@ -11,12 +11,12 @@
     position:absolute;
     top:50%;
     left:50%;
-    width:400px;
+    width:500px;
     margin-left:-200px;
 }
 
 #index-search-box select{
-    width:360px;
+    width:460px;
     border:0px;
     background:#fff;
     appearance:button;
@@ -32,6 +32,18 @@
     border-top: 1px solid #000;
     border-bottom: 2px solid #000;
     height: 75px;
+}
+
+#portal-switch-programs{
+    position: absolute;
+    top: 10px;
+    left: 350px;
+}
+#portal-switch-programs select{
+    background:#ededed;
+    border:0px;
+    font-size: 16px;
+    width: 250px;
 }
 
 #flex-container{
@@ -50,7 +62,6 @@
 
 #column1{
 	order: 1;
-	//background:red;
 	flex-grow: 1;
 	max-width: 260px;
 	min-width: 200px;
@@ -61,7 +72,6 @@
 
 #column2{
 	order: 2;
-	//background:green;
 	flex-grow: 2;
 	margin: 0px 25px;
 	display: flex;
@@ -70,7 +80,6 @@
 
 #column3{
 	order: 3;
-	//background:blue;
 	flex-grow: 1;
 	max-width: 260px;
 	min-width: 200px;

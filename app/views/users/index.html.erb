@@ -1,22 +1,51 @@
-<div class="page-header">Users</div>
-<table class="programs-table">
+<div id="portal-header">Users</div>
+<div id="flex-container">
+ <div id="column1" class="flex-item"><table class="users-legend">
+     <thead>
+         <tr>
+             <td colspan="2">Legend</td>
+         </tr>
+     </thead>
+     <tbody>
+         <tr>
+             <td>Admin</td>
+             <td class="admin"></td>
+         </tr>
+         <tr>
+             <td>Banned</td>
+             <td class="banned"></td>
+         </tr>
+     </tbody>
+ </table>
+ <div id="users-show-banned"><input type="checkbox" id="users-filter-show-banned" name="showBanned" <%= if @showBanned then "checked" end %>> <label for="users-filter-show-banned">Show Banned Users</label></div></div>
+ <div id="column2" class="flex-item"><table class="users-list">
     <thead>
         <tr>
-            <td>User Name</td>
+            <td>Name</td>
             <td>Email</td>
-            <td>Is Admin?</td>
             <td>Study Abroad Program</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
+        <tr class="filters">
+            <td></td>
+            <td></td>
+            <td><select id="users-filter-programs" name="program_id"><option value=0>view all programs</option>
+                <%= @programs.each do |program| %>
+                    <option value="<%= program.id %>" <%= if @selectedProgram == program.id then "selected" end %>><%= program.name %></option>
+                <% end %>
+            </select></td>
+            <td></td>
+        </tr>
         <% @users.each do |user| %>    
-        <tr>
+        <tr <%= if user.banned then "class=banned" else if user.admin then "class=admin" end end %>>
             <td><%= user.name %></td>
             <td><%= user.email %></td>
-            <td><%= check_box_tag 'admin', '1', user.admin, :disabled => true %></td>
             <td><%= user.program_name %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>
         </tr>
         <% end %>
     </tbody>
-</table>
+</table></div>
+</div>
