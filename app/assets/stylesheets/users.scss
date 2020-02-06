@@ -1,3 +1,81 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.users-list, .users-legend, .user-admin{
+    width:100%;
+    border-collapse: collapse;
+}
+
+.users-list td, .users-legend td, .user-admin td{
+    border: 1px solid #ededed;
+}
+
+.users-list tr.admin td, .users-legend td.admin{
+    background: #d4e6ff;
+    min-width: 15px;
+}
+
+.users-list tr.banned td, .users-legend td.banned{
+    background: #ffbfbf;
+    min-width: 15px;
+}
+
+.users-list thead td, .users-legend thead td, .user-admin thead td{
+    font-weight: bold;
+    background: #eee;
+    padding: 2px 4px;
+}
+
+.users-list tr.filters td{
+    border: none;
+}
+
+#users-filter-programs{
+    width:100%;
+    border-radius:8px;
+}
+
+#users-show-banned{
+    padding-top: 10px;
+    width:100%;
+}
+
+
+.user-edit-table{
+    margin: 0 auto;
+}
+
+.user-edit-table td{
+    padding: 5px;
+    font-size: 16px;
+}
+
+.user-edit-label{
+    font-weight: bold;
+    text-align: right;
+}
+
+.user-edit-submit{
+    text-align: center;
+}
+
+.user-edit-submit input{
+    margin-top: 20px;
+    padding: 5px 30px;
+    font: inherit;
+    color: inherit;
+    background-color: #b3f9ff;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 3px solid #80f5ff;
+}
+
+.user-edit-submit input:hover{
+    background-color: #80f5ff;
+}
+
+.user-edit-submit input:focus{
+    outline: 0;
+}

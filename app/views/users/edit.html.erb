@@ -1,31 +1,47 @@
-<div class="page-header">Edit User</div>
-<%= form_tag user_path(@user), :method => :put do %>
-<table class="user-edit-table">
-    <tbody>
-        <tr>
-            <td><%= @user.name %></td>
-        </tr>
-        <tr>
-            <td><%= @user.email %></td>
-        </tr>
-        <tr>
-            <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
-                <%= @programs.each do |program| %>
-                    <option value="<%= program.id %>" <%= if @user.program_id == program.id then "selected" end %>><%= program.name %></option>
-                <% end %>
-            </select></td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><%= submit_tag 'Save' %></td>
-        </tr>
-    </tfoot>
-<% end %>
-<% if logged_in? and session[:admin] %>
-    <%= if @user.admin then
-        link_to 'Remove Admin', :controller => :users, :action => :demote
-    else
-        link_to 'Make Admin', :controller => :users, :action => :promote
-    end%>
-<% end%>
+<div id="portal-header">User: <%= @user.name %></div>
+<div id="flex-container">
+ <% if session[:user_admin] %><div id="column1" class="flex-item"><table class="user-admin">
+     <thead>
+         <tr>
+             <td>Admin Functions</td>
+         </tr>
+     </thead>
+     <tbody>
+         <tr>
+             <td><%= if @user.admin then
+                    link_to 'Demote Admin', :controller => :users, :action => :demote
+                else
+                    link_to 'Promote to Admin', :controller => :users, :action => :promote
+                end%></td>
+         </tr>
+         <tr>
+             <td><%= if @user.banned then
+                    link_to 'Unban User', :controller => :users, :action => :unban
+                else
+                    link_to 'Ban User', :controller => :users, :action => :ban
+                end%></td>
+         </tr>
+     </tbody>
+ </table></div><%end%>
+ <div id="column2" class="flex-item"><%= form_tag user_path(@user), :method => :put do %>
+    <table class="user-edit-table">
+        <tbody>
+            <tr>
+                <td class="user-edit-label">Email Address:</td>
+                <td><%= @user.email %></td>
+            </tr>
+            <tr>
+                <td class="user-edit-label">Abroad Program:</td>
+                <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
+                    <%= @programs.each do |program| %>
+                        <option value="<%= program.id %>" <%= if @user.program_id == program.id then "selected" end %>><%= program.name %></option>
+                    <% end %>
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="user-edit-submit"><%= submit_tag 'Save' %></td>
+            </tr>
+        </tbody>
+    </table>
+ <% end %></div>
+</div>

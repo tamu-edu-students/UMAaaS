@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_200724) do
+ActiveRecord::Schema.define(version: 2020_02_06_041358) do
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_02_03_200724) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "program_id"
     t.boolean "admin", default: false
+    t.boolean "banned", default: false
     t.index ["program_id"], name: "index_users_on_program_id"
   end
 

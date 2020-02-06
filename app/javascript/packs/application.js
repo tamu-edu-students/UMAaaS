@@ -21,8 +21,36 @@ require("jquery")
 $(function(){
 
   $("#index-search-box select").change(function(){
-      var selectedId = $(this).find(":selected").val();
-      if(selectedId != 0) $("#index-search-box-form").submit();
+    var selectedId = $(this).find(":selected").val();
+    if(selectedId != 0) $("#index-search-box-form").submit();
+  });
+  
+  $("#portal-switch-programs select").change(function(){
+    var selectedId = $(this).find(":selected").val();
+    if(selectedId != 0) $("#portal-switch-programs-form").submit();
+  });
+  
+  
+  // For the Users page, adds filtering param to the url to only show a selected program
+  $("#users-filter-programs").change(function(){
+    window.location.replace(generateUserListParams());
+  });
+  
+  $("#users-filter-show-banned").change(function(){
+    window.location.replace(generateUserListParams());
   });
 
 });
+
+function generateUserListParams(){
+  var params = "?";
+  var selectedId = $("#users-filter-programs").find(":selected").val();
+  if(selectedId != 0){
+    params += "p="+selectedId;
+  }
+  if ($('#users-filter-show-banned').is(":checked")){
+    if(params.length > 1) params += "&";
+    params += "b=true";
+  }
+  return params;
+}
