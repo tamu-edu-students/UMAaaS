@@ -10,6 +10,11 @@ class SessionsController < ApplicationController
         dbUser = User.find_by email: user_info["info"]["email"]
         if(dbUser.nil?)
             dbUser = User.create(uid: user_info["uid"], name: user_info["info"]["name"], email: user_info["info"]["email"])
+        else
+            if(dbUser.banned)
+                flash[:alert] = "Your account has been banned! Please contact the administrators."
+                redirect_to root_path and return
+            end
         end
 
         if(user_info["info"]["email"] == Rails.configuration.admin_email)

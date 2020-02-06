@@ -18,7 +18,8 @@ require("jquery")
 // const imagePath = (name) => images(name, true)
 /*global $*/
 
-$(function(){
+//$(function(){
+document.addEventListener("turbolinks:load", function() {  // the site uses turbolinks so have to use this instead of regular jquery opening
 
   $("#index-search-box select").change(function(){
     var selectedId = $(this).find(":selected").val();
