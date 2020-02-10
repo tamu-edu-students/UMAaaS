@@ -42,6 +42,16 @@
     width:100%;
 }
 
+.users-hide-banned-column{
+    display: none;
+}
+
+.users-admin-column, .users-banned-column{
+    width: 1px;
+    text-align: center;
+    font-weight: bold;
+}
+
 
 .user-edit-table{
     margin: 0 auto;

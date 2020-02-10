@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_06_041358) do
+ActiveRecord::Schema.define(version: 2020_02_10_021555) do
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
     t.string "region"
+    t.string "location"
+    t.boolean "disabled", default: false
   end
 
   create_table "reviews", force: :cascade do |t|

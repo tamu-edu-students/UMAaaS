@@ -20,7 +20,7 @@ class UsersController < ApplicationController
         @users = @users.where(banned: false)
       end
       
-      @programs = Program.all
+      @programs = Program.where(disabled: false)
       @selectedProgram = params[:p].to_i
       @showBanned = params[:b] == "true"
   end

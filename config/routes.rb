@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   get 'users/:id/demote', to: 'users#demote'
   get 'users/:id/ban', to: 'users#ban'
   get 'users/:id/unban', to: 'users#unban'
+  get 'programss/:id/enable', to: 'programs#enable'
+  get 'programss/:id/disable', to: 'programs#disable'
   get 'p', to: 'portals#index', as: "portals"
-  get 'p/redirect', to: 'portals#program_redirect', as: 'program_redirect'
+  get 'p/select', to: 'portals#program_select', as: 'program_select'
+  get 'p/view', to: 'portals#program_view', as: 'program_view'
   get 'p/:id', to: 'portals#view', as: "portal"
   root 'reviews#index'
 end

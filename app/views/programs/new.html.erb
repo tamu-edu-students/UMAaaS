@@ -1,23 +1,24 @@
-<div class="page-header">New Study Abroad Program</div>
-<%= form_tag programs_path, :method => :post do %>
-<table class="programs-edit-table">
-    <tbody>
-        <tr>
-            <td><%= label :program, :name, 'Program Name' %></td>
-        </tr>
-        <tr>
-            <td><%= text_field :program, :name %></td>
-        </tr>
-        <tr>
-            <td><%= label :program, :region, 'Region' %></td>
-        </tr>
-        <tr>
-            <td><%= text_field :program, :region %></td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><%= submit_tag 'Save' %></td>
-        </tr>
-    </tfoot>
-<% end %>
+<div id="portal-header">New Study Abroad Program</div>
+<div id="flex-container">
+ <div id="column2" class="flex-item"><%= form_tag programs_path, :method => :post do %>
+    <table class="program-edit-table">
+        <tbody>
+            <tr>
+                <td class="program-edit-label"><%= label :program, :name, 'Program Name' %></td>
+                <td><%= text_field :program, :name %></td>
+            </tr>
+            <tr>
+                <td class="program-edit-label"><%= label :program, :location, 'Location (city, country)' %></td>
+                <td><%= text_field :program, :location %></td>
+            </tr>
+            <tr>
+                <td class="program-edit-label"><%= label :program, :region, 'Region' %></td>
+                <td><%= text_field :program, :region %></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
+            </tr>
+        </tbody>
+    </table>
+ <% end %></div>
+</div>

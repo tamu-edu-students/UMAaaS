@@ -1,26 +1,42 @@
-<div class="page-header">Study Abroad Programs</div>
-<table class="programs-table">
+<div id="portal-header">Study Abroad Programs</div>
+<div id="flex-container">
+ <div id="column1" class="flex-item">
+    <div id="programs-add-new"><%= link_to 'Add new program', new_program_path %></div>
+    <table class="programs-legend">
+         <thead>
+             <tr>
+                 <td colspan="2">Legend</td>
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td>Disabled</td>
+                 <td class="disabled"></td>
+             </tr>
+         </tbody>
+     </table>
+     <div id="programs-show-disabled"><input type="checkbox" id="programs-filter-show-disabled" name="showDisabled" <%= if @showDisabled then "checked" end %>> <label for="programs-filter-show-disabled">Show Disabled Programs</label></div>
+ </div>
+ <div id="column2" class="flex-item"><table class="programs-list">
     <thead>
         <tr>
-            <td>Program Name</td>
+            <td>Name</td>
+            <td>Location</td>
             <td>Region</td>
-            <td></td>
+            <td <%= if not @showDisabled then "class=programs-hide-disabled-column" end %>>Disabled</td>
             <td></td>
         </tr>
     </thead>
     <tbody>
         <% @programs.each do |program| %>    
-        <tr>
+        <tr <%= if program.disabled then "class=disabled" end %>>
             <td><%= program.name %></td>
+            <td><%= program.location %></td>
             <td><%= program.region %></td>
+            <td <%= if not @showDisabled then "class=programs-hide-disabled-column" else "class=programs-disabled-column" end %>><%= if program.disabled then "x" end %></td>
             <td><%= link_to 'Edit', edit_program_path(program) %></td>
-            <td><%= link_to 'Delete', program_path(program), :method => :delete %></td>
         </tr>
         <% end %>
     </tbody>
-    <tfoot>
-        <tr>
-            <td colspan=4><%= link_to 'Add new program', new_program_path %></td>
-        </tr>
-    </tfoot>
-</table>
+</table></div>
+</div>

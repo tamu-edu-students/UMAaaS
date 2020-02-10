@@ -24,6 +24,8 @@
             <td>Name</td>
             <td>Email</td>
             <td>Study Abroad Program</td>
+            <td>Admin</td>
+            <td <%= if not @showBanned then "class=users-hide-banned-column" end %>>Banned</td>
             <td></td>
         </tr>
     </thead>
@@ -43,6 +45,8 @@
             <td><%= user.name %></td>
             <td><%= user.email %></td>
             <td><%= user.program_name %></td>
+            <td class="users-admin-column"><%= if user.admin then "x" end %></td>
+            <td <%= if not @showBanned then "class=users-hide-banned-column" else "class=users-banned-column" end %>><%= if user.banned then "x" end %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>
         </tr>
         <% end %>
