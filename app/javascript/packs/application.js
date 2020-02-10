@@ -41,6 +41,11 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     window.location.replace(generateUserListParams());
   });
 
+  // For the Programs page
+  $("#programs-filter-show-disabled").change(function(){
+    window.location.replace(generateProgramListParams());
+  });
+  
 });
 
 function generateUserListParams(){
@@ -52,6 +57,15 @@ function generateUserListParams(){
   if ($('#users-filter-show-banned').is(":checked")){
     if(params.length > 1) params += "&";
     params += "b=true";
+  }
+  return params;
+}
+
+function generateProgramListParams(){
+  var params = "?";
+  if ($('#programs-filter-show-disabled').is(":checked")){
+    if(params.length > 1) params += "&";
+    params += "d=true";
   }
   return params;
 }

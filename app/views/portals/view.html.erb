@@ -1,4 +1,4 @@
-<div id="portal-switch-programs"><%= form_tag program_redirect_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--Switch Programs--</option>
+<div id="portal-switch-programs"><%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--View Another Program--</option>
                 <%= @programs.each do |program| %>
                     <% if program.id != @program.id then %>
                        <option value="<%= program.id %>"><%= program.name %></option>

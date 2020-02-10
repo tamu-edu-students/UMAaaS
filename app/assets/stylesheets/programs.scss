@@ -1,3 +1,86 @@
 // Place all the styles related to the Programs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.programs-list, .programs-legend, .program-admin{
+    width:100%;
+    border-collapse: collapse;
+}
+
+.programs-list td, .programs-legend td, .program-admin td{
+    border: 1px solid #ededed;
+}
+
+.programs-list tr.disabled td, .programs-legend td.disabled{
+    background: #ffbfbf;
+    min-width: 15px;
+}
+
+.programs-list thead td, .programs-legend thead td, .programs-admin thead td{
+    font-weight: bold;
+    background: #eee;
+    padding: 2px 4px;
+}
+
+#programs-add-new{
+    text-align: center;
+}
+
+#programs-add-new a{
+    font-weight: bold;
+    line-height: 30px;
+}
+
+#programs-show-disabled{
+    padding-top: 10px;
+    width:100%;
+}
+
+.programs-hide-disabled-column{
+    display: none;
+}
+
+.programs-disabled-column{
+    width: 1px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.program-edit-table{
+    margin: 0 auto;
+}
+
+.program-edit-table td{
+    padding: 5px;
+    font-size: 16px;
+}
+
+.program-edit-label{
+    font-weight: bold;
+    text-align: right;
+}
+
+.program-edit-submit{
+    text-align: center;
+}
+
+.program-edit-submit input{
+    margin-top: 20px;
+    padding: 5px 30px;
+    font: inherit;
+    color: inherit;
+    background-color: #b3f9ff;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 3px solid #80f5ff;
+}
+
+.program-edit-submit input:hover{
+    background-color: #80f5ff;
+}
+
+.program-edit-submit input:focus{
+    outline: 0;
+}

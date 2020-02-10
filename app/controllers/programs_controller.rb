@@ -11,9 +11,12 @@ class ProgramsController < ApplicationController
   
   def index
     @programs = Program.all
-    #@programs.each do |program|
-    #  puts "Region: "
-    #end
+    
+    if params[:d] != "true" then
+      @programs = @programs.where(disabled: false)
+    end
+    
+    @showDisabled = params[:d] == "true"
   end
   
   def new
@@ -24,7 +27,7 @@ class ProgramsController < ApplicationController
     params.require(:program).permit(:name, :region)
     params.require(:program).require(:name)
     params.require(:program).require(:region)
-    @program = Program.create(:name => params[:program][:name], :region => params[:program][:region])
+    @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     redirect_to programs_path
   end
   
@@ -34,15 +37,46 @@ class ProgramsController < ApplicationController
   
   def update
     @program = Program.find params[:id]
-    @program.update_attributes(:name => params[:program][:name], :region => params[:program][:region])
+    @program.update_attributes(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     flash[:notice] = "#{@program.name} was successfully updated."
     redirect_to programs_path
   end
   
+  
+  # this is no longer called anywhere, programs aren't deleted, just disabled
   def destroy
     @program = Program.find(params[:id])
     @program.destroy
     flash[:notice] = "Program ’#{@program.name}’ deleted."
     redirect_to programs_path
+  end
+  
+  
+  #disable program
+  def disable
+    program = Program.find params[:id]
+    if(program.nil?) then
+      flash[:alert] = "Error disabling program: program not found."
+      redirect_to programs_path
+    else
+      program.disabled = true
+      program.save
+      flash[:notice] = "#{program.name} has been disabled."
+      redirect_to programs_path
+    end
+  end
+  
+  #enable program
+  def enable
+    program = Program.find params[:id]
+    if(program.nil?) then
+      flash[:alert] = "Error enabling program: program not found."
+      redirect_to programs_path
+    else
+      program.disabled = false
+      program.save
+      flash[:notice] = "#{program.name} has been enabled."
+      redirect_to programs_path
+    end
   end
 end

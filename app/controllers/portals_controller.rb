@@ -1,6 +1,6 @@
 class PortalsController < ApplicationController
     def index
-        @programs = Program.all
+        @programs = Program.where(disabled: false)
         
         if logged_in?
             #if logged in and the user already has a program selected, then automatically go that program portal
@@ -11,7 +11,7 @@ class PortalsController < ApplicationController
         end
     end
     
-    def program_redirect
+    def program_select
         program = Program.find params[:program_id]
         if(program.nil?) then
             flash[:notice] = "Pogram not found!"
@@ -29,8 +29,19 @@ class PortalsController < ApplicationController
         end
     end
     
+    
+    def program_view
+        program = Program.find params[:program_id]
+        if(program.nil?) then
+            flash[:notice] = "Pogram not found!"
+        else
+            session[:user_program_id] = program.id
+            redirect_to portal_path(program.id)
+        end
+    end
+    
     def view
         @program = Program.find params[:id]
-        @programs = Program.all
+        @programs = Program.where(disabled: false)
     end
 end
