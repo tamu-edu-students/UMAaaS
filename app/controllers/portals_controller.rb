@@ -43,6 +43,7 @@ class PortalsController < ApplicationController
     def view
         @program = Program.find params[:id]
         @programs = Program.where(disabled: false)
-        @tips = Tip.where(program_id: params[:id])
+        @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
+        # @tips = Tip.where(program_id: params[:id])
     end
 end

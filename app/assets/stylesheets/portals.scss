@@ -91,6 +91,9 @@
     font-size: 22px;
     font-weight: 700;
     font-family: Arial;
+    justify-content: space-between;
+    display: flex;
+    min-width: 150px;
 }
 
 .portal-review{
@@ -102,11 +105,28 @@
 }
 
 .portal-tip{
-    border: 1px solid #ccc;
     width: 100%;
-    height: 75px;
-    margin: 5px 0;
+    margin: 15px 0;
     min-width: 160px;
+    position: relative;
+    padding: 0 5px 30px 5px;
+    border-left: 3px solid black;
+}
+.portal-tip-info{
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    font-size: 11px;
+    color: #999999;
+}
+.portal-tip-info-user{
+    
+}
+.portal-tip-helpful{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
 }
 
 .portal-experience{
