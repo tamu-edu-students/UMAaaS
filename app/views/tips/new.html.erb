@@ -1,0 +1,16 @@
+<div id="portal-header">New Tip</div>
+<div id="flex-container">
+ <div id="column2" class="flex-item"><%= form_tag tips_path, :method => :post do %>
+    <table class="program-edit-table">
+        <tbody>
+            <tr>
+                <td class="program-edit-label"><%= label :tip, :tip, 'Tip' %></td>
+                <td><%= text_area :tip, :tip %></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
+            </tr>
+        </tbody>
+    </table>
+ <% end %></div>
+</div>
