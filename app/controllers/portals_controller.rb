@@ -43,5 +43,6 @@ class PortalsController < ApplicationController
     def view
         @program = Program.find params[:id]
         @programs = Program.where(disabled: false)
+        @tips = Tip.where(program_id: params[:id])
     end
 end
