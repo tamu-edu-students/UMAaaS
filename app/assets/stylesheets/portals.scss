@@ -93,7 +93,18 @@
     font-family: Arial;
     justify-content: space-between;
     display: flex;
-    min-width: 150px;
+    min-width: 200px;
+    padding-top: 15px;
+}
+.portal-column-title-sort{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 1px solid #999999;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: right;
 }
 
 .portal-review{
@@ -111,22 +122,39 @@
     position: relative;
     padding: 0 5px 30px 5px;
     border-left: 3px solid black;
+    font-size: 13px;
+    line-height: 15px;
 }
 .portal-tip-info{
     position: absolute;
     bottom: 0;
     left: 5px;
-    font-size: 11px;
+    font-size: 9px;
     color: #999999;
-}
-.portal-tip-info-user{
-    
 }
 .portal-tip-helpful{
     position: absolute;
     bottom: 0;
     right: 0;
     font-size: 12px;
+    line-height: 16px;
+}
+.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #ededed;
+    cursor: pointer;
+}
+.portal-tip-helpful .tip-helpful-yes:hover, .portal-tip-helpful .tip-helpful-no:hover{
+    background: #cdcdcd;
+}
+
+.portal-tips-none{
+    font-style: italic;
+    color: #666666;
+    font-size: 12px;
+    text-align: center;
 }
 
 .portal-experience{
@@ -149,7 +177,7 @@
         flex-direction: row;
         overflow-x: auto;
         margin: 0px 25px;
-        padding-top: 40px;
+        padding-top: 55px;
     }
   
     #column2{
@@ -157,7 +185,7 @@
         flex-direction: row;
         overflow-x: auto;
         margin: 0 25px 25px 25px;
-        padding-top: 40px;
+        padding-top: 55px;
     }
   
     #column3{
@@ -172,6 +200,10 @@
     .portal-column-title{
         position: absolute;
         top: 5px;
+    }
+    .portal-column-title-sort{
+        text-align: left;
+        border: 0;
     }
   
     .portal-review{

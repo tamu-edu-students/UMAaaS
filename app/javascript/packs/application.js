@@ -31,6 +31,12 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(selectedId != 0) $("#portal-switch-programs-form").submit();
   });
   
+  $(".tip-helpful-yes").click(function(){
+    var idParts = this.id.split("-");
+    var tipId = idParts[2];
+    alert("Upvote "+tipId);
+  });
+  
   
   // For the Users page, adds filtering param to the url to only show a selected program
   $("#users-filter-programs").change(function(){

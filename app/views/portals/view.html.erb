@@ -7,14 +7,17 @@
             </select><%end%></div>
 <div id="portal-header"><%= @program.name %></div>
 <div id="flex-container">
- <div id="column1" class="flex-item"><div class="portal-column-title">Tips <%= link_to '+ Add tip', new_tip_path %></div>
+ <div id="column1" class="flex-item">
+     <div class="portal-column-title">Tips <%= if session[:user] then link_to '+ Add', new_tip_path; end %>
+         <div class="portal-column-title-sort">sort by: <select><option>most helpful</option><option>date</option></select></div>
+     </div>
  <% @tips.each do |tip| %>
      <div class="portal-tip"><%= tip.tip %>
-         <div class="portal-tip-info"><span class="portal-tip-info-user"><%= tip.user_name %></span> <span class="portal-tip-info-date"><%= tip.created_at.strftime("%D") %></span></div>
-         <div class="portal-tip-helpful">helpful?</div>
+         <div class="portal-tip-info"><span class="portal-tip-info-user"><%= tip.user_name %></span> | <span class="portal-tip-info-date"><%= tip.created_at.strftime("%b %-d, '%y") %></span></div>
+         <div class="portal-tip-helpful">helpful? <div class="tip-helpful-yes" id="tip-upvote-<%= tip.id %>">U</div> <div class="tip-helpful-no" id="tip-downvote-<%= tip.id %>">D</div></div>
      </div>
  <% end %>
- <div class="portal-tip">tip 1</div><div class="portal-tip">tip 2</div></div>
+ <% if @tips.size == 0 then %><div class="portal-tips-none">No tips added yet!</div><% end %></div>
  <div id="column2" class="flex-item"><div class="portal-column-title">Reviews</div><div class="portal-review">review 1</div><div class="portal-review">review 2</div><div class="portal-review">review 3</div><div class="portal-review">review 4</div><div class="portal-review">review 5</div><div class="portal-review">review 6</div><div class="portal-review">review 7</div><div class="portal-review">review 8</div></div>
  <div id="column3" class="flex-item"><div class="portal-column-title">Experiences</div><div class="portal-experience">experience 1</div><div class="portal-experience">experience 2</div><div class="portal-experience">experience 3</div></div>
 </div>
