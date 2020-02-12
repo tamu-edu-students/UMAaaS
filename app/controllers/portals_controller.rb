@@ -45,5 +45,6 @@ class PortalsController < ApplicationController
         @programs = Program.where(disabled: false)
         @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
         # @tips = Tip.where(program_id: params[:id])
+        @experinces = Experince.left_outer_joins(:user).select("experinces.*,users.name as user_name").where(experinces: {program_id: params[:id]})
     end
 end

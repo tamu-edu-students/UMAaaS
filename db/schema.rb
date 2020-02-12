@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_11_013759) do
+ActiveRecord::Schema.define(version: 2020_02_12_201729) do
+
+  create_table "experinces", force: :cascade do |t|
+    t.text "experince"
+    t.integer "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "program_id"
+    t.integer "user_id"
+    t.index ["program_id"], name: "index_experinces_on_program_id"
+    t.index ["user_id"], name: "index_experinces_on_user_id"
+  end
 
   create_table "programs", force: :cascade do |t|
     t.string "name"
@@ -59,6 +70,8 @@ ActiveRecord::Schema.define(version: 2020_02_11_013759) do
     t.index ["program_id"], name: "index_users_on_program_id"
   end
 
+  add_foreign_key "experinces", "programs"
+  add_foreign_key "experinces", "users"
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"
