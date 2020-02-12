@@ -19,5 +19,55 @@
  <% end %>
  <% if @tips.size == 0 then %><div class="portal-tips-none">No tips added yet!</div><% end %></div>
  <div id="column2" class="flex-item"><div class="portal-column-title">Reviews</div><div class="portal-review">review 1</div><div class="portal-review">review 2</div><div class="portal-review">review 3</div><div class="portal-review">review 4</div><div class="portal-review">review 5</div><div class="portal-review">review 6</div><div class="portal-review">review 7</div><div class="portal-review">review 8</div></div>
- <div id="column3" class="flex-item"><div class="portal-column-title">Experiences</div><div class="portal-experience">experience 1</div><div class="portal-experience">experience 2</div><div class="portal-experience">experience 3</div></div>
+ <div id="column3" class="flex-item">
+     <div class="portal-column-title">Experinces <%= if session[:user] then link_to '+ Add', new_experince_path; end %>
+         <div class="portal-column-title-sort">sort by: <select><option>most helpful</option><option>date</option></select></div>
+     </div>
+ <% @experinces.each do |experince| %>
+     <div class="portal-experince"><%= experince.experince %>
+         <div class="portal-experince-info"><span class="portal-experince-info-user"><%= experince.user_name %></span> | <span class="portal-experince-info-date"><%= experince.created_at.strftime("%b %-d, '%y") %></span></div>
+         <div class="portal-experince-rating">
+             					<% if experince.rating.nil? %>
+									<%= content_tag :h4, " "%>
+								<% elsif experince.rating == 0 %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif experince.rating == 1 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif experince.rating == 2 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif experince.rating == 3 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif experince.rating == 4 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_grey.svg", size: "20") %>
+								<% elsif experince.rating == 5 %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+									<%= image_tag("gigs_maroon.svg", size: "20") %>
+								<% end %>
+         </div>
+     </div>
+ <% end %>
+ <% if @experinces.size == 0 then %><div class="portal-tips-none">No experinces added yet!</div><% end %></div>
 </div>

@@ -11,7 +11,7 @@ module Reviews
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    config.admin_email = "bjirka@tamu.edu"
+    config.admin_email = "praun@tamu.edu"
     config.time_zone = "Central Time (US & Canada)"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

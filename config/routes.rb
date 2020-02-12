@@ -24,5 +24,7 @@ Rails.application.routes.draw do
   get 'p/:id', to: 'portals#view', as: 'portal'
   get 'p/:id/tips/new', to: 'tips#new', as: 'new_tip'
   post 'p/:id/tips', to: 'tips#create', as: 'tips'
+  get 'p/:id/experinces/new', to: 'experinces#new', as: 'new_experince'
+  post 'p/:id/experinces', to: 'experinces#create', as: 'experinces'
   root 'reviews#index'
 end
