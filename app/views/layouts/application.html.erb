@@ -33,7 +33,7 @@
                     <li><%=link_to "Contacts", reviews_emergency_path(), :id => "contacts" %></li>
                   <% if logged_in? %>
                     <%if !current_user.img.nil?%>
-                      <li class="navigation-user-icon"><%= link_to image_tag(current_user.img, class: "img-circle", height: '50', width: '50') %>
+                      <li class="navigation-user-icon"><a href=""><%= image_tag(current_user.img, class: "img-circle", height: '50', width: '50') %></a>
                         <ul>
                           <li><%=link_to "Profile", edit_user_path(current_user), :id => "profile" %></li>
                           <li><%=link_to "Logout", logout_path(), :id => "logout" %></li>
