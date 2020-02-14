@@ -16,22 +16,34 @@
     <body>
         <nav class="nav">
             <%= link_to image_tag("tripagvisor_logo_2.png", class: "logo"), reviews_path(), :id => "tamu_logo_link", :class => "logo" %>
+            <!-- Change this -->
               <div class="nav-actions">
-                <%if logged_in?%>
-                  <%if current_user.admin%>
-                    <%=link_to "USERS", users_path(), :id => "users", :class => "link nav-links"%>
-                    <%=link_to "PROGRAMS", programs_path(), :id => "programs", :class => "link nav-links"%>
+                <ul class="navigation">
+                    
+                  <%if logged_in?%>
+                    <%if current_user.admin%>
+                      <li><a href="" title="Admin">Admin</a>
+                      <ul>
+                        <li><%=link_to "Users", users_path(), :id => "users" %></li>
+                        <li><%=link_to "Programs", programs_path(), :id => "programs" %></li>
+                      </ul>
+                      </li>
+                    <%end%>
                   <%end%>
-                <%end%>
-                <%=link_to "CONTACT", reviews_emergency_path(), :id => "contact", :class => "link nav-links"%>
-                <% if logged_in? %>
-                  <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link nav-links"%>
-                  <%if !current_user.img.nil?%>
-                    <%= link_to image_tag(current_user.img, class: "img-circle", height: '50', width: '50'), edit_user_path(current_user)%>
+                    <li><%=link_to "Contacts", reviews_emergency_path(), :id => "contacts" %></li>
+                  <% if logged_in? %>
+                    <%if !current_user.img.nil?%>
+                      <li class="navigation-user-icon"><%= link_to image_tag(current_user.img, class: "img-circle", height: '50', width: '50') %>
+                        <ul>
+                          <li><%=link_to "Profile", edit_user_path(current_user), :id => "profile" %></li>
+                          <li><%=link_to "Logout", logout_path(), :id => "logout" %></li>
+                        </ul>
+                      </li>
+                    <%end%>
+                  <%else%>
+                    <li><%=link_to "Login", login_path(), :id => "login" %></li>
                   <%end%>
-                <%else%>
-                  <%=link_to "LOGIN", login_path(), :id => "login", :class => "link nav-links"%>
-                <%end%>
+                </ul>
               </div>
            
 
