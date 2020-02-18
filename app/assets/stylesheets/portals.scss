@@ -23,21 +23,11 @@
     cursor:pointer;
 }
 
-#portal-header{
-    color: #fff;
-    background: #333;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    border-top: 1px solid #000;
-    border-bottom: 2px solid #000;
-    height: 75px;
-}
-
 #portal-switch-programs{
-    position: absolute;
+    position: fixed;
     top: 10px;
     left: 350px;
+    z-index: 9999;
 }
 #portal-switch-programs select{
     background:#ededed;
@@ -46,19 +36,6 @@
     width: 250px;
 }
 
-#flex-container{
-	display: flex;
-	max-width: 1250px;
-	margin: 20px auto;
-	align-items: flex-start;
-	flex-direction: row;
-}
-
-.flex-item{
-	padding: 10px 20px;
-	background: #fff;
-	position: relative;
-}
 
 #column1{
 	order: 1;
@@ -115,7 +92,7 @@
 	margin: 5px 0;
 }
 
-.portal-tip, .portal-experince{
+.portal-tip, .portal-experience{
     width: 100%;
     margin: 15px 0;
     min-width: 160px;
@@ -125,14 +102,18 @@
     font-size: 13px;
     line-height: 15px;
 }
-.portal-tip-info, .portal-experince-info{
+.portal-experience{
+    margin: 5px 0;
+}
+
+.portal-tip-info, .portal-experience-info{
     position: absolute;
     bottom: 0;
     left: 5px;
     font-size: 9px;
     color: #999999;
 }
-.portal-tip-helpful, .portal-experince-rating{
+.portal-tip-helpful, .portal-experience-rating{
     position: absolute;
     bottom: 0;
     right: 0;
@@ -150,11 +131,205 @@
     background: #cdcdcd;
 }
 
-.portal-tips-none, .portal-experinces-none{
+.portal-tips-none, .portal-experiences-none{
     font-style: italic;
     color: #666666;
     font-size: 12px;
     text-align: center;
+}
+
+.portal-experience-comments{
+    padding: 0 16px;
+    overflow-y: hidden;
+    /*max-height: 100px;*/
+    margin-bottom: 10px;
+}
+
+.portal-experience-comment-count{
+    font-size: 12px;
+    background: #eee;
+    font-weight: bold;
+    cursor: pointer;
+}
+.portal-experience-comment-count .down-arrow{
+    float: right;
+    padding-right: 10px;
+}
+.portal-experience-comment-count .down-arrow i{
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.portal-experience-comment-count .up-arrow{
+    float: right;
+    padding-right: 10px;
+}
+.portal-experience-comment-count .up-arrow i{
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.portal-experience-leave-comment{
+    position: relative;
+}
+
+.portal-experience-leave-comment.active{
+    padding-bottom: 22px;
+    animation-name: add_comment_wrapper_focus;
+    animation-duration: 0.5s;
+}
+@keyframes add_comment_wrapper_focus {
+  0% { padding-bottom: 0px;  }
+  100% { padding-bottom: 22px; }
+}
+.portal-experience-leave-comment.inactive{
+    padding-bottom: 0px;
+    animation-name: add_comment_wrapper_blur;
+    animation-duration: 1s;
+}
+@keyframes add_comment_wrapper_blur {
+  0% { padding-bottom: 22px;  }
+  30% { padding-bottom: 22px;  }
+  100% { padding-bottom: 0px; }
+}
+
+.portal-experience-leave-comment textarea{
+    border: 0;
+    border-bottom: 1px solid #999;
+    font-size: 12px;
+    width: 100%;
+    resize: none;
+    height: 1.5em;
+}
+
+.portal-experience-leave-comment.active textarea{
+    height: 5em;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    animation-name: add_comment_textarea_focus;
+    animation-duration: 0.5s;
+}
+@keyframes add_comment_textarea_focus {
+  0% { height: 1.5em; }
+  100% { height: 5em; }
+}
+.portal-experience-leave-comment.inactive textarea{
+    height: 1.5em;
+    animation-name: add_comment_textarea_blur;
+    animation-duration: 1s;
+}
+@keyframes add_comment_textarea_blur {
+  0% { height: 5em; }
+  50% { height: 5em; }
+  100% { height: 1.5em; }
+}
+
+.portal-experience-leave-comment input[type=submit]{
+    border: 1px solid #666;
+    background: #eee;
+    border-radius: 4px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -1;
+}
+.portal-experience-leave-comment.active input[type=submit]{
+    opacity: 1;
+    z-index: 1;
+    animation-name: add_comment_input_focus;
+    animation-duration: 1s;
+}
+@keyframes add_comment_input_focus {
+  0% { opacity: 0; }
+  50%{ opacity: 0; }
+  100% { opacity: 1; }
+}
+.portal-experience-leave-comment.inactive input[type=submit]{
+    opacity: 0;
+    z-index: -1;
+    animation-name: add_comment_input_blur;
+    animation-duration: 0.5s;
+}
+@keyframes add_comment_input_blur {
+  0% { opacity: 1; z-index: 1; }
+  100% { opacity: 0; z-index: -1; }
+}
+
+.portal-experience-leave-comment .comment_rating_wrapper{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+}
+.portal-experience-leave-comment.active .comment_rating_wrapper{
+    opacity: 1;
+    z-index: 1;
+    animation-name: add_comment_rating_focus;
+    animation-duration: 1s;
+}
+@keyframes add_comment_rating_focus {
+  0% { opacity: 0; }
+  50%{ opacity: 0; }
+  100% { opacity: 1; }
+}
+.portal-experience-leave-comment .comment_rating_wrapper .comment_label{
+    float: left;
+    font-size: 12px;
+}
+.portal-experience-leave-comment .comment_rating_wrapper .rating{
+    float: right;
+    border: 0;
+    font-size: 10px;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.portal-experience-comments-list{
+    background: #fcfcfc;
+    display: none;
+}
+
+.portal-experience-comment{
+    border-left: 3px solid #999;
+    border-bottom: 1px solid #ddd;
+    padding: 0 5px 30px 5px;
+    margin: 5px 0 10px 0;
+    font-size: 12px;
+    position: relative;
+}
+
+.portal-experience-comment .comment-author{
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    font-size: 9px;
+    color: #888888;
+}
+.portal-experience-comment .comment-rating{
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+}
+
+.experience-div{
+    background: #ededed;
+    height: 8px;
+    width: calc(100% + 42px);
+    margin-left: -21px;
+    border-bottom: 1px solid #ccc;
+    border-top: 2px solid #900000;
+    margin-bottom: 10px;
 }
 
 

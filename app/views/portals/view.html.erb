@@ -5,9 +5,9 @@
                     <%end%>
                 <% end %>
             </select><%end%></div>
-<div id="portal-header"><%= @program.name %></div>
+<div id="page-header"><%= @program.name %></div>
 <div id="flex-container">
- <div id="column1" class="flex-item">
+ <div id="column_1_of_2" class="flex-item">
      <div class="portal-column-title">Tips <%= if session[:user] then link_to '+ Add', new_tip_path; end %>
          <div class="portal-column-title-sort">sort by: <select><option>most helpful</option><option>date</option></select></div>
      </div>
@@ -18,56 +18,75 @@
      </div>
  <% end %>
  <% if @tips.size == 0 then %><div class="portal-tips-none">No tips added yet!</div><% end %></div>
- <div id="column2" class="flex-item"><div class="portal-column-title">Reviews</div><div class="portal-review">review 1</div><div class="portal-review">review 2</div><div class="portal-review">review 3</div><div class="portal-review">review 4</div><div class="portal-review">review 5</div><div class="portal-review">review 6</div><div class="portal-review">review 7</div><div class="portal-review">review 8</div></div>
- <div id="column3" class="flex-item">
-     <div class="portal-column-title">Experinces <%= if session[:user] then link_to '+ Add', new_experince_path; end %>
+ <div id="column_2_of_2" class="flex-item">
+     <div class="portal-column-title">Experiences <%= if session[:user] then link_to '+ Add', new_experience_path; end %>
          <div class="portal-column-title-sort">sort by: <select><option>most helpful</option><option>date</option></select></div>
      </div>
- <% @experinces.each do |experince| %>
-     <div class="portal-experince"><%= experince.experince %>
-         <div class="portal-experince-info"><span class="portal-experince-info-user"><%= experince.user_name %></span> | <span class="portal-experince-info-date"><%= experince.created_at.strftime("%b %-d, '%y") %></span></div>
-         <div class="portal-experince-rating">
-             					<% if experince.rating.nil? %>
+ <% @experiences.each_with_index do |experience, index| %>
+ 	<div class="portal-experience-wrapper">
+     <div class="portal-experience"><%= experience.experience %>
+         <div class="portal-experience-info"><span class="portal-experience-info-user"><%= experience.user_name %></span> | <span class="portal-experience-info-date"><%= experience.created_at.strftime("%b %-d, '%y") %></span></div>
+         <div class="portal-experience-rating">
+             					<% if experience.rating.nil? %>
 									<%= content_tag :h4, " "%>
-								<% elsif experince.rating == 0 %>
+								<% elsif experience.rating == 0 %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
-								<% elsif experince.rating == 1 %>
+								<% elsif experience.rating == 1 %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
-								<% elsif experince.rating == 2 %>
+								<% elsif experience.rating == 2 %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
-								<% elsif experince.rating == 3 %>
+								<% elsif experience.rating == 3 %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
-								<% elsif experince.rating == 4 %>
+								<% elsif experience.rating == 4 %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_grey.svg", size: "20") %>
-								<% elsif experince.rating == 5 %>
+								<% elsif experience.rating == 5 %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 									<%= image_tag("gigs_maroon.svg", size: "20") %>
 								<% end %>
+			<div class="portal-experience-rating-average">Avg: 4.8</div>
          </div>
      </div>
+     <div class="portal-experience-comments">
+     	<% if experience.comments.size > 0 then %><div class="portal-experience-comment-count">Comments: <%= experience.comments.size %> <span class="down-arrow"><i></i></span></div><% end %>
+     	<div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= experience.id %>"><textarea id="add_comment_<%= experience.id %>" name="add_comment" placeholder="Leave a comment"></textarea><input id="submit_add_comment_<%= experience.id %>" type="submit" value="Save Comment"><div class="comment_rating_wrapper"><%= label :rating, "Rating:", :class => "comment_label" %>
+                <fieldset class="rating">
+                      <input type="radio" value="5" name="comment_rating_<%= experience.id %>" id="comment_rating_5_<%= experience.id %>" /> <label for="comment_rating_5_<%= experience.id %>">Rating 5</label> 
+                      <input type="radio" value="4" name="comment_rating_<%= experience.id %>" id="comment_rating_4_<%= experience.id %>" /> <label for="comment_rating_4_<%= experience.id %>">Rating 4</label> 
+                      <input type="radio" value="3" name="comment_rating_<%= experience.id %>" id="comment_rating_3_<%= experience.id %>" /> <label for="comment_rating_3_<%= experience.id %>">Rating 3</label> 
+                      <input type="radio" value="2" name="comment_rating_<%= experience.id %>" id="comment_rating_2_<%= experience.id %>" /> <label for="comment_rating_2_<%= experience.id %>">Rating 2</label> 
+                      <input type="radio" value="1" name="comment_rating_<%= experience.id %>" id="comment_rating_1_<%= experience.id %>" /> <label for="comment_rating_1_<%= experience.id %>">Rating 1</label>
+                </fieldset></div></div>
+        <div class="portal-experience-comments-list">
+        	<% experience.comments.each do |comment| %>
+        		<div class="portal-experience-comment"><%= comment.comment %><div class="comment-author"><%= comment.user_name %> | <%= comment.created_at.strftime("%b %-d, '%y") %></div><div class="comment-rating"><%= comment.rating %></div></div>	
+        	<% end %>
+        </div>
+     </div>
+     <% if index < @experiences.size - 1 then %><div class="experience-div"></div><% end %>
+    </div>
  <% end %>
- <% if @experinces.size == 0 then %><div class="portal-tips-none">No experinces added yet!</div><% end %></div>
+ <% if @experiences.size == 0 then %><div class="portal-experiences-none">No experiences added yet!</div><% end %></div>
 </div>

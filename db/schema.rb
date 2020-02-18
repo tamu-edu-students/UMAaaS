@@ -10,17 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_201729) do
+ActiveRecord::Schema.define(version: 2020_02_18_024802) do
 
-  create_table "experinces", force: :cascade do |t|
-    t.text "experince"
+  create_table "experience_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "experience_id"
+    t.integer "user_id"
+    t.index ["experience_id"], name: "index_experience_comments_on_experience_id"
+    t.index ["user_id"], name: "index_experience_comments_on_user_id"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.text "experience"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "program_id"
     t.integer "user_id"
-    t.index ["program_id"], name: "index_experinces_on_program_id"
-    t.index ["user_id"], name: "index_experinces_on_user_id"
+    t.index ["program_id"], name: "index_experiences_on_program_id"
+    t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -70,8 +81,10 @@ ActiveRecord::Schema.define(version: 2020_02_12_201729) do
     t.index ["program_id"], name: "index_users_on_program_id"
   end
 
-  add_foreign_key "experinces", "programs"
-  add_foreign_key "experinces", "users"
+  add_foreign_key "experience_comments", "experiences"
+  add_foreign_key "experience_comments", "users"
+  add_foreign_key "experiences", "programs"
+  add_foreign_key "experiences", "users"
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"

@@ -45,6 +45,11 @@ class PortalsController < ApplicationController
         @programs = Program.where(disabled: false)
         @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
         # @tips = Tip.where(program_id: params[:id])
-        @experinces = Experince.left_outer_joins(:user).select("experinces.*,users.name as user_name").where(experinces: {program_id: params[:id]})
+        @experiences = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {program_id: params[:id]})
+        puts "OUTPUT HERE"
+        @experiences.each do |exp|
+            exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).order(created_at: :desc)
+            puts exp.comments.size
+        end
     end
 end
