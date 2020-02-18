@@ -37,6 +37,41 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     alert("Upvote "+tipId);
   });
   
+  $(".portal-experience-leave-comment textarea").focus(function(){
+    $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
+    var wrapperId = "wrapper_" + $(this).attr('id');
+    $("#"+wrapperId).addClass("active").removeClass("inactive");
+  });
+  
+  $(".portal-experience-leave-comment input[type=submit]").click(function(){
+    var experienceId = $(this).attr('id').split('_')[3];
+    var commentText = $("#add_comment_"+experienceId).val();
+    var radioValue = $("input[name='comment_rating_" + experienceId + "']:checked").val();
+
+    $.ajax({
+      type: "POST", 
+      url: "/experience/"+experienceId+"/comment",
+      data: {experienceId: experienceId, commentText: commentText, rating: radioValue},
+      dataType: "json",
+      success: function(data, textStatus, jqXHR){
+        //alert('great success!');
+        //alert(JSON.stringify(data));
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+      }
+    });
+    
+    // reset inputs
+    $("#add_comment_"+experienceId).val("");
+    $("input[name='comment_rating_" + experienceId + "']:checked").prop('checked', false);
+
+  });
+  
+  $(".portal-experience-comment-count").click(function(){
+    $(this).children(":first").toggleClass("down-arrow up-arrow");
+    $(this).siblings(".portal-experience-comments-list").slideToggle("fast");
+  });
+  
   
   // For the Users page, adds filtering param to the url to only show a selected program
   $("#users-filter-programs").change(function(){

@@ -1,7 +1,8 @@
 class User < ApplicationRecord
     belongs_to :program, optional: true
     has_many :tips
-    has_many :experinces
+    has_many :experiences
+    has_many :experience_comments
     
     attr_accessor :img
 end
