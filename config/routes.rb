@@ -27,5 +27,5 @@ Rails.application.routes.draw do
   get 'p/:id/experiences/new', to: 'experiences#new', as: 'new_experience'
   post 'p/:id/experiences', to: 'experiences#create', as: 'experiences'
   post 'experience/:id/comment', to: 'experiences#create_comment'
-  root 'reviews#index'
+  root 'portals#index'
 end
