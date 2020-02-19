@@ -37,13 +37,14 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     alert("Upvote "+tipId);
   });
   
-  $(".portal-experience-leave-comment textarea").focus(function(){
+  $(document).on('focus', '.portal-experience-leave-comment textarea', function(){
     $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
     var wrapperId = "wrapper_" + $(this).attr('id');
     $("#"+wrapperId).addClass("active").removeClass("inactive");
   });
   
-  $(".portal-experience-leave-comment input[type=submit]").click(function(){
+  $(document).on('click', '.portal-experience-leave-comment input[type=submit]', function(){
+    $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
     var experienceId = $(this).attr('id').split('_')[3];
     var commentText = $("#add_comment_"+experienceId).val();
     var radioValue = $("input[name='comment_rating_" + experienceId + "']:checked").val();
@@ -52,10 +53,8 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
       type: "POST", 
       url: "/experience/"+experienceId+"/comment",
       data: {experienceId: experienceId, commentText: commentText, rating: radioValue},
-      dataType: "json",
+      dataType: "script",
       success: function(data, textStatus, jqXHR){
-        //alert('great success!');
-        //alert(JSON.stringify(data));
       },
       error: function(jqXHR, textStatus, errorThrown){
       }
@@ -67,11 +66,14 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
 
   });
   
-  $(".portal-experience-comment-count").click(function(){
+  $(document).on('click', '.portal-experience-comment-count', function(){
     $(this).children(":first").toggleClass("down-arrow up-arrow");
     $(this).siblings(".portal-experience-comments-list").slideToggle("fast");
   });
   
+  $("#portal-sort-experiences").change(function(){
+    window.location.replace(generatePortalParams());
+  });
   
   // For the Users page, adds filtering param to the url to only show a selected program
   $("#users-filter-programs").change(function(){
@@ -108,5 +110,15 @@ function generateProgramListParams(){
     if(params.length > 1) params += "&";
     params += "d=true";
   }
+  return params;
+}
+
+function generatePortalParams(){
+  var params = "?";
+  var selectedId = $("#portal-sort-experiences").find(":selected").val();
+  if(selectedId != "rating"){  // date is default so it doesn't need to be in the URL parameters
+    params += "sort_exp="+selectedId;
+  }
+
   return params;
 }

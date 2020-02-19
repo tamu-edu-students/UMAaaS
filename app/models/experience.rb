@@ -4,4 +4,5 @@ class Experience < ApplicationRecord
     has_many :experience_comments
     
     attr_accessor :comments
+    attr_accessor :average_rating
 end
