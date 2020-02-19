@@ -50,7 +50,7 @@ class PortalsController < ApplicationController
             
             rating_sum = ExperienceComment.where(experience_id: exp.id).group(:experience_id).sum(:rating).values[0]
             if(rating_sum.nil?)
-                rating_sum = 1
+                rating_sum = exp.rating #just the original rating
             else
                 rating_sum += exp.rating #add the original rating
             end
