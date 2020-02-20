@@ -21,11 +21,28 @@ require("jquery")
 //$(function(){
 document.addEventListener("turbolinks:load", function() {  // the site uses turbolinks so have to use this instead of regular jquery opening
 
+/////////////////////////////////
+// for all pages
+//
+  $(".flash-alert-button input").click(function(){
+    $(".flash-alert-wrapper").hide();
+  });
+
+
+
+/////////////////////////////////
+// for homepage
+//
   $("#index-search-box select").change(function(){
     var selectedId = $(this).find(":selected").val();
     if(selectedId != 0) $("#index-search-box-form").submit();
   });
   
+  
+  
+/////////////////////////////////
+// for portal page
+//
   $("#portal-switch-programs select").change(function(){
     var selectedId = $(this).find(":selected").val();
     if(selectedId != 0) $("#portal-switch-programs-form").submit();
@@ -44,25 +61,28 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
   });
   
   $(document).on('click', '.portal-experience-leave-comment input[type=submit]', function(){
-    $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
     var experienceId = $(this).attr('id').split('_')[3];
-    var commentText = $("#add_comment_"+experienceId).val();
     var radioValue = $("input[name='comment_rating_" + experienceId + "']:checked").val();
-
-    $.ajax({
-      type: "POST", 
-      url: "/experience/"+experienceId+"/comment",
-      data: {experienceId: experienceId, commentText: commentText, rating: radioValue},
-      dataType: "script",
-      success: function(data, textStatus, jqXHR){
-      },
-      error: function(jqXHR, textStatus, errorThrown){
-      }
-    });
-    
-    // reset inputs
-    $("#add_comment_"+experienceId).val("");
-    $("input[name='comment_rating_" + experienceId + "']:checked").prop('checked', false);
+    var commentText = $("#add_comment_"+experienceId).val();
+    if(commentText == "") return;
+    if(radioValue || confirm("Submit your comment without a rating?")){
+      $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
+  
+      $.ajax({
+        type: "POST", 
+        url: "/experience/"+experienceId+"/comment",
+        data: {experienceId: experienceId, commentText: commentText, rating: radioValue},
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+      
+      // reset inputs
+      $("#add_comment_"+experienceId).val("");
+      $("input[name='comment_rating_" + experienceId + "']:checked").prop('checked', false);
+    }
 
   });
   
@@ -75,7 +95,12 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     window.location.replace(generatePortalParams());
   });
   
-  // For the Users page, adds filtering param to the url to only show a selected program
+  
+  
+/////////////////////////////////
+// for users page
+//
+  // adds filtering param to the url to only show a selected program
   $("#users-filter-programs").change(function(){
     window.location.replace(generateUserListParams());
   });
@@ -84,7 +109,11 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     window.location.replace(generateUserListParams());
   });
 
-  // For the Programs page
+
+
+/////////////////////////////////
+// for programs page
+//
   $("#programs-filter-show-disabled").change(function(){
     window.location.replace(generateProgramListParams());
   });

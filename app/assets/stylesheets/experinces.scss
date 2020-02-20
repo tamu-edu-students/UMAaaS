@@ -1,3 +1,41 @@
 // Place all the styles related to the experinces controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.experience-edit-table{
+    width: 100%;
+}
+
+.experience-edit-label{
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+    padding-right: 10px;
+    width: 400px;
+}
+
+.experience-edit-table textarea{
+    width: 600px;
+    height: 150px;
+}
+.experience-edit-table input[type=text]{
+    width: 600px;
+}
+
+.experience-edit-field-tips{
+    font-size: 12px;
+    color: #999;
+    padding-bottom: 5px;
+}
+
+.experience-edit-table .rating{
+    padding: 0;
+    margin: 0;
+    border: none;
+    height: 45px;
+}
+
+.experience-edit-submit{
+    text-align: center;
+    padding: 20px 0 10px 0;
+}
