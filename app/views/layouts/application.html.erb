@@ -71,7 +71,7 @@
       <%= content_tag :div, flash["notice"], class: "flash-notice" %>
     <% end %>
     <% if flash[:alert] %>
-      <%= content_tag :div, flash["alert"], class: "flash-alert" %>
+      <div class="flash-alert-wrapper"><div class="flash-alert"><div class="flash-alert-header">Error</div><div class="flash-alert-message"><%= flash[:alert] %></div><div class="flash-alert-button"><input type="button" value="Got it!"></div></div></div>
     <% end %>
     <%= yield %>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

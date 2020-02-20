@@ -41,24 +41,34 @@ class PortalsController < ApplicationController
     end
     
     def view
+        #get this specific program
         @program = Program.find params[:id]
+        
+        # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
+        
+        # get all tips for this program
         @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
-        @experiences = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {program_id: params[:id]}).order(rating: :desc)
+        
+        # get all experiences for this program
+        @experiences = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {program_id: params[:id]}).where(users: {banned: false}).order(rating: :desc)
+        
+        # for each experience get the comments associated with it and calculate the average rating
         @experiences.each do |exp|
-            exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).order(created_at: :desc)
+            exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).where(users: {banned: false}).order(created_at: :desc)
             
-            rating_sum = ExperienceComment.where(experience_id: exp.id).group(:experience_id).sum(:rating).values[0]
+            rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
             if(rating_sum.nil?)
                 rating_sum = exp.rating #just the original rating
             else
                 rating_sum += exp.rating #add the original rating
             end
-            rating_count = ExperienceComment.where(experience_id: exp.id).where.not(rating: nil).count(:id)
+            rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).where.not(rating: nil).count(:id)
             rating_count +=1 #add 1 for the original rating
             exp.average_rating = (rating_sum.to_f / rating_count).round(1)
         end
         
+        # for sorting the experiences
         if(params[:sort_exp].nil?) then
             @experience_sort_by = "rating"
         else

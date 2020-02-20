@@ -13,11 +13,11 @@ class ExperiencesController < ApplicationController
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => session[:user], :experience_id => params[:experienceId])
         @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:experienceId]}).first
         
-        @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: params[:experienceId]).order(created_at: :desc)
+        @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: params[:experienceId]).where(users: {banned: false}).order(created_at: :desc)
         
-        rating_sum = ExperienceComment.where(experience_id: params[:experienceId]).group(:experience_id).sum(:rating).values[0]
+        rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:experienceId]).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
         rating_sum += @experience.rating #add the original rating
-        rating_count = ExperienceComment.where(experience_id: params[:experienceId]).where.not(rating: nil).count(:id)
+        rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:experienceId]).where(users: {banned: false}).where.not(rating: nil).count(:id)
         rating_count +=1 #add 1 for the original rating
         @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
         

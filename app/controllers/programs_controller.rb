@@ -28,6 +28,7 @@ class ProgramsController < ApplicationController
     params.require(:program).require(:name)
     params.require(:program).require(:region)
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
+    flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path
   end
   
