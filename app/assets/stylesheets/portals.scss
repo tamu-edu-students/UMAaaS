@@ -124,11 +124,23 @@
     display: inline-block;
     width: 16px;
     height: 16px;
-    background: #ededed;
     cursor: pointer;
 }
-.portal-tip-helpful .tip-helpful-yes:hover, .portal-tip-helpful .tip-helpful-no:hover{
-    background: #cdcdcd;
+.portal-tip-helpful .tip-helpful-yes{
+    background-image: url(asset_path("thumbs_up.png"));
+    background-position-y: 0%;
+}
+.portal-tip-helpful .tip-helpful-yes:hover{
+    background-image: url(asset_path("thumbs_up.png"));
+    background-position-y: 100%;
+}
+.portal-tip-helpful .tip-helpful-no{
+    background-image: url(asset_path("thumbs_down.png"));
+    background-position-y: 0%;
+}
+.portal-tip-helpful .tip-helpful-no:hover{
+    background-image: url(asset_path("thumbs_down.png"));
+    background-position-y: 100%;
 }
 
 .portal-tips-none, .portal-experiences-none{
