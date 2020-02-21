@@ -14,7 +14,7 @@
  <% @tips.each do |tip| %>
      <div class="portal-tip"><%= tip.tip %>
          <div class="portal-tip-info"><span class="portal-tip-info-user"><%= tip.user_name %></span> | <span class="portal-tip-info-date"><%= tip.created_at.strftime("%b %-d, '%y") %></span></div>
-         <div class="portal-tip-helpful">helpful? <div class="tip-helpful-yes" id="tip-upvote-<%= tip.id %>">U</div> <div class="tip-helpful-no" id="tip-downvote-<%= tip.id %>">D</div></div>
+         <div class="portal-tip-helpful">helpful? <div class="tip-helpful-yes" id="tip-upvote-<%= tip.id %>"> </div> <div class="tip-helpful-no" id="tip-downvote-<%= tip.id %>"> </div></div>
      </div>
  <% end %>
  <% if @tips.size == 0 then %><div class="portal-tips-none">No tips added yet!</div><% end %></div>
