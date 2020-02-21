@@ -54,13 +54,16 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     alert("Upvote "+tipId);
   });
   
-  $(document).on('focus', '.portal-experience-leave-comment textarea', function(){
+  // The .off fixes a problem with the javascript getting double loaded by turbolinks when the back button is used
+  // that was causing events to get double triggered. So the .off removes any extra events then adds just a single instance
+  
+  $(document).off('focus', '.portal-experience-leave-comment textarea').on('focus', '.portal-experience-leave-comment textarea', function(){
     $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
     var wrapperId = "wrapper_" + $(this).attr('id');
     $("#"+wrapperId).addClass("active").removeClass("inactive");
   });
   
-  $(document).on('click', '.portal-experience-leave-comment input[type=submit]', function(){
+  $(document).off('click', '.portal-experience-leave-comment input[type=submit]').on('click', '.portal-experience-leave-comment input[type=submit]', function(){
     var experienceId = $(this).attr('id').split('_')[3];
     var radioValue = $("input[name='comment_rating_" + experienceId + "']:checked").val();
     var commentText = $("#add_comment_"+experienceId).val();
@@ -86,7 +89,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
 
   });
   
-  $(document).on('click', '.portal-experience-comment-count', function(){
+  $(document).off('click', '.portal-experience-comment-count').on('click', '.portal-experience-comment-count', function(){
     $(this).children(":first").toggleClass("down-arrow up-arrow");
     $(this).siblings(".portal-experience-comments-list").slideToggle("fast");
   });
@@ -96,7 +99,22 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
   });
   
   
-  
+
+/////////////////////////////////
+// for new experience page
+//
+  var typingTimer;                //timer identifier
+  var doneTypingInterval = 1000;  //time in ms (5 seconds)
+
+  //on keyup, start the countdown
+  $(document).off('input', '#yelp-search').on('input', '#yelp-search', function(){
+    clearTimeout(typingTimer);
+    if ($(this).val()) {
+        typingTimer = setTimeout(searchYelp, doneTypingInterval);
+    }
+  });
+
+
 /////////////////////////////////
 // for users page
 //
@@ -150,4 +168,10 @@ function generatePortalParams(){
   }
 
   return params;
+}
+
+
+//user is "finished typing," search Yelp
+function searchYelp () {
+    //alert($("#yelp-search").val());
 }
