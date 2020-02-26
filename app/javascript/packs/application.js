@@ -48,10 +48,77 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(selectedId != 0) $("#portal-switch-programs-form").submit();
   });
   
-  $(".tip-helpful-yes").click(function(){
+  $(document).off('click', '.tip-helpful-yes').on('click', '.tip-helpful-yes', function(){
+    
     var idParts = this.id.split("-");
     var tipId = idParts[2];
-    alert("Upvote "+tipId);
+    
+    if($(this).hasClass("voted")){
+      
+      $.ajax({
+        type: "POST", 
+        url: "/tip/helpful",
+        data: {tipId: tipId, vote: 0}, //0 means no vote (so undo an upvote or a downvote)
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+      
+    }else{
+
+      $.ajax({
+        type: "POST", 
+        url: "/tip/helpful",
+        data: {tipId: tipId, vote: 1},
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    
+    }
+    
+    
+  });
+  
+  
+  $(document).off('click', '.tip-helpful-no').on('click', '.tip-helpful-no', function(){
+    var idParts = this.id.split("-");
+    var tipId = idParts[2];
+
+    if($(this).hasClass("voted")){
+      
+      $.ajax({
+        type: "POST", 
+        url: "/tip/helpful",
+        data: {tipId: tipId, vote: 0}, //0 means no vote (so undo an upvote or a downvote)
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+      
+    }else{
+
+      $.ajax({
+        type: "POST", 
+        url: "/tip/helpful",
+        data: {tipId: tipId, vote: -1},
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    
+    }    
+    
+    
+    
   });
   
   // The .off fixes a problem with the javascript getting double loaded by turbolinks when the back button is used

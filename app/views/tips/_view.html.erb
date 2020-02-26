@@ -1,0 +1,4 @@
+<div class="portal-tip"><%= locals[:tip].tip %>
+    <div class="portal-tip-info"><span class="portal-tip-info-user"><%= locals[:tip].user_name %></span> | <span class="portal-tip-info-date"><%= locals[:tip].created_at.strftime("%b %-d, '%y") %></span></div>
+    <div class="portal-tip-helpful">helpful? <div class="tip-helpful-yes <%= if locals[:tip].hasUserUpvoted == 1 then "voted" end %>" id="tip-upvote-<%= locals[:tip].id %>"> </div> <div class="tip-helpful-no <%= if locals[:tip].hasUserDownvoted == 1 then "voted" end %>" id="tip-downvote-<%= locals[:tip].id %>"> </div></div>
+</div>

@@ -142,6 +142,11 @@
     background-image: url(asset_path("thumbs_down.png"));
     background-position-y: 100%;
 }
+.portal-tip-helpful .voted{
+    background-position-y: 100%;
+}
+
+
 
 .portal-tips-none, .portal-experiences-none{
     font-style: italic;

@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   post 'p/:id/experiences', to: 'experiences#create', as: 'experiences'
   post 'experience/:id/comment', to: 'experiences#create_comment'
   post 'experience/yelp_search', to: 'experiences#yelp_search'
+  post 'tip/helpful', to: 'tips#helpful'
   root 'portals#index'
 end
