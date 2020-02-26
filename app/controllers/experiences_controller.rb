@@ -1,6 +1,8 @@
 class ExperiencesController < ApplicationController
     def new
         @experience = Experience.new
+        program = Program.find params[:id]
+        @near = program.location
     end
     
     def create
@@ -26,5 +28,26 @@ class ExperiencesController < ApplicationController
         respond_to do |format|
             format.js {}
         end
+    end
+    
+    def yelp_search
+        @results = search(params[:yelpTerm], params[:yelpLocation])
+        puts @results
+        
+        respond_to do |format|
+            format.json  { render :json => @results }
+        end
+    end
+    
+    
+    def search(term, location)
+        url = "#{Rails.configuration.YELP_API_HOST}#{Rails.configuration.YELP_SEARCH_PATH}"
+        params = {
+            term: term,
+            location: location,
+            limit: 10,
+        }
+        response = HTTP.auth("Bearer #{Rails.configuration.YELP_API_KEY}").get(url, params: params)
+        response.parse
     end
 end
