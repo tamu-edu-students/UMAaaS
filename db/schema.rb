@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_024802) do
+ActiveRecord::Schema.define(version: 2020_02_26_182825) do
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -81,6 +81,19 @@ ActiveRecord::Schema.define(version: 2020_02_18_024802) do
     t.index ["program_id"], name: "index_users_on_program_id"
   end
 
+  create_table "yelp_locations", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "alias"
+    t.string "yelp_id"
+    t.string "url"
+    t.string "image_url"
+    t.string "rating"
+    t.string "yelp_tags"
+    t.integer "experience_id"
+    t.index ["experience_id"], name: "index_yelp_locations_on_experience_id"
+  end
+
   add_foreign_key "experience_comments", "experiences"
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"
@@ -88,4 +101,5 @@ ActiveRecord::Schema.define(version: 2020_02_18_024802) do
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"
+  add_foreign_key "yelp_locations", "experiences"
 end

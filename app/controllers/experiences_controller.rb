@@ -6,7 +6,14 @@ class ExperiencesController < ApplicationController
     end
     
     def create
-        Experience.create(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :user_id => session[:user], :program_id => params[:id])
+        newExperience = Experience.create(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :user_id => session[:user], :program_id => params[:id])
+
+        if(params.has_key?(:yelp_id))
+            # has a Yelp location selected
+            YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        end
+        
+        
         redirect_to portal_path(params[:id])
     end
     
