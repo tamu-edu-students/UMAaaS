@@ -104,14 +104,49 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
 // for new experience page
 //
   var typingTimer;                //timer identifier
-  var doneTypingInterval = 1000;  //time in ms (5 seconds)
+  var doneTypingInterval = 750;  //time in ms (.75 seconds)
 
   //on keyup, start the countdown
   $(document).off('input', '#yelp-search').on('input', '#yelp-search', function(){
     clearTimeout(typingTimer);
     if ($(this).val()) {
         typingTimer = setTimeout(searchYelp, doneTypingInterval);
+        
+        $("#yelp-search-results").show();
+        if(!$("#yelp-search-results").children("#yelp-searching-indicator").length){
+          $("#yelp-search-results").prepend("<div id='yelp-searching-indicator'>searching...</div>");
+        }
+    }else{
+      $("#yelp-search-results").hide();
+      $("#yelp-search-results").empty();
     }
+  });
+  
+  //when a yelp search result is clicked
+  $(document).off('click', '.yelp-search-result').on('click', '.yelp-search-result', function(){
+    // clear the search bar and results and hide them
+    $("#yelp-search-wrapper").hide();
+    $("#yelp-search-results").empty();
+    $("#yelp-search-results").hide();
+    $("#yelp-search").val("");
+    
+    // then add the business details to the selected location display and show it
+    $("#yelp-location-wrapper").append("<div id='yelp-selected-location'><div id='yelp-remove-selected-location'>&#10006;</div>" + $(this).children(".yelp-search-result-name").text() + "</div>");
+    $("#yelp-location-wrapper").show();
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-name' class='yelp-hidden-field' value=\"" + $(this).children(".yelp-search-result-name").text() + "\">");
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-address' class='yelp-hidden-field' value=\"" + $(this).children(".yelp-search-result-address").text() + "\">");
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-alias' class='yelp-hidden-field' value='" + $(this).children(".yelp-search-result-alias").text() + "'>");
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-id' class='yelp-hidden-field' value='" + $(this).children(".yelp-search-result-id").text() + "'>");
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-url' class='yelp-hidden-field' value='" + $(this).children(".yelp-search-result-url").text() + "'>");
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-image-url' class='yelp-hidden-field' value='" + $(this).children(".yelp-search-result-image-url").text() + "'>");
+    $("#yelp-location-wrapper").append("<input type='text' name='yelp-rating' class='yelp-hidden-field' value='" + $(this).children(".yelp-search-result-rating").text() + "'>");
+  });
+  
+  //when a selected location's X is clicked to remove it
+  $(document).off('click', '#yelp-remove-selected-location').on('click', '#yelp-remove-selected-location', function(){
+    $("#yelp-location-wrapper").hide();
+    $("#yelp-location-wrapper").empty();
+    $("#yelp-search-wrapper").show();
   });
 
 
@@ -173,5 +208,39 @@ function generatePortalParams(){
 
 //user is "finished typing," search Yelp
 function searchYelp () {
-    //alert($("#yelp-search").val());
+  $.ajax({
+    type: "POST", 
+    url: "/experience/yelp_search",
+    data: {yelpTerm: $("#yelp-search").val(), yelpLocation: $("#yelp-near").val()},
+    dataType: "json",
+    success: function(data, textStatus, jqXHR){
+      
+      $("#yelp-search-results").empty();
+      for(let result = 0; result < data.businesses.length; result++){
+        var resultHTML = "<div class='yelp-search-result' id='yelp-result-" + result + "'>";
+        resultHTML += "<div class='yelp-search-result-name'>"+ data.businesses[result].name  +"</div>";
+        var addressHTML = "";
+        for(let i = 0; i < data.businesses[result].location.display_address.length; i++){
+          addressHTML += data.businesses[result].location.display_address[i] + " ";
+        }
+        resultHTML += "<div class='yelp-search-result-address'>"+ addressHTML + "</div>";
+        resultHTML += "<div class='yelp-search-result-id yelp-hidden-field'>"+ data.businesses[result].id  +"</div>";
+        resultHTML += "<div class='yelp-search-result-alias yelp-hidden-field'>"+ data.businesses[result].alias  +"</div>";
+        resultHTML += "<div class='yelp-search-result-image-url yelp-hidden-field'>"+ data.businesses[result].image_url  +"</div>";
+        resultHTML += "<div class='yelp-search-result-url yelp-hidden-field'>"+ data.businesses[result].url  +"</div>";
+        resultHTML += "<div class='yelp-search-result-rating yelp-hidden-field'>"+ data.businesses[result].rating  +"</div>";
+        resultHTML += "</div>";
+  
+        $("#yelp-search-results").append(resultHTML);
+      }
+      if(data.businesses.length == 0){
+        $("#yelp-search-results").append("<div class='yelp-search-empty'>No results found</div>");
+      }
+      
+      $("#yelp-search-results").slideDown("fast");
+      
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+    }
+  });
 }

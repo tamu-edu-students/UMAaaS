@@ -6,10 +6,13 @@
     width: 100%;
 }
 
+.experience-edit-table td{
+    vertical-align: top;
+}
+
 .experience-edit-label{
     font-weight: bold;
     text-align: right;
-    vertical-align: top;
     padding-right: 10px;
     width: 400px;
 }
@@ -20,6 +23,84 @@
 }
 .experience-edit-table input[type=text]{
     width: 600px;
+}
+
+.experience-edit-table input[type=text]#yelp-search{
+    width: 413px;
+}
+.experience-edit-table input[type=text]#yelp-near{
+    width: 130px;
+}
+
+#yelp-search-results{
+    border: 1px solid #000;
+    position: absolute;
+    width: 600px;
+    background: #eee;
+    box-shadow: 4px 4px 4px #999;
+    display: none;
+}
+
+.yelp-search-result{
+    border-bottom: 1px solid #ccc;
+    padding-left: 5px;
+}
+.yelp-search-result:hover{
+    background:#fff;
+    cursor: pointer;
+}
+
+.yelp-search-result-name{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.yelp-search-result-address{
+    font-size: 12px;
+    color: #777;
+    padding-left: 10px;
+}
+
+.yelp-hidden-field{
+    display: none;
+}
+
+.yelp-search-empty{
+    padding-left: 5px;
+    font-style: italic;
+}
+
+#yelp-location-wrapper{
+    display: none;
+}
+
+#yelp-selected-location{
+    background: #ddd;
+    width: max-content;
+    border-radius: 25px;
+    position: relative;
+    padding: 2px 10px 2px 25px;
+}
+
+#yelp-remove-selected-location{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    background: #a9a9a9;
+    width: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 10px;
+    color: #333;
+    box-shadow: 1px 1px 1px #333;
+    cursor: pointer;
+}
+
+#yelp-searching-indicator{
+    text-align: center;
+    color: #999;
 }
 
 .experience-edit-field-tips{
