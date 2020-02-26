@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_182825) do
+ActiveRecord::Schema.define(version: 2020_02_26_204710) do
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 2020_02_26_182825) do
     t.integer "user_id"
     t.index ["program_id"], name: "index_experiences_on_program_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
+  end
+
+  create_table "helpful_votes", force: :cascade do |t|
+    t.integer "vote"
+    t.integer "tip_id"
+    t.integer "user_id"
+    t.index ["tip_id"], name: "index_helpful_votes_on_tip_id"
+    t.index ["user_id"], name: "index_helpful_votes_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -98,6 +106,8 @@ ActiveRecord::Schema.define(version: 2020_02_26_182825) do
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"
   add_foreign_key "experiences", "users"
+  add_foreign_key "helpful_votes", "tips"
+  add_foreign_key "helpful_votes", "users"
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"
