@@ -269,12 +269,12 @@ body{
         overflow-x: auto;
         margin: 0px 25px;
         padding-top: 55px;
+        border-bottom: 10px solid #eee;
     }
   
     #column_2_of_2{
         order: 2;
         flex-direction: column;
-        overflow-x: auto;
         margin: 0 25px 25px 25px;
         padding-top: 55px;
     }
