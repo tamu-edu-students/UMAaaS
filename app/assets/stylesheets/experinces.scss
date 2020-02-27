@@ -98,6 +98,11 @@
     cursor: pointer;
 }
 
+#yelp-remove-selected-location:hover{
+    background: #999;
+    box-shadow: 0.5px 0.5px 0.5px #333;
+}
+
 #yelp-searching-indicator{
     text-align: center;
     color: #999;
