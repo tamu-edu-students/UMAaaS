@@ -20,7 +20,7 @@ class ExperiencesController < ApplicationController
     
     def create_comment
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => session[:user], :experience_id => params[:experienceId])
-        @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:experienceId]}).first
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:experienceId]}).first
         
         @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: params[:experienceId]).where(users: {banned: false}).order(created_at: :desc)
         
