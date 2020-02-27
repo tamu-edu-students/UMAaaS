@@ -474,11 +474,16 @@
   
     .portal-column-title{
         position: absolute;
-        top: 5px;
+        top: 0;
+        margin-top: 0;
+        width: 100%;
     }
     .portal-column-title-sort{
         text-align: left;
         border: 0;
+        right: 30px;
+        width: auto;
+        color: #000;
     }
   
     .portal-review{
@@ -489,10 +494,10 @@
     .portal-tip{
         margin: 0 5px;
         max-width: 220px;
+        height: 100%;
     }
   
     .portal-experience{
         margin: 0 5px;
-        max-width: 250px;
     }
 }
