@@ -1,5 +1,6 @@
     <div class="portal-experience-wrapper">
      <div class="portal-experience"><%= locals[:experience].experience %>
+     	 <%if current_user.admin%><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; Delete</div><% end %>
      	 <% if not locals[:experience].yelp_name.nil? %><div class="portal-experience-location"><div class="yelp-image"><img src="<%= locals[:experience].yelp_image_url %>"></div><div class="yelp-info"><div class="yelp-info-name"><%= locals[:experience].yelp_name %></div><div class="yelp-info-address"><%= locals[:experience].yelp_address %></div><div class="yelp-info-rating">Yelp Rating: <img src="<%= asset_path("yelp-rating-" + locals[:experience].yelp_rating + ".png") %>"></div><div class="yelp-links"><a href="<%= locals[:experience].yelp_url %>" target="_blank">View on Yelp</a> | <a href="https://www.yelp.com/map/<%= locals[:experience].yelp_alias %>" target="_blank">View Map</a></div></div></div><% end %>
      	 <div class="portal-experience-tags"><div>wifi</div><div>wheelchair accessible</div></div>
          <div class="portal-experience-info"><span class="portal-experience-info-user"><%= locals[:experience].user_name %></span> | <span class="portal-experience-info-date"><%= locals[:experience].created_at.strftime("%b %-d, '%y") %></span></div>
@@ -58,7 +59,11 @@
                 </fieldset></div></div><% end %>
         <div class="portal-experience-comments-list">
         	<% locals[:experience].comments.each do |comment| %>
-        		<div class="portal-experience-comment"><%= comment.comment %><div class="comment-author"><%= comment.user_name %> | <%= comment.created_at.strftime("%b %-d, '%y") %></div><div class="comment-rating"><%= comment.rating %></div></div>	
+        		<div class="portal-experience-comment"><%= comment.comment %>
+        			<div class="portal-experience-comment-delete" id="portal-experience-comment-delete-<%= comment.id %>">&#10006; Delete</div>
+        			<div class="comment-author"><%= comment.user_name %> | <%= comment.created_at.strftime("%b %-d, '%y") %></div>
+        			<div class="comment-rating"><%= comment.rating %></div>
+        		</div>	
         	<% end %>
         </div>
      </div>

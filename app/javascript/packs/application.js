@@ -48,13 +48,14 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(selectedId != 0) $("#portal-switch-programs-form").submit();
   });
   
+  
+  // and upvote on a tip
   $(document).off('click', '.tip-helpful-yes').on('click', '.tip-helpful-yes', function(){
     
     var idParts = this.id.split("-");
     var tipId = idParts[2];
     
     if($(this).hasClass("voted")){
-      
       $.ajax({
         type: "POST", 
         url: "/tip/helpful",
@@ -65,9 +66,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
         error: function(jqXHR, textStatus, errorThrown){
         }
       });
-      
     }else{
-
       $.ajax({
         type: "POST", 
         url: "/tip/helpful",
@@ -78,19 +77,16 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
         error: function(jqXHR, textStatus, errorThrown){
         }
       });
-    
     }
-    
-    
   });
   
   
+  // a downvote on a tip
   $(document).off('click', '.tip-helpful-no').on('click', '.tip-helpful-no', function(){
     var idParts = this.id.split("-");
     var tipId = idParts[2];
 
     if($(this).hasClass("voted")){
-      
       $.ajax({
         type: "POST", 
         url: "/tip/helpful",
@@ -101,9 +97,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
         error: function(jqXHR, textStatus, errorThrown){
         }
       });
-      
     }else{
-
       $.ajax({
         type: "POST", 
         url: "/tip/helpful",
@@ -114,11 +108,59 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
         error: function(jqXHR, textStatus, errorThrown){
         }
       });
-    
     }    
+  });
+  
+  
+  // delete an entire experience
+  $(document).off('click', '.portal-experience-delete').on('click', '.portal-experience-delete', function(){
+    var idParts = this.id.split("-");
+    var experienceId = idParts[3];
     
+    if(confirm("Are you sure you want to delete this experience?\nThis action cannot be undone!")){
+      
+      // delete the following divider div (unless it doesn't have a following divider, then delete the preceding divider)
+      if($("#portal-experience-wrapper-" + experienceId).next().attr("class") == "experience-div"){
+        $("#portal-experience-wrapper-" + experienceId).next().remove();
+      }else if($("#portal-experience-wrapper-" + experienceId).prev().attr("class") == "experience-div"){
+        $("#portal-experience-wrapper-" + experienceId).prev().remove();
+      }
+      
+      // delete the experience from the DOM
+      $("#portal-experience-wrapper-" + experienceId).remove();
+      
+      // make and ajax call to the function that does the actual deletion from the database
+      $.ajax({
+        type: "DELETE", 
+        url: "/experience/" + experienceId + "/delete",
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }
+  });
+  
+  
+  // delete an experience comment
+  $(document).off('click', '.portal-experience-comment-delete').on('click', '.portal-experience-comment-delete', function(){
+    var idParts = this.id.split("-");
+    var commentId = idParts[4];
     
-    
+    if(confirm("Are you sure you want to delete this comment?\nThis action cannot be undone!")){
+      
+      // make and ajax call to the function that does the actual deletion from the database
+      $.ajax({
+        type: "DELETE", 
+        url: "/experience/" + commentId + "/delete_comment",
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }
   });
   
   // The .off fixes a problem with the javascript getting double loaded by turbolinks when the back button is used
