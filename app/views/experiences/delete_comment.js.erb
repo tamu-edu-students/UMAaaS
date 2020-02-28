@@ -1,0 +1,2 @@
+$("#<%= @experienceDivId %>").html("<%= escape_javascript render 'experiences/view' , locals: {experience: @experience} %>");
+$("#<%= @experienceDivId %> .portal-experience-comment-count").trigger("click");

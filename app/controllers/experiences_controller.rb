@@ -1,4 +1,15 @@
 class ExperiencesController < ApplicationController
+    before_action :requireAdmin, only: [:delete, :delete_comment]
+    
+    def requireAdmin
+        if logged_in?
+            redirect_to root_path and return unless current_user.admin
+        else
+            flash[:alert] = "You must be an admin to perform that action!"
+            redirect_to root_path and return
+        end
+    end
+    
     def new
         @experience = Experience.new
         program = Program.find params[:id]
@@ -56,5 +67,55 @@ class ExperiencesController < ApplicationController
         }
         response = HTTP.auth("Bearer #{Rails.configuration.YELP_API_KEY}").get(url, params: params)
         response.parse
+    end
+    
+    # deletes a whole experience
+    def delete
+        puts "DELETE"
+        puts params[:id]
+        
+        # delete comments
+        ExperienceComment.where(experience_id: params[:id]).destroy_all
+        
+        # delete associated location
+        YelpLocation.where(experience_id: params[:id]).destroy_all
+        
+        # delete experience
+        Experience.where(id: params[:id]).destroy_all
+        
+        respond_to do |format|
+            format.js {}
+        end
+    end
+    
+    # deletes just 1 comment
+    def delete_comment
+        puts "DELETE COMMENT"
+        puts params[:id]
+        
+        # delete comments
+        experienceComment = ExperienceComment.find(params[:id])
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: experienceComment.experience_id}).first
+        
+        experienceComment.destroy
+        
+        @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: @experience.id).where(users: {banned: false}).order(created_at: :desc)
+        
+        rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
+        if(rating_sum.nil?)
+            rating_sum = 0
+        end
+        rating_sum += @experience.rating #add the original rating
+        rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where.not(rating: nil).count(:id)
+        rating_count +=1 #add 1 for the original rating
+        @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+        
+        @experienceDivId = "portal-experience-wrapper-" + @experience.id.to_s
+        
+        
+
+        respond_to do |format|
+            format.js {}
+        end
     end
 end

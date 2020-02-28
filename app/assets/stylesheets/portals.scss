@@ -109,6 +109,34 @@
     margin: 5px 0;
 }
 
+.portal-experience-delete{
+    position: absolute;
+    top: -17px;
+    right: -22px;
+    background: #000;
+    color: #fff;
+    padding: 0 5px;
+    box-shadow: 1px 3px 3px #ccc;
+    border-radius: 3px;
+}
+.portal-experience-delete:hover{
+    cursor: pointer;
+}
+
+.portal-experience-comment-delete{
+    position: absolute;
+    top: -9px;
+    right: -14px;
+    background: #000;
+    color: #fff;
+    padding: 0 5px;
+    box-shadow: 1px 3px 3px #ccc;
+    border-radius: 3px;
+}
+.portal-experience-comment-delete:hover{
+    cursor: pointer;
+}
+
 .portal-experience-tags{
     position: absolute;
     bottom: 17px;
@@ -476,7 +504,7 @@
         position: absolute;
         top: 0;
         margin-top: 0;
-        width: 100%;
+        width: calc(100% - 20px);
     }
     .portal-column-title-sort{
         text-align: left;
@@ -484,6 +512,11 @@
         right: 30px;
         width: auto;
         color: #000;
+    }
+    .portal-column-title a{
+        position: absolute;
+        right: 10px;
+        bottom: -10px;
     }
   
     .portal-review{
