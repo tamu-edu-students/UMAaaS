@@ -307,8 +307,12 @@ function generateProgramListParams(){
 
 function generatePortalParams(){
   var params = "?";
+  if($("#search-field").val()){
+    params += "search="+encodeURIComponent($("#search-field").val());
+  }
   var selectedId = $("#portal-sort-experiences").find(":selected").val();
   if(selectedId != "rating"){  // date is default so it doesn't need to be in the URL parameters
+  if(params.length > 1) params += "&";
     params += "sort_exp="+selectedId;
   }
 

@@ -64,6 +64,31 @@
 	flex-direction: column;
 }
 
+#search-wrapper{
+    margin-top: -25px;
+    text-align: center;
+}
+.search-border-outer{
+    border: 2px solid #000;
+    display: inline-block;
+    border-radius: 3px;
+}
+.search-border-inner{
+    display: inline-block;
+    border: 5px solid #eee;
+    background: #eee;
+}
+#search-wrapper input[type=text]{
+    border: 0px;
+    width: 400px;
+    font-size: 20px;
+    padding: 1px 10px;
+    height: 30px;
+}
+#search-wrapper input[type=image]{
+    float: right;
+}
+
 .portal-column-title{
     font-size: 22px;
     font-weight: 700;

@@ -47,6 +47,7 @@ class PortalsController < ApplicationController
         # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
         
+
         # get all tips for this program
         @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
 
