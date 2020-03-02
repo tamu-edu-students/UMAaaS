@@ -5,24 +5,24 @@
         <tbody>
             <tr>
                 <td class="experience-edit-label">Experience:</td>
-                <td><%= text_area :experience, :experience %><div class="experience-edit-field-tips">&nbsp;</div></td>
+                <td><%= text_area :experience, :experience, :required => true %><div class="experience-edit-field-tips">&nbsp;</div></td>
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>
                 <td><fieldset class="rating">
-                      <%= radio_button(:experience, :rating, "5") %> <%= label(:experience, :rating.to_s + "_5" ) %> 
-                      <%= radio_button(:experience, :rating, "4") %> <%= label(:experience, :rating.to_s + "_4" ) %> 
-                      <%= radio_button(:experience, :rating, "3") %> <%= label(:experience, :rating.to_s + "_3" ) %> 
-                      <%= radio_button(:experience, :rating, "2") %> <%= label(:experience, :rating.to_s + "_2" ) %> 
-                      <%= radio_button(:experience, :rating, "1") %> <%= label(:experience, :rating.to_s + "_1" ) %>
+                      <%= radio_button :experience, :rating, "5", :required => true %> <%= label(:experience, :rating.to_s + "_5" ) %> 
+                      <%= radio_button :experience, :rating, "4", :required => true %> <%= label(:experience, :rating.to_s + "_4" ) %> 
+                      <%= radio_button :experience, :rating, "3", :required => true %> <%= label(:experience, :rating.to_s + "_3" ) %> 
+                      <%= radio_button :experience, :rating, "2", :required => true %> <%= label(:experience, :rating.to_s + "_2" ) %> 
+                      <%= radio_button :experience, :rating, "1", :required => true %> <%= label(:experience, :rating.to_s + "_1" ) %>
                 </fieldset><div class="experience-edit-field-tips">&nbsp;</div></td>
             </tr>
             <tr>
-                <td class="experience-edit-label">Tags:</td>
-                <td><input type="text"><div class="experience-edit-field-tips">Popular tags: wifi, cash only, English</div></td>
+                <td class="experience-edit-label">Tags:<div>(optional)</div></td>
+                <td><%= text_field :experience, :tags, :placeholder => "comma separated list of tags" %><div class="experience-edit-field-tips">Popular tags: wifi, cash only, English</div></td>
             </tr>
             <tr>
-                <td class="experience-edit-label">Location:<br>(optional)</td>
+                <td class="experience-edit-label">Location:<div>(optional)</div></td>
                 <td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>
                 <td id="yelp-location-wrapper"></td>
             </tr>

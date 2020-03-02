@@ -70,6 +70,8 @@ class PortalsController < ApplicationController
         
         # for each experience get the comments associated with it and calculate the average rating
         @experiences.each do |exp|
+            exp.tagArray
+            
             exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).where(users: {banned: false}).order(created_at: :desc)
             
             rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]

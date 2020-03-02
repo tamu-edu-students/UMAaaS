@@ -17,7 +17,20 @@ class ExperiencesController < ApplicationController
     end
     
     def create
-        newExperience = Experience.create(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :user_id => session[:user], :program_id => params[:id])
+        if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
+            flash[:alert] = "Cannot create experience"
+            redirect_to portal_path(params[:id]) and return
+        end
+        
+        tagArray = params[:experience][:tags].split(",")
+        tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
+        tagArray.each do |tag|
+            tag = tag.strip.upcase
+            tagArrayFixed += tag + ","
+        end
+
+        
+        newExperience = Experience.create(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => session[:user], :program_id => params[:id])
 
         if(params.has_key?(:yelp_id))
             # has a Yelp location selected
