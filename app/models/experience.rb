@@ -6,4 +6,17 @@ class Experience < ApplicationRecord
     
     attr_accessor :comments
     attr_accessor :average_rating
+    
+    def tagArray
+        if(tags.nil?)
+            tagArray = nil
+        elsif(tags == ",")
+            tagArray = nil
+        else
+            tagArray = tags.split(",")
+            tagArray = tagArray.drop(1)
+        end
+        
+        return tagArray
+    end
 end

@@ -207,6 +207,10 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     window.location.replace(generatePortalParams());
   });
   
+  // when a tag is clicked the page is reloaded with "tag: whatever" as the search term
+  $(document).off('click', '.portal-experience-tags div').on('click', '.portal-experience-tags div', function(){
+    window.location.replace("?search=tag%3A+" + encodeURIComponent($(this).html().toLowerCase()));
+  });
   
 
 /////////////////////////////////

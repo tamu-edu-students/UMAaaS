@@ -16,6 +16,12 @@
     padding-right: 10px;
     width: 400px;
 }
+.experience-edit-label div{
+    margin-top: -3px;
+    font-weight: normal;
+    font-size: 12px;
+    color: #999;
+}
 
 .experience-edit-table textarea{
     width: 600px;
@@ -29,7 +35,7 @@
     width: 413px;
 }
 .experience-edit-table input[type=text]#yelp-near{
-    width: 130px;
+    width: 129px;
 }
 
 #yelp-search-results{

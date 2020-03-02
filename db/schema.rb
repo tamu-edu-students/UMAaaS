@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_204710) do
+ActiveRecord::Schema.define(version: 2020_03_02_021015) do
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_02_26_204710) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "program_id"
     t.integer "user_id"
+    t.string "tags"
     t.index ["program_id"], name: "index_experiences_on_program_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
