@@ -47,32 +47,76 @@ class PortalsController < ApplicationController
         # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
         
-
-        # get all tips for this program
-        @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
-
-
-        @tips.each do |tip|
-            tip.hasUserUpvoted = 0
-            tip.hasUserDownvoted = 0
-            helpful = HelpfulVote.select("vote").where(tip_id: tip.id).where(user_id: session[:user]).first
-            if not helpful.nil?
-                if helpful.vote == 1
-                    tip.hasUserUpvoted = 1
-                elsif helpful.vote == -1
-                    tip.hasUserDownvoted = 1
-                end
-            end 
+        
+        # get the search terms, if the search starts with "tag: ", then only search tags
+        searchTerm = nil
+        searchTagsOnly = nil
+        if not params[:search].blank?
+            match = params[:search].match(/\Atag:\s*([0-9a-z -]+)/i)
+            if not match.nil?
+                searchTerm = match[1]
+                searchTagsOnly = true
+            else
+                searchTerm = params[:search]
+            end
         end
+        
+
+        if searchTagsOnly.nil?  # Tips don't have tags, so if we're only searching tags then we can skip the tips
+            
+            # get all tips for this program
+            @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
+
+            if not searchTerm.nil?
+                @tips = @tips.where('tip LIKE ?', "%#{searchTerm}%")
+            end
+    
+            @tips.each do |tip|
+                tip.hasUserUpvoted = 0
+                tip.hasUserDownvoted = 0
+                helpful = HelpfulVote.select("vote").where(tip_id: tip.id).where(user_id: session[:user]).first
+                if not helpful.nil?
+                    if helpful.vote == 1
+                        tip.hasUserUpvoted = 1
+                    elsif helpful.vote == -1
+                        tip.hasUserDownvoted = 1
+                    end
+                end 
+            end
+        else
+            @tips = []
+        end
+        
         
         # get all experiences for this program
         @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {program_id: params[:id]}).where(users: {banned: false}).order(rating: :desc)
         
+        if not searchTagsOnly.nil?
+            @experiences = @experiences.where('tags LIKE ?', "%,#{searchTerm},%")
+        end
+        
+        searchResults = Array.new
+        
         # for each experience get the comments associated with it and calculate the average rating
         @experiences.each do |exp|
+            found = true
+            if searchTagsOnly.nil? and not searchTerm.nil?
+                found = false
+                if((exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i))
+                    found = true
+                end
+            end
+            
             exp.tagArray
             
             exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).where(users: {banned: false}).order(created_at: :desc)
+            
+            if searchTagsOnly.nil? and not searchTerm.nil?
+                searchComments = exp.comments.where('comment LIKE ?', "%#{searchTerm}%")
+                if searchComments.size > 0
+                    found = true
+                end
+            end
             
             rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
             if(rating_sum.nil?)
@@ -83,7 +127,13 @@ class PortalsController < ApplicationController
             rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).where.not(rating: nil).count(:id)
             rating_count +=1 #add 1 for the original rating
             exp.average_rating = (rating_sum.to_f / rating_count).round(1)
+            
+            if found
+                searchResults.push(exp) # only records matching the search term, if there is one, will be added to searchResults
+            end
         end
+        
+        @experiences = searchResults  # put searchResults back into @experiences for the view to use
         
         # for sorting the experiences
         if(params[:sort_exp].nil?) then

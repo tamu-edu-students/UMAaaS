@@ -15,7 +15,7 @@
  <% @tips.each do |tip| %>
     <div class="portal-tip-wrapper" id="portal-tip-wrapper-<%= tip.id %>"><%= render 'tips/view' , locals: {tip: tip} %></div>
  <% end %>
- <% if @tips.size == 0 then %><div class="portal-tips-none">No tips added yet!</div><% end %></div>
+ <% if @tips.size == 0 then %><div class="portal-tips-none"><% if params[:search].blank? then %>No tips added yet!<% else %>No search results!<% end %></div><% end %></div>
  <div id="column_2_of_2" class="flex-item">
      <div class="portal-column-title">Experiences <%= if session[:user] then link_to '+ Add', new_experience_path; end %>
          <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="rating" <%= if @experience_sort_by == "rating" then "selected" end %>>best rating</option><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>best avg rating</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>newest date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
@@ -24,5 +24,5 @@
  	<div class="portal-experience-wrapper" id="portal-experience-wrapper-<%= experience.id %>"><%= render 'experiences/view' , locals: {experience: experience} %></div>
     <% if index < @experiences.size - 1 then %><div class="experience-div"></div><% end %>
  <% end %>
- <% if @experiences.size == 0 then %><div class="portal-experiences-none">No experiences added yet!</div><% end %></div>
+ <% if @experiences.size == 0 then %><div class="portal-experiences-none"><% if params[:search].blank? then %>No experiences added yet!<% else %>No search results!<% end %></div><% end %></div>
 </div>
