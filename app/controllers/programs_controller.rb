@@ -24,9 +24,11 @@ class ProgramsController < ApplicationController
   end
   
   def create
-    params.require(:program).permit(:name, :region)
-    params.require(:program).require(:name)
-    params.require(:program).require(:region)
+    if(params[:program][:name].blank? || params[:program][:location].blank? || params[:program][:region].blank?) # required fields
+        flash[:alert] = "Cannot create program"
+        redirect_to programs_path and return
+    end
+    
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path

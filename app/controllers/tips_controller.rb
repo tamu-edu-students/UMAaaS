@@ -4,6 +4,11 @@ class TipsController < ApplicationController
     end
     
     def create
+        if(params[:tip][:tip].blank?) # tip text is required
+            flash[:alert] = "Cannot create tip"
+            redirect_to portal_path(params[:id]) and return
+        end
+        
         Tip.create(:tip => params[:tip][:tip], :user_id => session[:user], :program_id => params[:id])
         redirect_to portal_path(params[:id])
     end
