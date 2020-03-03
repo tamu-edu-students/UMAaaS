@@ -5,15 +5,15 @@
         <tbody>
             <tr>
                 <td class="program-edit-label"><%= label :program, :name, 'Program Name' %></td>
-                <td><%= text_field :program, :name %></td>
+                <td><%= text_field :program, :name, :required => true %></td>
             </tr>
             <tr>
                 <td class="program-edit-label"><%= label :program, :location, 'Location (city, country)' %></td>
-                <td><%= text_field :program, :location %></td>
+                <td><%= text_field :program, :location, :required => true %></td>
             </tr>
             <tr>
                 <td class="program-edit-label"><%= label :program, :region, 'Region' %></td>
-                <td><%= text_field :program, :region %></td>
+                <td><%= text_field :program, :region, :required => true %></td>
             </tr>
             <tr>
                 <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>

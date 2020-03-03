@@ -5,7 +5,7 @@
         <tbody>
             <tr>
                 <td class="program-edit-label"><%= label :tip, :tip, 'Tip' %></td>
-                <td><%= text_area :tip, :tip %></td>
+                <td><%= text_area :tip, :tip, :required => true %></td>
             </tr>
             <tr>
                 <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
