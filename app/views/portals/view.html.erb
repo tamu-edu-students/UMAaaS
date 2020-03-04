@@ -10,7 +10,7 @@
 <div id="flex-container">
  <div id="column_1_of_2" class="flex-item">
      <div class="portal-column-title">Tips <%= if session[:user] then link_to '+ Add', new_tip_path; end %>
-         <div class="portal-column-title-sort">sort by: <select><option>most helpful</option><option>date</option></select></div>
+         <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
      </div>
  <% @tips.each do |tip| %>
     <div class="portal-tip-wrapper" id="portal-tip-wrapper-<%= tip.id %>"><%= render 'tips/view' , locals: {tip: tip} %></div>

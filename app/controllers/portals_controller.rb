@@ -72,6 +72,19 @@ class PortalsController < ApplicationController
             end
     
             @tips.each do |tip|
+                
+                upvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: tip.id).where(users: {banned: false}).where(vote: 1).group(:tip_id).count(:vote).values[0]
+                if upvote_sum.blank? 
+                    upvote_sum = 0
+                end                 
+                tip.upvoteCount = upvote_sum
+                
+                downvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: tip.id).where(users: {banned: false}).where(vote: -1).group(:tip_id).count(:vote).values[0]
+                if downvote_sum.blank? 
+                    downvote_sum = 0
+                end 
+                tip.downvoteCount = downvote_sum
+                
                 tip.hasUserUpvoted = 0
                 tip.hasUserDownvoted = 0
                 helpful = HelpfulVote.select("vote").where(tip_id: tip.id).where(user_id: session[:user]).first
@@ -150,6 +163,21 @@ class PortalsController < ApplicationController
         elsif(@experience_sort_by == "comments") then
             @experiences = @experiences.sort_by {|x| x.comments.length}.reverse!
         end
+        
+        
+        # for sorting the tips
+        if(params[:sort_tip].nil?) then
+            @tip_sort_by = "helpful"
+        else
+            @tip_sort_by = params[:sort_tip]
+        end
+              
+        #already sorted by helpful by default, so only need to sort if some else is selected
+        if(@tip_sort_by == "helpful") then
+            @tips = @tips.sort_by {|x| x.upvoteCount - x.downvoteCount}.reverse!
+        elsif(@tip_sort_by == "date") then
+            @tips = @tips.sort_by(&:created_at).reverse!
+        end                
 
     end
 end

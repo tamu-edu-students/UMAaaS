@@ -190,18 +190,35 @@
 }
 .portal-tip-helpful, .portal-experience-rating{
     position: absolute;
+    line-height: 16px;
     bottom: 0;
     right: 0;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 11px;
+    color: #999;
 }
+
 .portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no{
     display: inline-block;
-    width: 16px;
     height: 16px;
     cursor: pointer;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    font-size: 11px;
+    color: #666;
 }
-.portal-tip-helpful .tip-helpful-yes{
+
+.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin{
+    display: inline-block;
+    height: 16px;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    font-size: 11px;
+    color: #666;
+}
+
+
+
+.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-yes-nologin{
     background-image: url(asset_path("thumbs_up.png"));
     background-position-y: 0%;
 }
@@ -209,7 +226,7 @@
     background-image: url(asset_path("thumbs_up.png"));
     background-position-y: 100%;
 }
-.portal-tip-helpful .tip-helpful-no{
+.portal-tip-helpful .tip-helpful-no, .portal-tip-helpful .tip-helpful-no-nologin{
     background-image: url(asset_path("thumbs_down.png"));
     background-position-y: 0%;
 }
