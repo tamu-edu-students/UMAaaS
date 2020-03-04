@@ -493,6 +493,47 @@
 }
 
 
+.arrow-box {
+	position: fixed;
+	top: 55px;
+	right: 40px;
+	width: 180px;
+	background: #fff;
+	z-index: 9999;
+	opacity: 0.0;
+	box-shadow: 4px 4px 3px #666;
+	padding: 5px 10px;
+	font-weight: bold;
+    animation-name: login_reminder_dialog;
+    animation-duration: 20s;
+}
+@keyframes login_reminder_dialog {
+  0% { opacity: 1.0; }
+  90% { opacity: 1.0; }
+  100% { opacity: 0.0; }
+}
+.arrow-box:after, .arrow-box:before {
+	bottom: 100%;
+	left: 90%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow-box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow-box:before {
+	border-color: rgba(194, 225, 245, 0);
+}
+
+
 @media only screen and (max-width: 1000px) {
     #flex-container{
         flex-direction: column;
