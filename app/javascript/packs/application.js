@@ -203,9 +203,14 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     $(this).siblings(".portal-experience-comments-list").slideToggle("fast");
   });
   
+  // sorting 
   $("#portal-sort-experiences").change(function(){
     window.location.replace(generatePortalParams());
   });
+  $("#portal-sort-tips").change(function(){
+    window.location.replace(generatePortalParams());
+  });
+  
   
   // when a tag is clicked the page is reloaded with "tag: whatever" as the search term
   $(document).off('click', '.portal-experience-tags div').on('click', '.portal-experience-tags div', function(){
@@ -315,9 +320,14 @@ function generatePortalParams(){
     params += "search="+encodeURIComponent($("#search-field").val());
   }
   var selectedId = $("#portal-sort-experiences").find(":selected").val();
-  if(selectedId != "rating"){  // date is default so it doesn't need to be in the URL parameters
+  if(selectedId != "rating"){  // rating is default so it doesn't need to be in the URL parameters
   if(params.length > 1) params += "&";
     params += "sort_exp="+selectedId;
+  }
+  selectedId = $("#portal-sort-tips").find(":selected").val();
+  if(selectedId != "helpful"){  // helpful is default so it doesn't need to be in the URL parameters
+  if(params.length > 1) params += "&";
+    params += "sort_tip="+selectedId;
   }
 
   return params;

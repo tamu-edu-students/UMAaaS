@@ -28,6 +28,20 @@ class TipsController < ApplicationController
         @tip = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {id: params[:tipId]}).first
 
 
+        upvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: @tip.id).where(users: {banned: false}).where(vote: 1).group(:tip_id).count(:vote).values[0]
+        if upvote_sum.blank? 
+            upvote_sum = 0
+        end                 
+        @tip.upvoteCount = upvote_sum
+        
+        downvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: @tip.id).where(users: {banned: false}).where(vote: -1).group(:tip_id).count(:vote).values[0]
+        if downvote_sum.blank? 
+            downvote_sum = 0
+        end 
+        @tip.downvoteCount = downvote_sum
+      
+
+
         @tip.hasUserUpvoted = 0
         @tip.hasUserDownvoted = 0
         helpful = HelpfulVote.select("vote").where(tip_id: @tip.id).where(user_id: session[:user]).first
