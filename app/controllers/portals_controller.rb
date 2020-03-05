@@ -66,13 +66,18 @@ class PortalsController < ApplicationController
             
             # get all tips for this program
             @tips = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {program_id: params[:id]})
-
-            if not searchTerm.nil?
-                @tips = @tips.where('tip LIKE ?', "%#{searchTerm}%")
-            end
+    
+            searchResults = Array.new
     
             @tips.each do |tip|
-                
+                found = true
+                if not searchTerm.nil?
+                    found = false
+                    if(tip.tip =~ /#{searchTerm}/i)
+                        found = true
+                    end
+                end
+            
                 upvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: tip.id).where(users: {banned: false}).where(vote: 1).group(:tip_id).count(:vote).values[0]
                 if upvote_sum.blank? 
                     upvote_sum = 0
@@ -94,8 +99,14 @@ class PortalsController < ApplicationController
                     elsif helpful.vote == -1
                         tip.hasUserDownvoted = 1
                     end
-                end 
+                end
+                
+                if found
+                    searchResults.push(tip) # only records matching the search term, if there is one, will be added to searchResults
+                end
             end
+            
+            @tips = searchResults  # put searchResults back into @tips for the view to use
         else
             @tips = []
         end
@@ -104,18 +115,20 @@ class PortalsController < ApplicationController
         # get all experiences for this program
         @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {program_id: params[:id]}).where(users: {banned: false}).order(rating: :desc)
         
-        if not searchTagsOnly.nil?
-            @experiences = @experiences.where('tags LIKE ?', "%,#{searchTerm},%")
-        end
-        
+
         searchResults = Array.new
         
         # for each experience get the comments associated with it and calculate the average rating
         @experiences.each do |exp|
             found = true
-            if searchTagsOnly.nil? and not searchTerm.nil?
+            if not searchTagsOnly.nil?
                 found = false
-                if((exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i))
+                if(exp.tags =~ /,#{searchTerm},/i)
+                    found = true
+                end
+            elsif not searchTerm.nil?
+                found = false
+                if((exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i) or (exp.tags =~ /#{searchTerm}/i))
                     found = true
                 end
             end
