@@ -163,6 +163,32 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     }
   });
   
+  
+    // delete a tip
+  $(document).off('click', '.portal-tip-delete').on('click', '.portal-tip-delete', function(){
+    var idParts = this.id.split("-");
+    var tipId = idParts[3];
+    
+    if(confirm("Are you sure you want to delete this tip?\nThis action cannot be undone!")){
+      
+      
+      // delete the tip from the DOM
+      $("#portal-tip-wrapper-" + tipId).remove();
+      
+      // make and ajax call to the function that does the actual deletion from the database
+      $.ajax({
+        type: "DELETE", 
+        url: "/tip/" + tipId + "/delete",
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }
+  });
+  
+  
   // The .off fixes a problem with the javascript getting double loaded by turbolinks when the back button is used
   // that was causing events to get double triggered. So the .off removes any extra events then adds just a single instance
   

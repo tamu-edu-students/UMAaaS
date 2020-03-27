@@ -25,8 +25,8 @@
 
 #portal-switch-programs{
     position: fixed;
-    top: 10px;
-    left: 350px;
+    top: 0px;
+    left: 400px;
     z-index: 9999;
 }
 #portal-switch-programs select{
@@ -138,21 +138,31 @@
     position: absolute;
     top: -17px;
     right: -22px;
-    background: #000;
+    background: #f00;
     color: #fff;
     padding: 0 5px;
     box-shadow: 1px 3px 3px #ccc;
     border-radius: 3px;
 }
-.portal-experience-delete:hover{
+.portal-tip-delete{
+    position: absolute;
+    top: -7px;
+    right: -22px;
+    background: #f00;
+    color: #fff;
+    padding: 0 5px;
+    box-shadow: 1px 3px 3px #ccc;
+    border-radius: 3px;
+}
+.portal-experience-delete:hover, .portal-tip-delete:hover{
     cursor: pointer;
 }
 
 .portal-experience-comment-delete{
     position: absolute;
-    top: -9px;
+    top: 1px;
     right: -14px;
-    background: #000;
+    background: #f00;
     color: #fff;
     padding: 0 5px;
     box-shadow: 1px 3px 3px #ccc;

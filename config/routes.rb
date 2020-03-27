@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   post 'tip/helpful', to: 'tips#helpful'
   delete 'experience/:id/delete', to: 'experiences#delete'
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
+  delete 'tip/:id/delete', to: 'tips#delete'
   root 'portals#index'
 end
