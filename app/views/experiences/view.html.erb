@@ -1,0 +1,13 @@
+<div id="page-header"><%= @program.name %></div>
+
+<div id="flex-container">
+ <div id="column_2_of_2" class="flex-item">
+     <div class="portal-column-title">Experiences <%= if session[:user] then link_to '+ Add', new_experience_path; end %>
+         <div class="portal-column-title-sort">&nbsp;</div>
+     </div>
+ 
+ 	<div class="portal-experience-outer-wrapper" id="portal-experience-wrapper-<%= @experience.id %>"><%= render 'experiences/view' , locals: {experience: @experience, single: true} %></div>
+
+ 
+</div>
+<%if not logged_in? %><div class="arrow-box">Login to share your tips and experiences!</div><% end %>

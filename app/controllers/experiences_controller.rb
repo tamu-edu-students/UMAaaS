@@ -42,11 +42,33 @@ class ExperiencesController < ApplicationController
     end
     
     
+    def view
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
+        @program = Program.find @experience.program_id
+        
+        @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: params[:id]).where(users: {banned: false}).order(created_at: :desc)
+        
+        @experience.totalComments = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).count(:id)
+        
+        rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
+        if(rating_sum.nil?)
+            rating_sum = @experience.rating #just the original rating
+        else
+            rating_sum += @experience.rating #add the original rating
+        end
+        rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).where.not(rating: nil).count(:id)
+        rating_count +=1 #add 1 for the original rating
+        @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+    end
+    
+    
     def create_comment
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => session[:user], :experience_id => params[:experienceId])
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:experienceId]}).first
         
-        @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: params[:experienceId]).where(users: {banned: false}).order(created_at: :desc)
+        @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: params[:experienceId]).where(users: {banned: false}).order(created_at: :desc).limit(Rails.configuration.max_comments_shown)
+        
+        @experience.totalComments = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).count(:id)
         
         rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:experienceId]).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
         rating_sum += @experience.rating #add the original rating

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'p/:id/tips/new', to: 'tips#new', as: 'new_tip'
   post 'p/:id/tips', to: 'tips#create', as: 'tips'
   get 'p/:id/experiences/new', to: 'experiences#new', as: 'new_experience'
+  get 'experience/:id', to: 'experiences#view'
   post 'p/:id/experiences', to: 'experiences#create', as: 'experiences'
   post 'experience/:id/comment', to: 'experiences#create_comment'
   post 'experience/yelp_search', to: 'experiences#yelp_search'

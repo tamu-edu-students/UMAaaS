@@ -12,7 +12,11 @@ module Reviews
     config.load_defaults 6.0
 
     config.admin_email = "justin.hong@tamu.edu"
+    
     config.time_zone = "Central Time (US & Canada)"
+    
+    # Maximum number of experience comments to show on the portal view (all comments are shown on single experience view)
+    config.max_comments_shown = "10";
     
     
     # Place holders for Yelp Fusion's API key. Grab it

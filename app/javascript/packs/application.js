@@ -48,6 +48,13 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(selectedId != 0) $("#portal-switch-programs-form").submit();
   });
   
+  // when an experience is clicked on go to the single experience view
+  $(document).off('click', '.portal-experience').on('click', '.portal-experience', function(e){
+    if(e.target.getAttribute("class") == "yelp-link") return;
+    var idParts = this.closest(".portal-experience-outer-wrapper").id.split("-");
+    var experienceId = idParts[3];
+    window.location.replace("/experience/" + experienceId);
+  });
   
   // and upvote on a tip
   $(document).off('click', '.tip-helpful-yes').on('click', '.tip-helpful-yes', function(){
