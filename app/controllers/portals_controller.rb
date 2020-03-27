@@ -171,6 +171,10 @@ class PortalsController < ApplicationController
         #already sorted by rating by default, so only need to sort if some else is selected
         if(@experience_sort_by == "avg_rating") then
             @experiences = @experiences.sort_by(&:average_rating).reverse!
+        elsif(@experience_sort_by == "rating_asc") then
+            @experiences = @experiences.sort_by(&:rating);
+        elsif(@experience_sort_by == "avg_rating_asc") then
+            @experiences = @experiences.sort_by(&:average_rating);
         elsif(@experience_sort_by == "date") then
             @experiences = @experiences.sort_by(&:created_at).reverse!
         elsif(@experience_sort_by == "comments") then
