@@ -18,7 +18,7 @@
  <% if @tips.size == 0 then %><div class="portal-tips-none"><% if params[:search].blank? then %>No tips added yet!<% else %>No search results!<% end %></div><% end %></div>
  <div id="column_2_of_2" class="flex-item">
      <div class="portal-column-title">Experiences <%= if session[:user] then link_to '+ Add', new_experience_path; end %>
-         <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="rating" <%= if @experience_sort_by == "rating" then "selected" end %>>best rating</option><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>best avg rating</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>newest date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
+         <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="rating" <%= if @experience_sort_by == "rating" then "selected" end %>>best rating</option><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>best avg rating</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
      </div>
  <% @experiences.each_with_index do |experience, index| %>
  	<div class="portal-experience-wrapper" id="portal-experience-wrapper-<%= experience.id %>"><%= render 'experiences/view' , locals: {experience: experience} %></div>

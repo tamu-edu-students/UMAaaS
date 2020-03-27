@@ -61,4 +61,21 @@ class TipsController < ApplicationController
             format.js {}
         end
     end
+    
+    
+    def delete
+        puts "DELETE"
+        puts params[:id]
+        
+        # delete helpful votes
+        HelpfulVote.where(tip_id: params[:id]).destroy_all
+        
+        
+        # delete tip
+        Tip.where(id: params[:id]).destroy_all
+        
+        respond_to do |format|
+            format.js {}
+        end
+    end
 end

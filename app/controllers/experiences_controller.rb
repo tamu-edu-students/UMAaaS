@@ -57,7 +57,7 @@ class ExperiencesController < ApplicationController
         @experienceDivId = "portal-experience-wrapper-" + params[:experienceId]
         
         respond_to do |format|
-            format.js {}
+            format.js {}  # code in views/experiences/create_comment.js.erb will return
         end
     end
     
@@ -128,7 +128,7 @@ class ExperiencesController < ApplicationController
         
 
         respond_to do |format|
-            format.js {}
+            format.js {}   # code in views/experiences/delete_comment.js.erb will return
         end
     end
 end
