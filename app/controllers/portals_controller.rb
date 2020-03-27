@@ -134,8 +134,10 @@ class PortalsController < ApplicationController
             end
             
             exp.tagArray
+
+            exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).where(users: {banned: false}).order(created_at: :desc).limit(Rails.configuration.max_comments_shown)
             
-            exp.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: exp.id).where(users: {banned: false}).order(created_at: :desc)
+            exp.totalComments = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).count(:id)
             
             if searchTagsOnly.nil? and not searchTerm.nil?
                 searchComments = exp.comments.where('comment LIKE ?', "%#{searchTerm}%")
@@ -178,7 +180,7 @@ class PortalsController < ApplicationController
         elsif(@experience_sort_by == "date") then
             @experiences = @experiences.sort_by(&:created_at).reverse!
         elsif(@experience_sort_by == "comments") then
-            @experiences = @experiences.sort_by {|x| x.comments.length}.reverse!
+            @experiences = @experiences.sort_by {|x| x.totalComments}.reverse!
         end
         
         

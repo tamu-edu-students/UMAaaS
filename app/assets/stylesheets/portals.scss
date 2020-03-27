@@ -120,7 +120,7 @@
 	margin: 5px 0;
 }
 
-.portal-tip, .portal-experience{
+.portal-tip, .portal-experience, .portal-experience-single{
     width: 100%;
     margin: 15px 0;
     min-width: 160px;
@@ -130,8 +130,14 @@
     font-size: 13px;
     line-height: 15px;
 }
-.portal-experience{
+.portal-experience, .portal-experience-single{
     margin: 5px 0;
+}
+
+.portal-experience:hover{
+    background: #f7ffff;
+    border-left: 3px solid #009494;
+    cursor: pointer;
 }
 
 .portal-experience-delete{
@@ -326,6 +332,11 @@
     font-weight: bold;
     cursor: pointer;
 }
+.portal-experience-comment-count-single{
+    font-size: 12px;
+    background: #eee;
+    font-weight: bold;
+}
 .portal-experience-comment-count .down-arrow{
     float: right;
     padding-right: 10px;
@@ -349,6 +360,13 @@
     padding: 3px;
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
+}
+.portal-experience-comment-more{
+    background: #f4f4f4;
+    text-align: center;
+}
+.portal-experience-comment-more a{
+    padding: 0 calc(50% - 100px);
 }
 
 .portal-experience-leave-comment{
@@ -474,6 +492,9 @@
 .portal-experience-comments-list{
     background: #fcfcfc;
     display: none;
+}
+.portal-experience-comments-list-single{
+    background: #fcfcfc;
 }
 
 .portal-experience-comment{

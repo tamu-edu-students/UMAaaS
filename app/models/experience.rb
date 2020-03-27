@@ -5,6 +5,7 @@ class Experience < ApplicationRecord
     has_one :yelp_location
     
     attr_accessor :comments
+    attr_accessor :totalComments
     attr_accessor :average_rating
     
     def tagArray

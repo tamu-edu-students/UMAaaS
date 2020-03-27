@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
             end
         end
 
+        # if email address matches the one in the /config/application.rb file then make that user an admin
         if(user_info["info"]["email"] == Rails.configuration.admin_email)
             dbUser.admin = true
             dbUser.save
