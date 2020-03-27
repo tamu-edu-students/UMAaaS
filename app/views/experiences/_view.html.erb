@@ -49,7 +49,7 @@
      </div>
      <div class="portal-experience-comments">
      	<% if locals[:experience].comments.size > 0 then %><div class="portal-experience-comment-count<%if locals[:single] == true %>-single<% end %>">Comments: <%= locals[:experience].totalComments %> <span class="down-arrow"><i></i></span></div><% end %>
-     	<% if session[:user] then %><div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= locals[:experience].id %>"><textarea id="add_comment_<%= locals[:experience].id %>" name="add_comment" placeholder="Leave a comment"></textarea><input id="submit_add_comment_<%= locals[:experience].id %>" type="submit" value="Save Comment"><div class="comment_rating_wrapper"><%= label :rating, "Rating:", :class => "comment_label" %>
+     	<% if session[:user] then %><div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= locals[:experience].id %>"><textarea id="add_comment_<%= locals[:experience].id %>" name="add_comment" placeholder="Leave a comment"></textarea><input id="submit_add_comment_<%= locals[:experience].id %>" class="submit_add_comment" type="submit" value="Save Comment"><div class="comment_rating_wrapper"><%= label :rating, "Rating:", :class => "comment_label" %>
                 <fieldset class="rating">
                       <input type="radio" value="5" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_5_<%= locals[:experience].id %>" /> <label for="comment_rating_5_<%= locals[:experience].id %>">Rating 5</label> 
                       <input type="radio" value="4" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_4_<%= locals[:experience].id %>" /> <label for="comment_rating_4_<%= locals[:experience].id %>">Rating 4</label> 
@@ -62,7 +62,7 @@
         		<div class="portal-experience-comment"><%= comment.comment %>
         			<%if current_user.admin%><div class="portal-experience-comment-delete" id="portal-experience-comment-delete-<%= comment.id %>">&#10006; </div><% end %>
         			<div class="comment-author"><%= comment.user_name %> | <%= comment.created_at.strftime("%b %-d, '%y") %></div>
-        			<div class="comment-rating"><%= comment.rating %></div>
+        			<div class="comment-rating"><%if comment.rating != nil %><img src="<%=asset_path(comment.rating.to_s + "_thumbs.png")%>" height="16"><% end %></div>
         		</div>
         	<% end %>
         	<% if locals[:experience].comments.size != locals[:experience].totalComments %><div class="portal-experience-comment-more"><a href="/experience/<%= locals[:experience].id %>">see <%= locals[:experience].totalComments - locals[:experience].comments.size%> more comments</a></div><% end %>
