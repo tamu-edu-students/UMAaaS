@@ -50,7 +50,9 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
   
   // when an experience is clicked on go to the single experience view
   $(document).off('click', '.portal-experience').on('click', '.portal-experience', function(e){
-    if(e.target.getAttribute("class") == "yelp-link") return;
+    if(e.target.getAttribute("class") == "yelp-link") return; // don't redirect if clicking on yelp link
+    if(e.target.getAttribute("class") == "tag") return; // don't redirect if clicking on tag
+    if(e.target.getAttribute("class") == "portal-experience-delete") return; // don't redirect if clicking on delete
     var idParts = this.closest(".portal-experience-outer-wrapper").id.split("-");
     var experienceId = idParts[3];
     window.location.replace("/experience/" + experienceId);

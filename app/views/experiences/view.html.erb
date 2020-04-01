@@ -2,7 +2,7 @@
 
 <div id="flex-container">
  <div id="column_2_of_2" class="flex-item">
-     <div class="portal-column-title">Experiences <%= if session[:user] then link_to '+ Add', new_experience_path; end %>
+     <div class="portal-column-title">Experiences <%= if session[:user] == @experience.user_id then link_to 'Edit', edit_experience_path; end %>
          <div class="portal-column-title-sort">&nbsp;</div>
      </div>
  

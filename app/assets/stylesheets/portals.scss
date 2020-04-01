@@ -204,6 +204,10 @@
     font-size: 9px;
     color: #999999;
 }
+.portal-experience-info-date-updated{
+    padding-left: 15px;
+    color: #bbbbbb;
+}
 .portal-tip-helpful, .portal-experience-rating{
     position: absolute;
     line-height: 16px;
@@ -235,11 +239,11 @@
 
 
 .portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-yes-nologin{
-    background-image: url(asset_path("thumbs_up.png"));
+    background-image: url(asset_path("thumbs_up2.png"));
     background-position-y: 0%;
 }
 .portal-tip-helpful .tip-helpful-yes:hover{
-    background-image: url(asset_path("thumbs_up.png"));
+    background-image: url(asset_path("thumbs_up2.png"));
     background-position-y: 100%;
 }
 .portal-tip-helpful .tip-helpful-no, .portal-tip-helpful .tip-helpful-no-nologin{

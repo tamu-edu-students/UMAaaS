@@ -153,4 +153,42 @@ class ExperiencesController < ApplicationController
             format.js {}   # code in views/experiences/delete_comment.js.erb will return
         end
     end
+    
+    def edit
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.yelp_id as yelp_id, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating, yelp_locations.yelp_tags as yelp_tags").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
+        program = Program.find @experience.program_id
+        @near = program.location
+        
+        
+        @experience.tags = @experience.tags[1..-2] unless @experience.tags.nil? #tags are stored with a leading & trailing comma, this strips those off
+    end
+    
+    def update
+        if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
+            flash[:alert] = "Cannot update experience"
+            redirect_to experience_path(params[:id]) and return
+        end
+        
+        tagArray = params[:experience][:tags].split(",")
+        tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
+        tagArray.each do |tag|
+            tag = tag.strip.upcase
+            tagArrayFixed += tag + ","
+        end
+
+        @experience = Experience.find params[:id]
+        @experience.update_attributes(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed)
+
+        # delete any existing associated location
+        YelpLocation.where(experience_id: params[:id]).destroy_all
+        
+        # then create new associated location if there is one
+        if(params.has_key?(:yelp_id))
+            # has a Yelp location selected
+            YelpLocation.create(:experience_id => params[:id], :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        end
+        
+        
+        redirect_to experience_path(params[:id])
+    end
 end
