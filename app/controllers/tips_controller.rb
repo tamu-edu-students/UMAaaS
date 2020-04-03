@@ -64,8 +64,23 @@ class TipsController < ApplicationController
     
     
     def delete
-        puts "DELETE"
-        puts params[:id]
+        # prevent unauthorized deletions
+         if(not logged_in?)
+            flash[:alert] = "You are not authorized to delete this post!"
+            redirect_to root_path and return 
+         end
+        
+        tip = Tip.find params[:id]
+        
+        if(tip.nil?)
+            flash[:alert] = "Post not found, error deleting!"
+            redirect_to root_path and return
+        elsif((tip.user_id != current_user.id) && (not current_user.admin))
+            flash[:alert] = "You are not authorized to delete this post!"
+            redirect_to root_path and return
+        end
+        # done checking for unauthorized deletions
+        
         
         # delete helpful votes
         HelpfulVote.where(tip_id: params[:id]).destroy_all

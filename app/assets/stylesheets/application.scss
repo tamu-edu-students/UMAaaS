@@ -111,6 +111,14 @@ body{
 	flex-direction: row;
 }
 
+.flex-header{
+	display: flex;
+	max-width: 1250px;
+	margin: 10px auto -10px auto;
+	align-items: flex-start;
+	flex-direction: row;
+}
+
 .flex-item{
 	padding: 10px 20px;
 	background: #fff;
@@ -130,6 +138,15 @@ body{
 
 #column_2_of_2{
 	order: 2;
+	flex-grow: 3;
+	flex-basis: 600px;
+	margin: 0px 25px;
+	display: flex;
+	flex-direction: column;
+}
+
+.header_column_1_of_1{
+    order: 1;
 	flex-grow: 3;
 	flex-basis: 600px;
 	margin: 0px 25px;

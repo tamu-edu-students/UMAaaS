@@ -1,5 +1,10 @@
 <div id="page-header"><%= @program.name %></div>
 
+<div class="flex-header">
+ <div class="header_column_1_of_1" class="flex-item">
+  <div><a href="/p/<%= @program.id %>" class="header-return-link">&#x21D0; Return</a></div>
+ </div>
+</div>
 <div id="flex-container">
  <div id="column_2_of_2" class="flex-item">
      <div class="portal-column-title">Experiences <%= if session[:user] == @experience.user_id then link_to 'Edit', edit_experience_path; end %>

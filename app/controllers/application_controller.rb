@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     def logged_in?
         session.has_key? :user
     end
+    
     def current_user
         cu = User.new
         cu.admin = session[:user_admin]
