@@ -1,15 +1,5 @@
 class ExperiencesController < ApplicationController
-    before_action :requireAdmin, only: [:delete, :delete_comment]
-    
-    def requireAdmin
-        if logged_in?
-            redirect_to root_path and return unless current_user.admin
-        else
-            flash[:alert] = "You must be an admin to perform that action!"
-            redirect_to root_path and return
-        end
-    end
-    
+
     def new
         @experience = Experience.new
         program = Program.find params[:id]
@@ -106,8 +96,23 @@ class ExperiencesController < ApplicationController
     
     # deletes a whole experience
     def delete
-        puts "DELETE"
-        puts params[:id]
+        # prevent unauthorized deletions
+         if(not logged_in?)
+            flash[:alert] = "You are not authorized to delete this post!"
+            redirect_to root_path and return 
+         end
+        
+        experience = Experience.find params[:id]
+        
+        if(experience.nil?)
+            flash[:alert] = "Post not found, error deleting!"
+            redirect_to root_path and return
+        elsif((experience.user_id != current_user.id) && (not current_user.admin))
+            flash[:alert] = "You are not authorized to delete this post!"
+            redirect_to root_path and return
+        end
+        # done checking for unauthorized deletions
+        
         
         # delete comments
         ExperienceComment.where(experience_id: params[:id]).destroy_all
@@ -125,16 +130,32 @@ class ExperiencesController < ApplicationController
     
     # deletes just 1 comment
     def delete_comment
-        puts "DELETE COMMENT"
-        puts params[:id]
+        # prevent unauthorized deletions
+         if(not logged_in?)
+            flash[:alert] = "You are not authorized to delete this post!"
+            redirect_to root_path and return 
+         end
         
-        # delete comments
-        experienceComment = ExperienceComment.find(params[:id])
+        experienceComment = ExperienceComment.find params[:id]
+    
+        if(experienceComment.nil?)
+            flash[:alert] = "Post not found, error deleting!"
+            redirect_to root_path and return
+        elsif((experienceComment.user_id != current_user.id) && (not current_user.admin))
+            flash[:alert] = "You are not authorized to delete this post!"
+            redirect_to root_path and return
+        end
+        # done checking for unauthorized deletions
+        
+
+
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: experienceComment.experience_id}).first
-        
+
         experienceComment.destroy
         
         @experience.comments = ExperienceComment.left_outer_joins(:user).select("experience_comments.*,users.name as user_name").where(experience_id: @experience.id).where(users: {banned: false}).order(created_at: :desc)
+        
+        @experience.totalComments = ExperienceComment.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).count(:id)
         
         rating_sum = ExperienceComment.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).group(:experience_id).sum(:rating).values[0]
         if(rating_sum.nil?)
@@ -154,6 +175,7 @@ class ExperiencesController < ApplicationController
         end
     end
     
+    
     def edit
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.yelp_id as yelp_id, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating, yelp_locations.yelp_tags as yelp_tags").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
         program = Program.find @experience.program_id
@@ -163,7 +185,12 @@ class ExperiencesController < ApplicationController
         @experience.tags = @experience.tags[1..-2] unless @experience.tags.nil? #tags are stored with a leading & trailing comma, this strips those off
     end
     
+    
     def update
+        if(params[:commit] == "Cancel")   #if the user pressed the cancel button then just go back to the previous page
+            redirect_to experience_path(params[:id]) and return
+        end
+        
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:alert] = "Cannot update experience"
             redirect_to experience_path(params[:id]) and return

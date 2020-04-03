@@ -1,5 +1,5 @@
 <div class="portal-tip"><%= locals[:tip].tip %>
-    <%if current_user.admin%><div class="portal-tip-delete" id="portal-tip-delete-<%= locals[:tip].id %>">&#10006; </div><% end %>
+    <%if current_user.admin || locals[:tip].user_id == current_user.id %><div class="portal-tip-delete" id="portal-tip-delete-<%= locals[:tip].id %>">&#10006; </div><% end %>
     <div class="portal-tip-info"><span class="portal-tip-info-user"><%= locals[:tip].user_name %></span> | <span class="portal-tip-info-date"><%= locals[:tip].created_at.strftime("%b %-d, '%y") %></span></div>
     <div class="portal-tip-helpful">helpful? <div class="<%= if session[:user] then "tip-helpful-yes" else "tip-helpful-yes-nologin" end %> <%= if locals[:tip].hasUserUpvoted == 1 then "voted" end %>" id="tip-upvote-<%= locals[:tip].id %>"> <%= locals[:tip].upvoteCount %></div> <div class="<%= if session[:user] then "tip-helpful-no" else "tip-helpful-no-nologin" end %> <%= if locals[:tip].hasUserDownvoted == 1 then "voted" end %>" id="tip-downvote-<%= locals[:tip].id %>"> <%= locals[:tip].downvoteCount %></div></div>
 </div>

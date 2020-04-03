@@ -131,3 +131,21 @@
     text-align: center;
     padding: 20px 0 10px 0;
 }
+
+.experience-edit-submit input.cancel{
+    background: #ddd;
+    border: 2px solid #ccc;
+    color: #999;
+    box-shadow: 1.5px 1.5px 1.5px #888;
+}
+.experience-edit-submit input.cancel:hover{
+    background: #e6e6e6;
+    border: 2px solid #ccc;
+    color: #999;
+}
+
+.header-return-link, .header-return-link:hover, .header-return-link:active, .header-return-link:visited{
+    font-weight: bold;
+    font-size: 18px;
+    color: #666;
+}
