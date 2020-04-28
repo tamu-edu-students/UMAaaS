@@ -4,7 +4,7 @@ class PortalsController < ApplicationController
         
         if logged_in?
             #if logged in and the user already has a program selected, then automatically go that program portal
-            program = Program.find session[:user_program_id] unless session[:user_program_id].nil?
+            program = Program.find current_user.user_program_id unless current_user.user_program_id.nil?
             if(not program.nil?) then
                 redirect_to portal_path(program.id)
             end
@@ -18,11 +18,11 @@ class PortalsController < ApplicationController
         else
             if logged_in?
                 #save selected program to the user account so next time they don't have to select it
-                user = User.find session[:user]
+                user = User.find current_user.id
                 if(not user.nil?) then
                     user.program_id = program.id
                     user.save
-                    session[:user_program_id] = program.id
+                    curent_user.user_program_id = program.id
                 end
             end
             redirect_to portal_path(program.id)
@@ -35,7 +35,7 @@ class PortalsController < ApplicationController
         if(program.nil?) then
             flash[:notice] = "Pogram not found!"
         else
-            session[:user_program_id] = program.id
+            current_user.user_program_id = program.id
             redirect_to portal_path(program.id)
         end
     end
@@ -92,7 +92,7 @@ class PortalsController < ApplicationController
                 
                 tip.hasUserUpvoted = 0
                 tip.hasUserDownvoted = 0
-                helpful = HelpfulVote.select("vote").where(tip_id: tip.id).where(user_id: session[:user]).first
+                helpful = HelpfulVote.select("vote").where(tip_id: tip.id).where(user_id: current_user.id).first
                 if not helpful.nil?
                     if helpful.vote == 1
                         tip.hasUserUpvoted = 1

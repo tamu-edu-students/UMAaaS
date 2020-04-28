@@ -6,4 +6,5 @@ class User < ApplicationRecord
     has_many :tips, through: :helpful_votes
     
     attr_accessor :img
+    attr_accessor :user_program_id
 end
