@@ -5,6 +5,4 @@ Feature: Create search bar
 
 Scenario: Test for search bar presence 
     Given I am on the home page
-    Then I should see class "search-flex"    
-   
-    
+    Then I should see id "index-search-box"

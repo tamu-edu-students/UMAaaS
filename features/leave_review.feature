@@ -36,7 +36,3 @@ Scenario: Leave a Review
 	When I choose "review_wifi_true"
 	When I choose "review_wheelchair_true"
 	When I press "Submit"
-	Given I am on the home page
-	When I fill in "near" with "College Station"
-	When I fill in "find" with "tacos"
-	When I press "button"
