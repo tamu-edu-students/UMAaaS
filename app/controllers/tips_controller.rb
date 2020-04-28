@@ -9,19 +9,19 @@ class TipsController < ApplicationController
             redirect_to portal_path(params[:id]) and return
         end
         
-        Tip.create(:tip => params[:tip][:tip], :user_id => session[:user], :program_id => params[:id])
+        Tip.create(:tip => params[:tip][:tip], :user_id => current_user.id, :program_id => params[:id])
         redirect_to portal_path(params[:id])
     end
     
     def helpful
         if(params[:vote] == "0")
             
-            HelpfulVote.where(tip_id: params[:tipId]).where(user_id: session[:user]).destroy_all
+            HelpfulVote.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
             
         else 
             
-            HelpfulVote.where(tip_id: params[:tipId]).where(user_id: session[:user]).destroy_all
-            HelpfulVote.create(:vote => params[:vote], :user_id => session[:user], :tip_id => params[:tipId])
+            HelpfulVote.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
+            HelpfulVote.create(:vote => params[:vote], :user_id => current_user.id, :tip_id => params[:tipId])
             
         end
         
@@ -44,7 +44,7 @@ class TipsController < ApplicationController
 
         @tip.hasUserUpvoted = 0
         @tip.hasUserDownvoted = 0
-        helpful = HelpfulVote.select("vote").where(tip_id: @tip.id).where(user_id: session[:user]).first
+        helpful = HelpfulVote.select("vote").where(tip_id: @tip.id).where(user_id: current_user.id).first
         if not helpful.nil?
             if helpful.vote == 1
                 @tip.hasUserUpvoted = 1

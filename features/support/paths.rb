@@ -27,6 +27,12 @@ module NavigationHelpers
 
         when /^the show_mad_taco\s?page$/
             'reviews/os-fZ4atEmOxbIo36kG9gA'
+            
+        when /^the singapore\s?page$/
+            'p/1'
+            
+        when /^the singapore\s?search\s?page$/
+            'p/1?search=zzzzzz'
         # Add more mappings here.
         # Here is an example that pulls values out of the Regexp:
         #
