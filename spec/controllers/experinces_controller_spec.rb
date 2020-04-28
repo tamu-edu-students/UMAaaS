@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe ExperincesController, type: :controller do
+RSpec.describe ExperiencesController, type: :controller do
 
 end
