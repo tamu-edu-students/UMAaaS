@@ -38,5 +38,3 @@ yarn-debug.log*
 
 .DS_Store
 reviews/vendor/bundle
-
-/coverage/*
