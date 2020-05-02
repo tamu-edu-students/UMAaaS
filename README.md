@@ -28,3 +28,5 @@ Application type will be "Web Application"
 Give it any name you want.  
 For the Authorized JavaScript Origins, give it your heroku address and the address of all your Cloud9 devs up to the .com part  
 For the Authorized Redirect URIs, try to login on your app with these blank, you'll get an error message that has the correct value to put in here. It starts with the same addresses as you put in the Authorized JavaScript Origins parts, but with more URL past the .com. The URL should end with 'callback'
+## Additional Notes
+The initial project was mostly just the Reviews model/controller and database table, but we have mostly abandoned the concept of Reviews. However, the Reviews stylesheet still has a lot of active styles! So that is why all the Reviews stuff hasn't been deleted yet.
