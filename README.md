@@ -36,6 +36,8 @@ rails server
 7. Click the 'Login' link in the menu. You'll get an error message, it gives you the URL that you need to give https://console.developers.google.com/ (go to the Credentials part and create a new 'OAuth client ID') to make the login work. The given URL (from https:// all the way to /callback) is what you need to put in the 'Authorized redirect URIs', just the domain name (from https:// to .com) is what you need to put in the 'URIs'. If each person on your team has their own Cloud9 then you'll need to put the addresses for each of them into your Google console.
 8. You'll want to change the admin email address in /tripAgvisor/config/application.rb so you can login as an administrator for the first time
 
+Setup your Heroku account to automatically sync with the master branch of your github. That's much easier than trying to push to Heroku from your Cloud9.
+
 ## Additional Notes
 The initial project was mostly just the Reviews model/controller and database table, but we have mostly abandoned the concept of Reviews. However, the Reviews stylesheet still has a lot of active styles! So that is why all the Reviews stuff hasn't been deleted yet.  
 Email me at bjirka@tamu.edu if you have any questions or problems.
