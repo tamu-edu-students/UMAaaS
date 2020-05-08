@@ -38,6 +38,8 @@ rails server
 
 Setup your Heroku account to automatically sync with the master branch of your github. That's much easier than trying to push to Heroku from your Cloud9.
 
+Good luck
+
 ## Additional Notes
 The initial project was mostly just the Reviews model/controller and database table, but we have mostly abandoned the concept of Reviews. However, the Reviews stylesheet still has a lot of active styles! So that is why all the Reviews stuff hasn't been deleted yet.  
 Email me at bjirka@tamu.edu if you have any questions or problems.
