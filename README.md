@@ -9,25 +9,33 @@
 3. Allison Kinnamore
 4. Paige Raun
 
-## Installation Help
-Our team developed on Cloud9, we recommend you use that platform also. Be sure to increase the size of your Cloud9 immediately so you don't run into space problems later.
+## Installation Instructions
+Our team developed on Cloud9, we recommend you use that platform also. 
 
-npm install -g yarn  
-rvm install 2.6.5  
-rvm use 2.6.5 --default  
-gem install rails  
-bundle exec rake db:setup  
+1. Create new Cloud9 environment  
+   Keep everything default except switch Platform to Ubuntu
+2. Increase the size of you Cloud9 to 20gb, instructions here: https://docs.aws.amazon.com/cloud9/latest/user-guide/move-environment.html
+3. Run these commands in Cloud9 terminal:
 
-There are configuration settings in /config/application.rb  
-You'll want to at least change the admin email address there.
+npm install -g yarn
+rvm install 2.6.5
+rvm use 2.6.5 --default
+gem install rails
+sudo apt-get install postgresql postgresql-client libpq5 libpq-dev
+git clone https://github.com/MarinaBaySaaS/tripAgvisor.git
+cd tripAgvisor
+gem install bundler
+bundle install
+yarn install
+rails db:migrate
+rails server
 
-You also need to setup Google API credentials to make the login work  
-https://console.developers.google.com (I think you'll have to login with a person gmail account, tamu.edu won't work)  
-Click the Credentials section, then create an "OAuth client ID"  
-Application type will be "Web Application"  
-Give it any name you want.  
-For the Authorized JavaScript Origins, give it your heroku address and the address of all your Cloud9 devs up to the .com part  
-For the Authorized Redirect URIs, try to login on your app with these blank, you'll get an error message that has the correct value to put in here. It starts with the same addresses as you put in the Authorized JavaScript Origins parts, but with more URL past the .com. The URL should end with 'callback'
+4. Click the address in the window that pops up in the upper right corner of the terminal window
+5. You will get an error message telling you to add a line to your environment configuration. Copy the given line and paste it in /tripAgvisor/config/environments/development.rb (replace line 2 with the given line)
+6. In the terminal press Ctrl+c to stop the server, then type 'rails server' to start it again. Refresh the page that had the error and it should be working now.
+7. Click the 'Login' link in the menu. You'll get an error message, it gives you the URL that you need to give https://console.developers.google.com/ (go to the Credentials part and create a new 'OAuth client ID') to make the login work. The given URL (from https:// all the way to /callback) is what you need to put in the 'Authorized redirect URIs', just the domain name (from https:// to .com) is what you need to put in the 'URIs'. If each person on your team has their own Cloud9 then you'll need to put the addresses for each of them into your Google console.
+8. You'll want to change the admin email address in /tripAgvisor/config/application.rb so you can login as an administrator for the first time
+
 ## Additional Notes
 The initial project was mostly just the Reviews model/controller and database table, but we have mostly abandoned the concept of Reviews. However, the Reviews stylesheet still has a lot of active styles! So that is why all the Reviews stuff hasn't been deleted yet.  
 Email me at bjirka@tamu.edu if you have any questions or problems.
