@@ -17,19 +17,19 @@ Our team developed on Cloud9, we recommend you use that platform also.
 2. Increase the size of you Cloud9 to 20gb, instructions here: https://docs.aws.amazon.com/cloud9/latest/user-guide/move-environment.html
 3. Run these commands in Cloud9 terminal:
 
-npm install -g yarn
-rvm install 2.6.5
-rvm use 2.6.5 --default
-gem install rails
-sudo apt-get install postgresql postgresql-client libpq5 libpq-dev
-git clone https://github.com/MarinaBaySaaS/tripAgvisor.git
-cd tripAgvisor
-gem install bundler
-bundle install
-yarn install
-rails db:migrate
-rails server
-
+npm install -g yarn  
+rvm install 2.6.5  
+rvm use 2.6.5 --default  
+gem install rails  
+sudo apt-get install postgresql postgresql-client libpq5 libpq-dev  
+git clone https://github.com/MarinaBaySaaS/tripAgvisor.git  
+cd tripAgvisor  
+gem install bundler  
+bundle install  
+yarn install  
+rails db:migrate  
+rails server  
+  
 4. Click the address in the window that pops up in the upper right corner of the terminal window
 5. You will get an error message telling you to add a line to your environment configuration. Copy the given line and paste it in /tripAgvisor/config/environments/development.rb (replace line 2 with the given line)
 6. In the terminal press Ctrl+c to stop the server, then type 'rails server' to start it again. Refresh the page that had the error and it should be working now.
