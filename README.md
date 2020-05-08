@@ -15,7 +15,7 @@ Our team developed on Cloud9, we recommend you use that platform also.
 1. Create new Cloud9 environment  
    Keep everything default except switch Platform to Ubuntu
 2. Increase the size of you Cloud9 to 20gb, instructions here: https://docs.aws.amazon.com/cloud9/latest/user-guide/move-environment.html
-3. Run these commands in Cloud9 terminal:
+3. Run these commands in Cloud9 terminal (obviously, change the github address to your own fork):
 
 npm install -g yarn  
 rvm install 2.6.5  
