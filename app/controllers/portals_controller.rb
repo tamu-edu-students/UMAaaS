@@ -22,7 +22,7 @@ class PortalsController < ApplicationController
                 if(not user.nil?) then
                     user.program_id = program.id
                     user.save
-                    curent_user.user_program_id = program.id
+                    current_user.user_program_id = program.id
                 end
             end
             redirect_to portal_path(program.id)
