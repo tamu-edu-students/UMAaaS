@@ -3,6 +3,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     OmniAuth.config.allowed_request_methods = [:post, :get]
     OmniAuth.config.silence_get_warning = true
 
+
   
   # change this
     provider :google_oauth2, '325404468347-72uokrj376lr1ku5ddm29k1l5a90e85k.apps.googleusercontent.com',
