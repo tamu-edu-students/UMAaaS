@@ -107,7 +107,7 @@ production:
   webpack_compile_output: false
 
   # Production depends on precompilation of packs prior to booting for performance.
-  compile: true
+  compile: false
 
   # Extract and emit a css file
   # extract_css: true
