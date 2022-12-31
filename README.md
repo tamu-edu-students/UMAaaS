@@ -43,3 +43,42 @@ Good luck
 ## Additional Notes
 The initial project was mostly just the Reviews model/controller and database table, but we have mostly abandoned the concept of Reviews. However, the Reviews stylesheet still has a lot of active styles! So that is why all the Reviews stuff hasn't been deleted yet.  
 Email me at bjirka@tamu.edu if you have any questions or problems.
+
+
+
+#2022-23
+
+
+### Project Description
+***Experience Recommendation / Review System:*** This was a legacy project.
+
+### Team Members
+1. Arka Bose
+2. Molly Frost
+3. Anuj Ketkar
+4. Abhishek More
+5. Uma Sarkar
+6. Sarah Sotelo
+
+
+
+## Installation Instructions
+
+Develop on cloud9 instance...
+
+cloud9 comes installed with rvm
+
+npm install -g yarn  
+rvm install 3.1.3 (or rbenv install 3.1.3)
+rvm use 3.1.3 --default (or rbenv global 3.1.3) 
+gem install rails  
+sudo apt-get install postgresql postgresql-client libpq5 libpq-dev  
+git clone https://github.com/tamu-edu-students/UMAaaS.git
+cd UMAaaS
+gem install bundler
+bundle install
+yarn install
+rails db:migrate
+rails server
+
+
