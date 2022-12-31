@@ -67,7 +67,7 @@ Email me at bjirka@tamu.edu if you have any questions or problems.
 Develop on cloud9 instance...
 
 cloud9 comes installed with rvm
-
+```
 npm install -g yarn  
 rvm install ruby-3.1.3 (or rbenv install 3.1.3)
 rvm use ruby-3.1.3 --default (or rbenv global 3.1.3) 
@@ -80,5 +80,5 @@ bundle install
 yarn install
 rails db:migrate
 rails server
-
+```
 
