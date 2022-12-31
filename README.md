@@ -69,8 +69,8 @@ Develop on cloud9 instance...
 cloud9 comes installed with rvm
 
 npm install -g yarn  
-rvm install 3.1.3 (or rbenv install 3.1.3)
-rvm use 3.1.3 --default (or rbenv global 3.1.3) 
+rvm install ruby-3.1.3 (or rbenv install 3.1.3)
+rvm use ruby-3.1.3 --default (or rbenv global 3.1.3) 
 gem install rails  
 sudo apt-get install postgresql postgresql-client libpq5 libpq-dev  
 git clone https://github.com/tamu-edu-students/UMAaaS.git
