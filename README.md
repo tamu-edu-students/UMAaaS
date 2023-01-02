@@ -1,5 +1,5 @@
-# Marina Bay SaaS
-## TripAgvisor
+
+# TripAgvisor
 ### Project Description
 ***Experience Recommendation / Review System:*** This was a legacy project. We turned it into a system for Texas A&M students who have studied abroad to leave tips and experiences for future study abroad students to learn from.
 
@@ -17,13 +17,13 @@ Good luck
 The initial project was mostly just the Reviews model/controller and database table, but we have mostly abandoned the concept of Reviews. However, the Reviews stylesheet still has a lot of active styles! So that is why all the Reviews stuff hasn't been deleted yet.  
 Email me at bjirka@tamu.edu if you have any questions or problems.
 
+---
 
-
-#2022-23
+# 2022-23
 
 
 ### Project Description
-***Experience Recommendation / Review System:*** This was a legacy project.
+***Experience Recommendation / Review System:*** This was a legacy (legacy project). We worked on this as part of the 2022-2023 wintermester in Singapore.
 
 ### Team Members
 1. Arka Bose
@@ -34,12 +34,11 @@ Email me at bjirka@tamu.edu if you have any questions or problems.
 6. Sarah Sotelo
 
 
-
 ## Installation Instructions
 
-Develop on cloud9 instance...
+Create a [AWS Cloud9 instance](https://aws.amazon.com/cloud9/), which automatically creates an EC2 instance. We found that this was the easiest way to get this bloated legacy project up and running quickly. Cloud9 comes installed with rvm and some other cool dependencies.
 
-cloud9 comes installed with rvm
+Complete the following steps to get your environment up and running:
 ```
 npm install -g yarn  
 rvm install ruby-3.1.3 (or rbenv install 3.1.3)
@@ -55,9 +54,34 @@ rails db:migrate
 rails server
 ```
 
-4. Click the address in the window that pops up in the upper right corner of the terminal window
-5. You will get an error message telling you to add a line to your environment configuration. Copy the given line and paste it in /tripAgvisor/config/environments/development.rb (replace line 2 with the given line)
-6. In the terminal press Ctrl+c to stop the server, then type 'rails server' to start it again. Refresh the page that had the error and it should be working now. (Normally, you don't have to stop and restart the server after changes, just refresh your page)
-7. Click the 'Login' link in the menu. You'll get an error message, it gives you the URL that you need to give https://console.developers.google.com/ (go to the Credentials part and create a new 'OAuth client ID') to make the login work. The given URL (from https:// all the way to /callback) is what you need to put in the 'Authorized redirect URIs', just the domain name (from https:// to .com) is what you need to put in the 'URIs'. If each person on your team has their own Cloud9 then you'll need to put the addresses for each of them into your Google console.
-8. You'll want to change the admin email address in /tripAgvisor/config/application.rb so you can login as an administrator for the first time
+- Click the address in the window that pops up in the upper right corner of the terminal window
+- You will get an error message telling you to add a line to your environment configuration. Copy the given line and paste it in /tripAgvisor/config/environments/development.rb (replace line 2 with the given line)
+- In the terminal press Ctrl+c to stop the server, then type 'rails server' to start it again. Refresh the page that had the error and it should be working now. (Normally, you don't have to stop and restart the server after changes, just refresh your page)
+- To set up Google auth, Go to the [Google Cloud Console](https://console.developers.google.com/). You may need to create a new project. Create credentials for a new OAuth Client ID. In the consent screen, select 'External' as the user type. Fill in the remaining info (the authorized domain and all that jazz can be changed later, if you don't know it currently).
+- After completing the consent screen (if you had to), create credentials for a new OAuth Client ID once again. Choose web application as the application type.
+- Insert your hosted site URL under the Authorized JavaScript origins. Example:
+```
+https://999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com
+AND/OR
+https://tripagvisor.herokuapp.com
+```
+- Insert your hosted site URL + "/auth/google_oauth2/callback" as Authorized redirect URIs. Example:
+```
+https://999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com/auth/google_oauth2/callback
+AND/OR
+https://tripagvisor.herokuapp.com/auth/google_oauth2/callback
+```
+- Change the admin email address in /tripAgvisor/config/application.rb so you can login as an administrator for the first time
+- Create a .env file in the root directory. This ensures that your secrets are not exposed. Try not to commit this :)\
+Insert the following:
+```
+GOOGLE_CLIENT_ID=[INSERT GOOGLE CLIENT ID HERE (NO QUOTES)]
+GOOGLE_CLIENT_SECRET=[INSERT GOOGLE CLIENT SECRET HERE (NO QUOTES)]
+```
+
+Your app should be up and running after this. Apologies for any technical atrocities you may encounter and good luck! 
+
+### Useful Resources
+- [Connecting VSCode to Cloud9](https://medium.com/@mahantya/access-your-aws-cloud9-ec2-instance-from-vs-code-over-ssh-ee1f5ea259ff)
+
 
