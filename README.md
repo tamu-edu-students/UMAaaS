@@ -80,3 +80,8 @@ GOOGLE_CLIENT_SECRET=[INSERT GOOGLE CLIENT SECRET HERE (NO QUOTES)]
 ```
 
 Your app should be up and running after this. Apologies for any technical atrocities you may encounter and good luck! 
+
+### Useful Resources
+- [Connecting VSCode to Cloud9](https://medium.com/@mahantya/access-your-aws-cloud9-ec2-instance-from-vs-code-over-ssh-ee1f5ea259ff)
+
+
