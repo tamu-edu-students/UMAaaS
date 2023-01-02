@@ -72,7 +72,7 @@ AND/OR
 https://tripagvisor.herokuapp.com/auth/google_oauth2/callback
 ```
 - Change the admin email address in /tripAgvisor/config/application.rb so you can login as an administrator for the first time
-- Create a .env file in the root directory. This ensures that your secrets are not exposed. Try not to commit this :)
+- Create a .env file in the root directory. This ensures that your secrets are not exposed. Try not to commit this :)\
 Insert the following:
 ```
 GOOGLE_CLIENT_ID=[INSERT GOOGLE CLIENT ID HERE (NO QUOTES)]
