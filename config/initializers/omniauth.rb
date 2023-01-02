@@ -5,8 +5,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
   
   # change this
-    provider :google_oauth2, '325404468347-72uokrj376lr1ku5ddm29k1l5a90e85k.apps.googleusercontent.com',
-                            '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',
+    provider :google_oauth2, '890464551227-vlrtvoqgamv76vtaqn9hm05bl304ldvu.apps.googleusercontent.com',
+                            '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',
                             image_size: 150,
                             skip_jwt: true
 end

@@ -3,14 +3,14 @@
 #   client_secret: '5UgDl6FSacW1DYobM11yPhJt'
 
 development:
-  client_id: '325404468347-72uokrj376lr1ku5ddm29k1l5a90e85k.apps.googleusercontent.com'
-  client_secret: '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'
+  client_id: '890464551227-vlrtvoqgamv76vtaqn9hm05bl304ldvu.apps.googleusercontent.com'
+  client_secret: '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'
 
 test:
-  client_id: '325404468347-72uokrj376lr1ku5ddm29k1l5a90e85k.apps.googleusercontent.com'
-  client_secret: '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'
+  client_id: '890464551227-vlrtvoqgamv76vtaqn9hm05bl304ldvu.apps.googleusercontent.com'
+  client_secret: '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'
 
 production:
-  client_id: '325404468347-72uokrj376lr1ku5ddm29k1l5a90e85k.apps.googleusercontent.com'
-  client_secret: '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'
+  client_id: '890464551227-vlrtvoqgamv76vtaqn9hm05bl304ldvu.apps.googleusercontent.com'
+  client_secret: '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'
   
