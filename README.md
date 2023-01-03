@@ -36,7 +36,7 @@ Email me at bjirka@tamu.edu if you have any questions or problems.
 
 ## Installation Instructions
 
-Create a [AWS Cloud9 instance](https://aws.amazon.com/cloud9/), which automatically creates an EC2 instance. We found that this was the easiest way to get this bloated legacy project up and running quickly. Cloud9 comes installed with rvm and some other cool dependencies.
+Create a [AWS Cloud9 instance](https://aws.amazon.com/cloud9/), which automatically creates an EC2 instance. We found that this was the easiest way to get this bloated legacy project up and running quickly. Cloud9 comes installed with rvm and some other cool dependencies. This is the way to go, I promise.
 
 Complete the following steps to get your environment up and running:
 ```
