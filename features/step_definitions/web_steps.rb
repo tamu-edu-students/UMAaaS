@@ -66,9 +66,9 @@ When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
 end
 
-When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
-  fill_in(field, :with => value)
-end
+# When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
+#   fill_in(field, :with => value)
+# end
 
 =begin
 When /^(?:|I )fill in "([^"]*)" for "([^"]*)"$/ do |value, field|
@@ -126,24 +126,20 @@ end
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   if page.respond_to? :should
     page.should have_content(text)
-  else
-    assert page.has_content?(text)
   end
 end
 
-Then /^(?:|I )should see a "([^"]*)" card$/ do |text| 
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
-end
+# Then /^(?:|I )should see a "([^"]*)" card$/ do |text| 
+#   if page.respond_to? :should
+#     page.should have_content(text)
+#   else
+#     assert page.has_content?(text)
+#   end
+# end
 
 Then /^(?:|I )should see class "([^"]*)"$/ do |text|
   if page.respond_to? :should
     page.should have_selector('.' + text)
-  else
-    assert page.have_selector?('.' +text)
   end
 end
 
@@ -160,8 +156,6 @@ end
 Then /^(?:|I )should see id "([^"]*)"$/ do |text|
   if page.respond_to? :should
     page.should have_selector('#' + text)
-  else
-    assert page.have_selector?('#' +text)
   end
 end
 
