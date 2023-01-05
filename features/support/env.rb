@@ -6,6 +6,8 @@
 
 require 'cucumber/rails'
 require 'simplecov'
+require 'selenium-webdriver'
+require 'capybara'
 SimpleCov.start
 
 # frozen_string_literal: true
@@ -36,6 +38,57 @@ ActionController::Base.allow_rescue = false
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
   
+Before('@omniauth_test') do
+  OmniAuth.config.test_mode = true
+  Capybara.default_host = 'http://example.com'
+  OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+  :provider => 'google',
+  :uid => '123545'
+  # etc.
+})
+
+  Capybara.app_host = "google.com"
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new app, browser: :chrome
+  end
+
+  Capybara.register_driver :headless_chrome do |app|
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w(headless disable-gpu) }
+    )
+
+    Capybara::Selenium::Driver.new app,
+      browser: :chrome,
+      desired_capabilities: capabilities
+  end
+  Capybara.default_driver = :headless_chrome
+
+
+
+  
+  OmniAuth.config.add_mock(:twitter, {
+    :uid => '12345',
+    :info => {
+      :name => 'twitteruser',
+    }
+  })
+
+  OmniAuth.config.add_mock(:facebook, {
+    :uid => '12345',
+    :info => {
+      :name => 'facebookuser'
+    }
+  })
+end
+
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end
+
+
+
+
+
   DatabaseCleaner.strategy = :transaction
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."

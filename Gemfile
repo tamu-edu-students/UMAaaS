@@ -36,6 +36,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
+gem 'selenium-webdriver'
+# gem 'puma'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -54,6 +56,8 @@ group :development, :test do
   gem 'rspec-rails', '4.0.0.beta3'
   gem 'simplecov'
   gem 'sqlite3', '~> 1.4'
+  gem 'capybara', '>= 2.15'
+  gem 'geckodriver-helper'
 end
 
 group :development do
@@ -67,7 +71,7 @@ end
 
 group :production do
 # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  # gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
