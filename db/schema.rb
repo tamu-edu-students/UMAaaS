@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_02_021015) do
+ActiveRecord::Schema.define(version: 2023_01_05_162234) do
 
   create_table "experience_comments", force: :cascade do |t|
-    t.text "title"
     t.text "comment"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
@@ -32,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_03_02_021015) do
     t.integer "program_id"
     t.integer "user_id"
     t.string "tags"
+    t.string "title"
     t.index ["program_id"], name: "index_experiences_on_program_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
