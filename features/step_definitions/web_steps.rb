@@ -113,6 +113,42 @@ When /^(?:|I )uncheck "([^"]*)"$/ do |field|
 end
 =end
 
+
+
+Given /^an experience with no tags/ do 
+
+@experience1 = Experience.new(program: nil, user: nil, tags: nil)
+
+end
+
+Given /^an experience with tags=,/ do 
+
+@experience1 = Experience.new(program: nil, user: nil, tags: ",")
+
+end
+
+Given /^an experience with tags "([^"]*)"$/ do |stringVal|
+
+@experience1 = Experience.new(program: nil, user: nil, tags: stringVal)
+
+end
+
+When /^I ask for the tag array/ do 
+  
+  @resultVal = @experience1.tagArray()
+end
+
+Then /^I should get nil$/ do
+  expect(nil==@resultVal)
+end
+
+Then /^I should get an tag array "([^"]*)"$/ do |array|
+ @expected = array.split(",")
+  expect(@expected==@resultVal)
+ 
+end
+
+
 When /^(?:|I )choose "([^"]*)"$/ do |field|
   choose(field)
 end
