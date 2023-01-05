@@ -20,7 +20,7 @@ class ExperiencesController < ApplicationController
         end
 
         
-        newExperience = Experience.create(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
 
         if(params.has_key?(:yelp_id))
             # has a Yelp location selected
