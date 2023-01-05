@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_03_02_021015) do
 
   create_table "experience_comments", force: :cascade do |t|
+    t.text "title"
     t.text "comment"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false

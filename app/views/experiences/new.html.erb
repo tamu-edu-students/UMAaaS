@@ -4,8 +4,12 @@
     <table class="experience-edit-table">
         <tbody>
             <tr>
+                <td class="experience-edit-label">Title:</td>
+                <td><%= text_field :experience, :experience, :required => true, :placeholder => "Enter title" %><div class="experience-edit-title-tips">&nbsp;</div></td>
+            </tr>
+            <tr>
                 <td class="experience-edit-label">Experience:</td>
-                <td><%= text_area :experience, :experience, :required => true %><div class="experience-edit-field-tips">&nbsp;</div></td>
+                <td><%= text_area :experience, :experience, :required => true%><div class="experience-edit-field-tips">&nbsp;</div></td>
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>
