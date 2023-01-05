@@ -31,11 +31,11 @@ class ReviewsController < ApplicationController
 	end
 
 	def yelp_help(food, city)
-		search(food, city)
+		# search(food, city)
 	end
 
 	def yelp_help_location(food, lat, long)
-		search_location(food, lat, long)
+		# search_location(food, lat, long)
 	end
 
 end
