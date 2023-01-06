@@ -180,9 +180,17 @@ a {
     font-weight: 500;
 }
 
+.desc {
+    height: 50px;
+    overflow: scroll;
+}
+
 .portal-experience-description {
     font-size: 18px;
     color: black;
+    height: 50px;
+    overflow: scroll;
+    width: 75%;
 }
 
 .portal-experience-tags {
@@ -564,6 +572,7 @@ a {
     background: #fcfcfc;
     display: none;
 }
+
 .portal-experience-comments-list-single{
     background: #fcfcfc;
 }

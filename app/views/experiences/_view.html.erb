@@ -1,8 +1,10 @@
     <div class="portal-experience-wrapper" id="test">
      <div class="portal-experience">
 		 	<div class="portal-experience-title">
-				<%= locals[:experience].title %>
-				<% if current_user.admin %>	
+				<div class="title">
+					<%= locals[:experience].title %>
+				</div>
+				<% if !current_user.admin %>	
 					<div class="portal-experience-icons">
 						<p class="portal-experience-icon">Flag</p>
 						<p class="portal-experience-icon">Delete</p>
