@@ -2,10 +2,12 @@
      <div class="portal-experience">
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
-				<div class="portal-experience-icons">
-					<p class="portal-experience-icon">Flag</p>
-					<p class="portal-experience-icon">Delete</p>
-				</div>
+				<% if current_user.admin %>	
+					<div class="portal-experience-icons">
+						<p class="portal-experience-icon">Flag</p>
+						<p class="portal-experience-icon">Delete</p>
+					</div>
+				<% end %>
 			</div>
 			<div class="portal-experience-tags">
 				<% if not locals[:experience].tagArray.nil? then locals[:experience].tagArray.each do |tag| %>
