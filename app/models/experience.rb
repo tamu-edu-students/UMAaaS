@@ -9,6 +9,7 @@ class Experience < ApplicationRecord
     attr_accessor :average_rating
     
     def tagArray
+        puts "AAAAAAAAAAAAAAA"
         if(tags.nil?)
             tagArray = nil
         elsif(tags == ",")

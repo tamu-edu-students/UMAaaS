@@ -9,15 +9,23 @@
 <div id="search-wrapper"><div class="search-border-outer"><div class="search-border-inner"><%= form_tag portal_path(), :method => :get, :id => "search-form" do %><input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>"><input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %></div></div></div>
 <div id="flex-container">
  <div id="column_1_of_2" class="flex-item">
-     <div class="portal-column-title">Tips <%= if current_user.id then link_to '+ Add', new_tip_path; end %>
-         <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
+     <div class="portal-column-title">
+     <p>Tips</p>
+     <% if current_user.id  %>
+      <%= link_to 'Add', new_tip_path, class: 'header-button'%> 
+    <% end %>
+        <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
      </div>
  <% @tips.each do |tip| %>
     <div class="portal-tip-wrapper" id="portal-tip-wrapper-<%= tip.id %>"><%= render 'tips/view' , locals: {tip: tip} %></div>
  <% end %>
  <% if @tips.size == 0 then %><div class="portal-tips-none"><% if params[:search].blank? then %>No tips added yet!<% else %>No search results!<% end %></div><% end %></div>
  <div id="column_2_of_2" class="flex-item">
-     <div class="portal-column-title">Experiences <%= if current_user.id then link_to '+ Add', new_experience_path; end %>
+     <div class="portal-column-title">
+         <p>Experiences</p>
+         <% if current_user.id  %>
+          <%= link_to 'Add', new_experience_path, class: 'header-button'%> 
+         <% end %>
          <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="rating" <%= if @experience_sort_by == "rating" then "selected" end %>>rating - best to worst</option><option value="rating_asc" <%= if @experience_sort_by == "rating_asc" then "selected" end %>>rating - worst to best</option><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>avg rating - best to worst</option><option value="avg_rating_asc" <%= if @experience_sort_by == "avg_rating_asc" then "selected" end %>>avg rating - worst to best</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
      </div>
  <% @experiences.each_with_index do |experience, index| %>
