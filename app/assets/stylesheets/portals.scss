@@ -247,15 +247,15 @@
     background-position-y: 100%;
 }
 .portal-tip-helpful .tip-helpful-no, .portal-tip-helpful .tip-helpful-no-nologin{
-    background-image: url(asset_path("thumbs_down.png"));
-    background-position-y: 0%;
+    background-image: url(asset_path("horndown_off.png"));
+    // background-position-y: 0%;
 }
 .portal-tip-helpful .tip-helpful-no:hover{
-    background-image: url(asset_path("thumbs_down.png"));
-    background-position-y: 100%;
+    background-image: url(asset_path("horndown_on.png"));
+    // background-position-y: 100%;
 }
 .portal-tip-helpful .voted{
-    background-position-y: 100%;
+    background-image: url(asset_path("horndown_on.png"));
 }
 
 
