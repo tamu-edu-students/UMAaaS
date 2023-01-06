@@ -156,11 +156,15 @@ a {
     margin-top: 25px;
 }
 
-.portal-tip, .portal-experience, .portal-experience-single{
-}
-
-
-.portal-experience, .portal-experience-single{
+.portal-tip {
+    width: 100%;
+    margin: 15px 0;
+    min-width: 160px;
+    position: relative;
+    padding: 0 5px 40px 5px;
+    border-left: 3px solid black;
+    font-size: 13px;
+    line-height: 15px;
 }
 
 .portal-experience {
