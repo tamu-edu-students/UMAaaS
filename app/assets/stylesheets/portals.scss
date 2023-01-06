@@ -248,6 +248,8 @@
 }
 .portal-tip-helpful .tip-helpful-no, .portal-tip-helpful .tip-helpful-no-nologin{
     background-image: url(asset_path("horndown_off.png"));
+    height: auto;
+    width: auto;
     // background-position-y: 0%;
 }
 .portal-tip-helpful .tip-helpful-no:hover{
