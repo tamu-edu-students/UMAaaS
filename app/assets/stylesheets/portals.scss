@@ -126,7 +126,7 @@ a {
     justify-content: space-between;
     align-items: center;
     min-width: 200px;
-    margin-top: 15px;
+    margin-top: 25px;
     //border-bottom: 1px solid gray;
 }
 .portal-column-title-sort{
@@ -159,12 +159,6 @@ a {
 .portal-tip, .portal-experience, .portal-experience-single{
 }
 
-.portal-experience-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 21px;
-}
 
 .portal-experience, .portal-experience-single{
 }
@@ -173,9 +167,25 @@ a {
     font-size: 21px;
 }
 
+.portal-experience-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 2px;
+    color: black;
+    font-weight: 500;
+}
+
+.portal-experience-description {
+    font-size: 18px;
+    color: black;
+}
+
 .portal-experience-tags {
     display: flex;
     gap: 8px;
+    margin-bottom: 8px;
 }
 
 .portal-experience-tag {
@@ -207,6 +217,10 @@ a {
 .portal-experience-icon {
     font-size: 15px;
 
+}
+
+.portal-experience-rating-average {
+    font-size: 13px;
 }
 
 .portal-experience:hover{

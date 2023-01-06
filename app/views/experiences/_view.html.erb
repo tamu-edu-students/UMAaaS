@@ -1,7 +1,7 @@
     <div class="portal-experience-wrapper" id="test">
      <div class="portal-experience">
 		 	<div class="portal-experience-title">
-				<%= locals[:experience].experience %>
+				<%= locals[:experience].title %>
 				<div class="portal-experience-icons">
 					<p class="portal-experience-icon">Flag</p>
 					<p class="portal-experience-icon">Delete</p>
@@ -13,6 +13,9 @@
 						#<%= tag %>
 					</div>
 					<% end end %>
+			</div>
+			<div class="portal-experience-description">
+				<%= locals[:experience].experience%>
 			</div>
 			<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
@@ -26,9 +29,10 @@
 				updated: <%= locals[:experience].updated_at.strftime("%b %-d, '%y") %>
 			</span>
 			<% end %>
+			<div class="portal-experience-rating-average">
+				Average: <%= locals[:experience].average_rating %>
 			</div>
-     	 <%if current_user.admin || locals[:experience].user_id == current_user.id %>
-			 <div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
+			</div>
          <div class="portal-experience-rating">
 								<% if locals[:experience].rating.nil? %>
 									<%= content_tag :h4, " "%>
@@ -39,7 +43,6 @@
 								<% elsif locals[:experience].rating == 4 %>
 								<% elsif locals[:experience].rating == 5 %>
 								<% end %>
-			<div class="portal-experience-rating-average">Average: <%= locals[:experience].average_rating %></div>
          </div>
      </div>
      <div class="portal-experience-comments">
