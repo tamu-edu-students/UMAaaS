@@ -14,22 +14,19 @@ module NavigationHelpers
         case page_name
 
         when /^the home\s?page$/
-            '/'
+            root_path
 	
 	    when /^the emergency\s?page$/
-            '/reviews/emergency'
+            reviews_emergency_path
         
         when /^the programs\s?page$/
-            '/programs/index'
+            programs_path
             
         when /^the review\s?page$/
-            'reviews/leave_review/os-fZ4atEmOxbIo36kG9gA'
-
-        when /^the show_mad_taco\s?page$/
-            'reviews/os-fZ4atEmOxbIo36kG9gA'
+            leave_review_path
             
         when /^the singapore\s?page$/
-            'p/1'
+            portals_path
             
         when /^the singapore\s?search\s?page$/
             'p/1?search=zzzzzz'
