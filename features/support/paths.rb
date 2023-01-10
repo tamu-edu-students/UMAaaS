@@ -20,7 +20,7 @@ module NavigationHelpers
             reviews_emergency_path
         
         when /^the programs\s?page$/
-            programs_path
+            programs_path 
             
         when /^the review\s?page$/
             leave_review_path
