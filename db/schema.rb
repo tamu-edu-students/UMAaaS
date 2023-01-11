@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_05_172608) do
+ActiveRecord::Schema.define(version: 2023_01_11_014551) do
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 2023_01_05_172608) do
     t.integer "user_id"
     t.index ["tip_id"], name: "index_helpful_votes_on_tip_id"
     t.index ["user_id"], name: "index_helpful_votes_on_user_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.integer "participant_id"
+    t.integer "program_id_id", null: false
+    t.boolean "isFaculty"
+    t.integer "user_id_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["program_id_id"], name: "index_participants_on_program_id_id"
+    t.index ["user_id_id"], name: "index_participants_on_user_id_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -110,6 +121,8 @@ ActiveRecord::Schema.define(version: 2023_01_05_172608) do
   add_foreign_key "experiences", "users"
   add_foreign_key "helpful_votes", "tips"
   add_foreign_key "helpful_votes", "users"
+  add_foreign_key "participants", "program_ids"
+  add_foreign_key "participants", "user_ids"
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"
