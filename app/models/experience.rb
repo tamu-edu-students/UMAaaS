@@ -3,13 +3,14 @@ class Experience < ApplicationRecord
     belongs_to :user
     has_many :experience_comments
     has_one :yelp_location
+    has_one :image
     
+    attr_accessor :image
     attr_accessor :comments
     attr_accessor :totalComments
     attr_accessor :average_rating
     
     def tagArray
-        puts "AAAAAAAAAAAAAAA"
         if(tags.nil?)
             tagArray = nil
         elsif(tags == ",")

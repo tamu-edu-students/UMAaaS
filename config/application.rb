@@ -10,6 +10,12 @@ if ['development', 'test'].include? ENV['RAILS_ENV']
   Dotenv::Railtie.load
 end
 
+ActiveSupport.on_load(:active_record) do
+  include ActiveStorage::Reflection::ActiveRecordExtensions
+  ActiveRecord::Reflection.singleton_class.prepend(ActiveStorage::Reflection::ReflectionExtension)
+  include ActiveStorage::Attached::Model
+end
+
 module Reviews
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
