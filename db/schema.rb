@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_05_172608) do
+ActiveRecord::Schema.define(version: 2023_01_11_025600) do
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -36,12 +36,49 @@ ActiveRecord::Schema.define(version: 2023_01_05_172608) do
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
+  create_table "flag_comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_flag_comments_on_comment_id"
+    t.index ["user_id"], name: "index_flag_comments_on_user_id"
+  end
+
+  create_table "flag_experiences", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "experience_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["experience_id"], name: "index_flag_experiences_on_experience_id"
+    t.index ["user_id"], name: "index_flag_experiences_on_user_id"
+  end
+
+  create_table "flag_tips", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "tip_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tip_id"], name: "index_flag_tips_on_tip_id"
+    t.index ["user_id"], name: "index_flag_tips_on_user_id"
+  end
+
   create_table "helpful_votes", force: :cascade do |t|
     t.integer "vote"
     t.integer "tip_id"
     t.integer "user_id"
     t.index ["tip_id"], name: "index_helpful_votes_on_tip_id"
     t.index ["user_id"], name: "index_helpful_votes_on_user_id"
+  end
+
+  create_table "participants", force: :cascade do |t|
+    t.integer "program_id", null: false
+    t.boolean "isFaculty"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["program_id"], name: "index_participants_on_program_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -108,8 +145,16 @@ ActiveRecord::Schema.define(version: 2023_01_05_172608) do
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"
   add_foreign_key "experiences", "users"
+  add_foreign_key "flag_comments", "comments"
+  add_foreign_key "flag_comments", "users"
+  add_foreign_key "flag_experiences", "experiences"
+  add_foreign_key "flag_experiences", "users"
+  add_foreign_key "flag_tips", "tips"
+  add_foreign_key "flag_tips", "users"
   add_foreign_key "helpful_votes", "tips"
   add_foreign_key "helpful_votes", "users"
+  add_foreign_key "participants", "programs"
+  add_foreign_key "participants", "users"
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"
