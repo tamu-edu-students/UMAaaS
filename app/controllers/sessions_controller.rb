@@ -1,7 +1,15 @@
 class SessionsController < ApplicationController
     def create
-        user_info = request.env["omniauth.auth"]
-
+        
+        response_info = request.env["omniauth.auth"]
+        test_info = {"uid":3124213,"info":{"email":"test@gmail.com","name":"tester"}}
+        if params[:test] 
+            user_info = test_info
+        else
+            user_info = response_info
+        end
+        
+        
         if params[:hd] != 'tamu.edu'
             flash[:alert] = "Must login with @tamu.edu email address!"
             redirect_to root_path and return

@@ -12,3 +12,4 @@
 #end
 
 Program.create!(:name => "Singapore CSCE Wintermester", :region => "Asia")
+Program.create!(:name => "Greece CSCE Wintermester", :region => "Europe")

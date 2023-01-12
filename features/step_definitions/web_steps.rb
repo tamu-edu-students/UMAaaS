@@ -24,6 +24,11 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 
+require 'capybara/rspec'
+require 'rack_session_access'
+require 'rack_session_access/capybara'
+
+
 =begin
 module WithinHelpers
   def with_scope(locator)
@@ -50,6 +55,18 @@ end
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
+
+And /^(?:|I )am logged in/ do
+     cookies[:stub_user_id] = "12321321"
+     cookies[:stub_user_admin] = "false"
+     cookies[:stub_user_program_id] = "1"
+    # page.set_rack_session(:user_id => "4")
+    # page.set_rack_session(:user_admin => false)
+    # page.set_rack_session(:user_program_id => 1 )
+     visit root_path
+end
+
+
 
 
 =begin
