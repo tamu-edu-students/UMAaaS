@@ -7,6 +7,17 @@
             </select><% end %></div>
 <div id="page-header"><%= @program.name %></div>
 <div id="search-wrapper"><div class="search-border-outer"><div class="search-border-inner"><%= form_tag portal_path(), :method => :get, :id => "search-form" do %><input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>"><input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %></div></div></div>
+
+<!--This block theoretically can has the potential to update the search results everytime it detects a keystroke. However, this is not possible given the current way the search was written since Javascript cannot directly call on a Ruby function so I will leave this for future teams to figure out-->
+<!--<%= javascript_tag do %>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--      const searchInput = document.getElementById("search-field");-->
+<!--      searchInput.addEventListener("keyup", function() {-->
+<!--        console.log("Update search results");-->
+<!--      });-->
+<!--    });-->
+<!--<% end %>-->
+
 <div id="flex-container">
  <div id="column_1_of_2" class="flex-item">
      <div class="portal-column-title">

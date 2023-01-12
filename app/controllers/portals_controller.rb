@@ -14,7 +14,7 @@ class PortalsController < ApplicationController
     def program_select
         program = Program.find params[:program_id]
         if(program.nil?) then
-            flash[:notice] = "Pogram not found!"
+            flash[:notice] = "Program not found!"
         else
             if logged_in?
                 #save selected program to the user account so next time they don't have to select it
@@ -48,11 +48,11 @@ class PortalsController < ApplicationController
         @programs = Program.where(disabled: false)
         
         
-        # get the search terms, if the search starts with "tags:", then only search tags
+        # get the search terms, if the search starts with "#", then only search tags
         searchTerm = nil
         searchTagsOnly = nil
         if not params[:search].blank?
-            match = params[:search].match(/\Atags:\s*([0-9a-z -]+)/i)
+            match = params[:search].match(/\A#\s*([0-9a-z -]+)/i)
             if not match.nil?
                 searchTerm = match[1]
                 searchTagsOnly = true

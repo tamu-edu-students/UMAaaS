@@ -11,7 +11,7 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
         end
-        
+        image = params[:experience][:image]
         tagArray = params[:experience][:tags].split(",")
         tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
         tagArray.each do |tag|
@@ -193,7 +193,7 @@ class ExperiencesController < ApplicationController
             redirect_to experience_path(params[:id]) and return
         end
         
-        if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
+        if(params[:experience][:title].blank? || params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:alert] = "Cannot update experience"
             redirect_to experience_path(params[:id]) and return
         end
@@ -206,7 +206,7 @@ class ExperiencesController < ApplicationController
         end
 
         @experience = Experience.find params[:id]
-        @experience.update_attributes(:experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed)
+        @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed)
 
         # delete any existing associated location
         YelpLocation.where(experience_id: params[:id]).destroy_all

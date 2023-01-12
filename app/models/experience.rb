@@ -3,7 +3,7 @@ class Experience < ApplicationRecord
     belongs_to :user
     has_many :experience_comments
     has_one :yelp_location
-    has_one :image
+    has_one_attached :image
     
     attr_accessor :image
     attr_accessor :comments
