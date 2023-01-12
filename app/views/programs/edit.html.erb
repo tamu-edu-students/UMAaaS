@@ -15,26 +15,37 @@
                 end%></td>
          </tr>
      </tbody>
- </table></div>
- <div id="column2" class="flex-item"><%= form_tag program_path(@program), :method => :put do %>
-    <table class="program-edit-table">
-        <tbody>
-            <tr>
-                <td class="program-edit-label"><%= label :program, :name, 'Program Name' %></td>
-                <td><%= text_field :program, :name %></td>
-            </tr>
-            <tr>
-                <td class="program-edit-label"><%= label :program, :location, 'Location (city, country)' %></td>
-                <td><%= text_field :program, :location %></td>
-            </tr>
-            <tr>
-                <td class="program-edit-label"><%= label :program, :region, 'Region' %></td>
-                <td><%= text_field :program, :region %></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
-            </tr>
-        </tbody>
-    </table>
- <% end %></div>
+ </table>
+ </div>
+ <div id="column2" class="flex-item">
+    <%= form_tag program_path(@program), :method => :put do %>
+        <table class="program-edit-table">
+            <tbody>
+                <tr>
+                    <td class="program-edit-label"><%= label :program, :name, 'Program Name' %></td>
+                    <td><%= text_field :program, :name %></td>
+                </tr>
+                <tr>
+                    <td class="program-edit-label"><%= label :program, :location, 'Location (city, country)' %></td>
+                    <td><%= text_field :program, :location %></td>
+                </tr>
+                <tr>
+                    <td class="program-edit-label"><%= label :program, :region, 'Region' %></td>
+                    <td><%= text_field :program, :region %></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="program-edit-submit">
+                    <%= link_to "Add Participants", new_program_participant_path(@program.id) %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    <% end %>
+ </div>
 </div>
+
+</div>
+

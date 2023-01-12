@@ -46,12 +46,11 @@ ActiveRecord::Schema.define(version: 2023_01_11_011111) do
 
   create_table "participants", force: :cascade do |t|
     t.boolean "is_faculty"
+    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "program_id"
-    t.integer "user_id"
+    t.integer "program_id",
     t.index ["program_id"], name: "index_participants_on_program_id"
-    t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -121,7 +120,6 @@ ActiveRecord::Schema.define(version: 2023_01_11_011111) do
   add_foreign_key "helpful_votes", "tips"
   add_foreign_key "helpful_votes", "users"
   add_foreign_key "participants", "programs"
-  add_foreign_key "participants", "users"
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"
