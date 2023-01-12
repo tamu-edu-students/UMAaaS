@@ -165,7 +165,7 @@ class PortalsController < ApplicationController
         
         # for sorting the experiences
         if(params[:sort_exp].nil?) then
-            @experience_sort_by = "rating"
+            @experience_sort_by = "avg_rating"
         else
             @experience_sort_by = params[:sort_exp]
         end

@@ -11,7 +11,6 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
         end
-        image = params[:experience][:image]
         tagArray = params[:experience][:tags].split(",")
         tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
         tagArray.each do |tag|
