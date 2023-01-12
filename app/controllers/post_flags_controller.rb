@@ -1,0 +1,2 @@
+class PostFlagsController < ApplicationController
+end

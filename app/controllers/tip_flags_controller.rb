@@ -1,0 +1,2 @@
+class TipFlagsController < ApplicationController
+end

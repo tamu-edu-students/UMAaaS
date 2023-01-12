@@ -1,0 +1,2 @@
+class CommentFlagsController < ApplicationController
+end
