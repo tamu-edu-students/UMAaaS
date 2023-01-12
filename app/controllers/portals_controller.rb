@@ -14,7 +14,7 @@ class PortalsController < ApplicationController
     def program_select
         program = Program.find params[:program_id]
         if(program.nil?) then
-            flash[:notice] = "Pogram not found!"
+            flash[:notice] = "Program not found!"
         else
             if logged_in?
                 #save selected program to the user account so next time they don't have to select it
@@ -33,7 +33,7 @@ class PortalsController < ApplicationController
     def program_view
         program = Program.find params[:program_id]
         if(program.nil?) then
-            flash[:notice] = "Pogram not found!"
+            flash[:notice] = "Program not found!"
         else
             current_user.user_program_id = program.id
             redirect_to portal_path(program.id)
@@ -42,13 +42,10 @@ class PortalsController < ApplicationController
     
     def view
         #get this specific program
-        puts "HEYYYYY"
         @program = Program.find params[:id]
         
         # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
-        puts "HALLO"
-        
         
         # get the search terms, if the search starts with "tag: ", then only search tags
         searchTerm = nil

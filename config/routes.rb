@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   get "/logout", to: "sessions#destroy"
   resource :session, only: [:create, :destroy]
   resources :reviews
-  resources :programs
   resources :users
+  resources :programs do
+    resources :participants
+  end
+
   # resources :tips
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'

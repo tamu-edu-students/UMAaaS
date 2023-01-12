@@ -4,6 +4,10 @@ class ExperiencesController < ApplicationController
         @experience = Experience.new
         program = Program.find params[:id]
         @near = program.location
+        participant = Participant.find_by(user_id: current_user.id, program: program.id) 
+        puts "PARTICIPANT"
+        puts participant
+
     end
     
     def create
@@ -11,7 +15,8 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
         end
-        
+
+
         tagArray = params[:experience][:tags].split(",")
         tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
         tagArray.each do |tag|
@@ -99,10 +104,10 @@ class ExperiencesController < ApplicationController
     # deletes a whole experience
     def delete
         # prevent unauthorized deletions
-         if(not logged_in?)
-            flash[:alert] = "You are not authorized to delete this post!"
-            redirect_to root_path and return 
-         end
+        if(not logged_in? or not current_user.admin)
+           flash[:alert] = "You are not authorized to delete this post!"
+           redirect_to root_path and return 
+        end
         
         experience = Experience.find params[:id]
         
