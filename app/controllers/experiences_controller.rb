@@ -1,13 +1,19 @@
 class ExperiencesController < ApplicationController
 
+    before_action :checkPrivilege
+    
+    def checkPrivilege
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+        if participant.nil?
+            flash[:alert] = "You are not assigned to this program."
+            redirect_to portal_path(params[:id]) and return 
+        end
+    end
+
     def new
         @experience = Experience.new
         program = Program.find params[:id]
         @near = program.location
-        participant = Participant.find_by(user_id: current_user.id, program: program.id) 
-        puts "PARTICIPANT"
-        puts participant
-
     end
     
     def create

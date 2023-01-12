@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
     def create
         user_info = request.env["omniauth.auth"]
 
-        if params[:hd] != 'tamu.edu'
+        #Allow non tamu emails for testing
+        if params[:hd] != 'tamu.edu' && 1==0
             flash[:alert] = "Must login with @tamu.edu email address!"
             redirect_to root_path and return
         end
@@ -27,6 +28,7 @@ class SessionsController < ApplicationController
         session[:user_admin] = dbUser.admin
         session[:user_img] = user_info["info"]["image"]
         session[:user_program_id] = dbUser.program_id
+        session[:user_email] = dbUser.email
 
         redirect_to(root_path) and return
     end
@@ -35,6 +37,7 @@ class SessionsController < ApplicationController
         session.delete :user_admin
         session.delete :user_img
         session.delete :user_program_id
+        session.delete :user_email
         redirect_to root_path
     end
 end

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     def current_user
         cu = User.new
         cu.admin = session[:user_admin]
+        cu.email = session[:user_email]
         cu.img = session[:user_img]
         cu.id = session[:user]
         cu.user_program_id = session[:user_program_id]

@@ -11,7 +11,7 @@
  <div id="column_1_of_2" class="flex-item">
      <div class="portal-column-title">
      <p>Tips</p>
-     <% if current_user.id  %>
+     <% if logged_in? and has_program? %>
       <%= link_to 'Add', new_tip_path, class: 'header-button'%> 
     <% end %>
         <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
@@ -23,7 +23,7 @@
  <div id="column_2_of_2" class="flex-item">
      <div class="portal-column-title">
          <p>Experiences</p>
-         <% if current_user.id  %>
+         <% if logged_in? and has_program? %>
           <%= link_to 'Add', new_experience_path, class: 'header-button'%> 
          <% end %>
          <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="rating" <%= if @experience_sort_by == "rating" then "selected" end %>>rating - best to worst</option><option value="rating_asc" <%= if @experience_sort_by == "rating_asc" then "selected" end %>>rating - worst to best</option><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>avg rating - best to worst</option><option value="avg_rating_asc" <%= if @experience_sort_by == "avg_rating_asc" then "selected" end %>>avg rating - worst to best</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
