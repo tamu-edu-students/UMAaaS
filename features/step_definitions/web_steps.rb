@@ -66,6 +66,14 @@ And /^(?:|I )am logged in/ do
      visit root_path
 end
 
+# When('I click on the selector and choose a program') do
+# print("Hello")
+# end
+
+Given('I have a program_id') do
+find_field('program_id').find("option[value='2']").select_option
+end
+
 
 
 

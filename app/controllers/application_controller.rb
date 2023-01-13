@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
     def current_user
         if Rails.env.test? 
          cu = User.new
-         cu.admin = true
+         cu.admin = false
          cu.img = nil
          cu.id = "43242342342"
-         cu.user_program_id = 1
+         cu.user_program_id = nil
          return cu
        end 
         

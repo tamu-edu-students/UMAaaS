@@ -1,4 +1,5 @@
 class PortalsController < ApplicationController
+
     def index
         @programs = Program.where(disabled: false)
         print("ON PROGRAM PAGE\n")
@@ -14,7 +15,9 @@ class PortalsController < ApplicationController
     end
     
     def program_select
+        print("RUNNING PROGRAM SELECT")
         program = Program.find params[:program_id]
+        
         # if(program.nil?) then
         #     flash[:notice] = "Pogram not found!"
         # else
