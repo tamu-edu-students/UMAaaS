@@ -4,8 +4,10 @@
 				<%= locals[:experience].title %>
 				<% if current_user.admin %>	
 					<div class="portal-experience-icons">
-						<p class="portal-experience-icon">Flag</p>
-						<p class="portal-experience-icon">Delete</p>
+						<!--<p class="portal-experience-icon">Flag</p>-->
+					    <div>
+					    	<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
+					    </div>
 					</div>
 				<% end %>
 			</div>
