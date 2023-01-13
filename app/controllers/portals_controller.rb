@@ -56,11 +56,11 @@ class PortalsController < ApplicationController
         # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
         
-        # get the search terms, if the search starts with "tag: ", then only search tags
+        # get the search terms, if the search starts with "#", then only search tags
         searchTerm = nil
         searchTagsOnly = nil
         if not params[:search].blank?
-            match = params[:search].match(/\Atag:\s*([0-9a-z -]+)/i)
+            match = params[:search].match(/\A#\s*([0-9a-z -]+)/i)
             if not match.nil?
                 searchTerm = match[1]
                 searchTagsOnly = true
@@ -136,7 +136,7 @@ class PortalsController < ApplicationController
                 end
             elsif not searchTerm.nil?
                 found = false
-                if((exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i) or (exp.tags =~ /#{searchTerm}/i))
+                if((exp.title =~ /#{searchTerm}/i) or (exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i) or (exp.tags =~ /#{searchTerm}/i))
                     found = true
                 end
             end
@@ -173,7 +173,7 @@ class PortalsController < ApplicationController
         
         # for sorting the experiences
         if(params[:sort_exp].nil?) then
-            @experience_sort_by = "rating"
+            @experience_sort_by = "avg_rating"
         else
             @experience_sort_by = params[:sort_exp]
         end

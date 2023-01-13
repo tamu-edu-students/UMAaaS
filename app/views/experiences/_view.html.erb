@@ -16,6 +16,11 @@
 					</div>
 					<% end end %>
 			</div>
+			<div class="portal-experience-photo">
+				<% if not locals[:experience].image.nil? and locals[:experience].image.attached? %>
+					<%= image_tag locals[:experience].image%>
+				<%end%>
+			</div>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>
