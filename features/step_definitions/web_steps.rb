@@ -57,9 +57,6 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
 end
 
 And /^(?:|I )am logged in/ do
-     cookies[:stub_user_id] = "12321321"
-     cookies[:stub_user_admin] = "false"
-     cookies[:stub_user_program_id] = "1"
     # page.set_rack_session(:user_id => "4")
     # page.set_rack_session(:user_admin => false)
     # page.set_rack_session(:user_program_id => 1 )
@@ -71,10 +68,15 @@ end
 # end
 
 Given('I have a program_id') do
-find_field('program_id').find("option[value='2']").select_option
+  within("#index-search-box-form")
+     select "Greece CSCE Wintermester", from: "program_id"
+     click_button "Submit"
 end
 
 
+Then('if I am on the home page') do
+  visit root_path
+end
 
 
 =begin

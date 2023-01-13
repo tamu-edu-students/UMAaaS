@@ -230,6 +230,12 @@ a {
     cursor: pointer;
 }
 
+.hidden-submit {
+    height:0px;
+    width:0px;
+    opacity:0;
+}
+
 .portal-experience-delete{
     position: absolute;
     top: -17px;

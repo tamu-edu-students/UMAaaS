@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
          cu = User.new
          cu.admin = false
          cu.img = nil
-         cu.id = "43242342342"
+         cu.id = "4"
          cu.user_program_id = nil
          return cu
        end 
