@@ -2,8 +2,8 @@ class TipsController < ApplicationController
     before_action :checkPrivilege
     
     def checkPrivilege
-        tip = Tip.find_by(id: params["tipId"])
-        participant = Participant.find_by(email: current_user.email, program_id: tip.program_id)
+        puts params
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
         if participant.nil?
             flash[:alert] = "You are not authorized to manage tips for this program"
             redirect_to portal_path(tip.program_id) and return 
