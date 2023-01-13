@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   
   def index
       if not params[:p].nil? then
+        #participants = Participant.where(program_id: params[:p])
+        #@users = User.joins(:participants).where(programs: {program_id: params[:p]})
         @users = User.left_outer_joins(:program).select("users.*,programs.name as program_name").where(users: {program_id: params[:p]})
       else
         @users = User.left_outer_joins(:program).select("users.*,programs.name as program_name").all

@@ -54,14 +54,14 @@
      </div>
      <div class="portal-experience-comments">
      	<% if locals[:experience].comments.size > 0 then %><div class="portal-experience-comment-count<%if locals[:single] == true %>-single<% end %>">Comments: <%= locals[:experience].totalComments %> <span class="down-arrow"><i></i></span></div><% end %>
-     	<% if current_user.id then %><div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= locals[:experience].id %>"><textarea id="add_comment_<%= locals[:experience].id %>" name="add_comment" placeholder="Leave a comment"></textarea><input id="submit_add_comment_<%= locals[:experience].id %>" class="submit_add_comment" type="submit" value="Save Comment"><div class="comment_rating_wrapper"><%= label :rating, "Rating:", :class => "comment_label" %>
-                <fieldset class="rating">
-                      <input type="radio" value="5" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_5_<%= locals[:experience].id %>" /> <label for="comment_rating_5_<%= locals[:experience].id %>">Rating 5</label> 
-                      <input type="radio" value="4" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_4_<%= locals[:experience].id %>" /> <label for="comment_rating_4_<%= locals[:experience].id %>">Rating 4</label> 
-                      <input type="radio" value="3" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_3_<%= locals[:experience].id %>" /> <label for="comment_rating_3_<%= locals[:experience].id %>">Rating 3</label> 
-                      <input type="radio" value="2" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_2_<%= locals[:experience].id %>" /> <label for="comment_rating_2_<%= locals[:experience].id %>">Rating 2</label> 
-                      <input type="radio" value="1" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_1_<%= locals[:experience].id %>" /> <label for="comment_rating_1_<%= locals[:experience].id %>">Rating 1</label>
-                </fieldset></div></div><% end %>
+     	<% if logged_in? then %><div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= locals[:experience].id %>"><textarea id="add_comment_<%= locals[:experience].id %>" name="add_comment" placeholder="Leave a comment"></textarea><input id="submit_add_comment_<%= locals[:experience].id %>" class="submit_add_comment" type="submit" value="Save Comment"><div class="comment_rating_wrapper"><%= label :rating, "Rating:", :class => "comment_label" %>
+					<fieldset class="rating">
+						<input type="radio" value="5" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_5_<%= locals[:experience].id %>" /> <label for="comment_rating_5_<%= locals[:experience].id %>">Rating 5</label> 
+						<input type="radio" value="4" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_4_<%= locals[:experience].id %>" /> <label for="comment_rating_4_<%= locals[:experience].id %>">Rating 4</label> 
+						<input type="radio" value="3" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_3_<%= locals[:experience].id %>" /> <label for="comment_rating_3_<%= locals[:experience].id %>">Rating 3</label> 
+						<input type="radio" value="2" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_2_<%= locals[:experience].id %>" /> <label for="comment_rating_2_<%= locals[:experience].id %>">Rating 2</label> 
+						<input type="radio" value="1" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_1_<%= locals[:experience].id %>" /> <label for="comment_rating_1_<%= locals[:experience].id %>">Rating 1</label>
+					</fieldset></div></div><% end %>
         <div class="portal-experience-comments-list<%if locals[:single] == true %>-single<% end %>">
         	<% locals[:experience].comments.each do |comment| %>
         		<div class="portal-experience-comment"><%= comment.comment %>

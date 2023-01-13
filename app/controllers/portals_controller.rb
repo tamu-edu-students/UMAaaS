@@ -1,4 +1,12 @@
 class PortalsController < ApplicationController
+    helper_method :has_program?,
+
+    def has_program?
+        puts params
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+        return !participant.nil?
+    end
+
     def index
         @programs = Program.where(disabled: false)
         
@@ -43,10 +51,10 @@ class PortalsController < ApplicationController
     def view
         #get this specific program
         @program = Program.find params[:id]
+
         
         # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
-        
         
         # get the search terms, if the search starts with "#", then only search tags
         searchTerm = nil
