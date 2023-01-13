@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2023_01_11_030351) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -33,9 +32,6 @@ ActiveRecord::Schema.define(version: 2023_01_11_030351) do
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
-=======
-ActiveRecord::Schema.define(version: 2023_01_11_011111) do
->>>>>>> 53b68cc26fbaaa3ca41a91fc1dbc67e1fac5f1a3
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -107,10 +103,10 @@ ActiveRecord::Schema.define(version: 2023_01_11_011111) do
     t.index ["user_id"], name: "index_participants_on_user_id"
 =======
     t.boolean "is_faculty"
-    t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "program_id",
+    t.integer "program_id"
+    t.string "email"
     t.index ["program_id"], name: "index_participants_on_program_id"
 >>>>>>> 53b68cc26fbaaa3ca41a91fc1dbc67e1fac5f1a3
   end
