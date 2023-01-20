@@ -1,0 +1,56 @@
+<div id="page-header">New Participant</div>
+<div id="flex-container">
+    <div id="column1" class="flex-item"></div>
+  <div id="column2" class="flex-item"><%= form_tag program_participants_path, :method => :post do %>
+    <%= link_to "Back", edit_program_path(@program) %>
+    <table class="program-edit-table">
+        <tbody>
+            <tr>
+                <td class="program-edit-label">
+                    <%= label :participant, :email, 'Participant Email' %>
+                </td>
+                <td>
+                    <%= text_field :participant, :email, :required => true %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Faculty: </p>
+                </td>
+                <td style="display: flex; justify-content: end; align-items: center">
+                    <%= check_box :participant, "is_faculty" %>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
+            </tr>
+        </tbody>
+    </table>
+  <% end %>
+  <div style="display:flex; justify-content: center; margin-top: 50px">
+    <div  id="column2" class="flex-item">
+      <table class="users-list">
+        <thead>
+          <tr>
+            <td>Email</td>
+            <td>Faculty</td>
+            <td> </td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @participants.each do |participant| %>    
+          <tr>
+            <td><%= participant.email %></td>
+            <td class="users-admin-column"><%= if participant.is_faculty then "x" end %></td>
+            <td style="display: flex; justify-content: end; width: 100%">
+              <%= link_to "Remove", "/programs/#{@program.id}/participants/#{participant.id}", method: :delete %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
