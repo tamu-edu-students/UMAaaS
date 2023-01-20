@@ -1,4 +1,5 @@
 class PortalsController < ApplicationController
+
     helper_method :has_program?,
 
     def has_program?
@@ -7,11 +8,14 @@ class PortalsController < ApplicationController
         return !participant.nil?
     end
 
+
     def index
         @programs = Program.where(disabled: false)
-        
+        print("ON PROGRAM PAGE\n")
+        print("Logged in: ",logged_in?)
         if logged_in?
             #if logged in and the user already has a program selected, then automatically go that program portal
+            print("Portal ID:", current_user.user_program_id)
             program = Program.find current_user.user_program_id unless current_user.user_program_id.nil?
             if(not program.nil?) then
                 redirect_to portal_path(program.id)
@@ -20,12 +24,18 @@ class PortalsController < ApplicationController
     end
     
     def program_select
+        print("RUNNING PROGRAM SELECT")
         program = Program.find params[:program_id]
-        if(program.nil?) then
-            flash[:notice] = "Program not found!"
-        else
+
+        
+        # if(program.nil?) then
+        #     flash[:notice] = "Pogram not found!"
+        # else
+
             if logged_in?
                 #save selected program to the user account so next time they don't have to select it
+                print("Logged in YAY\n")
+                print("ID IS:",current_user.user_program_id)
                 user = User.find current_user.id
                 if(not user.nil?) then
                     user.program_id = program.id
@@ -35,7 +45,7 @@ class PortalsController < ApplicationController
             end
             redirect_to portal_path(program.id)
         end
-    end
+    # end
     
     
     def program_view
