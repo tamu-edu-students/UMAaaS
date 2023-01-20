@@ -23,6 +23,8 @@ class PortalsController < ApplicationController
         # else
             if logged_in?
                 #save selected program to the user account so next time they don't have to select it
+                print("Logged in YAY\n")
+                print("ID IS:",current_user.user_program_id)
                 user = User.find current_user.id
                 if(not user.nil?) then
                     user.program_id = program.id

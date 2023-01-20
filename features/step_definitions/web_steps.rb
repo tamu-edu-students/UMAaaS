@@ -71,10 +71,15 @@ Given('I have a program_id') do
   within("#index-search-box-form")
      select "Greece CSCE Wintermester", from: "program_id"
      click_button "Submit"
+  
 end
 
 
-Then('if I am on the home page') do
+Given /If ^(?:|I )am on (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+
+Then('If I am on the home page') do
   visit root_path
 end
 

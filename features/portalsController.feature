@@ -6,11 +6,11 @@ And I am logged in
 And I have a program_id
 Then I should see "Experiences"
 
-Scenario: Already logged in and have a program
+# Scenario: Already logged in and have a program
 
 Given I am logged in
 And I have a program_id
-Then if I am on the home page
+Then If I am on the home page
 Then I should see "Experiences"
 
 

@@ -3,10 +3,9 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
          if Rails.env.test?
-             
              return true
          end
-        !current_user.id.nil? && current_user.id > 0
+       return !current_user.id.nil? && current_user.id > 0
     end
     
     def current_user
