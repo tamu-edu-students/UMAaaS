@@ -1,4 +1,12 @@
 class PortalsController < ApplicationController
+    helper_method :has_program?,
+
+    def has_program?
+        puts params
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+        return !participant.nil?
+    end
+
     def index
         @programs = Program.where(disabled: false)
         
@@ -14,7 +22,7 @@ class PortalsController < ApplicationController
     def program_select
         program = Program.find params[:program_id]
         if(program.nil?) then
-            flash[:notice] = "Pogram not found!"
+            flash[:notice] = "Program not found!"
         else
             if logged_in?
                 #save selected program to the user account so next time they don't have to select it
@@ -33,7 +41,7 @@ class PortalsController < ApplicationController
     def program_view
         program = Program.find params[:program_id]
         if(program.nil?) then
-            flash[:notice] = "Pogram not found!"
+            flash[:notice] = "Program not found!"
         else
             current_user.user_program_id = program.id
             redirect_to portal_path(program.id)
@@ -42,19 +50,17 @@ class PortalsController < ApplicationController
     
     def view
         #get this specific program
-        puts "HEYYYYY"
         @program = Program.find params[:id]
+
         
         # get list of all programs to display in drop down list for switching between
         @programs = Program.where(disabled: false)
-        puts "HALLO"
         
-        
-        # get the search terms, if the search starts with "tag: ", then only search tags
+        # get the search terms, if the search starts with "#", then only search tags
         searchTerm = nil
         searchTagsOnly = nil
         if not params[:search].blank?
-            match = params[:search].match(/\Atag:\s*([0-9a-z -]+)/i)
+            match = params[:search].match(/\A#\s*([0-9a-z -]+)/i)
             if not match.nil?
                 searchTerm = match[1]
                 searchTagsOnly = true
@@ -130,7 +136,7 @@ class PortalsController < ApplicationController
                 end
             elsif not searchTerm.nil?
                 found = false
-                if((exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i) or (exp.tags =~ /#{searchTerm}/i))
+                if((exp.title =~ /#{searchTerm}/i) or (exp.experience =~ /#{searchTerm}/i) or (exp.yelp_name =~ /#{searchTerm}/i) or (exp.tags =~ /#{searchTerm}/i))
                     found = true
                 end
             end
@@ -167,7 +173,7 @@ class PortalsController < ApplicationController
         
         # for sorting the experiences
         if(params[:sort_exp].nil?) then
-            @experience_sort_by = "rating"
+            @experience_sort_by = "avg_rating"
         else
             @experience_sort_by = params[:sort_exp]
         end

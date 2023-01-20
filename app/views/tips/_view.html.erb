@@ -12,11 +12,11 @@
     </div>
     <div class="portal-tip-helpful">
         helpful?
-        <div class="<%= if current_user.id then "tip-helpful-yes" else "tip-helpful-yes-nologin" end %>
+        <div class="<%= if logged_in? then "tip-helpful-yes" else "tip-helpful-yes-nologin" end %>
             <%= if locals[:tip].hasUserUpvoted == 1 then "voted" end %>" id="tip-upvote-<%= locals[:tip].id %>">
             <%= locals[:tip].upvoteCount %>
         </div>
-        <div class="<%= if current_user.id then "tip-helpful-no" else "tip-helpful-no-nologin" end %>
+        <div class="<%= if logged_in? then "tip-helpful-no" else "tip-helpful-no-nologin" end %>
             <%= if locals[:tip].hasUserDownvoted == 1 then "voted" end %>" id="tip-downvote-<%= locals[:tip].id %>">
             <%= locals[:tip].downvoteCount %>
         </div>
