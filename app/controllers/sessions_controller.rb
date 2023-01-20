@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
     def create
+
         user_info = request.env["omniauth.auth"]
 
         #Allow non tamu emails for testing

@@ -30,6 +30,8 @@ module NavigationHelpers
             
         when /^the singapore\s?page$/
             'p/1'
+        
+        
             
         when /^the singapore\s?search\s?page$/
             'p/1?search=zzzzzz'
