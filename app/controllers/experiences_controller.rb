@@ -244,4 +244,10 @@ class ExperiencesController < ApplicationController
         
         redirect_to experience_path(params[:id])
     end
+    
+    private
+    
+    def experience_params
+        params.require(:experience).permit(:image, :comments, :totalComments, :average_rating )
+    end
 end
