@@ -19,10 +19,13 @@
 					<% end end %>
 			</div>
 			<div class="portal-experience-photo">
-				<% if not locals[:experience].image.nil? and locals[:experience].image.attached? %>
+				<% if locals[:experience].image.attached? %>
 					<%= image_tag locals[:experience].image%>
+					<% else %>
+					<%= image_tag 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/800px-GoldenGateBridge-001.jpg', size: "400x225" %>
 				<%end%>
 			</div>
+			</br>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>

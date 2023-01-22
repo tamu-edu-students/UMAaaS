@@ -12,6 +12,7 @@ class ExperiencesController < ApplicationController
 
     def new
         @experience = Experience.new
+        @experience.image = params[:image]
         program = Program.find params[:id]
         participant = Participant.find_by(email: current_user.email, program_id: program.id)
         if participant.nil?
@@ -23,6 +24,10 @@ class ExperiencesController < ApplicationController
     end
     
     def create
+        @experience = Experience.create(experience_params)
+        if params[:image]
+            @experience.image.attach(params[:image])
+        end
 
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:alert] = "Cannot create experience"
@@ -248,6 +253,6 @@ class ExperiencesController < ApplicationController
     private
     
     def experience_params
-        params.require(:experience).permit(:image, :comments, :totalComments, :average_rating )
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, image: [], image_attachment: [], image_blob: [])
     end
 end
