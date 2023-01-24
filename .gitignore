@@ -43,3 +43,5 @@ yarn-debug.log*
 
 .DS_Store
 reviews/vendor/bundle
+
+/config/credentials/production.key
