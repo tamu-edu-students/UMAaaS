@@ -26,7 +26,6 @@ class PortalsController < ApplicationController
     def program_select
         print("RUNNING PROGRAM SELECT")
         program = Program.find params[:program_id]
-
         
         # if(program.nil?) then
         #     flash[:notice] = "Pogram not found!"
