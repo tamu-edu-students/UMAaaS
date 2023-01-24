@@ -12,7 +12,6 @@ class ExperiencesController < ApplicationController
 
     def new
         @experience = Experience.new
-        @experience.image = params[:image]
         program = Program.find params[:id]
         participant = Participant.find_by(email: current_user.email, program_id: program.id)
         if participant.nil?
@@ -24,11 +23,6 @@ class ExperiencesController < ApplicationController
     end
     
     def create
-        @experience = Experience.create(experience_params)
-        if params[:image]
-            @experience.image.attach(params[:image])
-        end
-
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
@@ -40,9 +34,13 @@ class ExperiencesController < ApplicationController
             tag = tag.strip.upcase
             tagArrayFixed += tag + ","
         end
-
         
         newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        
+        if params[:image]
+            newExperience.image.attach(params[:image])
+        end
+        
         puts "PARAMS TIME"
         puts params[:experience][:title]
 
@@ -253,6 +251,6 @@ class ExperiencesController < ApplicationController
     private
     
     def experience_params
-        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, image: [], image_attachment: [], image_blob: [])
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :image)
     end
 end

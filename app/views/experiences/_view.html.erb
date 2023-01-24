@@ -20,7 +20,7 @@
 			</div>
 			<div class="portal-experience-photo">
 				<% if locals[:experience].image.attached? %>
-					<%= image_tag locals[:experience].image%>
+					<%= image_tag locals[:experience].image, style: "width: 400px; height: auto;" %>
 					<% else %>
 					<%= image_tag 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/800px-GoldenGateBridge-001.jpg', size: "400x225" %>
 				<%end%>
