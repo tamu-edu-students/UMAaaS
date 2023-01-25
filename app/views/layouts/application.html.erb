@@ -20,14 +20,12 @@
             <!-- Change this -->
               <div class="nav-actions">
                 <ul class="navigation">
-                    
                   <%if logged_in?%>
                     <%if current_user.admin%>
                       <li><a href="" title="Admin">Admin</a>
                       <ul>
                         <li><%=link_to "Users", users_path(), :id => "users" %></li>
                         <li><%=link_to "Programs", programs_path(), :id => "programs" %></li>
-                        <li><%=link_to "Add Participants", new_program_participant_path(@program.id) %></li>
                       </ul>
                       </li>
                     <%end%>
