@@ -361,3 +361,31 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 =end
+
+Given('I am logged_in') do
+  # Create a user and log them in
+  @user = FactoryBot.create(:user)
+  login_as(@user)
+end
+
+Given('I see an Experience') do
+  # Create an experience and visit the show page
+  @experience = FactoryBot.create(:experience)
+  visit experience_path(@experience)
+end
+
+Given('Experience has a comment') do
+  # Create a comment for the experience
+  create(:comment, experience: @experience)
+end
+
+Given('I am not logged_in') do
+  # Log out the user
+  devise.logout(:user)
+end
+
+Then('I should not see class {string}') do |string|
+  # Expect that the class is not present on the page
+  expect(page).to_not have_css(string)
+end
+

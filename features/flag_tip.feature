@@ -4,14 +4,18 @@ Feature: Flag a comment or a tip or a post
     I want to be able to report comments or tips or posts
     
 Scenario: Flag button is displayed for authenticated users
-    Given I am on the portal page
+    Given I am on the singapore page
     And I am logged_in
-    Then I should see the "Flag" button
+    And I see an Experience
+    And Experience has a comment
+    Then I should see class "flag"
 
 Scenario: Flag button is not displayed for unauthenticated users
-    Given I am on the post/tip/comment page
+    Given I am on the singapore page
     And I am not logged_in
-    Then the "Flag" button should be disabled
+    And I see an Experience
+    And Experience has a comment
+    Then I should not see class "flag"
 
 Scenario: Test flagging comment
     Given I see an Experience
