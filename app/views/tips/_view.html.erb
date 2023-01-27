@@ -21,4 +21,11 @@
             <%= locals[:tip].downvoteCount %>
         </div>
     </div>
+    <div class="portal-tip-flag">
+        report
+        <div class="<%= if current_user.id then "tip-flagged-yes" else "tip-flagged-yes-nologin" end %>
+            <%= if locals[:tip].hasUserFlagged == 1 then "flagged" end %>" id="tip-flag-<%= locals[:tip].id %>">
+            <%= locals[:tip].flagCount %>
+        </div>
+    </div>
 </div>

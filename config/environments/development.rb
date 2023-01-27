@@ -1,5 +1,6 @@
 Rails.application.configure do
-  config.hosts << ENV["AWS_HOST"]
+  config.hosts << "729b63db7a1b45c5a39fcac26b25f135.vfs.cloud9.ap-southeast-1.amazonaws.com"
+  #config.hosts << ENV["AWS_HOST"]
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

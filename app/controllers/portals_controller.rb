@@ -44,7 +44,7 @@ class PortalsController < ApplicationController
                 end
             end
             redirect_to portal_path(program.id)
-        end
+    end
     # end
     
     
@@ -108,6 +108,12 @@ class PortalsController < ApplicationController
                 end 
                 tip.downvoteCount = downvote_sum
                 
+                flag_sum = FlagTip.left_outer_joins(:user).where(tip_id: tip.id).where(users: {banned: false}).where(flag: 1).group(:tip_id).count(:flag).values[0]
+                if flag_sum.blank? 
+                    flag_sum = 0
+                end                 
+                tip.flagCount = flag_sum
+                
                 tip.hasUserUpvoted = 0
                 tip.hasUserDownvoted = 0
                 helpful = HelpfulVote.select("vote").where(tip_id: tip.id).where(user_id: current_user.id).first
@@ -116,6 +122,14 @@ class PortalsController < ApplicationController
                         tip.hasUserUpvoted = 1
                     elsif helpful.vote == -1
                         tip.hasUserDownvoted = 1
+                    end
+                end
+                
+                tip.hasUserFlagged = 0
+                flagged = FlagTip.select("flag").where(tip_id: tip.id).where(user_id: current_user.id).first
+                if not flagged.nil?
+                    if flagged.flag == 1
+                        tip.hasUserFlagged = 1
                     end
                 end
                 

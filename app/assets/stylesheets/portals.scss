@@ -274,7 +274,7 @@ a {
     font-size: 13px;
     color: #bbbbbb;
 }
-.portal-tip-helpful, .portal-experience-rating{
+.portal-tip-helpful, .portal-experience-rating, .portal-tip-flag{
     position: absolute;
     line-height: 16px;
     bottom: 0;
@@ -283,7 +283,7 @@ a {
     color: #999;
 }
 
-.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no{
+.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no, .portal-tip-flag, .tip-flagged-yes{
     display: inline-block;
     height: 16px;
     cursor: pointer;
@@ -293,7 +293,7 @@ a {
     color: #666;
 }
 
-.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin{
+.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin, .portal-tip-flag, .tip-flagged-yes-nologin{
     display: inline-block;
     height: 16px;
     padding-left: 20px;
@@ -302,6 +302,18 @@ a {
     color: #666;
 }
 
+
+.portal-tip-flag .tip-flagged-yes, .portal-tip-flag .tip-flagged-yes-nologin{
+    background-image: url(asset_path("flag_off.png"));
+    //background-position-y: 0%;
+}
+.portal-tip-flag .tip-flagged-yes:hover{
+    background-image: url(asset_path("flag_on.png"));
+    //background-position-y: 100%;
+}
+.portal-tip-flag .flagged{
+    background-position-y: 100%;
+}
 
 
 .portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-yes-nologin{

@@ -120,6 +120,37 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     }    
   });
   
+      // and flag on a tip
+    $(document).off('click', '.tip-helpful-yes').on('click', '.tip-helpful-yes', function(){
+    
+      var idParts = this.id.split("-");
+      var tipId = idParts[2];
+      
+      if($(this).hasClass("flagged")){
+        $.ajax({
+          type: "POST", 
+          url: "/tip/flagged",
+          data: {tipId: tipId, flag: 0}, //0 means no flag 
+          dataType: "script",
+          success: function(data, textStatus, jqXHR){
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+          }
+        });
+      }else{
+        $.ajax({
+          type: "POST", 
+          url: "/tip/flagged",
+          data: {tipId: tipId, flag: 1},
+          dataType: "script",
+          success: function(data, textStatus, jqXHR){
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+          }
+        });
+      }
+    });
+  
   
   // delete an entire experience
   $(document).off('click', '.portal-experience-delete').on('click', '.portal-experience-delete', function(){

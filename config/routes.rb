@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post 'experience/:id/comment', to: 'experiences#create_comment'
   post 'experience/yelp_search', to: 'experiences#yelp_search'
   post 'tip/helpful', to: 'tips#helpful'
+  post 'tip/flagged', to: 'tips#flagged'
   delete 'experience/:id/delete', to: 'experiences#delete'
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
   delete 'tip/:id/delete', to: 'tips#delete'
