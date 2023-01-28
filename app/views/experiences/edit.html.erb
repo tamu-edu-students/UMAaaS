@@ -12,6 +12,10 @@
                 <td><%= text_area :experience, :experience, :required => true %><div class="experience-edit-field-tips">&nbsp;</div></td>
             </tr>
             <tr>
+                <td class="experience-edit-label">Image:</td>
+                <td><%= file_field_tag :image, class: "form-control" %>
+            </tr>
+            <tr>
                 <td class="experience-edit-label">Rating:</td>
                 <td><fieldset class="rating">
                       <%= radio_button :experience, :rating, "5", :required => true %> <%= label(:experience, :rating.to_s + "_5" ) %> 
