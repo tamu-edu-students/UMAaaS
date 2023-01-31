@@ -18,7 +18,22 @@ class UsersController < ApplicationController
         @users = User.left_outer_joins(:program).select("users.*,programs.name as program_name").all
       end
       
-      if params[:b] != "true" then
+      if not params[:search].nil? then
+        searchResults =  Array.new
+        print("------s-")
+        search_term = params[:search]
+        print("Search TErm is ", search_term)
+        @users.each do |user|
+          print("Looping",user[:name])
+        full_name = "#{user[:name]}"
+        if full_name =~ /#{search_term}/i
+          puts "Found match: #{full_name}"
+          searchResults << user
+        end
+        end
+        @users = searchResults
+      
+      elsif params[:b] != "true" then
         @users = @users.where(banned: false)
       end
       
@@ -32,6 +47,7 @@ class UsersController < ApplicationController
         @programs = Program.all
   end
   
+ 
   def update
     @user = User.find params[:id]
     if(params[:program_id].to_i > 0) then
@@ -46,6 +62,10 @@ class UsersController < ApplicationController
   end
   
   def destroy
+  end
+  
+  def view
+  print("__________________________")
   end
   
   #promote user to admin

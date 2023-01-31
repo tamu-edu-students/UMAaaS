@@ -19,6 +19,17 @@
  </table>
  <div id="users-show-banned"><input type="checkbox" id="users-filter-show-banned" name="showBanned" <%= if @showBanned then "checked" end %>> <label for="users-filter-show-banned">Show Banned Users</label></div></div>
  <div id="column2" class="flex-item"><table class="users-list">
+     <div id="search-wrapper">
+         <div class="search-border-outer">
+             <div class="search-border-inner">
+                  <%= form_tag users_path(), :method => :get, :id => "search-form" do %>
+                     <input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>">
+                     <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>">
+                  <% end %>
+        </div>
+      </div>
+     </div>
+
     <thead>
         <tr>
             <td>Name</td>

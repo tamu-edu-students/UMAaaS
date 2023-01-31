@@ -59,6 +59,7 @@ class PortalsController < ApplicationController
     
     def view
         #get this specific program
+     
         @program = Program.find params[:id]
 
         
