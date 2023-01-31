@@ -14,4 +14,4 @@
 Program.create!(:name => "Singapore CSCE Wintermester", :region => "Asia")
 Program.create!(:name => "Greece CSCE Wintermester", :region => "Europe")
 
-User.create!(:admin => false,:program_id => nil,:id => 4, :img => nil)
+User.create!(:admin => false,:program_id => nil,:id => 5, :img => nil, :name => "Arkaprabho Bose", :email => "abose0267@tamu.edu")
