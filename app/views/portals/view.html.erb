@@ -1,3 +1,4 @@
+
 <div id="portal-switch-programs"><%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select id="program_id"name="program_id"><option value=0 disabled selected>--View Another Program--</option>
                 <% @programs.each do |program| %>
                     <% if program.id != @program.id then %>
@@ -6,7 +7,21 @@
                 <% end %>
             </select><% end %></div>
 <div id="page-header"> <%= @program.name %> </div>
-<div id="search-wrapper"><div class="search-border-outer"><div class="search-border-inner"><%= form_tag portal_path(), :method => :get, :id => "search-form" do %><input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>"><input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %></div></div></div>
+
+<div id="search-wrapper">
+    <div class="search-border-outer">
+        <div class="search-border-inner">
+            <%= form_tag portal_path(), :method => :get, :id => "search-form" do %>
+            <input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>">
+            <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %>
+        </div>
+    </div>
+   <% if current_user.admin then %> 
+        <div style="" class="header-button">
+            <%= link_to "Add Participants", new_program_participant_path(@program.id) %>
+        </div>
+    <% end %>
+</div>
 
 <!--This block theoretically can has the potential to update the search results everytime it detects a keystroke. However, this is not possible given the current way the search was written since Javascript cannot directly call on a Ruby function so I will leave this for future teams to figure out-->
 <!--<%= javascript_tag do %>-->
