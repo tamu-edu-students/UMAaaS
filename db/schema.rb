@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2023_01_11_025600) do
   create_table "flag_tips", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "tip_id", null: false
+    t.integer "flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tip_id"], name: "index_flag_tips_on_tip_id"

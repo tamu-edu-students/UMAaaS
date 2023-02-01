@@ -2,6 +2,13 @@
     <%if current_user.admin || locals[:tip].user_id == current_user.id %>
         <div class="portal-tip-delete" id="portal-tip-delete-<%= locals[:tip].id %>">&#10006; </div>
     <% end %>
+    <div class="portal-tip-flag">
+        report
+        <div class="<%= if current_user.id then "tip-flagged-yes" else "tip-flagged-yes-nologin" end %>
+            <%= if locals[:tip].hasUserFlagged == 1 then "flagged" end %>" id="tip-flag-<%= locals[:tip].id %>">
+            <%= locals[:tip].flagCount %>
+        </div>
+    </div>
     <div class="portal-tip-info">
         <span class="portal-tip-info-user">
             <%= locals[:tip].user_name %>
@@ -10,22 +17,17 @@
             <%= locals[:tip].created_at.strftime("%b %-d, '%y") %>
         </span>
     </div>
-    <div class="portal-tip-helpful">
-        helpful?
-        <div class="<%= if current_user.id then "tip-helpful-yes" else "tip-helpful-yes-nologin" end %>
-            <%= if locals[:tip].hasUserUpvoted == 1 then "voted" end %>" id="tip-upvote-<%= locals[:tip].id %>">
-            <%= locals[:tip].upvoteCount %>
-        </div>
-        <div class="<%= if current_user.id then "tip-helpful-no" else "tip-helpful-no-nologin" end %>
-            <%= if locals[:tip].hasUserDownvoted == 1 then "voted" end %>" id="tip-downvote-<%= locals[:tip].id %>">
-            <%= locals[:tip].downvoteCount %>
-        </div>
-    </div>
-    <div class="portal-tip-flag">
-        report
-        <div class="<%= if current_user.id then "tip-flagged-yes" else "tip-flagged-yes-nologin" end %>
-            <%= if locals[:tip].hasUserFlagged == 1 then "flagged" end %>" id="tip-flag-<%= locals[:tip].id %>">
-            <%= locals[:tip].flagCount %>
+    <div>
+        <div class="portal-tip-helpful">
+            helpful?
+            <div class="<%= if current_user.id then "tip-helpful-yes" else "tip-helpful-yes-nologin" end %>
+                <%= if locals[:tip].hasUserUpvoted == 1 then "voted" end %>" id="tip-upvote-<%= locals[:tip].id %>">
+                <%= locals[:tip].upvoteCount %>
+            </div>
+            <div class="<%= if current_user.id then "tip-helpful-no" else "tip-helpful-no-nologin" end %>
+                <%= if locals[:tip].hasUserDownvoted == 1 then "voted" end %>" id="tip-downvote-<%= locals[:tip].id %>">
+                <%= locals[:tip].downvoteCount %>
+            </div>
         </div>
     </div>
 </div>
