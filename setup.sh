@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Installing Yarn with npm..."
 npm install -g yarn
 if [ $? -eq 0 ]; then
@@ -53,26 +54,14 @@ else
   exit 1
 fi
 
-echo "Installing PostgreSQL and its dependencies with apt-get..."
-sudo apt-get install postgresql postgresql-client libpq5 libpq-dev
+echo "Installing SQLite3 and its dependencies with apt-get..."
+sudo apt-get install sqlite3 libsqlite3-dev
 if [ $? -eq 0 ]; then
-  echo "PostgreSQL and its dependencies installed successfully!"
+  echo "SQLite3 and its dependencies installed successfully!"
 else
-  echo "Failed to install PostgreSQL and its dependencies."
+  echo "Failed to install SQLite3 and its dependencies."
   exit 1
 fi
-
-echo "Cloning UMAaaS repository from GitHub..."
-git clone https://github.com/tamu-edu-students/UMAaaS.git
-if [ $? -eq 0 ]; then
-  echo "UMAaaS repository cloned successfully!"
-else
-  echo "Failed to clone UMAaaS repository."
-  exit 1
-fi
-
-echo "Changing directory to UMAaaS..."
-cd UMAaaS
 
 echo "Installing Bundler with gem..."
 gem install bundler
@@ -110,11 +99,17 @@ else
   exit 1
 fi
 
-echo "Starting Rails server with rails server..."
+# Start the Rails server
+rails server &
+
+# Extract the link
+AWS_HOST=$(grep -o "https://.*vfs.*amazonaws.com/" <<< $(jobs -l))
+
+# Write the link to the .env file
+echo "AWS_HOST=$AWS_HOST" >> .env
+
+# Stop the Rails server
+kill $!
+
+
 rails server
-if [ $? -eq 0 ]; then
-  echo "Rails server started successfully!"
-else
-  echo "Failed to start Rails server."
-  exit 1
-fi
