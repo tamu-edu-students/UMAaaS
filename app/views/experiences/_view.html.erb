@@ -2,14 +2,14 @@
      <div class="portal-experience">
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
-				<% if current_user.admin %>	
 					<div class="portal-experience-icons">
-						<!--<p class="portal-experience-icon">Flag</p>-->
-					    <div>
-					    	<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
-					    </div>
-					</div>
+				<% if current_user.admin %>	
+						<p class="portal-experience-icon">Flag</p>
 				<% end %>
+					<div>
+						<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
+					</div>
+					</div>
 			</div>
 			<div class="portal-experience-tags">
 				<% if not locals[:experience].tagArray.nil? then locals[:experience].tagArray.each do |tag| %>
