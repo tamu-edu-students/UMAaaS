@@ -44,6 +44,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :test do
   gem 'rack_session_access'
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do

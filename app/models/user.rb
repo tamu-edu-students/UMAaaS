@@ -3,7 +3,7 @@ class User < ApplicationRecord
     has_many :tips
     has_many :experiences
     has_many :experience_comments
-    has_many :tips, through: :helpful_votes
+    has_many :helpful_votes, through: :tips
     
     attr_accessor :img
     attr_accessor :user_program_id
