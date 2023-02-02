@@ -121,12 +121,13 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
   });
   
       // and flag on a tip
-    $(document).off('click', '.tip-helpful-yes').on('click', '.tip-helpful-yes', function(){
+    $(document).off('click', '.tip-flagged-yes').on('click', '.tip-flagged-yes', function(){
     
       var idParts = this.id.split("-");
       var tipId = idParts[2];
       
       if($(this).hasClass("flagged")){
+        console.log("marking flag as not flagged")
         $.ajax({
           type: "POST", 
           url: "/tip/flagged",
@@ -138,6 +139,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           }
         });
       }else{
+        console.log("marking flag as flagged")
         $.ajax({
           type: "POST", 
           url: "/tip/flagged",

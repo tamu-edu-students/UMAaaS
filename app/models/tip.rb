@@ -6,7 +6,6 @@ class Tip < ApplicationRecord
     
     attr_accessor :hasUserFlagged
     attr_accessor :flagCount
-    
     attr_accessor :hasUserUpvoted
     attr_accessor :hasUserDownvoted
     attr_accessor :upvoteCount

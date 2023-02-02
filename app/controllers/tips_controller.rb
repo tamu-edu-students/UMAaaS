@@ -17,16 +17,21 @@ class TipsController < ApplicationController
     def flagged
         if(params[:flag] == "0")
             
+            puts "destroying flag"
             FlagTip.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
             
         else 
             
-            FlagTip.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
-            FlagTip.create(:flag => params[:vote], :user_id => current_user.id, :tip_id => params[:tipId])
+            puts "params of flag" + params[:flag].to_s
+            # FlagTip.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
+            FlagTip.create(:flag => params[:flag], :user_id => current_user.id, :tip_id => params[:tipId])
             
         end
         
         @tip = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {id: params[:tipId]}).first
+        
+        str = "number of tips: " 
+        puts str + @tips.to_s 
 
 
         flag_sum = FlagTip.left_outer_joins(:user).where(tip_id: @tip.id).where(users: {banned: false}).where(flag: 1).group(:tip_id).count(:flag).values[0]
