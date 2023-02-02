@@ -1,4 +1,4 @@
-<div id="page-header">New Participant</div>
+<div id="page-header">New Participant for: <br /> <%= @program.name %></div>
 <div id="flex-container">
     <div id="column1" class="flex-item"></div>
   <div id="column2" class="flex-item"><%= form_tag program_participants_path, :method => :post do %>
