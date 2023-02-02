@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
     it { should respond_to(:user_program_id) }
   end
 
-  describe "validations" do
-    # i am not sure if we have anything to validate yet
-  end
+ 
 end
+
+#COMMENT !!!!!!!! 
