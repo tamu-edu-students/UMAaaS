@@ -26,7 +26,6 @@ class PortalsController < ApplicationController
     def program_select
         print("RUNNING PROGRAM SELECT")
         program = Program.find params[:program_id]
-
         
         # if(program.nil?) then
         #     flash[:notice] = "Pogram not found!"
@@ -44,7 +43,11 @@ class PortalsController < ApplicationController
                 end
             end
             redirect_to portal_path(program.id)
+<<<<<<< HEAD
     end
+=======
+        end
+>>>>>>> origin
     # end
     
     

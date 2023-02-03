@@ -35,9 +35,13 @@ class ExperiencesController < ApplicationController
             tag = tag.strip.upcase
             tagArrayFixed += tag + ","
         end
-
         
         newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        
+        if params[:image]
+            newExperience.image.attach(params[:image])
+        end
+        
         puts "PARAMS TIME"
         puts params[:experience][:title]
 
@@ -243,5 +247,11 @@ class ExperiencesController < ApplicationController
         
         
         redirect_to experience_path(params[:id])
+    end
+    
+    private
+    
+    def experience_params
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :image)
     end
 end

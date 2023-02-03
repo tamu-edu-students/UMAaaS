@@ -1,9 +1,32 @@
 class TipsController < ApplicationController
+    # before_action :checkPrivilege
+    
+    # def checkPrivilege
+    #     puts params
+    #     participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+    #     if participant.nil?
+    #         flash[:alert] = "You are not authorized to manage tips for this program"
+    #         redirect_to portal_path(params[:id]) and return 
+    #     end
+    # end
+
     def new
         @tip = Tip.new
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+        if participant.nil?
+            flash[:alert] = "You are not authorized to manage tips for this program"
+            redirect_to portal_path(params[:id]) and return 
+        end
     end
     
     def create
+
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+        if participant.nil?
+            flash[:alert] = "You are not authorized to manage tips for this program"
+            redirect_to portal_path(params[:id]) and return 
+        end
+        
         if(params[:tip][:tip].blank?) # tip text is required
             flash[:alert] = "Cannot create tip"
             redirect_to portal_path(params[:id]) and return
@@ -58,6 +81,15 @@ class TipsController < ApplicationController
     
     
     def helpful
+
+        @tip = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {id: params[:tipId]}).first
+        
+        participant = Participant.find_by(email: current_user.email, program_id: @tip.program_id)
+        if participant.nil?
+            flash[:alert] = "You are not authorized to manage tips for this program"
+            redirect_to portal_path(@tip.program_id) and return 
+        end
+
         if(params[:vote] == "0")
             
             HelpfulVote.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
@@ -69,7 +101,6 @@ class TipsController < ApplicationController
             
         end
         
-        @tip = Tip.left_outer_joins(:user).select("tips.*,users.name as user_name").where(tips: {id: params[:tipId]}).first
 
 
         upvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: @tip.id).where(users: {banned: false}).where(vote: 1).group(:tip_id).count(:vote).values[0]
