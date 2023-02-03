@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_11_025600) do
+ActiveRecord::Schema.define(version: 2023_01_11_025552) do
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2023_01_11_025600) do
   create_table "flag_comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "comment_id", null: false
+    t.integer "flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["comment_id"], name: "index_flag_comments_on_comment_id"
@@ -48,20 +49,11 @@ ActiveRecord::Schema.define(version: 2023_01_11_025600) do
   create_table "flag_experiences", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "experience_id", null: false
+    t.integer "flag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["experience_id"], name: "index_flag_experiences_on_experience_id"
     t.index ["user_id"], name: "index_flag_experiences_on_user_id"
-  end
-
-  create_table "flag_tips", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "tip_id", null: false
-    t.integer "flag"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["tip_id"], name: "index_flag_tips_on_tip_id"
-    t.index ["user_id"], name: "index_flag_tips_on_user_id"
   end
 
   create_table "helpful_votes", force: :cascade do |t|
@@ -150,8 +142,6 @@ ActiveRecord::Schema.define(version: 2023_01_11_025600) do
   add_foreign_key "flag_comments", "users"
   add_foreign_key "flag_experiences", "experiences"
   add_foreign_key "flag_experiences", "users"
-  add_foreign_key "flag_tips", "tips"
-  add_foreign_key "flag_tips", "users"
   add_foreign_key "helpful_votes", "tips"
   add_foreign_key "helpful_votes", "users"
   add_foreign_key "participants", "programs"
