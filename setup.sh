@@ -1,115 +1,128 @@
 #!/bin/bash
 
-echo "Installing Yarn with npm..."
+if [ -z "$C9_HOSTNAME" ]; then
+    read -p "WARNING: This project was designed to run through an Amazon Cloud9 Environment. Some aspects of the development server may not be fully fuctional otherwise. Are you sure you want to continue? [y/N]: " answer
+    answer=${answer,,} # convert the answer to lowercase
+    if [ "$answer" != "y" ]; then
+        echo "Exiting."
+        exit 1
+    fi
+fi
+
+echo -e "\033[32mInstalling Yarn with npm...\033[0m"
 npm install -g yarn
 if [ $? -eq 0 ]; then
-  echo "Yarn installed successfully!"
+  echo -e "\033[32mYarn installed successfully!\033[0m"
 else
-  echo "Failed to install Yarn."
+  echo -e "\033[31mFailed to install Yarn.\033[0m"
   exit 1
 fi
 
-echo "Installing Ruby 3.1.3 with RVM or rbenv..."
-if [ -x "$(command -v rvm)" ]; then
-  rvm install ruby-3.1.3
+# Load RVM environment
+source "$HOME/.rvm/scripts/rvm"
+
+echo -e "\033[32mInstalling Ruby 3.1.3 with RVM...\033[0m"
+rvm install ruby-3.1.3
+if [ $? -eq 0 ]; then
+  echo -e "\033[32mRuby 3.1.3 installed successfully with RVM!\033[0m"
+  rvm use ruby-3.1.3 --default
   if [ $? -eq 0 ]; then
-    echo "Ruby 3.1.3 installed successfully with RVM!"
-    rvm use ruby-3.1.3 --default
-    if [ $? -eq 0 ]; then
-      echo "Using Ruby 3.1.3 as the default with RVM."
-    else
-      echo "Failed to set Ruby 3.1.3 as default with RVM."
-      exit 1
-    fi
+    echo -e "\033[32mUsing Ruby 3.1.3 as the default with RVM.\033[0m"
   else
-    echo "Failed to install Ruby 3.1.3 with RVM."
-    exit 1
-  fi
-elif [ -x "$(command -v rbenv)" ]; then
-  rbenv install 3.1.3
-  if [ $? -eq 0 ]; then
-    echo "Ruby 3.1.3 installed successfully with rbenv!"
-    rbenv global 3.1.3
-    if [ $? -eq 0 ]; then
-      echo "Using Ruby 3.1.3 as the default with rbenv."
-    else
-      echo "Failed to set Ruby 3.1.3 as default with rbenv."
-      exit 1
-    fi
-  else
-    echo "Failed to install Ruby 3.1.3 with rbenv."
+    echo -e "\033[31mFailed to set Ruby 3.1.3 as default with RVM.\033[0m"
     exit 1
   fi
 else
-  echo "Neither RVM nor rbenv is installed. Exiting..."
+  echo -e "\033[31mFailed to install Ruby 3.1.3 with RVM.\033[0m"
   exit 1
 fi
 
-echo "Installing Rails with gem..."
+echo -e "\033[32mSetting environment to development...\033[0m"
+
+export RAILS_ENV=development
+echo $RAILS_ENV
+
+echo -e "\033[32mInstalling Rails with gem...\033[0m"
 gem install rails
 if [ $? -eq 0 ]; then
-  echo "Rails installed successfully!"
+  echo -e "\033[32mRails installed successfully!\033[0m"
 else
-  echo "Failed to install Rails."
+  echo -e "\033[31mFailed to install Rails.\033[0m"
   exit 1
 fi
 
-echo "Installing SQLite3 and its dependencies with apt-get..."
+echo -e "\033[32mInstalling SQLite3 and its dependencies with apt-get...\033[0m"
 sudo apt-get install sqlite3 libsqlite3-dev
 if [ $? -eq 0 ]; then
-  echo "SQLite3 and its dependencies installed successfully!"
+  echo -e "\033[32mSQLite3 and its dependencies installed successfully!\033[0m"
 else
-  echo "Failed to install SQLite3 and its dependencies."
+  echo -e "\033[31mFailed to install SQLite3 and its dependencies.\033[0m"
   exit 1
 fi
 
-echo "Installing Bundler with gem..."
+echo -e "\033[32mInstalling Bundler with gem...\033[0m"
 gem install bundler
 if [ $? -eq 0 ]; then
-  echo "Bundler installed successfully!"
+  echo -e "\033[32mBundler installed successfully!\033[0m"
 else
-  echo "Failed to install Bundler."
+  echo -e "\033[31mFailed to install Bundler.\033[0m"
   exit 1
 fi
 
-echo "Installing gems with bundle install..."
+echo -e "\033[32mInstalling gems with bundle install...\033[0m"
 bundle install
 if [ $? -eq 0 ]; then
-  echo "Gems installed successfully with bundle install!"
+  echo -e "\033[32mGems installed successfully with bundle install!\033[0m"
 else
-  echo "Failed to install gems with bundle install."
+  echo -e "\033[31mFailed to install gems with bundle install.\033[0m"
   exit 1
 fi
 
-echo "Installing Yarn packages with yarn install..."
+echo -e "\033[32mInstalling Yarn packages with yarn install...\033[0m"
 yarn install
 if [ $? -eq 0 ]; then
-  echo "Yarn packages installed successfully!"
+  echo -e "\033[32mYarn packages installed successfully!\033[0m"
 else
-  echo "Failed to install Yarn packages."
+  echo -e "\033[31mFailed to install Yarn packages.\033[0m"
   exit 1
 fi
 
-echo "Running rails db:migrate..."
+echo -e "\033[32mRunning rails db:migrate...\033[0m"
 rails db:migrate
 if [ $? -eq 0 ]; then
-  echo "Rails database migrated successfully!"
+  echo -e "\033[32mRails database migrated successfully!\033[0m"
 else
-  echo "Failed to migrate Rails database."
+  echo -e "\033[31mFailed to migrate Rails database.\033[0m"
   exit 1
 fi
 
-# Start the Rails server
+echo -e "\033[1;33mThe Rails server is about to run in order to get the port forwarded URL."
+echo -e "Please copy paste the link from the popup that appears on top right"
+echo -e "Then wait for the prompt and paste it with CTRL-V into the shell."
+echo -e "If you understood, press any key to continue...\033[0m"
+
+# Start the Rails server in the background
 rails server &
+# Get the PID of the rails server process
+pid=$!
 
-# Extract the link
-AWS_HOST=$(grep -o "https://.*vfs.*amazonaws.com/" <<< $(jobs -l))
+sleep 5
 
-# Write the link to the .env file
-echo "AWS_HOST=$AWS_HOST" >> .env
+# Prompt the user for the host URL
+echo -n "Enter the host URL: "
+read host_url
 
-# Stop the Rails server
-kill $!
+# Remove the trailing "/" from the host URL if it exists
+host_url=${host_url%/}
 
+# Remove the "https://" from the host URL if it exists
+host_url=${host_url#https://}
 
+# Write the host URL to the .env file
+echo "AWS_HOST=$host_url" >> .env
+
+# Kill the rails server
+kill $pid
+
+# Restart the Rails server
 rails server
