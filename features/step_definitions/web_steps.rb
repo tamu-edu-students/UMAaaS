@@ -24,6 +24,11 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 
+require 'capybara/rspec'
+require 'rack_session_access'
+require 'rack_session_access/capybara'
+
+
 =begin
 module WithinHelpers
   def with_scope(locator)
@@ -49,6 +54,33 @@ end
 
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
+end
+
+And /^(?:|I )am logged in/ do
+    # page.set_rack_session(:user_id => "4")
+    # page.set_rack_session(:user_admin => false)
+    # page.set_rack_session(:user_program_id => 1 )
+     visit root_path
+end
+
+# When('I click on the selector and choose a program') do
+# print("Hello")
+# end
+
+Given('I have a program_id') do
+  within("#index-search-box-form")
+     select "Greece CSCE Wintermester", from: "program_id"
+     click_button "Submit"
+  
+end
+
+
+Given /If ^(?:|I )am on (.+)$/ do |page_name|
+  visit path_to(page_name)
+end
+
+Then('If I am on the home page') do
+  visit root_path
 end
 
 

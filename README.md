@@ -75,8 +75,8 @@ https://tripagvisor.herokuapp.com/auth/google_oauth2/callback
 - Create a .env file in the root directory. This ensures that your secrets are not exposed. Try not to commit this :)\
 Insert the following:
 ```
-GOOGLE_CLIENT_ID=[INSERT GOOGLE CLIENT ID HERE (NO QUOTES)]
-GOOGLE_CLIENT_SECRET=[INSERT GOOGLE CLIENT SECRET HERE (NO QUOTES)]
+GOOGLE_CLIENT_ID=INSERT GOOGLE CLIENT ID HERE
+GOOGLE_CLIENT_SECRET=INSERT GOOGLE CLIENT SECRET HERE
 ```
 
 Your app should be up and running after this. Apologies for any technical atrocities you may encounter and good luck! 

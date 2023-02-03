@@ -1,6 +1,6 @@
 <div id="page-header">Share Your Experience</div>
 <div id="flex-container">
- <div id="column2" class="flex-item"><%= form_tag experiences_path, :method => :post do %>
+ <div id="column2" class="flex-item"><%= form_tag experiences_path, :method => :post, enctype: "multipart/form-data" do %>
     <table class="experience-edit-table">
         <tbody>
             <tr>
@@ -10,6 +10,10 @@
             <tr>
                 <td class="experience-edit-label">Experience:</td>
                 <td><%= text_area :experience, :experience, :required => true%><div class="experience-edit-field-tips">&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td class="experience-edit-label">Image:</td>
+                <td><%= file_field_tag :image, class: "form-control" %>
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>

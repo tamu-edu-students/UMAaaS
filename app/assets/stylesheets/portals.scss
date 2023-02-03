@@ -40,7 +40,6 @@ a {
     width: 250px;
 }
 
-
 #column1{
 	order: 1;
 	flex-grow: 1;
@@ -69,12 +68,22 @@ a {
 }
 
 #search-wrapper{
-    margin-top: -25px;
-    text-align: center;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 150px;
+    padding-right: 150px;
 }
+
+.third { 
+    max-width: 33%;
+}
+
 .search-border-outer{
     border: 2px solid #000;
     display: inline-block;
+    flex-shrink: 0;
     border-radius: 3px;
 }
 .search-border-inner{
@@ -185,6 +194,12 @@ a {
     color: black;
 }
 
+.portal-experience-photo {
+    display: flex;
+    padding: 1 rem;
+}
+
+
 .portal-experience-tags {
     display: flex;
     gap: 8px;
@@ -214,6 +229,7 @@ a {
 
 .portal-experience-icons {
     display: flex;
+    align-items: center;
     gap: 12px;
 }
 
@@ -230,11 +246,15 @@ a {
     cursor: pointer;
 }
 
+.hidden-submit {
+    height:0px;
+    width:0px;
+    opacity:0;
+}
+
 .portal-experience-delete{
-    position: absolute;
-    top: -17px;
-    right: -22px;
     background: #f00;
+    margin-top: 5px;
     color: #fff;
     padding: 0 5px;
     box-shadow: 1px 3px 3px #ccc;
@@ -654,6 +674,13 @@ a {
     #flex-container{
         flex-direction: column;
         align-items: stretch;
+    }
+
+    #search-wrapper {
+        flex-direction: column;
+        gap: 25px;
+        padding-left: 0;
+        padding-right: 0;
     }
   
     #column1{
