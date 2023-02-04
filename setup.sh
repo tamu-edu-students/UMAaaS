@@ -18,24 +18,38 @@ else
   exit 1
 fi
 
-# Load RVM environment
-source "$HOME/.rvm/scripts/rvm"
-
-echo -e "\033[32mInstalling Ruby 3.1.3 with RVM...\033[0m"
-rvm install ruby-3.1.3
-if [ $? -eq 0 ]; then
-  echo -e "\033[32mRuby 3.1.3 installed successfully with RVM!\033[0m"
-  rvm use ruby-3.1.3 --default
-  if [ $? -eq 0 ]; then
-    echo -e "\033[32mUsing Ruby 3.1.3 as the default with RVM.\033[0m"
+# Load use Ruby 3.1.3 with either RVM or RBENV
+if source "$HOME/.rvm/scripts/rvm" ; then
+  echo -e "\033[32mRVM detected, installing Ruby 3.1.3 with RVM...\033[0m"
+  if rvm install ruby-3.1.3 ; then
+    echo -e "\033[32mRuby 3.1.3 installed successfully with RVM!\033[0m"
+    if rvm use ruby-3.1.3 --default ; then
+      echo -e "\033[32mUsing Ruby 3.1.3 as the default with RVM.\033[0m"
+      exit 0
+    else
+      echo -e "\033[31mFailed to set Ruby 3.1.3 as default with RVM.\033[0m"
+    fi
   else
-    echo -e "\033[31mFailed to set Ruby 3.1.3 as default with RVM.\033[0m"
-    exit 1
+    echo -e "\033[31mFailed to install Ruby 3.1.3 with RVM.\033[0m"
   fi
 else
-  echo -e "\033[31mFailed to install Ruby 3.1.3 with RVM.\033[0m"
-  exit 1
+  echo -e "\033[32mRVM not detected, installing Ruby 3.1.3 with rbenv...\033[0m"
+  if command -v rbenv &>/dev/null ; then
+    if rbenv install 3.1.3 ; then
+      echo -e "\033[32mRuby 3.1.3 installed successfully with rbenv!\033[0m"
+      if rbenv global 3.1.3 ; then
+        echo -e "\033[32mUsing Ruby 3.1.3 as the global version with rbenv.\033[0m"
+      else
+        echo -e "\033[31mFailed to set Ruby 3.1.3 as global version with rbenv.\033[0m"
+      fi
+    else
+      echo -e "\033[31mFailed to install Ruby 3.1.3 with rbenv.\033[0m"
+    fi
+  else
+    echo -e "\033[31mNeither RVM nor rbenv detected. Please install either of them first.\033[0m"
+  fi
 fi
+
 
 echo -e "\033[32mSetting environment to development...\033[0m"
 
@@ -96,33 +110,5 @@ else
   exit 1
 fi
 
-echo -e "\033[1;33mThe Rails server is about to run in order to get the port forwarded URL."
-echo -e "Please copy paste the link from the popup that appears on top right"
-echo -e "Then wait for the prompt and paste it with CTRL-V into the shell."
-echo -e "If you understood, press any key to continue...\033[0m"
-
-# Start the Rails server in the background
-rails server &
-# Get the PID of the rails server process
-pid=$!
-
-sleep 5
-
-# Prompt the user for the host URL
-echo -n "Enter the host URL: "
-read host_url
-
-# Remove the trailing "/" from the host URL if it exists
-host_url=${host_url%/}
-
-# Remove the "https://" from the host URL if it exists
-host_url=${host_url#https://}
-
-# Write the host URL to the .env file
-echo "AWS_HOST=$host_url" >> .env
-
-# Kill the rails server
-kill $pid
-
-# Restart the Rails server
+# Start the Rails server
 rails server
