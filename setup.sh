@@ -1,13 +1,14 @@
 #!/bin/bash
 
 if [ -z "$C9_HOSTNAME" ]; then
-    read -p "WARNING: This project was designed to run through an Amazon Cloud9 Environment. Some aspects of the development server may not be fully fuctional otherwise. Are you sure you want to continue? [y/N]: " answer
+    read -p $'\033[1;33mWARNING:\033[0m This project was designed to run through an Amazon Cloud9 Environment. Some aspects of the development server may not be fully fuctional otherwise. Are you sure you want to continue? [y/N]: ' answer
     answer=${answer,,} # convert the answer to lowercase
     if [ "$answer" != "y" ]; then
         echo "Exiting."
         exit 1
     fi
 fi
+
 
 echo -e "\033[32mInstalling Yarn with npm...\033[0m"
 npm install -g yarn
