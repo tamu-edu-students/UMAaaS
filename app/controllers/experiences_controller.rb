@@ -20,13 +20,35 @@ class ExperiencesController < ApplicationController
       flash[:alert] = 'You are not assigned to this program.'
       redirect_to portal_path(params[:id]) and return
     end
-    @near = program.location
-  end
+    
+    def create
+        if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
+            flash[:alert] = "Cannot create experience"
+            redirect_to portal_path(params[:id]) and return
+        end
+        
+        tagArray = params[:experience][:tags].split(",")
+        tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
+        tagArray.each do |tag|
+            tag = tag.strip.upcase
+            tagArrayFixed += tag + ","
+        end
+        
+        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        
+        if params[:image]
+            newExperience.image.attach(params[:image])
+        end
+         flash[:notice] = "Experience was successfully created."
+     
 
-  def create
-    if params[:experience][:experience].blank? || params[:experience][:rating].blank? # experience and rating are required
-      flash[:alert] = 'Cannot create experience'
-      redirect_to portal_path(params[:id]) and return
+        if(params.has_key?(:yelp_id))
+            # has a Yelp location selected
+            YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        end
+        
+        
+        redirect_to portal_path(params[:id])
     end
 
     tagArray = params[:experience][:tags].split(',')
