@@ -15,7 +15,11 @@ module Reviews
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+<<<<<<< HEAD
     config.admin_email = ENV['ADMIN_EMAIL']
+=======
+    config.admin_email = ENV["ADMIN_EMAIL"]
+>>>>>>> fd2d9d631f3c5c7ef50a3ffd078be52cbce80cc6
     
     config.time_zone = "Central Time (US & Canada)"
     
