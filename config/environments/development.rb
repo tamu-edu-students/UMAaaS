@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
-  config.hosts << ENV["AWS_HOST"]
-  #config.hosts << "999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com"
-  #config.hosts << "389763a4bd934fd2b31f81763dda423c.vfs.cloud9.ap-northeast-1.amazonaws.com"
+  config.hosts << ENV['AWS_HOST']
+  # config.hosts << "999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com"
+  # config.hosts << "389763a4bd934fd2b31f81763dda423c.vfs.cloud9.ap-northeast-1.amazonaws.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -65,5 +67,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
