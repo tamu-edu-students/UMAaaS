@@ -31,24 +31,19 @@ class PortalsController < ApplicationController
         #     flash[:notice] = "Pogram not found!"
         # else
 
-            if logged_in?
-                #save selected program to the user account so next time they don't have to select it
-                print("Logged in YAY\n")
-                print("ID IS:",current_user.user_program_id)
-                user = User.find current_user.id
-                if(not user.nil?) then
-                    user.program_id = program.id
-                    user.save
-                    current_user.user_program_id = program.id
-                end
+        if logged_in?
+            #save selected program to the user account so next time they don't have to select it
+            print("Logged in YAY\n")
+            print("ID IS:",current_user.user_program_id)
+            user = User.find current_user.id
+            if(not user.nil?) then
+                user.program_id = program.id
+                user.save
+                current_user.user_program_id = program.id
             end
-            redirect_to portal_path(program.id)
-<<<<<<< HEAD
-    end
-=======
         end
->>>>>>> origin
-    # end
+        redirect_to portal_path(program.id)
+    end
     
     
     def program_view
