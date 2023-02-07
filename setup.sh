@@ -25,7 +25,6 @@ if source "$HOME/.rvm/scripts/rvm" ; then
     echo -e "\033[32mRuby 3.1.3 installed successfully with RVM!\033[0m"
     if rvm use ruby-3.1.3 --default ; then
       echo -e "\033[32mUsing Ruby 3.1.3 as the default with RVM.\033[0m"
-      exit 0
     else
       echo -e "\033[31mFailed to set Ruby 3.1.3 as default with RVM.\033[0m"
     fi
