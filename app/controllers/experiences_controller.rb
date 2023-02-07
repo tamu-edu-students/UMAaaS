@@ -41,8 +41,7 @@ class ExperiencesController < ApplicationController
             newExperience.image.attach(params[:image])
         end
          flash[:notice] = "Experience was successfully created."
-        puts "PARAMS TIME"
-        puts params[:experience][:title]
+     
 
         if(params.has_key?(:yelp_id))
             # has a Yelp location selected
