@@ -1,41 +1,31 @@
+# frozen_string_literal: true
+
 require 'reviews_helper'
 include ReviewsHelper
 require 'json'
 
 class ReviewsController < ApplicationController
-	protect_from_forgery with: :null_session
+  protect_from_forgery with: :null_session
 
-	def index
+  def index; end
 
-	end
+  def leave_review
+    @review = Review.new
+  end
 
+  def show; end
 
-	def leave_review
-		@review = Review.new
-	end
+  def emergency; end
 
+  def review_params; end
 
-	def show
+  def create; end
 
-	end
+  def yelp_help(food, city)
+    # search(food, city)
+  end
 
-	def emergency
-	end
-
-	def review_params
-
-	end
-
-	def create
-
-	end
-
-	def yelp_help(food, city)
-		#search(food, city)
-	end
-
-	def yelp_help_location(food, lat, long)
-		#search_location(food, lat, long)
-	end
-
+  def yelp_help_location(food, lat, long)
+    # search_location(food, lat, long)
+  end
 end
