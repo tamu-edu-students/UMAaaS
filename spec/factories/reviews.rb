@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :review do
-    business_id "MyString"
-    user_email "MyString"
-    comment "MyText"
+    business_id 'MyString'
+    user_email 'MyString'
+    comment 'MyText'
     rating 1
     price 1
     safety 1

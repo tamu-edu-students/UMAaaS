@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ExperiencesController, type: :controller do
+
   
   let(:experience) { create(:experience, program_id: 2) }
 
@@ -56,3 +59,4 @@ RSpec.describe ExperiencesController, type: :controller do
   
   
   end
+

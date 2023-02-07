@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddForeignKeysToTips < ActiveRecord::Migration[6.0]
   def change
     add_reference :tips, :programs, foreign_key: true
