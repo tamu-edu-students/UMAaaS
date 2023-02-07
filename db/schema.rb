@@ -10,9 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2023_01_11_025552) do
-=======
 ActiveRecord::Schema.define(version: 2023_01_12_141145) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -35,7 +32,6 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
->>>>>>> origin
 
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
@@ -90,22 +86,12 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
   end
 
   create_table "participants", force: :cascade do |t|
-<<<<<<< HEAD
-    t.integer "program_id", null: false
-    t.boolean "isFaculty"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["program_id"], name: "index_participants_on_program_id"
-    t.index ["user_id"], name: "index_participants_on_user_id"
-=======
     t.boolean "is_faculty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "program_id"
     t.string "email"
     t.index ["program_id"], name: "index_participants_on_program_id"
->>>>>>> origin
   end
 
   create_table "programs", force: :cascade do |t|
@@ -180,10 +166,6 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
   add_foreign_key "helpful_votes", "tips"
   add_foreign_key "helpful_votes", "users"
   add_foreign_key "participants", "programs"
-<<<<<<< HEAD
-  add_foreign_key "participants", "users"
-=======
->>>>>>> origin
   add_foreign_key "tips", "programs"
   add_foreign_key "tips", "users"
   add_foreign_key "users", "programs"

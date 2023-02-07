@@ -43,11 +43,7 @@ class PortalsController < ApplicationController
                 end
             end
             redirect_to portal_path(program.id)
-<<<<<<< HEAD
     end
-=======
-        end
->>>>>>> origin
     # end
     
     
