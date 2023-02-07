@@ -234,7 +234,12 @@ class ExperiencesController < ApplicationController
 
         @experience = Experience.find params[:id]
         @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed)
-
+        
+        # if params[:image]
+        #     @experience.image.purge
+        #     @experience.image.attach(params[:image])
+        # end
+        
         # delete any existing associated location
         YelpLocation.where(experience_id: params[:id]).destroy_all
         

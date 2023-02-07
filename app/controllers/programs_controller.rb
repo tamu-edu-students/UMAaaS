@@ -32,6 +32,11 @@ class ProgramsController < ApplicationController
     end
     
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
+    
+    # if params[:banner_image]
+    #   @program.banner_image.attach(params[:banner_image])
+    # end
+        
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path
   end
@@ -86,4 +91,9 @@ class ProgramsController < ApplicationController
       redirect_to programs_path
     end
   end
+  
+  def experience_params
+        params.require(:experience).permit(:name, :location, :region, :banner_image)
+  end
+    
 end
