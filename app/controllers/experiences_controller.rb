@@ -40,7 +40,7 @@ class ExperiencesController < ApplicationController
         if params[:image]
             newExperience.image.attach(params[:image])
         end
-        
+         flash[:notice] = "Experience was successfully created."
         puts "PARAMS TIME"
         puts params[:experience][:title]
 
