@@ -11,7 +11,6 @@ RSpec.describe ExperiencesController, type: :controller do
     it "creates with valid params" do
           get :create, params: { experience: { title: "Test Title", experience: "Test Experience", rating: 5, tags: "test, tags" }, id: 1 }
           expect(flash[:notice]).to match(/Experience was successfully created./)
-
     end
 
       # it "attaches an image if one is provided" do
