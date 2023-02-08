@@ -46,7 +46,7 @@ class ProgramsController < ApplicationController
   def update
     @program = Program.find params[:id]
     @program.update_attributes(name: params[:program][:name], location: params[:program][:location],
-                               region: params[:program][:region])
+                              region: params[:program][:region])
     flash[:notice] = "#{@program.name} was successfully updated."
     redirect_to programs_path
   end
