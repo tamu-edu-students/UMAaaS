@@ -22,18 +22,19 @@ class TipsController < ApplicationController
   end
 
   def create
-    participant = Participant.find_by(email: current_user.email, program_id: params[:id])
-    if participant.nil?
-      flash[:alert] = 'You are not authorized to manage tips for this program'
-      redirect_to portal_path(params[:id]) and return
-    end
+    # participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+    # if participant.nil?
+    #   flash[:notice] = 'You are not authorized to manage tips for this program'
+    #   redirect_to portal_path(params[:id]) and return
+    # end
 
     if params[:tip][:tip].blank? # tip text is required
-      flash[:alert] = 'Cannot create tip'
+      flash[:notice] = 'Cannot create tip'
       redirect_to portal_path(params[:id]) and return
     end
 
     Tip.create(tip: params[:tip][:tip], user_id: current_user.id, program_id: params[:id])
+    flash[:notice] = "Tip was successfully created."
     redirect_to portal_path(params[:id])
   end
 
