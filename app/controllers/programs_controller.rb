@@ -30,9 +30,19 @@ class ProgramsController < ApplicationController
       flash[:alert] = 'Cannot create program'
       redirect_to programs_path and return
     end
+<<<<<<< HEAD
 
     @program = Program.create(name: params[:program][:name], location: params[:program][:location],
                               region: params[:program][:region])
+=======
+    
+    @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
+    
+    # if params[:banner_image]
+    #   @program.banner_image.attach(params[:banner_image])
+    # end
+        
+>>>>>>> 97f6182a8e92265c160bb0ea2ec44ec7d7332dcc
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path
   end
@@ -84,4 +94,9 @@ class ProgramsController < ApplicationController
     end
     redirect_to programs_path
   end
+  
+  def experience_params
+        params.require(:experience).permit(:name, :location, :region, :banner_image)
+  end
+    
 end
