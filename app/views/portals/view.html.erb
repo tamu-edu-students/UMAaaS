@@ -5,7 +5,10 @@
                     <%end%>
                 <% end %>
             </select><% end %></div>
-<div id="page-header"> <%= @program.name %> </div>
+<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+  <%= @program.name %>
+</div>
+
 
 <div id="search-wrapper">
     <div class="search-border-outer">
