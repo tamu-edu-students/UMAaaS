@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -7,11 +9,12 @@
 
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#reviews.each do |review|
+# reviews.each do |review|
 #  Review.create!(review)
-#end
+# end
 
-Program.create!(:name => "Singapore CSCE Wintermester", :region => "Asia")
-Program.create!(:name => "Greece CSCE Wintermester", :region => "Europe")
+Program.create!(name: 'Singapore CSCE Wintermester', region: 'Asia')
+Program.create!(name: 'Greece CSCE Wintermester', region: 'Europe')
 
-User.create!(:admin => false,:program_id => nil,:id => 5, :img => nil, :name => "Arkaprabho Bose", :email => "abose0267@tamu.edu")
+User.create!(admin: false, program_id: nil, id: 5, img: nil, name: 'Arkaprabho Bose',
+             email: 'abose0267@tamu.edu')

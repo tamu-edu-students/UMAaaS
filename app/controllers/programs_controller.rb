@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ProgramsController < ApplicationController
   before_action :requireAdmin
-  
+
   def requireAdmin
     if logged_in?
       redirect_to root_path and return unless current_user.admin
@@ -8,48 +10,51 @@ class ProgramsController < ApplicationController
       redirect_to root_path and return
     end
   end
-  
+
   def index
     @programs = Program.all
-    @participants = Participant.where(program_id: params["program_id"])
-    
-    if params[:d] != "true" then
-      @programs = @programs.where(disabled: false)
-    end
-    
-    @showDisabled = params[:d] == "true"
+    @participants = Participant.where(program_id: params['program_id'])
+
+    @programs = @programs.where(disabled: false) if params[:d] != 'true'
+
+    @showDisabled = params[:d] == 'true'
   end
-  
+
   def new
     @program = Program.new
-    @participants = Participant.where(program_id: params["program_id"])
+    @participants = Participant.where(program_id: params['program_id'])
   end
-  
+
   def create
-    if(params[:program][:name].blank? || params[:program][:location].blank? || params[:program][:region].blank?) # required fields
-        flash[:alert] = "Cannot create program"
-        redirect_to programs_path and return
+    if params[:program][:name].blank? || params[:program][:location].blank? || params[:program][:region].blank? # required fields
+      flash[:alert] = 'Cannot create program'
+      redirect_to programs_path and return
     end
     
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
+    
+    # if params[:banner_image]
+    #   @program.banner_image.attach(params[:banner_image])
+    # end
+        
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path
   end
-  
+
   def edit
     @participants = Participant.where(program_id: params[:id])
     @program = Program.find params[:id]
     @users = User.where(program_id: params[:id])
   end
-  
+
   def update
     @program = Program.find params[:id]
-    @program.update_attributes(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
+    @program.update_attributes(name: params[:program][:name], location: params[:program][:location],
+                              region: params[:program][:region])
     flash[:notice] = "#{@program.name} was successfully updated."
     redirect_to programs_path
   end
-  
-  
+
   # this is no longer called anywhere, programs aren't deleted, just disabled
   def destroy
     @program = Program.find(params[:id])
@@ -57,33 +62,35 @@ class ProgramsController < ApplicationController
     flash[:notice] = "Program ’#{@program.name}’ deleted."
     redirect_to programs_path
   end
-  
-  
-  #disable program
+
+  # disable program
   def disable
     program = Program.find params[:id]
-    if(program.nil?) then
-      flash[:alert] = "Error disabling program: program not found."
-      redirect_to programs_path
+    if program.nil?
+      flash[:alert] = 'Error disabling program: program not found.'
     else
       program.disabled = true
       program.save
       flash[:notice] = "#{program.name} has been disabled."
-      redirect_to programs_path
     end
+    redirect_to programs_path
   end
-  
-  #enable program
+
+  # enable program
   def enable
     program = Program.find params[:id]
-    if(program.nil?) then
-      flash[:alert] = "Error enabling program: program not found."
-      redirect_to programs_path
+    if program.nil?
+      flash[:alert] = 'Error enabling program: program not found.'
     else
       program.disabled = false
       program.save
       flash[:notice] = "#{program.name} has been enabled."
-      redirect_to programs_path
     end
+    redirect_to programs_path
   end
+  
+  def experience_params
+        params.require(:experience).permit(:name, :location, :region, :banner_image)
+  end
+    
 end

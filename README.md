@@ -31,7 +31,7 @@ Email me at bjirka@tamu.edu if you have any questions or problems.
 3. Anuj Ketkar
 4. Abhishek More
 5. Uma Sarkar
-6. Sarah Sotelo
+6. Sarah Sotelo <slsotelo@tamu.edu>
 
 
 ## Installation Instructions
