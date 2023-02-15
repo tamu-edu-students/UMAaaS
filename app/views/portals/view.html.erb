@@ -1,14 +1,17 @@
-<div id="portal-switch-programs"></br><%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--View Another Program--</option>
-                <% @programs.each do |program| %>
-                    <% if program.id != @program.id then %>
-                       <option id="OPTION" value="<%= program.id %>"><%= program.name %></option>
-                    <%end%>
-                <% end %>
-            </select><% end %></div>
+<div id="portal-switch-programs"></br>
+    <div style="margin-left: 90%">
+        <%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--View Another Program--</option>
+                    <% @programs.each do |program| %>
+                        <% if program.id != @program.id then %>
+                           <option id="OPTION" value="<%= program.id %>"><%= program.name %></option>
+                        <%end%>
+                    <% end %>
+                </select><% end %>
+    </div>
+</div>
 <div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
   <%= @program.name %>
 </div>
-
 
 <div id="search-wrapper">
     <div class="search-border-outer">
@@ -19,8 +22,8 @@
         </div>
     </div>
    <% if current_user.admin then %> 
-        <div style="" class="header-button">
-            <%= link_to "Add Participants", new_program_participant_path(@program.id) %>
+        <div style="" class="participant-button">
+            <%= link_to "Add Participants", new_program_participant_path(@program.id), class: "blue-link"%>
         </div>
     <% end %>
 </div>

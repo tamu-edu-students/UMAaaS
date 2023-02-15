@@ -4,27 +4,27 @@
   <div id="column2" class="flex-item"><%= form_tag program_participants_path, :method => :post do %>
     <%= link_to "Back", edit_program_path(@program) %>
     <table class="program-edit-table">
-        <tbody>
-            <tr>
-                <td class="program-edit-label">
-                    <%= label :participant, :email, 'Participant Email' %>
-                </td>
-                <td>
-                    <%= text_field :participant, :email, :required => true %>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>Faculty: </p>
-                </td>
-                <td style="display: flex; justify-content: end; align-items: center">
-                    <%= check_box :participant, "is_faculty" %>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
-            </tr>
-        </tbody>
+      <tbody>
+        <tr>
+          <td class="program-edit-label">
+            <strong><label for="emails">Participant Emails (one per line):</label></strong>
+          </td>
+          <td>
+            <%= text_area_tag :emails, nil, rows: 7, cols: 50, required: true %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p><strong>Faculty:</strong></p>
+          </td>
+          <td style="display: flex; justify-content: end; align-items: center">
+            <%= check_box :participant, "is_faculty" %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
+        </tr>
+      </tbody>
     </table>
   <% end %>
   <div style="display:flex; justify-content: center; margin-top: 50px">
