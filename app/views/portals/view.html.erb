@@ -1,10 +1,14 @@
-<div id="portal-switch-programs"></br><%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--View Another Program--</option>
-                <% @programs.each do |program| %>
-                    <% if program.id != @program.id then %>
-                       <option id="OPTION" value="<%= program.id %>"><%= program.name %></option>
-                    <%end%>
-                <% end %>
-            </select><% end %></div>
+<div id="portal-switch-programs"></br>
+    <div style="margin-left: 90%">
+        <%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--View Another Program--</option>
+                    <% @programs.each do |program| %>
+                        <% if program.id != @program.id then %>
+                           <option id="OPTION" value="<%= program.id %>"><%= program.name %></option>
+                        <%end%>
+                    <% end %>
+                </select><% end %>
+    </div>
+</div>
 <div id="page-header"> <%= @program.name %> </div>
 
 <div id="search-wrapper">
