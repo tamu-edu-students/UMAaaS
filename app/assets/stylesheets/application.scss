@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-
+ 
 body{
     margin: 0;
     padding: 0;
@@ -88,8 +88,8 @@ body{
 
 #page-header{
     color: #fff;
-    //background: #333;
-    background-image: url(asset_path("pana.jpeg"));
+    background: #333;
+    // background-image: url("#{asset_path(@program.banner)}");
     background-size: cover;
     background-position-x: center;
     text-align: center;
