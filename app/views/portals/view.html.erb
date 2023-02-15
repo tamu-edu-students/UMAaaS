@@ -20,8 +20,8 @@
         </div>
     </div>
    <% if current_user.admin then %> 
-        <div style="" class="header-button">
-            <%= link_to "Add Participants", new_program_participant_path(@program.id) %>
+        <div style="" class="participant-button">
+            <%= link_to "Add Participants", new_program_participant_path(@program.id), class: "blue-link"%>
         </div>
     <% end %>
 </div>

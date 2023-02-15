@@ -126,6 +126,43 @@ a {
     color: white;
 }
 
+.participant-button {
+    border: 2px solid #6495ed;
+    color: #6495ed;
+    border-radius: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 21px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.participant-button:hover {
+    background-color: #6495ed;
+    border-radius: 10px;
+    color: white;
+}
+
+.participant-button-text:hover {
+    color: white;
+    text-color: white;
+}
+
+.blue-link {
+    color: #6495ed;
+    text-decoration: none;
+}
+
+.blue-link:hover {
+    color: white;
+}
+
+
+
+
 .portal-column-title{
     font-size: 32px;
     font-weight: 700;
