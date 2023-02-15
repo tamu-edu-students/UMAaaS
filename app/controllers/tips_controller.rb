@@ -15,7 +15,7 @@ class TipsController < ApplicationController
   def new
     @tip = Tip.new
     participant = Participant.find_by(email: current_user.email, program_id: params[:id])
-    return unless participant.nil?
+    return unless participant.nil? and not current_user.admin
 
     flash[:alert] = 'You are not authorized to manage tips for this program'
     redirect_to portal_path(params[:id]) and return
@@ -42,7 +42,7 @@ class TipsController < ApplicationController
     @tip = Tip.left_outer_joins(:user).select('tips.*,users.name as user_name').where(tips: { id: params[:tipId] }).first
 
     participant = Participant.find_by(email: current_user.email, program_id: @tip.program_id)
-    if participant.nil?
+    if participant.nil? and not current_user.admin  
       flash[:alert] = 'You are not authorized to manage tips for this program'
       redirect_to portal_path(@tip.program_id) and return
     end
