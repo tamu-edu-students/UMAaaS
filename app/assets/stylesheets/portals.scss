@@ -32,12 +32,25 @@ a {
     top: 0px;
     left: 400px;
     z-index: 9999;
+    width: 15vw;
 }
+
+
 #portal-switch-programs select{
     background:#ededed;
     border:0px;
     font-size: 16px;
-    width: 250px;
+    width: 15vw;
+}
+
+.program-dropdown-middle {
+    display: flex;
+    position: fixed;
+    left: 42vw;
+    top: 1.3vw;
+    margin: 0 auto;
+    padding-left: 0;
+    width: 15vw;
 }
 
 #column1{
@@ -160,9 +173,14 @@ a {
     color: white;
 }
 
-.program-dropdown-middle {
-    position: fixed;
-    left: 42vw;
+.program-selector {
+    width: 1px;
+    text-align: center;
+}
+
+.program-options {
+    width: 1px;
+    text-align: center;
 }
 
 
