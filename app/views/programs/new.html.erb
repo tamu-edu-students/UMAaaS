@@ -1,4 +1,6 @@
-<div id="page-header">New Study Abroad Program</div>
+<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+  New Study Abroad Program
+</div>
 <div id="flex-container">
  <div id="column2" class="flex-item"><%= form_tag programs_path, :method => :post, enctype: "multipart/form-data" do %>
     <table class="program-edit-table">
