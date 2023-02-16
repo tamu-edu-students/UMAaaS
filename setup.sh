@@ -75,6 +75,7 @@ else
 fi
 
 echo -e "\033[32mInstalling SQLite3 and its dependencies with yum...\033[0m"
+sudo yum install postgresql-devel
 sudo amazon-linux-extras install postgresql10
 if [ $? -eq 0 ]; then
   echo -e "\033[32mSQLite3 and its dependencies installed successfully!\033[0m"
