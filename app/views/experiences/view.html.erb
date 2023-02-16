@@ -1,4 +1,6 @@
-<div id="page-header"><%= @program.name %></div>
+<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+  <%= @program.name %>
+</div>
 
 <div class="flex-header">
  <div class="header_column_1_of_1" class="flex-item">

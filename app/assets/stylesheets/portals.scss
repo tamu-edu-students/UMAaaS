@@ -32,12 +32,25 @@ a {
     top: 0px;
     left: 400px;
     z-index: 9999;
+    width: 15vw;
 }
+
+
 #portal-switch-programs select{
     background:#ededed;
     border:0px;
     font-size: 16px;
-    width: 250px;
+    width: 15vw;
+}
+
+.program-dropdown-middle {
+    display: flex;
+    position: fixed;
+    left: 42vw;
+    top: 1.3vw;
+    margin: 0 auto;
+    padding-left: 0;
+    width: 15vw;
 }
 
 #column1{
@@ -125,6 +138,51 @@ a {
 .header-button-text:hover {
     color: white;
 }
+
+.participant-button {
+    border: 2px solid #6495ed;
+    color: #6495ed;
+    border-radius: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 21px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.participant-button:hover {
+    background-color: #6495ed;
+    border-radius: 10px;
+    color: white;
+}
+
+.participant-button-text:hover {
+    color: white;
+    text-color: white;
+}
+
+.blue-link {
+    color: #6495ed;
+    text-decoration: none;
+}
+
+.blue-link:hover {
+    color: white;
+}
+
+.program-selector {
+    width: 1px;
+    text-align: center;
+}
+
+.program-options {
+    width: 1px;
+    text-align: center;
+}
+
 
 .portal-column-title{
     font-size: 32px;
