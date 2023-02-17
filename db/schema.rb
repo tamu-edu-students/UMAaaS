@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_12_141145) do
+ActiveRecord::Schema.define(version: 2023_02_17_002543) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
     t.string "title"
     t.index ["program_id"], name: "index_experiences_on_program_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
+  end
+
+  create_table "flag_tips", force: :cascade do |t|
+    t.integer "flag"
+    t.integer "user_id", null: false
+    t.integer "tip_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tip_id"], name: "index_flag_tips_on_tip_id"
+    t.index ["user_id"], name: "index_flag_tips_on_user_id"
   end
 
   create_table "helpful_votes", force: :cascade do |t|
@@ -139,6 +149,8 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"
   add_foreign_key "experiences", "users"
+  add_foreign_key "flag_tips", "tips"
+  add_foreign_key "flag_tips", "users"
   add_foreign_key "helpful_votes", "tips"
   add_foreign_key "helpful_votes", "users"
   add_foreign_key "participants", "programs"
