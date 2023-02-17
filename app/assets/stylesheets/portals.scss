@@ -353,7 +353,12 @@ a {
     color: #bbbbbb;
 }
 
-.portal-tip-helpful, .portal-experience-rating, .portal-tip-flag{
+.portal-tip-flag{
+    position: absolute;
+    bottom: 0;
+}
+
+.portal-tip-helpful, .portal-experience-rating{
     position: absolute;
     line-height: 16px;
     bottom: 0;

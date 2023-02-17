@@ -134,6 +134,8 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           data: {tipId: tipId, flag: 0}, //0 means no flag 
           dataType: "script",
           success: function(data, textStatus, jqXHR){
+            console.log("unflagging successful");
+            location.reload();
           },
           error: function(jqXHR, textStatus, errorThrown){
           }
@@ -146,6 +148,8 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           data: {tipId: tipId, flag: 1},
           dataType: "script",
           success: function(data, textStatus, jqXHR){
+            console.log("flagging successful");
+            location.reload();
           },
           error: function(jqXHR, textStatus, errorThrown){
           }
