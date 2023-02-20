@@ -1,0 +1,23 @@
+<div id="page-header">
+  <%= @user.name %>'s Posts
+</div>
+
+<div class="flex-header">
+  <div class="header_column_1_of_1" class="flex-item">
+    <div><a href="/" class="header-return-link">&#x21D0; Return to Home</a></div>
+  </div>
+</div>
+
+<div class="flex-container">
+    <% if @user.experiences.empty? %>
+      <p>No experiences found.</p>
+    <% else %>
+      <ul class="experiences-list" style="width: 100%;">
+        <% @user.experiences.each do |experience| %>
+          <div class="portal-experience-outer-wrapper" id="portal-experience-wrapper-<%= experience.id %>">
+  <%= render 'experiences/view', locals: { experience: experience, single: true } %>
+          </div>
+        <% end %>
+      </ul>
+    <% end %>
+</div>
