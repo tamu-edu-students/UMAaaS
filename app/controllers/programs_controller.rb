@@ -33,9 +33,9 @@ class ProgramsController < ApplicationController
     
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     
-    # if params[:banner_image]
-    #   @program.banner_image.attach(params[:banner_image])
-    # end
+    if params[:banner]
+      @program.banner.attach(params[:banner])
+    end
         
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path
@@ -51,6 +51,9 @@ class ProgramsController < ApplicationController
     @program = Program.find params[:id]
     @program.update_attributes(name: params[:program][:name], location: params[:program][:location],
                               region: params[:program][:region])
+    if params[:banner]
+      @program.banner.attach(params[:banner])
+    end
     flash[:notice] = "#{@program.name} was successfully updated."
     redirect_to programs_path
   end
@@ -89,8 +92,8 @@ class ProgramsController < ApplicationController
     redirect_to programs_path
   end
   
-  def experience_params
-        params.require(:experience).permit(:name, :location, :region, :banner_image)
+  def program_params
+        params.require(:experience).permit(:name, :location, :region, :banner)
   end
     
 end
