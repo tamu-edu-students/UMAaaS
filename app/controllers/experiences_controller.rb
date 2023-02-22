@@ -11,6 +11,7 @@ class ExperiencesController < ApplicationController
     # end
 
     def new
+        @program = Program.find params[:id]
         @experience = Experience.new
         program = Program.find params[:id]
         participant = Participant.find_by(email: current_user.email, program_id: program.id)
@@ -27,6 +28,7 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
         end
+        
         
         tagArray = params[:experience][:tags].split(",")
         tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas

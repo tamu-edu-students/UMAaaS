@@ -14,6 +14,7 @@ class TipsController < ApplicationController
 
   def new
     @tip = Tip.new
+    @program = Program.find params[:id]
     participant = Participant.find_by(email: current_user.email, program_id: params[:id])
     return unless participant.nil? and not current_user.admin
 

@@ -2,7 +2,12 @@
 
 class UsersController < ApplicationController
   before_action :requireAdmin
-
+  
+  def show
+    @user = User.find(params[:id])
+    @experiences = @user.experiences
+  end 
+  
   def requireAdmin
     if logged_in?
       redirect_to root_path and return unless current_user.admin || session[:user].to_i == params[:id].to_i

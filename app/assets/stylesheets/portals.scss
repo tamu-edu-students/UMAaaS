@@ -6,6 +6,17 @@ a {
     text-decoration: none !important;
 }
 
+.actual-tip {
+    font-size:18px;    
+    margin-bottom: 4px;
+}
+
+.stickyboi {
+    position: sticky;
+    top: 100px;
+    display: hidden;
+}
+
 #index-search-box{
     background:#fff;
     border-radius: 32px;
@@ -756,6 +767,7 @@ a {
 @media only screen and (max-width: 1000px) {
     #flex-container{
         flex-direction: column;
+        gap:25px;
         align-items: stretch;
     }
 
@@ -816,7 +828,7 @@ a {
         max-width: 300px;
     }
   
-    .portal-tip{
+    .portal-tip {
         margin: 0 5px;
         max-width: 220px;
         height: 100%;
@@ -824,5 +836,9 @@ a {
   
     .portal-experience{
         margin: 0 5px;
+    }
+    
+    .stickyboi {
+        position: relative;
     }
 }
