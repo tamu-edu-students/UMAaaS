@@ -134,12 +134,17 @@ body{
 
 }
 
+.stickyboi {
+    position: sticky;
+    top: 100px;
+}
+
 #column_2_of_2{
+    top: 100px;
 	order: 2;
 	flex-grow: 3;
 	flex-basis: 600px;
 	margin: 0px 25px;
-	display: flex;
 	flex-direction: column;
 }
 
