@@ -1,6 +1,6 @@
 <div id="portal-switch-programs">
     <div class="program-dropdown-middle">
-        <%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option class="program-selector" value=0 disabled selected>--View Another Program--</option>
+        <%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option class="program-selector" value=0 disabled selected>View Another Program</option>
                     <% @programs.each do |program| %>
                         <% if program.id != @program.id then %>
                            <option class="program-options" id="OPTION" value="<%= program.id %>"><%= program.name %></option>

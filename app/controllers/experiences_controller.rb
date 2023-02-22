@@ -50,7 +50,6 @@ class ExperiencesController < ApplicationController
             YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
         end
         
-        
         redirect_to portal_path(params[:id])
     end
     

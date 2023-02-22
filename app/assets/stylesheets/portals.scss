@@ -51,17 +51,23 @@ a {
     background:#ededed;
     border:0px;
     font-size: 16px;
-    width: 15vw;
+    width: 16vw;
+    border: 4px solid #DEDEDE;
+    border-radius: 10px;
+    background-color: #DEDEDE;
+    font-family: "Arial", serif;
 }
 
 .program-dropdown-middle {
     display: flex;
     position: fixed;
     left: 42vw;
-    top: 1.3vw;
+    top: 0.8vw;
     margin: 0 auto;
     padding-left: 0;
-    width: 15vw;
+    width: 16vw;
+    background-color: #DEDEDE;
+    border-radius: 10px;
 }
 
 #column1{
@@ -187,7 +193,9 @@ a {
 .program-selector {
     width: 1px;
     text-align: center;
+    
 }
+
 
 .program-options {
     width: 1px;
@@ -363,6 +371,12 @@ a {
     font-size: 13px;
     color: #bbbbbb;
 }
+
+.portal-tip-flag{
+    position: absolute;
+    bottom: 0;
+}
+
 .portal-tip-helpful, .portal-experience-rating{
     position: absolute;
     line-height: 16px;
@@ -372,7 +386,7 @@ a {
     color: #999;
 }
 
-.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no{
+.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no, .portal-tip-flag .tip-flagged-yes{
     display: inline-block;
     height: 16px;
     cursor: pointer;
@@ -382,7 +396,7 @@ a {
     color: #666;
 }
 
-.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin{
+.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin, .portal-tip-flag .tip-flagged-yes-nologin{
     display: inline-block;
     height: 16px;
     padding-left: 20px;
@@ -391,7 +405,18 @@ a {
     color: #666;
 }
 
-
+.portal-tip-flag .tip-flagged-yes, .portal-tip-flag .tip-flagged-yes-nologin, .portal-experience-flag .experience-flagged-yes, .portal-experience-flag .experience-flagged-yes-nologin{
+    background-image: url(asset_path("flag_off.png"));
+    //background-position-y: 0%;
+}
+.portal-tip-flag .tip-flagged-yes:hover, .portal-experience-flag .experience-flagged-yes:hover{
+    background-image: url(asset_path("flag_on.png"));
+    //background-position-y: 100%;
+}
+.portal-tip-flag .flagged, .portal-experience-flag .flagged{
+    background-image: url(asset_path("flag_on.png"));
+    //background-position-y: 100%;
+}
 
 .portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-yes-nologin{
     background-image: url(asset_path("thumbs_up2.png"));
