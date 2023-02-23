@@ -51,7 +51,7 @@
     <div class="portal-tip-wrapper" id="portal-tip-wrapper-<%= tip.id %>"><%= render 'tips/view' , locals: {tip: tip} %></div>
  <% end %>
  <% if @tips.size == 0 then %><div class="portal-tips-none"><% if params[:search].blank? then %>No tips added yet!<% else %>No search results!<% end %></div><% end %></div>
- <div id="column_2_of_2" class="flex-item">
+ <div id="column_2_of_2" class="flex-item stickyboi">
      <div class="portal-column-title">
          <p>Experiences</p>
          <% if logged_in? and (has_program? or current_user.admin?)  %>
