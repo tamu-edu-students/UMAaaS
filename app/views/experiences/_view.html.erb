@@ -29,7 +29,7 @@
 			</div>
 			<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
-				<%= locals[:experience].user.name %>
+				<%= link_to locals[:experience].user.name, user_path(locals[:experience].user), data: { turbolinks: false } %>
 			</span>
 			<span class="portal-experience-info-date">
 				<%= locals[:experience].created_at.strftime("%b %-d, '%y") %>
