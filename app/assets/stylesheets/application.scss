@@ -316,6 +316,11 @@ input[type=submit]:focus{
         flex-direction: column;
         align-items: stretch;
     }
+    
+    .stickyboi {
+        position: relative;
+        top: 100px;
+    }
   
     #column_1_of_2{
         order: 1;
