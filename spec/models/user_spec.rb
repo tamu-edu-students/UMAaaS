@@ -3,9 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-<<<<<<< HEAD
-  # pending "add some examples to (or delete) #{__FILE__}"
-=======
   describe "associations" do
     it { should belong_to(:program).optional }
     #it { should have_many(:tips) }
@@ -20,7 +17,6 @@ RSpec.describe User, type: :model do
   end
 
  
->>>>>>> someRspec
 end
 
 #COMMENT !!!!!!!! 
