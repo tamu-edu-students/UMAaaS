@@ -156,6 +156,39 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
         });
       }
     });
+    
+    // and flag on an experience
+    $(document).off('click', '.experience-flagged-yes').on('click', '.experience-flagged-yes', function(){
+    
+      var idParts = this.id.split("-");
+      var expId = idParts[2];
+      
+      if($(this).hasClass("flagged")){
+        console.log("marking flag as not flagged")
+        $.ajax({
+          type: "POST", 
+          url: "/experience/flagged",
+          data: {expId: expId, flag: 0}, //0 means no flag 
+          dataType: "script",
+          success: function(data, textStatus, jqXHR){
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+          }
+        });
+      }else{
+        console.log("marking flag as flagged")
+        $.ajax({
+          type: "POST", 
+          url: "/experience/flagged",
+          data: {expId: expId, flag: 1},
+          dataType: "script",
+          success: function(data, textStatus, jqXHR){
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+          }
+        });
+      }
+    });
   
   // delete an entire experience
   $(document).off('click', '.portal-experience-delete').on('click', '.portal-experience-delete', function(){

@@ -134,9 +134,13 @@ class PortalsController < ApplicationController
       @tips = []
     end
 
+  
     # get all experiences for this program
-    @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select('experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating').where(experiences: { program_id: params[:id] }).where(users: { banned: false }).order(rating: :desc)
+    @experiences = Experience.left_outer_joins(:user).select('experiences.*,users.name as user_name').where(experiences: { program_id: params[:id] }).where(users: { banned: false })
+  # @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select('experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating').where(experiences: { program_id: params[:id] }).where(users: { banned: false }).order(rating: :desc)
 
+
+puts("Hello")
     searchResults = []
 
     # for each experience get the comments associated with it and calculate the average rating
@@ -149,6 +153,20 @@ class PortalsController < ApplicationController
         found = false
         if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.yelp_name =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i)
           found = true
+        end
+      end
+      
+      exp_flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if exp_flag_sum.blank? 
+          exp_flag_sum = 0
+        end                 
+      exp.flagCount = exp_flag_sum
+      
+      exp.hasUserFlagged = 0
+      exp_flagged = FlagExperience.select("flag").where(experience_id: exp.id).where(user_id: current_user.id).first
+      if not exp_flagged.nil?
+        if exp_flagged.flag == 1
+          exp.hasUserFlagged = 1
         end
       end
 

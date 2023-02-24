@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   post 'experience/yelp_search', to: 'experiences#yelp_search'
   post 'tip/helpful', to: 'tips#helpful'
   post 'tip/flagged', to: 'tips#flagged'
+  post 'experience/flagged', to: 'experience#flagged'
   delete 'experience/:id/delete', to: 'experiences#delete'
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
   delete 'tip/:id/delete', to: 'tips#delete'

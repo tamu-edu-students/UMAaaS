@@ -377,6 +377,11 @@ a {
     bottom: 0;
 }
 
+.portal-experience-flag{
+    position: absolute;
+    bottom: 0;
+}
+
 .portal-tip-helpful, .portal-experience-rating{
     position: absolute;
     line-height: 16px;
@@ -386,7 +391,7 @@ a {
     color: #999;
 }
 
-.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no, .portal-tip-flag .tip-flagged-yes{
+.portal-tip-helpful .tip-helpful-yes, .portal-tip-helpful .tip-helpful-no, .portal-tip-flag .tip-flagged-yes, .portal-experience-flag .experience-flagged-yes{
     display: inline-block;
     height: 16px;
     cursor: pointer;
@@ -396,7 +401,7 @@ a {
     color: #666;
 }
 
-.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin, .portal-tip-flag .tip-flagged-yes-nologin{
+.portal-tip-helpful .tip-helpful-yes-nologin, .portal-tip-helpful .tip-helpful-no-nologin, .portal-tip-flag .tip-flagged-yes-nologin, .portal-experience-flag .experience-flagged-yes-nologin{
     display: inline-block;
     height: 16px;
     padding-left: 20px;
