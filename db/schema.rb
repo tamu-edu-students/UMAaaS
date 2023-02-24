@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_17_002543) do
+ActiveRecord::Schema.define(version: 2023_02_21_230942) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2023_02_17_002543) do
     t.string "title"
     t.index ["program_id"], name: "index_experiences_on_program_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
+  end
+
+  create_table "flag_experiences", force: :cascade do |t|
+    t.integer "flag"
+    t.integer "user_id", null: false
+    t.integer "experience_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["experience_id"], name: "index_flag_experiences_on_experience_id"
+    t.index ["user_id"], name: "index_flag_experiences_on_user_id"
   end
 
   create_table "flag_tips", force: :cascade do |t|
@@ -149,6 +159,8 @@ ActiveRecord::Schema.define(version: 2023_02_17_002543) do
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"
   add_foreign_key "experiences", "users"
+  add_foreign_key "flag_experiences", "experiences"
+  add_foreign_key "flag_experiences", "users"
   add_foreign_key "flag_tips", "tips"
   add_foreign_key "flag_tips", "users"
   add_foreign_key "helpful_votes", "tips"

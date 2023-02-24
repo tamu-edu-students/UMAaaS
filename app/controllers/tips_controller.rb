@@ -91,7 +91,6 @@ class TipsController < ApplicationController
             FlagTip.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
             
         else 
-            
             puts "params of flag" + params[:flag].to_s
             # FlagTip.where(tip_id: params[:tipId]).where(user_id: current_user.id).destroy_all
             FlagTip.create(:flag => params[:flag], :user_id => current_user.id, :tip_id => params[:tipId])

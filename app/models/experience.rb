@@ -6,6 +6,11 @@ class Experience < ApplicationRecord
   has_many :experience_comments
   has_one :yelp_location
   has_one_attached :image
+  has_many :users, through: :flag_experiences
+    
+  attr_accessor :hasUserFlagged
+  attr_accessor :flagCount
+    
 
   attr_accessor :comments, :totalComments, :average_rating
 

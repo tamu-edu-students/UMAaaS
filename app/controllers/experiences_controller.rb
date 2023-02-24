@@ -102,6 +102,44 @@ class ExperiencesController < ApplicationController
         end
     end
     
+    def experience_flagged
+        if(params[:flag] == "0")
+            
+            # puts "destroying flag"
+            FlagExperience.where(experience_id: params[:experienceId]).where(user_id: current_user.id).destroy_all
+        else 
+            # puts "params of flag" + params[:flag].to_s
+            FlagExperience.create(:flag => params[:flag], :user_id => current_user.id, :experience_id => params[:experienceId])
+        end
+        
+        @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:experienceId]}).first
+        
+        # str = "number of experience: " 
+        # puts str + @experience.to_s 
+
+        flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if flag_sum.blank? 
+            flag_sum = 0
+        end                 
+        @experience.flagCount = flag_sum
+
+        @experience.hasUserFlagged = 0
+        flagged = FlagExperience.select("flag").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not flagged.nil?
+            if flagged.flag == 1
+                @experience.hasUserFlagged = 1
+            end
+        end
+        
+        @experienceDivId = "portal-experience-wrapper-" + params[:experienceId]
+        
+        
+        respond_to do |format|
+            format.js {}
+        end
+    end
+
+    
     def yelp_search
         @results = search(params[:yelpTerm], params[:yelpLocation])
         puts @results
@@ -142,6 +180,8 @@ class ExperiencesController < ApplicationController
         end
         # done checking for unauthorized deletions
         
+        # delete flag
+        FlagExperience.where(experience_id: params[:id]).destroy_all
         
         # delete comments
         ExperienceComment.where(experience_id: params[:id]).destroy_all
