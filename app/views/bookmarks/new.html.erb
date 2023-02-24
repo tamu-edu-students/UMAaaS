@@ -1,0 +1,16 @@
+<div id="page-header">Create Bookmark</div>
+<div id="flex-container">
+ <div id="column2" class="flex-item"><%= form_tag tips_path, :method => :post do %>
+    <table class="tip-edit-table">
+        <tbody>
+            <tr>
+                <td class="tip-edit-label"><%= label :tip, :tip, 'Tip:' %></td>
+                <td><%= text_area :tip, :tip, :required => true %></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="tip-edit-submit"><%= submit_tag 'Save' %></td>
+            </tr>
+        </tbody>
+    </table>
+ <% end %></div>
+</div>

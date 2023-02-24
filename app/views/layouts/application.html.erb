@@ -36,6 +36,7 @@
                       <li class="navigation-user-icon"><a href=""><%= image_tag(current_user.img, class: "img-circle", height: '50', width: '50') %></a>
                         <ul>
                           <li><%=link_to "Profile", edit_user_path(current_user), :id => "profile" %></li>
+                          <li><%=link_to "Bookmark", edit_user_path(current_user), :id => "profile" %></li>
                           <li><%=link_to "Logout", logout_path(), :id => "logout" %></li>
                         </ul>
                       </li>
