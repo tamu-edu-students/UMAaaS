@@ -3,10 +3,11 @@
     <%= image_tag(@user.avatar, class: "user-circle", height: '100', width: '100') %>
   <% end %>
   <%= @user.name %>
-  <br>
+  <% if session[:user_email] == @user.email %>
   <div class = "edit-user">
   <%= link_to 'Edit', edit_user_path, style: "font-size: 16px;" %>
   </div>
+  <% end %>
 </div>
 
 
