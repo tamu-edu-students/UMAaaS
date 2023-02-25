@@ -23,7 +23,7 @@
          </tr>
      </tbody>
  </table></div><%end%>
- <div id="column2" class="flex-item"><%= form_tag user_path(@user), :method => :put do %>
+ <div id="column2" class="flex-item"><%= form_tag user_path(@user), :method => :put, enctype: "multipart/form-data" do %>
     <table class="user-edit-table">
         <tbody>
             <tr>
@@ -31,12 +31,18 @@
                 <td><%= @user.email %></td>
             </tr>
             <tr>
+                <td class="user-edit-label">Avatar:</td>
+                <td><%= file_field_tag :avatar, class: "form-control" %>
+            </tr>
+            <tr>
+                <% if current_user.admin %>
                 <td class="user-edit-label">Abroad Program:</td>
                 <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
                     <%= @programs.each do |program| %>
                         <option value="<%= program.id %>" <%= if @user.program_id == program.id then "selected" end %>><%= program.name %></option>
                     <% end %>
                 </select></td>
+                <% end %>
             </tr>
             <tr>
                 <td colspan="2" class="user-edit-submit"><%= submit_tag 'Save' %></td>
