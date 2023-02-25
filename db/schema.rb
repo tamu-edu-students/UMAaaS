@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_12_141145) do
+ActiveRecord::Schema.define(version: 2023_02_25_002744) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "experience_id"
+    t.integer "user_id"
+    t.index ["experience_id"], name: "index_bookmarks_on_experience_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "experience_comments", force: :cascade do |t|
@@ -135,6 +142,8 @@ ActiveRecord::Schema.define(version: 2023_01_12_141145) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "experiences"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "experience_comments", "experiences"
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"
