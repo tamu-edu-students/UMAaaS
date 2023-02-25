@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   # resources :tips
+  get 'bookmarks/:id', to: 'bookmarks#view', as: 'bookmarks_view'
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
   get 'users/:id/ban', to: 'users#ban'
