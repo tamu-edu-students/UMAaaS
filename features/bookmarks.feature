@@ -22,4 +22,4 @@ Scenario: Test for viewing all of your saved bookmarks
 Scenario: Test for viewing the original post of a bookmark
     Given that I am on the Bookmarks page
     And I select a bookmarked experience
-    Then I should see "experience"
+    Then I should see "experience" 
