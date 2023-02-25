@@ -1,8 +1,11 @@
-<div id="bookmark-header"><h2>BOOKMARKS</h2></div>
-<div id="bookmarks-list">
-    <ul>
-        <li>Example 1</li>
-        <li>Example 2</li>
-        <li>Example 3</li>
-    </ul>
+<div id="page-header"><%="Bookmarks for " + @user.name%></div>
+<div class="bookmarks-list">
+    <% if @experiences.size == 0 then %><div class="bookmarks-none">No Bookmarks added !</div>
+    <% else %>
+        <ul>
+        <% @experiences.each_with_index do |experience, index| %>
+        <li><%=link_to @titles[index].title, exeprience_view_path(experience)%></li>
+        <% end %>      
+        </ul>
+    <% end %>
 </div>
