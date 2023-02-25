@@ -63,6 +63,10 @@ class UsersController < ApplicationController
       @user.update_attributes(program_id: nil)
       session[:user_program_id] = nil
     end
+    
+    if params[:avatar]
+      @user.avatar.attach(params[:avatar])
+    end
     flash[:notice] = "#{@user.name} was successfully updated."
     redirect_to users_path
   end
@@ -124,4 +128,9 @@ class UsersController < ApplicationController
     end
     redirect_to users_path
   end
+  
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar)
+  end
+
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>tripAgvisor: TAMU Study Abroad tips, reviews, and experiences!</title>
+    <title>tripAgvisor</title>
     <meta name="turbolinks-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -33,7 +33,7 @@
                     <li><%=link_to "Contacts", reviews_emergency_path(), :id => "contacts" %></li>
                   <% if logged_in? %>
                     <%if !current_user.img.nil?%>
-                      <li class="navigation-user-icon"><a href=""><%= image_tag(current_user.img, class: "img-circle", height: '50', width: '50') %></a>
+                      <li class="navigation-user-icon"><a href=""><%= image_tag(current_user.avatar, class: "img-circle", height: '50', width: '50') %></a>
                         <ul>
                           <li><%= link_to "Profile", user_path(current_user), :id => "profile" %></li>
                           <li><%=link_to "Logout", logout_path(), :id => "logout" %></li>
@@ -41,7 +41,7 @@
                       </li>
                     <%end%>
                   <%else%>
-                    <li><%=link_to "Log In with Google", "/auth/google_oauth2", method: :get %></li>
+                    <li><%=link_to "Sign In", "/auth/google_oauth2", method: :get %></li>
                   <%end%>
                 </ul>
               </div>
