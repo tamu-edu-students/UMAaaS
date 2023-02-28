@@ -40,19 +40,21 @@ class ParticipantsController < ApplicationController
     errors = []
     created_participants = []
     emails.each do |email|
-      if Participant.find_by(email: email, program_id: pid).present? or !(email =~ URI::MailTo::EMAIL_REGEXP)
-        errors << "#{email}"
+      if Participant.find_by(email: email, program_id: pid).present? 
+        errors << "#{email} already exists"
+      elsif  !(email =~ URI::MailTo::EMAIL_REGEXP)
+        errors << "#{email} is not in a valid format"
       else
         Participant.create(email: email, is_faculty: is_faculty, program_id: pid)
         created_participants << email
       end
     end
-    
     if errors.any?
-        flash[:alert] = "Participant(s) already exist or invalid format: #{errors.join(', ')}"
+        flash[:alert] = "#{errors.join(",")}"
+        
     end
     if created_participants.any?
-      flash[:notice] = "Participant(s) successfully created!"
+      flash[:notice] = "Participant(s) successfully created!" + "#{created_participants.join(",")}"
     end
     
 
