@@ -32,7 +32,7 @@
                   <%end%>
                     <li><%=link_to "Contacts", reviews_emergency_path(), :id => "contacts" %></li>
                   <% if logged_in? %>
-                    <%if !current_user.img.nil?%>
+                    <%if !current_user.avatar.nil?%>
                       <li class="navigation-user-icon"><a href=""><%= image_tag(current_user.avatar, class: "img-circle", height: '50', width: '50') %></a>
                         <ul>
                           <li><%= link_to "Profile", user_path(current_user), :id => "profile" %></li>
