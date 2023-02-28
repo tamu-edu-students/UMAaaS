@@ -105,20 +105,27 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
   end
-  describe '#destroy' do
-  it 'deletes the user sessions' do
-    session[:user] = User.ids
-    session[:user_admin] = dbUser.admin
-    session[:user_img] = user_info['info']['image']
-    session[:user_program_id] = dbUser.program_id
-    session[:user_email] = dbUser.email
-    delete :destroy
-    expect(session[:user]).to be_nil
-    expect(session[:user_admin]).to be_nil
-    expect(session[:user_img]).to be_nil
-    expect(session[:user_program_id]).to be_nil
-    expect(session[:user_email]).to be_nil
+#   
+describe "DELETE #destroy" do
+    let(:user) { create(:user) }
+
+    before do
+      session[:user] = user.id
+      session[:user_admin] = true
+      session[:user_img] = 'http://example.com/user.png'
+      session[:user_program_id] = 123
+      session[:user_email] = 'user@example.com'
+    end
+
+    it "clears the session keys and redirects to the root path" do
+      delete :destroy
+      expect(session[:user]).to be_nil
+      expect(session[:user_admin]).to be_nil
+      expect(session[:user_img]).to be_nil
+      expect(session[:user_program_id]).to be_nil
+      expect(session[:user_email]).to be_nil
+      expect(response).to redirect_to(root_path)
+    end
   end
-end
 
 end
