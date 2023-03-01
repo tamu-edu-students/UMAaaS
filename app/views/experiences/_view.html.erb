@@ -29,10 +29,12 @@
 			</div>
 			<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
-				<%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
+				<% if locals[:experience].user.avatar.attached? %>
+				  <%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
 				    <%= image_tag(locals[:experience].user.avatar, class: "profile-circle", height: '30', width: '30') %>
+				  <% end %>
 				<% end %>
-				<%= link_to locals[:experience].user.name, user_path(locals[:experience].user), data: { turbolinks: false } %>
+			<%= link_to locals[:experience].user.name, user_path(locals[:experience].user), data: { turbolinks: false } %>
 			</span>
 			<span class="portal-experience-info-date">
 				<%= locals[:experience].created_at.strftime("%b %-d, '%y") %>
