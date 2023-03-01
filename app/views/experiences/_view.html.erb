@@ -18,11 +18,11 @@
 					</div>
 					<% end end %>
 			</div>
+			<% if locals[:experience].image.attached? %>
 			<div class="portal-experience-photo">
-				<% if locals[:experience].image.attached? %>
-					<%= image_tag locals[:experience].image, style: "width: 300px; "%>
-				<%end%>
+				<%= image_tag locals[:experience].image, style: "width: 300px; "%>
 			</div>
+			<%end%>
 			</br>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
