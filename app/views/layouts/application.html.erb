@@ -35,14 +35,18 @@
                     <%if current_user.avatar.attached?%>
                       <li class="navigation-user-icon"><a href=""><%= image_tag(current_user.avatar, class: "img-circle", height: '50', width: '50') %></a>
                         <ul>
+                          <% if User.exists?(current_user.id) %>
                           <li><%= link_to "Profile", user_path(current_user), :id => "profile" %></li>
+                          <% end %>
                           <li><%=link_to "Logout", logout_path(), :id => "logout" %></li>
                         </ul>
                       </li>
                     <% else %>
                     <li class="navigation-user-icon"><a href=""><%= image_tag(asset_path("profile.jpg"), class: "img-circle", height: '50', width: '50') %></a>
                         <ul>
+                          <% if User.exists?(current_user.id) %>
                           <li><%= link_to "Profile", user_path(current_user), :id => "profile" %></li>
+                          <% end %> 
                           <li><%=link_to "Logout", logout_path(), :id => "logout" %></li>
                         </ul>
                       </li>
