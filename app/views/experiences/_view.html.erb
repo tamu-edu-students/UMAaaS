@@ -11,19 +11,20 @@
 					</div>
 					</div>
 			</div>
+			<% if not locals[:experience].tagArray.nil? %>
 			<div class="portal-experience-tags">
-				<% if not locals[:experience].tagArray.nil? then locals[:experience].tagArray.each do |tag| %>
+				<% locals[:experience].tagArray.each do |tag| %>
 					<div class="portal-experience-tag">
 						#<%= tag %>
 					</div>
-					<% end end %>
+					<% end %>
 			</div>
+			<% end %>
 			<% if locals[:experience].image.attached? %>
-			<div class="portal-experience-photo">
-				<%= image_tag locals[:experience].image, style: "width: 300px; "%>
-			</div>
+				<div class="portal-experience-photo">
+					<%= image_tag locals[:experience].image, style: "width: 300px; "%>
+				</div>
 			<%end%>
-			</br>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>
