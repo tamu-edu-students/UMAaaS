@@ -3,12 +3,21 @@
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
 					<div class="portal-experience-icons">
-				<% if locals[:experience].user_id == current_user.id %>	
-						<p class="portal-experience-icon">Flag</p>
-				<% end %>
-					<div>
-						<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
-					</div>
+						<% if locals[:experience].user_id == current_user.id %>	
+							<p class="portal-experience-icon">Flag</p>
+						<% end %>
+						<div>
+							<% if locals[:experience].user_id == current_user.id %>
+								<div class="<%= if current_user.id then "bookmaek-yes" else "bookmark-no" end %><%= if locals[:experience].hasUserBookmarked == 1 then "bookmarked" end %>" id="experience-bookmark-<%= locals[:experience].id %>">
+								</div>
+						</div>
+							
+						<div>
+							<%if current_user.admin || locals[:experience].user_id == current_user.id %>
+								<div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; 
+								</div>
+							<% end %>
+						</div>
 					</div>
 			</div>
 			<div class="portal-experience-tags">
