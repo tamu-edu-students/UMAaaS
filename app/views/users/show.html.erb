@@ -1,6 +1,8 @@
 <div id="white-header">
   <% if @user.avatar.attached? %>
     <%= image_tag(@user.avatar, class: "user-circle", height: '100', width: '100') %>
+  <% else %>
+    <%= image_tag(asset_path("profile.jpg", class: "user-circle", height: '100', width: '100') %>
   <% end %>
   <%= @user.name %>
   <% if session[:user_email] == @user.email %>

@@ -33,6 +33,10 @@
 				  <%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
 				    <%= image_tag(locals[:experience].user.avatar, class: "profile-circle", height: '30', width: '30') %>
 				  <% end %>
+				  <% else %>
+				  	<%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
+				    <%= image_tag(asset_path("profile.jpg"), class: "profile-circle", height: '30', width: '30') %>
+				  <% end %>
 				<% end %>
 			<%= link_to locals[:experience].user.name, user_path(locals[:experience].user), data: { turbolinks: false } %>
 			</span>
