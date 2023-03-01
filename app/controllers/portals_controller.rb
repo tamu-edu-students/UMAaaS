@@ -136,7 +136,8 @@ class PortalsController < ApplicationController
 
   
     # get all experiences for this program
-    @experiences = Experience.left_outer_joins(:user).select('experiences.*,users.name as user_name').where(experiences: { program_id: params[:id] }).where(users: { banned: false })
+    @experiences = Experience.left_outer_joins(:user).select('experiences.*,users.name as user_name').where(experiences: { program_id: params[:id] })
+    #@experiences = Experience.all
   # @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select('experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating').where(experiences: { program_id: params[:id] }).where(users: { banned: false }).order(rating: :desc)
 
 
