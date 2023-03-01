@@ -55,7 +55,10 @@ class ExperiencesController < ApplicationController
     
     
     def view
-        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
+        
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).first
+        puts(params)
+        #@experience = Experience.left_outer_joins(:user).all.where(experiences: {id: params[:id]}).where(users: {banned: false}).first
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
