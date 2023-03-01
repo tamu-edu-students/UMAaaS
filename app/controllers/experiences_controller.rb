@@ -18,7 +18,7 @@ class ExperiencesController < ApplicationController
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
-            flash[:alert] = "You are not assigned to this program."
+            flash[:warning] = "You are not assigned to this program."
             redirect_to portal_path(program_id) and return 
         end
         participant = Participant.find_by(email: current_user.email, program_id: program.id)
@@ -62,7 +62,7 @@ class ExperiencesController < ApplicationController
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
-            flash[:alert] = "You are not assigned to this program."
+            flash[:warning] = "You are not assigned to this program."
             redirect_to portal_path(program_id) and return 
         end
 
@@ -137,7 +137,7 @@ class ExperiencesController < ApplicationController
     def delete
         # prevent unauthorized deletions
         if(not logged_in? or not current_user.admin)
-           flash[:alert] = "You are not authorized to delete this post!"
+           flash[:warning] = "You are not authorized to delete this post!"
            redirect_to root_path and return 
         end
         
@@ -147,7 +147,7 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Post not found, error deleting!"
             redirect_to root_path and return
         elsif((experience.user_id != current_user.id) && (not current_user.admin))
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return
         end
         # done checking for unauthorized deletions
@@ -171,17 +171,17 @@ class ExperiencesController < ApplicationController
     def delete_comment
         # prevent unauthorized deletions
          if(not logged_in?)
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return 
          end
         
         experienceComment = ExperienceComment.find params[:id]
     
         if(experienceComment.nil?)
-            flash[:alert] = "Post not found, error deleting!"
+            flash[:warning] = "Post not found, error deleting!"
             redirect_to root_path and return
         elsif((experienceComment.user_id != current_user.id) && (not current_user.admin))
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return
         end
         # done checking for unauthorized deletions

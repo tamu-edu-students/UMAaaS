@@ -77,6 +77,9 @@
     <% if flash[:notice] %>
       <%= content_tag :div, flash["notice"], class: "flash-notice" %>
     <% end %>
+    <% if flash[:warning] %>
+      <%= content_tag :div, flash["warning"], class: "flash-warning" %>
+    <% end %>
     <% if flash[:alert] %>
       <div class="flash-alert-wrapper"><div class="flash-alert"><div class="flash-alert-header">Error</div><div class="flash-alert-message"><%= flash[:alert] %></div><div class="flash-alert-button"><input type="button" value="Got it!"></div></div></div>
     <% end %>
