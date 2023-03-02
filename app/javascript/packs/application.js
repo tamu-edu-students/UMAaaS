@@ -17,7 +17,7 @@ require("jquery")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 /*global $*/
-
+/*global location*/
 //$(function(){
 document.addEventListener("turbolinks:load", function() {  // the site uses turbolinks so have to use this instead of regular jquery opening
 
@@ -53,6 +53,8 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(e.target.getAttribute("class") == "yelp-link") return; // don't redirect if clicking on yelp link
     if(e.target.getAttribute("class") == "tag") return; // don't redirect if clicking on tag
     if(e.target.getAttribute("class") == "portal-experience-delete") return; // don't redirect if clicking on delete
+    if(e.target.getAttribute("class") == "bookmark-yes") return; // don't redirect if clicking on bookmark
+    if(e.target.getAttribute("class") == ("bookmarked")) return; // don't redirect if clicking on bookmark
     var idParts = this.closest(".portal-experience-outer-wrapper").id.split("-");
     var experienceId = idParts[3];
     window.location.replace("/experience/" + experienceId);
@@ -120,6 +122,42 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     }    
   });
   
+      // bookmark an experience
+  $(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes', function(){
+
+    var idParts = this.id.split("-");
+    var experience_id = idParts[2];
+
+    if($(this).hasClass("bookmarked")){
+      console.log("Remove bookmark!")
+      $.ajax({
+        type: "POST", 
+        url: "/experience/bookmarked",
+        data: {experience_id: experience_id, bookmarked: 0}, //0 means no bookmark
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+          console.log("unbookmark successful");
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }else{
+      console.log("Bookmarked")
+      $.ajax({
+        type: "POST", 
+        url: "/experience/bookmarked",
+        data: {experience_id: experience_id, bookmarked: 1},
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+          console.log("bookmark successful");
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }
+  });
   
   // delete an entire experience
   $(document).off('click', '.portal-experience-delete').on('click', '.portal-experience-delete', function(){

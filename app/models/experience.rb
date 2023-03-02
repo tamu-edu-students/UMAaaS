@@ -7,7 +7,7 @@ class Experience < ApplicationRecord
   has_one :yelp_location
   has_one_attached :image
 
-  attr_accessor :comments, :totalComments, :average_rating
+  attr_accessor :comments, :totalComments, :average_rating, :hasUserBookmarked
 
   def tagArray
     if tags.nil?

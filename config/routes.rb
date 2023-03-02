@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 Rails.application.routes.draw do
   get 'programs', to: 'programs#index'
   get 'reviews/index'
@@ -15,7 +14,6 @@ Rails.application.routes.draw do
   resources :programs do
     resources :participants
   end
-
   # resources :tips
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
@@ -36,8 +34,9 @@ Rails.application.routes.draw do
   post 'p/:id/experiences', to: 'experiences#create', as: 'experiences'
   post 'experience/:id/comment', to: 'experiences#create_comment'
   post 'experience/yelp_search', to: 'experiences#yelp_search'
+  post 'experience/bookmarked', to: 'experiences#bookmarked'
   post 'tip/helpful', to: 'tips#helpful'
-  get 'bookmarks/:id', to: 'bookmarks#view', as: 'bookmarks_view'
+  get 'experience/bookmarks/:id', to: 'experiences#bookmark_view', as: 'bookmarks_view'
   delete 'experience/:id/delete', to: 'experiences#delete'
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
   delete 'tip/:id/delete', to: 'tips#delete'

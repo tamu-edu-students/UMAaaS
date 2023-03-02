@@ -77,8 +77,27 @@ class ExperiencesController < ApplicationController
         rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).where.not(rating: nil).count(:id)
         rating_count +=1 #add 1 for the original rating
         @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+        @experience.hasUserBookmarked = 0
+        bookmarked = Bookmark.select("bookmarked").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not bookmarked.nil?
+            if bookmarked.bookmarked == 1
+                @experience.hasUserBookmarked = 1
+            end
+        end
+        
     end
     
+    
+    def bookmark_view
+      @user = User.find params[:id]
+      @bookmarks = Bookmark.left_outer_joins(:user).select("bookmarks.*").where(users: { id: params[:id]})
+      @experiences = Array.new
+      @titles = Array.new
+      @bookmarks.each do |item|
+        @experiences.append(item.experience_id)
+        @titles.append(Experience.find(item.experience_id))
+      end
+    end
     
     def create_comment
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => current_user.id, :experience_id => params[:experienceId])
@@ -147,6 +166,9 @@ class ExperiencesController < ApplicationController
         
         # delete associated location
         YelpLocation.where(experience_id: params[:id]).destroy_all
+        
+        #delete bookmark
+        Bookmark.where(experience_id: params[:id]).destroy_all
         
         # delete experience
         Experience.where(id: params[:id]).destroy_all
@@ -247,9 +269,27 @@ class ExperiencesController < ApplicationController
             # has a Yelp location selected
             YelpLocation.create(:experience_id => params[:id], :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
         end
-        
-        
         redirect_to experience_path(params[:id])
+    end
+
+   def bookmarked
+        if(params[:bookmarked] == "0")
+            puts "destroying bookmark"
+            Bookmark.where(experience_id: params[:experience_id]).where(user_id: current_user.id).destroy_all
+        else
+            puts "params of bookmark" + params[:bookmarked].to_s
+            Bookmark.find_or_create_by(:bookmarked => params[:bookmarked], :user_id => current_user.id, :experience_id => params[:experience_id])
+        end
+
+        @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:experience_id]}).first
+
+        @experience.hasUserBookmarked = 0
+        bookmarked = Bookmark.select("bookmarked").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not bookmarked.nil?
+            if bookmarked.bookmarked == 1
+                @experience.hasUserBookmarked = 1
+            end
+        end
     end
     
     private
