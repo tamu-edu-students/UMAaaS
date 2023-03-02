@@ -252,28 +252,27 @@ a {
     opacity:0;
 }
 
-.portal-experience-bookmark-off{
-    font-size: 40px;
-    color: #000;
-    // margin-top: 5px;
-    // padding: 0 5px;
-    // border-radius: 3px;
+.bookmark-experience .bookmark-yes{
+    padding-left: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent;  
+    background-image: url(asset_path("bookmark-no.png")); 
 }
 
-.portal-experience-bookmark-on{
-    font-size: 40px;
-    color: #f00;
-    // margin-top: 5px;
-    // padding: 0 5px;
-    // border-radius: 3px;
-}
-
-.bookmark-yes{
+.bookmark-experience .bookmark-yes:hover{
+    padding-left: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent; 
     background-image: url(asset_path("bookmark-yes.png"));
 }
 
-.bookmark-no{
-    background-image: url(asset_path("bookmark-no.png"));
+.bookmark-experience .bookmarked{
+    background-position: center;
+    background-repeat: no-repeat;
+    color: transparent; 
+    background-image: url(asset_path("bookmark-yes.png"));    
 }
 
 .portal-experience-delete{

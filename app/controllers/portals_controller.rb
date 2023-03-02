@@ -158,7 +158,14 @@ class PortalsController < ApplicationController
       rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: { banned: false }).where.not(rating: nil).count(:id)
       rating_count += 1 # add 1 for the original rating
       exp.average_rating = (rating_sum.to_f / rating_count).round(1)
-
+      
+      exp.hasUserBookmarked = 0
+      bookmarked = Bookmark.select("bookmarked").where(experience_id: exp.id).where(user_id: current_user.id).first
+      if not bookmarked.nil?
+          if bookmarked.bookmarked == 1
+              exp.hasUserBookmarked = 1
+          end
+      end
       if found
         searchResults.push(exp) # only records matching the search term, if there is one, will be added to searchResults
       end
