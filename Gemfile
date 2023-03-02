@@ -27,7 +27,6 @@ gem 'turbolinks', '~> 5'
 gem 'railroady', '~> 1.5', '>= 1.5.2'
 # HTTP
 gem 'http'
-gem 'inline_svg'
 # Bootstrap
 gem 'bootstrap', '~> 4.3.1'
 # Use Redis adapter to run Action Cable in production
