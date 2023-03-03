@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'users/:id/unban', to: 'users#unban'
   get 'programss/:id/enable', to: 'programs#enable'
   get 'programss/:id/disable', to: 'programs#disable'
-  get '/programss/:id/flagged', to: 'programs#flagged', as: 'flagged_program'
+  get '/programs/:id/flagged', to: 'programs#flagged', as: 'flagged_program'
   get 'p', to: 'portals#index', as: 'portals'
   get 'p/select', to: 'portals#program_select', as: 'program_select'
   get 'p/view', to: 'portals#program_view', as: 'program_view'

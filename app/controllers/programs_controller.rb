@@ -93,13 +93,10 @@ class ProgramsController < ApplicationController
   end
   
   def flagged 
-    @programs = Program.all
-    @participants = Participant.where(program_id: params['program_id'])
-
-    @programs = @programs.where(disabled: false) if params[:d] != 'true'
-
-    @showDisabled = params[:d] == 'true'
+    @tips = FlagTip.find(params[:id])
+    @experience = FlagExperience.find(params[:id])
   end
+
   
   def program_params
         params.require(:experience).permit(:name, :location, :region, :banner)
