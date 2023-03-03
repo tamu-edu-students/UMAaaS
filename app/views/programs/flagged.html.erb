@@ -17,6 +17,7 @@
     <thead>
       <tr>
         <th>Flagged Item</th>
+        <th>Type</th>
         <th>Creator</th>
         <th>Date Created</th>
         <th>Flagged By</th>
@@ -28,6 +29,7 @@
       <% @experiences.each do |flagged_experience| %>
         <tr>
           <td><%= link_to "#{flagged_experience.experience.title}", experience_path(flagged_experience.experience) %></td>
+          <td> Experience </td>
           <td><%= flagged_experience.experience.user.name %></td>
           <td><%= flagged_experience.experience.created_at.strftime("%m/%d/%Y") %></td>
           <td><%= flagged_experience.user.name %></td>
@@ -38,6 +40,7 @@
       <% @tips.each do |flagged_tip| %>
         <tr>
           <td><%= flagged_tip.tip.tip %></td>
+          <td> Tip </td>
           <td><%= flagged_tip.tip.user.name %></td>
           <td><%= flagged_tip.tip.created_at.strftime("%m/%d/%Y") %></td>
           <td><%= flagged_tip.user.name %></td>
