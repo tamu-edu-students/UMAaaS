@@ -92,6 +92,15 @@ class ProgramsController < ApplicationController
     redirect_to programs_path
   end
   
+  def flagged 
+    @programs = Program.all
+    @participants = Participant.where(program_id: params['program_id'])
+
+    @programs = @programs.where(disabled: false) if params[:d] != 'true'
+
+    @showDisabled = params[:d] == 'true'
+  end
+  
   def program_params
         params.require(:experience).permit(:name, :location, :region, :banner)
   end

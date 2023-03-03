@@ -26,6 +26,8 @@
                       <ul>
                         <li><%=link_to "Users", users_path(), :id => "users" %></li>
                         <li><%=link_to "Programs", programs_path(), :id => "programs" %></li>
+                        <li><%= link_to "Flagged", flagged_program_path(@program), id: "flagged" %></li>
+
                       </ul>
                       </li>
                     <%end%>
