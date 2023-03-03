@@ -51,3 +51,23 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#search-field').on('keyup', function() {
+      var query = $(this).val().toLowerCase();
+      $('.flagged-list tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1)
+      });
+    });
+  });
+  $(document).ready(function() {
+    $('#search-form').submit(function(event) {
+      event.preventDefault(); // prevent the default form submission behavior
+      var query = $('#search-field').val().toLowerCase();
+      $('.flagged-list tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1)
+      });
+    });
+  });
+</script>
