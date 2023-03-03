@@ -92,13 +92,11 @@ class ExperiencesController < ApplicationController
       @user = User.find params[:id]
       @bookmarks = Bookmark.left_outer_joins(:user).select("bookmarks.*").where(users: { id: params[:id]})
       @experiences = Array.new
-      @titles = Array.new
       @bookmarks.each do |item|
-        @experiences.append(item.experience_id)
-        @titles.append(Experience.find(item.experience_id))
+        @experiences.append(Experience.find(item.experience_id))
       end
     end
-    
+
     def create_comment
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => current_user.id, :experience_id => params[:experienceId])
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:experienceId]}).first

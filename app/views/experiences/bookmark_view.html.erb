@@ -4,7 +4,7 @@
     <% else %>
         <ul>
         <% @experiences.each_with_index do |experience, index| %>
-        <li><%=link_to @titles[index].title, exeprience_view_path(experience)%></li>
+        <li><%=link_to experience.title, exeprience_view_path(experience)%></li>
         <% end %>      
         </ul>
     <% end %>
