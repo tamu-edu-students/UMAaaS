@@ -57,8 +57,9 @@ class ExperiencesController < ApplicationController
     
     
     def view
-        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
-        program_id = @experience.program_id
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).first
+        puts(params)
+        #@experience = Experience.left_outer_joins(:user).all.where(experiences: {id: params[:id]}).where(users: {banned: false}).first
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
@@ -81,6 +82,21 @@ class ExperiencesController < ApplicationController
         rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).where.not(rating: nil).count(:id)
         rating_count +=1 #add 1 for the original rating
         @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+        
+        flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if flag_sum.blank? 
+            flag_sum = 0
+        end                 
+        @experience.flagCount = flag_sum
+        puts(@experience.flagCount)
+
+        @experience.hasUserFlagged = 0
+        flagged = FlagExperience.select("flag").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not flagged.nil?
+            if flagged.flag == 1
+                @experience.hasUserFlagged = 1
+            end
+        end
     end
     
     
@@ -111,6 +127,46 @@ class ExperiencesController < ApplicationController
             format.js {}  # code in views/experiences/create_comment.js.erb will return
         end
     end
+    
+    def flagged 
+        puts("STARTED FLAGGING")
+        puts(params)
+        if(params[:flag] == "0")
+            
+            # puts "destroying flag"
+            FlagExperience.where(experience_id: params[:expId]).where(user_id: current_user.id).destroy_all
+        else 
+            # puts "params of flag" + params[:flag].to_s
+            FlagExperience.create(:flag => params[:flag], :user_id => current_user.id, :experience_id => params[:expId])
+        end
+        
+        @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:expId]}).first
+        
+        # str = "number of experience: " 
+        # puts str + @experience.to_s 
+
+        flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if flag_sum.blank? 
+            flag_sum = 0
+        end                 
+        @experience.flagCount = flag_sum
+
+        @experience.hasUserFlagged = 0
+        flagged = FlagExperience.select("flag").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not flagged.nil?
+            if flagged.flag == 1
+                @experience.hasUserFlagged = 1
+            end
+        end
+        
+        @experienceDivId = "portal-experience-wrapper-" + params[:expId]
+        
+        
+        respond_to do |format|
+            format.js {}
+        end
+    end
+
     
     def yelp_search
         @results = search(params[:yelpTerm], params[:yelpLocation])
@@ -152,6 +208,8 @@ class ExperiencesController < ApplicationController
         end
         # done checking for unauthorized deletions
         
+        # delete flag
+        FlagExperience.where(experience_id: params[:id]).destroy_all
         
         # delete comments
         ExperienceComment.where(experience_id: params[:id]).destroy_all
