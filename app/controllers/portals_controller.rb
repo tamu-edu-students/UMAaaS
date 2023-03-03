@@ -170,7 +170,7 @@ puts("Hello")
           exp.hasUserFlagged = 1
         end
       end
-
+      
       exp.tagArray
 
       exp.comments = ExperienceComment.left_outer_joins(:user).select('experience_comments.*,users.name as user_name').where(experience_id: exp.id).where(users: { banned: false }).order(created_at: :desc).limit(Rails.configuration.max_comments_shown)
@@ -219,6 +219,7 @@ puts("Hello")
     when 'comments'
       @experiences = @experiences.sort_by(&:totalComments).reverse!
     end
+    
 
     # for sorting the tips
     @tip_sort_by = if params[:sort_tip].nil?

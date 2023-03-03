@@ -3,16 +3,6 @@
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
 				<div class="portal-experience-icons">
-					<% if locals[:experience].user_id == current_user.id %>	
-						<!--<p class="portal-experience-icon">Flag</p>-->
-						<div class="portal-experience-flag">
-			            	report
-			            	<div class="<%= if current_user.id then "experience-flagged-yes" else "experience-flagged-yes-nologin" end %>
-			                	<%= if locals[:experience].hasUserFlagged == 1 then "flagged" end %>" id="experience-flag-<%= locals[:experience].id %>">
-			                	<%= locals[:experience].flagCount %>
-			            	</div>
-			        	</div>
-					<% end %>
 					<div>
 						<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
 					</div>

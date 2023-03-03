@@ -135,7 +135,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           dataType: "script",
           success: function(data, textStatus, jqXHR){
             console.log("unflagging successful");
-            location.reload();
+            window.location.reload();
           },
           error: function(jqXHR, textStatus, errorThrown){
           }
@@ -149,7 +149,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           dataType: "script",
           success: function(data, textStatus, jqXHR){
             console.log("flagging successful");
-            location.reload();
+            window.location.reload();
           },
           error: function(jqXHR, textStatus, errorThrown){
           }
@@ -160,9 +160,10 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     // and flag on an experience
     $(document).off('click', '.experience-flagged-yes').on('click', '.experience-flagged-yes', function(){
     
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
+      
       var idParts = this.id.split("-");
       var expId = idParts[2];
-      
       if($(this).hasClass("flagged")){
         console.log("marking flag as not flagged")
         $.ajax({
@@ -171,6 +172,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           data: {expId: expId, flag: 0}, //0 means no flag 
           dataType: "script",
           success: function(data, textStatus, jqXHR){
+            window.location.reload();
           },
           error: function(jqXHR, textStatus, errorThrown){
           }
@@ -183,6 +185,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
           data: {expId: expId, flag: 1},
           dataType: "script",
           success: function(data, textStatus, jqXHR){
+            window.location.reload();
           },
           error: function(jqXHR, textStatus, errorThrown){
           }

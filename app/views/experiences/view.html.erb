@@ -9,12 +9,20 @@
 </div>
 <div id="flex-container">
  <div id="column_2_of_2" class="flex-item">
-     <div class="portal-column-title">Experiences <%= if current_user.id == @experience.user_id then link_to 'Edit', edit_experience_path; end %>
+     <div class="portal-column-title">Experiences 
+       <% if @experience.user_id == current_user.id || current_user.admin %>	
+      <div style="display: flex; gap: 8px; align-items: center">
+						<div  class="portal-experience-flag">
+       	<div class="<%= if current_user.id then "experience-flagged-yes" else "experience-flagged-yes-nologin" end %>
+           	<%= if @experience.hasUserFlagged == 1 then "flagged" end %>" id="experience-flagged-<%= @experience.id %>">
+           	<%= @experience.flagCount %>
+       	</div>
+    	</div>
+					<% end %>
+     <%= if current_user.id == @experience.user_id then link_to 'Edit', edit_experience_path; end %>
+    	</div>
          <div class="portal-column-title-sort">&nbsp;</div>
      </div>
- 
  	<div class="portal-experience-outer-wrapper" id="portal-experience-wrapper-<%= @experience.id %>"><%= render 'experiences/view' , locals: {experience: @experience, single: true} %></div>
-
- 
 </div>
 <%if not logged_in? %><div class="arrow-box">Login to share your tips and experiences!</div><% end %>
