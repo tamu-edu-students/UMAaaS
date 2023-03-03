@@ -292,7 +292,7 @@
           null,
           null,
           1,
-          7,
+          4,
           null,
           null,
           null,
@@ -490,12 +490,17 @@
           1,
           null,
           1,
+<<<<<<< HEAD
           88,
+=======
+          58,
+>>>>>>> origin
           null,
           0,
           null,
           null,
           1,
+<<<<<<< HEAD
           100,
           100,
           100,
@@ -503,6 +508,15 @@
           100,
           100,
           100,
+=======
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+          44,
+>>>>>>> origin
           null,
           null,
           0,
@@ -656,9 +670,15 @@
           1,
           1,
           null,
+<<<<<<< HEAD
           6,
           6,
           6,
+=======
+          0,
+          0,
+          0,
+>>>>>>> origin
           null,
           null,
           1,
@@ -714,34 +734,46 @@
           4,
           null,
           null,
-          4,
+          0,
           null,
           null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+<<<<<<< HEAD
           4,
           4,
           4,
           1,
           1,
+=======
           0,
           0,
+          0,
+          0,
+          0,
           null,
-          1,
+>>>>>>> origin
           null,
-          null,
-          null,
-          4,
-          null,
-          null,
-          4,
-          null,
-          4,
-          null,
-          4,
-          4,
-          4,
-          1,
-          1,
-          null,
+          0,
+          0,
+          0,
           null,
           4,
           4,
@@ -751,6 +783,7 @@
           4,
           4,
           null,
+<<<<<<< HEAD
           4,
           4,
           4,
@@ -761,33 +794,53 @@
           4,
           4,
           4,
+=======
           0,
           null,
           0,
+          0,
+          0,
+          0,
+>>>>>>> origin
+          0,
           null,
           0,
           null,
-          null,
-          null,
-          4,
-          4,
-          4,
-          0,
           0,
           null,
           null,
           null,
+          4,
+          4,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+<<<<<<< HEAD
           4,
           3,
           null,
           null,
           null,
           4,
+=======
+          0,
+          0,
+          null,
+          null,
+>>>>>>> origin
+          null,
+          0,
           null,
           0,
           null,
           null,
-          null,
+<<<<<<< HEAD
           null,
           4,
           null,
@@ -801,6 +854,15 @@
           4,
           7,
           7,
+=======
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          0,
+>>>>>>> origin
           0,
           0,
           7,
@@ -850,44 +912,65 @@
           null,
           null,
           null,
+<<<<<<< HEAD
           3,
           null,
           null,
           3,
           3,
-          null,
+=======
           0,
           null,
-          null,
-          null,
-          3,
-          null,
-          3,
+>>>>>>> origin
           null,
           0,
-          null,
-          0,
-          null,
           0,
           null,
           0,
           null,
           null,
+<<<<<<< HEAD
+          3,
+          null,
+          3,
+=======
+>>>>>>> origin
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+<<<<<<< HEAD
+          null,
           null,
           3,
           3,
+          null,
+=======
+>>>>>>> origin
+          0,
           null,
           0,
           null,
           null,
-          null,
+<<<<<<< HEAD
           3,
           null,
           6,
+=======
+          null,
+          0,
+          0,
+>>>>>>> origin
           null,
           0,
           null,
           null,
+<<<<<<< HEAD
           null
         ]
       },
@@ -901,8 +984,12 @@
       },
       "/home/ubuntu/environment/UMAaaS/app/models/tip.rb": {
         "lines": [
+=======
+>>>>>>> origin
           null,
+          0,
           null,
+<<<<<<< HEAD
           1,
           1,
           1,
@@ -946,20 +1033,30 @@
           1,
           1,
           1,
+=======
+          0,
+          null,
+          0,
+          null,
+          null,
+>>>>>>> origin
           null
         ]
       },
-      "/home/ubuntu/environment/UMAaaS/app/models/participant.rb": {
+      "/home/ubuntu/environment/UMAaaS/app/models/review.rb": {
         "lines": [
           null,
           null,
-          1,
           1,
           null
         ]
       }
     },
+<<<<<<< HEAD
     "timestamp": 1677800256
+=======
+    "timestamp": 1677019919
+>>>>>>> origin
   },
   "RSpec": {
     "coverage": {

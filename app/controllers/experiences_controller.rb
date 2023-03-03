@@ -14,18 +14,20 @@ class ExperiencesController < ApplicationController
         @program = Program.find params[:id]
         @experience = Experience.new
         program = Program.find params[:id]
-        participant = Participant.find_by(email: current_user.email, program_id: program.id)
+        program_id = @experience.program_id
+        participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
-            flash[:alert] = "You are not assigned to this program."
-            redirect_to portal_path(params[:id]) and return 
+            flash[:warning] = "You are not assigned to this program."
+            redirect_to portal_path(program_id) and return 
         end
+        participant = Participant.find_by(email: current_user.email, program_id: program.id)
         @near = program.location
     end
     
     def create
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
-            flash[:alert] = "Cannot create experience"
+            flash[:notice] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
         end
         
@@ -55,15 +57,14 @@ class ExperiencesController < ApplicationController
     
     
     def view
-        
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).first
         puts(params)
         #@experience = Experience.left_outer_joins(:user).all.where(experiences: {id: params[:id]}).where(users: {banned: false}).first
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
-            flash[:alert] = "You are not assigned to this program."
-            redirect_to portal_path(params[:id]) and return 
+            flash[:warning] = "You are not assigned to this program."
+            redirect_to portal_path(program_id) and return 
         end
 
         @program = Program.find @experience.program_id
@@ -100,6 +101,13 @@ class ExperiencesController < ApplicationController
     
     
     def create_comment
+        # participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
+        # if participant.nil? and not current_user.admin
+        #     puts "FOUND NIL"
+        #     flash[:alert] = "You are not assigned to this program."
+        #     redirect_to portal_path(program_id) and return 
+        # end
+        
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => current_user.id, :experience_id => params[:experienceId])
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:experienceId]}).first
         
@@ -185,7 +193,7 @@ class ExperiencesController < ApplicationController
     def delete
         # prevent unauthorized deletions
         if(not logged_in? or not current_user.admin)
-           flash[:alert] = "You are not authorized to delete this post!"
+           flash[:warning] = "You are not authorized to delete this post!"
            redirect_to root_path and return 
         end
         
@@ -195,7 +203,7 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Post not found, error deleting!"
             redirect_to root_path and return
         elsif((experience.user_id != current_user.id) && (not current_user.admin))
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return
         end
         # done checking for unauthorized deletions
@@ -221,17 +229,17 @@ class ExperiencesController < ApplicationController
     def delete_comment
         # prevent unauthorized deletions
          if(not logged_in?)
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return 
          end
         
         experienceComment = ExperienceComment.find params[:id]
     
         if(experienceComment.nil?)
-            flash[:alert] = "Post not found, error deleting!"
+            flash[:warning] = "Post not found, error deleting!"
             redirect_to root_path and return
         elsif((experienceComment.user_id != current_user.id) && (not current_user.admin))
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return
         end
         # done checking for unauthorized deletions

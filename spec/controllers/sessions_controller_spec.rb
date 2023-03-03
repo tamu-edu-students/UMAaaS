@@ -71,23 +71,6 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
 
-  #   context 'with a banned user' do
-  #     before do
-  #     #user = User.create(uid: '12345', name: 'Test User', email: 'test@tamu.edu', banned: true)
-  #     user_info = { 'uid' => '12345', 'info' => { 'name' => 'Test User', 'email' => 'test@tamu.edu', 'image' => 'http://test_image.com' , 'banned'=>'true'} }
-  #     request.env['omniauth.auth'] = user_info
-  #   end
-
-  #   it 'displays an alert message' do
-  #   post :create
-  #   expect(flash[:alert]).to eq('Your account has been banned! Please contact the administrators.')
-  # end
-
-  #     it 'redirects to the root path' do
-  #       post :create
-  #       expect(response).to redirect_to(root_path)
-  #     end
-  #   end
     context 'when the user is not found in the database' do
       before do
         let(:user_info) { { 'uid' => '12345', 'info' => { 'email' => 'test@tamu.edu', 'name' => 'Test User', 'image' => 'image_url' } } }
@@ -122,20 +105,27 @@ RSpec.describe SessionsController, type: :controller do
       end
     end
   end
-  describe '#destroy' do
-  it 'deletes the user sessions' do
-    session[:user] = dbUser.id
-    session[:user_admin] = dbUser.admin
-    session[:user_img] = user_info['info']['image']
-    session[:user_program_id] = dbUser.program_id
-    session[:user_email] = dbUser.email
-    delete :destroy
-    expect(session[:user]).to be_nil
-    expect(session[:user_admin]).to be_nil
-    expect(session[:user_img]).to be_nil
-    expect(session[:user_program_id]).to be_nil
-    expect(session[:user_email]).to be_nil
+#   
+describe "DELETE #destroy" do
+    let(:user) { create(:user) }
+
+    before do
+      session[:user] = user.id
+      session[:user_admin] = true
+      session[:user_img] = 'http://example.com/user.png'
+      session[:user_program_id] = 123
+      session[:user_email] = 'user@example.com'
+    end
+
+    it "clears the session keys and redirects to the root path" do
+      delete :destroy
+      expect(session[:user]).to be_nil
+      expect(session[:user_admin]).to be_nil
+      expect(session[:user_img]).to be_nil
+      expect(session[:user_program_id]).to be_nil
+      expect(session[:user_email]).to be_nil
+      expect(response).to redirect_to(root_path)
+    end
   end
-end
 
 end

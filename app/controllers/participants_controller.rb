@@ -49,9 +49,8 @@ class ParticipantsController < ApplicationController
     end
     
     if errors.any?
-        flash[:alert] = "Participant(s) already exist or invalid format: #{errors.join(', ')}"
-    end
-    if created_participants.any?
+      flash[:warning] = "Participant(s) already exist or invalid format: #{errors.join(', ')}"
+    elsif created_participants.any?
       flash[:notice] = "Participant(s) successfully created!"
     end
     

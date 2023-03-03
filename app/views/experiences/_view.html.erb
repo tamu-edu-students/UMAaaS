@@ -8,25 +8,35 @@
 					</div>
 				</div>
 			</div>
+			<% if not locals[:experience].tagArray.nil? %>
 			<div class="portal-experience-tags">
-				<% if not locals[:experience].tagArray.nil? then locals[:experience].tagArray.each do |tag| %>
+				<% locals[:experience].tagArray.each do |tag| %>
 					<div class="portal-experience-tag">
 						#<%= tag %>
 					</div>
-					<% end end %>
+					<% end %>
 			</div>
-			<div class="portal-experience-photo">
-				<% if locals[:experience].image.attached? %>
-					<%= image_tag locals[:experience].image, style: "width: 400px; height: auto;" %>
-				<%end%>
-			</div>
-			</br>
+			<% end %>
+			<% if locals[:experience].image.attached? %>
+				<div class="portal-experience-photo">
+					<%= image_tag locals[:experience].image, style: "width: 300px; "%>
+				</div>
+			<%end%>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>
 			<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
-				<%= locals[:experience].user.name %>
+				<% if locals[:experience].user.avatar.attached? %>
+				  <%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
+				    <%= image_tag(locals[:experience].user.avatar, class: "profile-circle", height: '30', width: '30') %>
+				  <% end %>
+				  <% else %>
+				  	<%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
+				    <%= image_tag(asset_path("profile.jpg"), class: "profile-circle", height: '30', width: '30') %>
+				  <% end %>
+				<% end %>
+			<%= link_to locals[:experience].user.name, user_path(locals[:experience].user), data: { turbolinks: false } %>
 			</span>
 			<span class="portal-experience-info-date">
 				<%= locals[:experience].created_at.strftime("%b %-d, '%y") %>

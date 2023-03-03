@@ -1,6 +1,17 @@
-<div id="page-header">
-  <%= @user.name %>'s Posts
+<div id="white-header">
+  <% if @user.avatar.attached? %>
+    <%= image_tag(@user.avatar, class: "user-circle", height: '100', width: '100') %>
+  <% else %>
+    <%= image_tag(asset_path("profile.jpg"), class: "user-circle", height: '100', width: '100') %>
+  <% end %>
+  <%= @user.name %>
+  <% if session[:user_email] == @user.email %>
+  <div class = "edit-user">
+  <%= link_to 'Edit', edit_user_path, style: "font-size: 16px;" %>
+  </div>
+  <% end %>
 </div>
+
 
 <div class="flex-header">
   <div class="header_column_1_of_1" class="flex-item">
