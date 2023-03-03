@@ -1,0 +1,71 @@
+<div id="page-header">View Flagged Posts and Tips</div>
+<div id="search-wrapper"><div class="search-border-outer"><div class="search-border-inner"><%= form_tag users_path(), :method => :get, :id => "search-form" do %><input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>"><input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %></div></div></div>
+
+<div id="flex-container">
+ <div id="column1" class="flex-item"><table class="users-legend">
+    
+     <thead>
+         <tr>
+             <td colspan="2">Legend</td>
+         </tr>
+     </thead>
+     <tbody>
+         <tr>
+             <td>Admin</td>
+             <td class="admin"></td>
+         </tr>
+         <tr>
+             <td>Banned</td>
+             <td class="banned"></td>
+         </tr>
+     </tbody>
+ </table>
+ <div id="users-show-banned"><input type="checkbox" id="users-filter-show-banned" name="showBanned" <%= if @showBanned then "checked" end %>> <label for="users-filter-show-banned">Show Banned Users</label></div></div>
+ <div id="column2" class="flex-item"><table class="users-list">
+     <!--<div id="search-wrapper">-->
+     <!--    <div class="search-border-outer">-->
+     <!--        <div class="search-border-inner">-->
+     <!--             <%= form_tag users_path(), :method => :get, :id => "search-form" do %>-->
+     <!--                <input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>">-->
+     <!--                <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>">-->
+     <!--            <% end %>-->
+     <!--   </div>-->
+     <!-- </div>-->
+     <!--</div>-->
+     
+     
+
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Home Program</td>
+            <td>Admin</td>
+            <td <%= if not @showBanned then "class=users-hide-banned-column" end %>>Banned</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="filters">
+            <td></td>
+            <td></td>
+            <td><select id="users-filter-programs" name="program_id"><option value=0>view all programs</option>
+                <%= @programs.each do |program| %>
+                    <option value="<%= program.id %>" <%= if @selectedProgram == program.id then "selected" end %>><%= program.name %></option>
+                <% end %>
+            </select></td>
+            <td></td>
+        </tr>
+        <% @users.each do |user| %>    
+        <tr <%= if user.banned then "class=banned" else if user.admin then "class=admin" end end %>>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.program_name %></td>
+            <td class="users-admin-column"><%= if user.admin then "x" end %></td>
+            <td <%= if not @showBanned then "class=users-hide-banned-column" else "class=users-banned-column" end %>><%= if user.banned then "x" end %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table></div>
+</div>
