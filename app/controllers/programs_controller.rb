@@ -93,10 +93,10 @@ class ProgramsController < ApplicationController
   end
   
   def flagged 
-    @tips = FlagTip.find(params[:id])
-    @experience = FlagExperience.find(params[:id])
+    @program = Program.find(params[:id])
+    @tips = FlagTip.joins(:tip).where(tips: { program_id: @program.id })
+    @experiences = FlagExperience.joins(:experience).where(experiences: { program_id: @program.id })
   end
-
   
   def program_params
         params.require(:experience).permit(:name, :location, :region, :banner)

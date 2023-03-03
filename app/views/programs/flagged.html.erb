@@ -1,3 +1,50 @@
-<div id="page-header">View Flagged Posts and Tips</div>
-<div id="search-wrapper"><div class="search-border-outer"><div class="search-border-inner"><%= form_tag users_path(), :method => :get, :id => "search-form" do %><input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>"><input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %></div></div></div>
+<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+  Flagged Items for <%= @program.name %>
+</div>
+<div id="search-wrapper">
+  <div class="search-border-outer">
+    <div class="search-border-inner">
+      <%= form_tag users_path(), :method => :get, :id => "search-form" do %>
+        <input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>">
+        <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>">
+      <% end %>
+    </div>
+  </div>
+</div>
 
+<div id="flagged-wrapper">
+  <table class="flagged-list">
+    <thead>
+      <tr>
+        <th>Flagged Item</th>
+        <th>Creator</th>
+        <th>Date Created</th>
+        <th>Flagged By</th>
+        <th>Date Flagged</th>
+        <th>Number of Flags</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @experiences.each do |flagged_experience| %>
+        <tr>
+          <td><%= link_to "#{flagged_experience.experience.title}", experience_path(flagged_experience.experience) %></td>
+          <td><%= flagged_experience.experience.user.name %></td>
+          <td><%= flagged_experience.experience.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= flagged_experience.user.name %></td>
+          <td><%= flagged_experience.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= flagged_experience.experience.flagCount %></td>
+        </tr>
+      <% end %>
+      <% @tips.each do |flagged_tip| %>
+        <tr>
+          <td><%= flagged_tip.tip.tip %></td>
+          <td><%= flagged_tip.tip.user.name %></td>
+          <td><%= flagged_tip.tip.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= flagged_tip.user.name %></td>
+          <td><%= flagged_tip.created_at.strftime("%m/%d/%Y") %></td>
+          <td><%= flagged_tip.tip.flagCount %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
