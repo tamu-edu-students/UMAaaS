@@ -214,7 +214,6 @@ puts("Hello")
       @experiences = @experiences.sort_by(&:rating)
     when 'avg_rating_asc'
       @experiences = @experiences.sort_by(&:average_rating)
-    when 'date'
       @experiences = @experiences.sort_by(&:created_at).reverse!
     when 'comments'
       @experiences = @experiences.sort_by(&:totalComments).reverse!
