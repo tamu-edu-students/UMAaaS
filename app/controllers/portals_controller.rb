@@ -57,9 +57,11 @@ class PortalsController < ApplicationController
 
   def view
     # get this specific program
-
     @program = Program.find params[:id]
-
+    respond_to do |format|
+      format.html
+      # format.js { render partial: 'search_results' } # render partial view for AJAX requests
+    end
     # get list of all programs to display in drop down list for switching between
     @programs = Program.where(disabled: false)
 
@@ -152,7 +154,7 @@ puts("Hello")
         found = true if exp.tags =~ /,#{searchTerm},/i
       elsif !searchTerm.nil?
         found = false
-        if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.yelp_name =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i)
+        if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i)
           found = true
         end
       end
