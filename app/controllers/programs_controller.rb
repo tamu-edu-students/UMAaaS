@@ -92,6 +92,12 @@ class ProgramsController < ApplicationController
     redirect_to programs_path
   end
   
+  def flagged 
+    @program = Program.find(params[:id])
+    @tips = FlagTip.joins(:tip).where(tips: { program_id: @program.id })
+    @experiences = FlagExperience.joins(:experience).where(experiences: { program_id: @program.id })
+  end
+  
   def program_params
         params.require(:experience).permit(:name, :location, :region, :banner)
   end

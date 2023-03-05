@@ -66,3 +66,51 @@
     text-align: center;
 }
 
+.flagged-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.flagged-list th,
+.flagged-list td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.flagged-list th {
+  font-weight: bold;
+}
+
+.flagged-list tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.flagged-list tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.num-flags {
+  text-align: center;
+}
+
+.num-flags span {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+}
+
+.num-flags .flag-count {
+  font-size: 24px;
+  color: #f00;
+}
+
+#flagged-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+}
+

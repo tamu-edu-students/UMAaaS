@@ -17,7 +17,6 @@ class TipsController < ApplicationController
     @program = Program.find params[:id]
     participant = Participant.find_by(email: current_user.email, program_id: params[:id])
     return unless participant.nil? and not current_user.admin
-
     flash[:alert] = 'You are not authorized to manage tips for this program'
     redirect_to portal_path(params[:id]) and return
   end
@@ -81,6 +80,10 @@ class TipsController < ApplicationController
     respond_to do |format|
       format.js {}
     end
+  end
+  
+  def flagCount
+    return FlagTip.left_outer_joins(:user).where(tip_id: tip.id).where(users: {banned: false}).where(flag: 1).group(:tip_id).count(:flag).values[0]
   end
 
       

@@ -26,6 +26,10 @@
                       <ul>
                         <li><%=link_to "Users", users_path(), :id => "users" %></li>
                         <li><%=link_to "Programs", programs_path(), :id => "programs" %></li>
+                        <% if controller_name == 'portals'%>
+                          <li><%= link_to "Flag", flagged_program_path(@program), :id => "flagged" %></li>
+                        <% end %>
+
                       </ul>
                       </li>
                     <%end%>
