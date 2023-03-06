@@ -64,7 +64,7 @@ class ExperiencesController < ApplicationController
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
             flash[:warning] = "You are not assigned to this program."
-            redirect_to portal_path(program_id) and return 
+            redirect_to portal_path(@experience.program_id) and return 
         end
 
         @program = Program.find @experience.program_id
