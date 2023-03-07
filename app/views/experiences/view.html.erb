@@ -1,5 +1,7 @@
-<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
-  <%= @program.name %>
+<div onclick="window.location.href = '/';">
+  <div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+    <%= @program.name %>
+  </div>
 </div>
 
 <div class="flex-header">
