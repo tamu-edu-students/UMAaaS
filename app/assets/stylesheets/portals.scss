@@ -141,6 +141,30 @@ a {
     color: white;
 }
 
+.header-button-2 {
+    border: 2px solid #6495ed;
+    color: #6495ed;
+    border-radius: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-size: 21px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header-button-2:hover {
+    background-color: #6495ed;
+    border-radius: 10px;
+    color: white;
+}
+
+.header-button-text-2:hover {
+    color: white;
+}
+
 .participant-button {
     border: 2px solid #6495ed;
     color: #6495ed;
