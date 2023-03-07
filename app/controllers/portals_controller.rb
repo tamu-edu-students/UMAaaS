@@ -58,10 +58,6 @@ class PortalsController < ApplicationController
   def view
     # get this specific program
     @program = Program.find params[:id]
-    respond_to do |format|
-      format.html
-      # format.js { render partial: 'search_results' } # render partial view for AJAX requests
-    end
     # get list of all programs to display in drop down list for switching between
     @programs = Program.where(disabled: false)
 

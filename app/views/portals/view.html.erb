@@ -21,9 +21,12 @@
             <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %>
         </div>
     </div>
-   <% if current_user.admin then %> 
+    <% if current_user.admin then %>
         <div style="" class="participant-button">
-            <%= link_to "Add Participants", new_program_participant_path(@program.id), class: "blue-link"%>
+            <%= link_to "Participants", new_program_participant_path(@program), class: "blue-link"%>
+        </div>
+        <div style="" class="participant-button">
+            <%= link_to "Flags", flagged_program_path(@program), :id => "flagged", class: "blue-link"%>
         </div>
     <% end %>
 </div>
