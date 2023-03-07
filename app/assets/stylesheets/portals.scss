@@ -55,6 +55,12 @@ a {
     border-radius: 10px;
 }
 
+.admin-buttons {
+    display: flex;
+    justify-content: end;
+    gap:10px;
+}
+
 #column1{
 	order: 1;
 	flex-grow: 1;
