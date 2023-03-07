@@ -42,7 +42,7 @@ a {
 }
 
 
-#portal-switch-programs select{
+.program-dropdown-middle select{
     background:#ededed;
     border:0px;
     font-size: 16px;
@@ -55,12 +55,7 @@ a {
 
 .program-dropdown-middle {
     display: flex;
-    position: fixed;
-    left: 42vw;
-    top: 0.8vw;
-    margin: 0 auto;
-    padding-left: 0;
-    width: 16vw;
+    padding: 10px;
     background-color: #DEDEDE;
     border-radius: 10px;
 }
