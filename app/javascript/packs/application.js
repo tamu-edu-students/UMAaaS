@@ -442,46 +442,46 @@ function generatePortalParams(){
 
 
 // This function sends an AJAX request to the server to update the search results
-  function updateSearchResults(searchTerm) {
-    var programId = window.location.pathname.split('/').pop();
-    console.log('search:', searchTerm);
-    $.ajax({
-      url: '/p/' + programId,
-      method: 'GET',
-      data: { search: searchTerm },
-      // dataType: 'html',
-      success: function(data) {
+  // function updateSearchResults(searchTerm) {
+  //   var programId = window.location.pathname.split('/').pop();
+  //   console.log('search:', searchTerm);
+  //   $.ajax({
+  //     url: '/p/' + programId,
+  //     method: 'GET',
+  //     data: { search: searchTerm },
+  //     // dataType: 'html',
+  //     success: function(data) {
         
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
+  //     },
+  //     error: function(jqXHR, textStatus, errorThrown) {
         
-      }
-    });
-  }
+  //     }
+  //   });
+  // }
   
-  // This function debounces the search input so that it only sends an AJAX request
-  // after the user has finished typing (i.e. they stop typing for a short period)
-  function debounce(func, delay) {
-    let timeout;
-    return function() {
-      const context = this, args = arguments;
-      const later = function() {
-        timeout = null;
-        func.apply(context, args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, delay);
-    };
-  }
+  // // This function debounces the search input so that it only sends an AJAX request
+  // // after the user has finished typing (i.e. they stop typing for a short period)
+  // function debounce(func, delay) {
+  //   let timeout;
+  //   return function() {
+  //     const context = this, args = arguments;
+  //     const later = function() {
+  //       timeout = null;
+  //       func.apply(context, args);
+  //     };
+  //     clearTimeout(timeout);
+  //     timeout = setTimeout(later, delay);
+  //   };
+  // }
 
-  $(document).ready(function() {
-  // Your code here
-  const searchContainer = document.getElementById("search-field");
-  searchContainer.addEventListener('input', debounce(function(event) {
-    const searchTerm = event.target.value;
-    updateSearchResults(searchTerm);
-  }, 300));
-  });
+  // $(document).ready(function() {
+  // // Your code here
+  // const searchContainer = document.getElementById("search-field");
+  // searchContainer.addEventListener('input', debounce(function(event) {
+  //   const searchTerm = event.target.value;
+  //   updateSearchResults(searchTerm);
+  // }, 300));
+  // });
 
 
 
