@@ -157,7 +157,7 @@ class TipsController < ApplicationController
     Tip.where(id: params[:id]).destroy_all
 
     respond_to do |format|
-      format.js {}
+      format.html { redirect_to request.referer, notice: 'Tip was successfully deleted.' }
     end
   end
 end

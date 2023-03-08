@@ -114,3 +114,18 @@
   padding: 20px;
 }
 
+.delete-button input[type=submit] {
+  background-color: #500000;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover input[type=submit] {
+  background-color: #800000;
+}
+
+
+

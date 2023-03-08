@@ -24,11 +24,11 @@
         <th>Date Created</th>
         <th>Flagged By</th>
         <th>Date Flagged</th>
-        <th>Number of Flags</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <% @experiences.each do |flagged_experience| %>
+    <% @experiences.each do |flagged_experience| %>
         <tr>
           <td><%= link_to "#{flagged_experience.experience.title}", experience_path(flagged_experience.experience) %></td>
           <td> Experience </td>
@@ -36,7 +36,7 @@
           <td><%= flagged_experience.experience.created_at.strftime("%m/%d/%Y") %></td>
           <td><%= flagged_experience.user.name %></td>
           <td><%= flagged_experience.created_at.strftime("%m/%d/%Y") %></td>
-          <td><%= flagged_experience.experience.flagCount %></td>
+          <td><div class="delete-button"><%= button_to 'Delete', "/experience/#{flagged_experience.experience.id}/delete", method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }%></div></td>
         </tr>
       <% end %>
       <% @tips.each do |flagged_tip| %>
@@ -47,7 +47,7 @@
           <td><%= flagged_tip.tip.created_at.strftime("%m/%d/%Y") %></td>
           <td><%= flagged_tip.user.name %></td>
           <td><%= flagged_tip.created_at.strftime("%m/%d/%Y") %></td>
-          <td><%= flagged_tip.tip.flagCount %></td>
+          <td><%= button_to 'Delete', "/tip/#{flagged_tip.tip.id}/delete", method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }, class: 'btn btn-danger' %></td>
         </tr>
       <% end %>
     </tbody>
