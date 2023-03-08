@@ -221,7 +221,7 @@ class ExperiencesController < ApplicationController
         Experience.where(id: params[:id]).destroy_all
         
         respond_to do |format|
-            format.js {}
+            format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
         end
     end
     

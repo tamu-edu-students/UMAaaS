@@ -9,7 +9,18 @@
 }
 
 .users-list td, .users-legend td, .user-admin td{
-    border: 1px solid #ededed;
+    // border: 1px solid #ededed;
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.users-list tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.users-list tbody tr:hover {
+  background-color: #f5f5f5;
 }
 
 .users-list tr.admin td, .users-legend td.admin{
@@ -30,6 +41,13 @@
 
 .users-list tr.filters td{
     border: none;
+}
+
+.users-list th {
+  font-weight: bold;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 #users-filter-programs{
