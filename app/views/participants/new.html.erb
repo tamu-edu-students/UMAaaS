@@ -3,11 +3,22 @@
   Participants for <br /> <%= @program.name %>
 </div>
 </div>
+
+<div id="search-wrapper">
+  <div class="search-border-outer">
+    <div class="search-border-inner">
+      <%= form_tag users_path(), :method => :get, :id => "search-form" do %>
+        <input type="text" id="search-field" name="search" placeholder="search" value="<%= params[:search] %>">
+        <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>">
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div id="flex-container">
-    <div id="column1" class="flex-item"></div>
-  <div id="column2" class="flex-item"><%= form_tag program_participants_path, :method => :post do %>
-    <%= link_to "Back", edit_program_path(@program) %>
-  <% end %>
+  <%= link_to "Back", edit_program_path(@program) %>
+  <div id="column2" class="flex-item">
+    
     <div style="display:flex; justify-content: center; margin-top: 50px; margin-bottom: 70px">
     <div  id="column2" class="flex-item">
       <table class="users-list">
@@ -34,9 +45,9 @@
     </div>
     
     <div style="text-align: center;">
-    <p style="font-weight: bold; font-size: 36px; font-family: Arial, sans-serif; color: #333;">Add participants</p>
+    <p style="font-weight: bold; font-size: 36px; font-family: Arial, sans-serif; color: #333;">Add New Participants</p>
     </div>
-    
+    <%= form_tag program_participants_path, :method => :post do %>
     <table class="program-edit-table">
       <tbody>
         <tr>
@@ -60,6 +71,27 @@
         </tr>
       </tbody>
     </table>
+    <% end %>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#search-field').on('keyup', function() {
+      var query = $(this).val().toLowerCase();
+      $('.users-list tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1)
+      });
+    });
+  });
+  $(document).ready(function() {
+    $('#search-form').submit(function(event) {
+      event.preventDefault(); // prevent the default form submission behavior
+      var query = $('#search-field').val().toLowerCase();
+      $('.flagged-list tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1)
+      });
+    });
+  });
+</script>
 
