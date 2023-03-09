@@ -1,4 +1,4 @@
-<div onclick="window.location.href = '/';">
+<div onclick="window.location.href = '/p/<%= @program.id %>';">
 <div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
   Participants for <br /> <%= @program.name %>
 </div>
@@ -16,9 +16,7 @@
 </div>
 
 <div id="flex-container">
-  <%= link_to "Back", edit_program_path(@program) %>
   <div id="column2" class="flex-item">
-    
     <div style="display:flex; justify-content: center; margin-top: 50px; margin-bottom: 70px">
     <div  id="column2" class="flex-item">
       <table class="users-list">

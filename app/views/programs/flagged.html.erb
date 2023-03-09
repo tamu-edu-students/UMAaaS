@@ -1,4 +1,4 @@
-<div onclick="window.location.href = '/';">
+<div onclick="window.location.href = '/p/<%= @program.id %>';">
 <div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
   Flagged Items for <%= @program.name %>
 </div>
@@ -19,38 +19,44 @@
     <thead>
       <tr>
         <th>Flagged Item</th>
-        <th>Type</th>
         <th>Creator</th>
+        <th>Type</th>
         <th>Date Created</th>
         <th>Flagged By</th>
         <th>Date Flagged</th>
+        <th>Remove Flag</th>
         <th>Delete</th>
+        <th>Ban User</th>
       </tr>
     </thead>
-    <tbody>
-    <% @experiences.each do |flagged_experience| %>
-        <tr>
-          <td><%= link_to "#{flagged_experience.experience.title}", experience_path(flagged_experience.experience) %></td>
-          <td> Experience </td>
-          <td><%= flagged_experience.experience.user.name %></td>
-          <td><%= flagged_experience.experience.created_at.strftime("%m/%d/%Y") %></td>
-          <td><%= flagged_experience.user.name %></td>
-          <td><%= flagged_experience.created_at.strftime("%m/%d/%Y") %></td>
-          <td><div class="delete-button"><%= button_to 'Delete', "/experience/#{flagged_experience.experience.id}/delete", method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }%></div></td>
-        </tr>
-      <% end %>
-      <% @tips.each do |flagged_tip| %>
-        <tr>
-          <td><%= flagged_tip.tip.tip %></td>
-          <td> Tip </td>
-          <td><%= flagged_tip.tip.user.name %></td>
-          <td><%= flagged_tip.tip.created_at.strftime("%m/%d/%Y") %></td>
-          <td><%= flagged_tip.user.name %></td>
-          <td><%= flagged_tip.created_at.strftime("%m/%d/%Y") %></td>
-          <td><div class="delete-button"><%= button_to 'Delete', "/tip/#{flagged_tip.tip.id}/delete", method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }%></div></td>
-        </tr>
-      <% end %>
-    </tbody>
+      <tbody>
+        <% @experiences.reject { |e| e.user.banned? }.each do |flagged_experience| %>
+          <tr>
+            <td><%= link_to "#{flagged_experience.experience.title}", experience_path(flagged_experience.experience) %></td>
+            <td><%= link_to flagged_experience.experience.user.name, user_path(flagged_experience.experience.user) %></td>
+            <td>Experience</td>
+            <td><%= flagged_experience.experience.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= flagged_experience.user.name %></td>
+            <td><%= flagged_experience.created_at.strftime("%m/%d/%Y") %></td></div></td>
+            <td><div class="delete-button"><%= button_to 'Remove Flag', unflag_experience_path(flagged_experience.id), method: :post, data: { confirm: 'Are you sure you want to remove this flag?' }%>
+            <td><div class="delete-button"><%= button_to 'Delete', "/experience/#{flagged_experience.experience.id}/delete", method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }%></div></td>
+            <td><div class="delete-button"><%= button_to 'Ban User', { controller: 'users', action: 'ban', id: flagged_experience.user.id }, method: :get, data: { confirm: 'Are you sure you want to ban this user?' } %></div></td>
+          </tr>
+        <% end %>
+        <% @tips.reject{ |t| t.user.banned? }.each do |flagged_tip| %>
+          <tr>
+            <td><%= flagged_tip.tip.tip %></td>
+            <td><%= link_to flagged_tip.tip.user.name, user_path(flagged_tip.tip.user) %></td>
+            <td>Tip</td>
+            <td><%= flagged_tip.tip.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= flagged_tip.user.name %></td>
+            <td><%= flagged_tip.created_at.strftime("%m/%d/%Y") %></td>
+            <td><div class="delete-button"><%= button_to 'Remove Flag', unflag_tip_path(flagged_tip.id), method: :post, data: { confirm: 'Are you sure you want to remove this flag?' }%></div></td>
+            <td><div class="delete-button"><%= button_to 'Delete', "/tip/#{flagged_tip.tip.id}/delete", method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }%></div></td>
+            <td><div class="delete-button"><%= button_to 'Ban User', { controller: 'users', action: 'ban', id: flagged_tip.user.id}, method: :get, data: { confirm: 'Are you sure you want to ban this user?' } %></div></td>
+          </tr>
+        <% end %>
+      </tbody>
   </table>
 </div>
 

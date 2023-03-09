@@ -44,4 +44,8 @@ Rails.application.routes.draw do
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
   delete 'tip/:id/delete', to: 'tips#delete'
   root 'portals#index'
+  # unflag an experience
+  post 'experience/:id/unflag', to: 'experiences#unflag', as: 'unflag_experience'
+  # unflag a tip
+  post 'tip/:id/unflag', to: 'tips#unflag', as: 'unflag_tip'
 end
