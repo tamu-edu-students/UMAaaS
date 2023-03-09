@@ -68,7 +68,7 @@ class UsersController < ApplicationController
       @user.avatar.attach(params[:avatar])
     end
     flash[:notice] = "#{@user.name} was successfully updated."
-    redirect_to users_path
+    redirect_to user_path(@user)
   end
 
   def destroy; end
