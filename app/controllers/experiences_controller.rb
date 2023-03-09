@@ -166,6 +166,14 @@ class ExperiencesController < ApplicationController
             format.js {}
         end
     end
+    
+    def unflag
+        flagged_experience = FlagExperience.find(params[:id])
+        flagged_experience.destroy
+        respond_to do |format|
+          format.html { redirect_to request.referer, notice: 'Flag removed.' }
+        end
+    end
 
     
     def yelp_search

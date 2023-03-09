@@ -127,7 +127,14 @@ class TipsController < ApplicationController
             format.js {}
         end
     end
-
+    
+  def unflag
+    flagged_tip = FlagTip.find(params[:id])
+    flagged_tip.destroy
+    respond_to do |format|
+      format.html { redirect_to request.referer, notice: 'Flag removed.' }
+    end
+  end
 
   def delete
     # prevent unauthorized deletions
