@@ -171,7 +171,7 @@ puts("Hello")
       
       exp.tagArray
       
-      comment = ExperienceComment.find_by(user_id: current_user.id, experience_id: exp.id)
+      comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: exp.id)
       if !comment.nil?
           puts "commented true"
           exp.commented = true

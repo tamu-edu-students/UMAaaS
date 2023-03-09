@@ -69,7 +69,7 @@ class ExperiencesController < ApplicationController
         end
         
         @experience.commented = false
-        comment = ExperienceComment.find_by(user_id: current_user.id, experience_id: @experience.id)
+        comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: @experience.id)
         if !comment.nil?
             puts "commented true"
             @experience.commented = true
@@ -279,14 +279,13 @@ class ExperiencesController < ApplicationController
         @experienceDivId = "portal-experience-wrapper-" + @experience.id.to_s
         
         @experience.commented = false
-        comment = ExperienceComment.find_by(user_id: current_user.id, experience_id: @experience.id)
+        comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: @experience.id)
         if !comment.nil?
             puts "commented true"
             @experience.commented = true
         else 
             puts "commented false"
         end
-        
 
         respond_to do |format|
             format.js {}   # code in views/experiences/delete_comment.js.erb will return
