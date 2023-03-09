@@ -78,7 +78,7 @@
         		<div class="portal-experience-comment"><%= comment.comment %>
         			<%if current_user.admin || comment.user_id == current_user.id %><div class="portal-experience-comment-delete" id="portal-experience-comment-delete-<%= comment.id %>">&#10006; </div><% end %>
         			<div class="comment-author"><%= comment.user_name %> | <%= comment.created_at.strftime("%b %-d, '%y") %></div>
-        			<div class="comment-rating"><%if comment.rating != nil %><img src="<%=asset_path(comment.rating.to_s + "_thumb2.png")%>" height="16"><% end %></div>
+        			<div class="comment-rating"><%if comment.rating != nil %><img src="<%=asset_path(comment.rating.to_s + "_star2.png")%>" height="16"><% end %></div>
         		</div>
         	<% end %>
         	
