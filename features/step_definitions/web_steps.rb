@@ -48,6 +48,7 @@ require 'rack_session_access/capybara'
 
 Given(/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
+  save_page
 end
 
 And(/^(?:|I )am logged in/) do
@@ -170,7 +171,7 @@ end
 # end
 
 Then(/^(?:|I )should see class "([^"]*)"$/) do |text|
-  page.should have_selector(".#{text}") if page.respond_to? :should
+  page.should have_selector(".#{text}", wait: 100) if page.respond_to? :should
 end
 
 # Then /^(?:|I )should not see class "([^"]*)"$/ do |text|
@@ -184,6 +185,10 @@ end
 Then(/^(?:|I )should see id "([^"]*)"$/) do |text|
   page.should have_selector("##{text}") if page.respond_to? :should
 end
+
+#When(/^I click on bookmark icon/) do 
+#  page.driver.browser.execute_script("$(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes')")
+#end
 
 # Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
 #   regexp = Regexp.new(regexp)
