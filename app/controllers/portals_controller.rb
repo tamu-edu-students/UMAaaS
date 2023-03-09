@@ -170,6 +170,17 @@ puts("Hello")
       end
       
       exp.tagArray
+      
+      comment = ExperienceComment.find_by(user_id: current_user.id, experience_id: exp.id)
+      if !comment.nil?
+          puts "commented true"
+          exp.commented = true
+      else 
+          puts "commented false"
+          exp.commented = false
+      end
+      
+      
 
       exp.comments = ExperienceComment.left_outer_joins(:user).select('experience_comments.*,users.name as user_name').where(experience_id: exp.id).where(users: { banned: false }).order(created_at: :desc).limit(Rails.configuration.max_comments_shown)
 

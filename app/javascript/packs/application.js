@@ -284,7 +284,6 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     var radioValue = $("input[name='comment_rating_" + experienceId + "']:checked").val();
     var commentText = $("#add_comment_"+experienceId).val();
     if(commentText == "") return;
-    if(radioValue || confirm("Submit your comment without a rating?")){
       $(".portal-experience-leave-comment.active").removeClass("active").addClass("inactive");
   
       $.ajax({
@@ -301,7 +300,6 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
       // reset inputs
       $("#add_comment_"+experienceId).val("");
       $("input[name='comment_rating_" + experienceId + "']:checked").prop('checked', false);
-    }
 
   });
   

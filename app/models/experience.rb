@@ -12,7 +12,7 @@ class Experience < ApplicationRecord
   attr_accessor :flagCount
     
 
-  attr_accessor :comments, :totalComments, :average_rating
+  attr_accessor :comments, :totalComments, :average_rating, :commented
 
   def tagArray
     if tags.nil?

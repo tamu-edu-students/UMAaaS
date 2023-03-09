@@ -58,13 +58,23 @@ class ExperiencesController < ApplicationController
     
     def view
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).first
-        puts(params)
+        
+        puts "VIEWING!"
         #@experience = Experience.left_outer_joins(:user).all.where(experiences: {id: params[:id]}).where(users: {banned: false}).first
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
             flash[:warning] = "You are not assigned to this program."
             redirect_to portal_path(@experience.program_id) and return 
+        end
+        
+        @experience.commented = false
+        comment = ExperienceComment.find_by(user_id: current_user.id, experience_id: @experience.id)
+        if !comment.nil?
+            puts "commented true"
+            @experience.commented = true
+        else 
+            puts "commented false"
         end
 
         @program = Program.find @experience.program_id
@@ -120,6 +130,7 @@ class ExperiencesController < ApplicationController
         rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:experienceId]).where(users: {banned: false}).where.not(rating: nil).count(:id)
         rating_count +=1 #add 1 for the original rating
         @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+        @experience.commented = true
         
         @experienceDivId = "portal-experience-wrapper-" + params[:experienceId]
         
@@ -220,6 +231,8 @@ class ExperiencesController < ApplicationController
         # delete experience
         Experience.where(id: params[:id]).destroy_all
         
+
+        
         respond_to do |format|
             format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
         end
@@ -265,6 +278,14 @@ class ExperiencesController < ApplicationController
         
         @experienceDivId = "portal-experience-wrapper-" + @experience.id.to_s
         
+        @experience.commented = false
+        comment = ExperienceComment.find_by(user_id: current_user.id, experience_id: @experience.id)
+        if !comment.nil?
+            puts "commented true"
+            @experience.commented = true
+        else 
+            puts "commented false"
+        end
         
 
         respond_to do |format|
