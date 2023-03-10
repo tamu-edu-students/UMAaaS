@@ -20,8 +20,8 @@ Scenario: Test for viewing bookmark tab under profile
    
 Scenario: Test for viewing all of your saved bookmarks
     Given that I am on any page
-    And I click the Bookmarks tab in the profile drop down menu
-    Then I should se class "bookmark-experience"
+    And I click on the Bookmarks tab in the profile drop down menu
+    Then I should see class "bookmark-experience"
 
 Scenario: Test for viewing the original post of a bookmark
     Given that I am on the Bookmarks page

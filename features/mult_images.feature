@@ -4,10 +4,13 @@ Feature: Allow users to post multiple images
     I want to post multiple images for each experience.
 
 Scenario: Test for uploading multiple images
-    Given I am on the add review page
+    Given I am on the add new experience page
+    When I press "Choose File(s)"
     Then I should be able to upload multiple photos
     
 Scenario: Test for posting multiple images
-    Given I am on the add review page
-    And I uploaded multiple photos
-    Then I should see multiple photos in the posted experience
+    Given I am on the add new experience page
+    When I upload multiple photos
+    And I press "Save"
+    Then I should be redirected to the main program page
+    Then I should that all of my images were posted
