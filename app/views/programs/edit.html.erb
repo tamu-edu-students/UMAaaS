@@ -1,4 +1,4 @@
-<div onclick="window.location.href = '/';">
+<div onclick="window.location.href = '/p/<%= @program.id %>';">
 <div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
   Edit Study Abroad Program
 </div>
