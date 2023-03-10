@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/support/selectors.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/features/support/selectors.rb": {
         "lines": [
           null,
           null,
@@ -51,7 +51,7 @@
           1
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/support/paths.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/features/support/paths.rb": {
         "lines": [
           null,
           null,
@@ -106,7 +106,7 @@
           1
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/step_definitions/web_steps.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/features/step_definitions/web_steps.rb": {
         "lines": [
           null,
           null,
@@ -165,29 +165,17 @@
           null,
           null,
           null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
           0,
-          0,
-          0,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           1,
           0,
-          null,
-          null,
-          1,
           0,
-          null,
-          null,
-          null,
-          null,
+          0,
           null,
           null,
           1,
@@ -202,41 +190,49 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
+          0,
           null,
           null,
           1,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           1,
@@ -257,6 +253,10 @@
           null,
           1,
           0,
+          null,
+          null,
+          1,
+          0,
           0,
           null,
           null,
@@ -281,15 +281,27 @@
           null,
           null,
           1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
           1,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
+          1,
           null,
           null,
           1,
@@ -444,7 +456,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/portals_controller.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/portals_controller.rb": {
         "lines": [
           null,
           null,
@@ -660,7 +672,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/application_controller.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -694,7 +706,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/application_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -702,7 +714,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/emergency_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/emergency_helper.rb": {
         "lines": [
           null,
           null,
@@ -710,7 +722,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/experinces_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/experinces_helper.rb": {
         "lines": [
           null,
           null,
@@ -718,7 +730,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/portals_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/portals_helper.rb": {
         "lines": [
           null,
           null,
@@ -726,7 +738,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/programs_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/programs_helper.rb": {
         "lines": [
           null,
           null,
@@ -734,7 +746,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/reviews_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/reviews_helper.rb": {
         "lines": [
           null,
           null,
@@ -742,7 +754,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/sessions_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/sessions_helper.rb": {
         "lines": [
           null,
           null,
@@ -750,7 +762,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/tips_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/tips_helper.rb": {
         "lines": [
           null,
           null,
@@ -758,7 +770,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/users_helper.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/users_helper.rb": {
         "lines": [
           null,
           null,
@@ -766,7 +778,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/program.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/program.rb": {
         "lines": [
           null,
           null,
@@ -779,7 +791,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/application_record.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -788,26 +800,10 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/tip.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/tip.rb": {
         "lines": [
           null,
           null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/user.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
           1,
           1,
           1,
@@ -817,7 +813,23 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/experience.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/user.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/experience.rb": {
         "lines": [
           null,
           null,
@@ -845,7 +857,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/yelp_location.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/yelp_location.rb": {
         "lines": [
           null,
           null,
@@ -854,7 +866,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/experience_comment.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/experience_comment.rb": {
         "lines": [
           null,
           null,
@@ -864,7 +876,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/bookmark.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/bookmark.rb": {
         "lines": [
           1,
           1,
@@ -872,7 +884,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/participant.rb": {
+      "/home/ubuntu/environment/TripAgvisor-GradVersion_Spring2023/app/models/participant.rb": {
         "lines": [
           null,
           null,
@@ -882,7 +894,7 @@
         ]
       }
     },
-    "timestamp": 1678372699
+    "timestamp": 1678421591
   },
   "RSpec": {
     "coverage": {

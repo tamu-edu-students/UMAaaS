@@ -186,6 +186,18 @@ Then(/^(?:|I )should see id "([^"]*)"$/) do |text|
   page.should have_selector("##{text}") if page.respond_to? :should
 end
 
+When (/I click on bookmark icon/) do
+  find('.bookmark-experience .bookmark-yes').click
+end
+
+# When (/I hover over the profile drop down menu/) do
+#   click_link("")
+# end
+
+# Then(/I should see "(.*)"/) do |string|
+#   expect(page).to have_content(string)
+# end
+
 #When(/^I click on bookmark icon/) do 
 #  page.driver.browser.execute_script("$(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes')")
 #end
