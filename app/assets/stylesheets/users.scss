@@ -10,7 +10,7 @@
 
 .users-list td, .users-legend td, .user-admin td{
     // border: 1px solid #ededed;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ddd;
     text-align: left;
 }
@@ -68,6 +68,10 @@
     width: 1px;
     text-align: center;
     font-weight: bold;
+}
+
+.users-list td:last-child {
+  width: 100px;
 }
 
 

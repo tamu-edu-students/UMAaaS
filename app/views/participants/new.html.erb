@@ -24,7 +24,7 @@
           <tr>
             <td>Email</td>
             <td>Faculty</td>
-            <td> </td>
+            <td>Remove</td>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +32,7 @@
           <tr>
             <td><%= participant.email %></td>
             <td class="users-admin-column"><%= if participant.is_faculty then "x" end %></td>
-            <td style="display: flex; justify-content: end; width: 100%">
+            <td>
               <%= link_to "Remove", "/programs/#{@program.id}/participants/#{participant.id}", method: :delete %>
             </td>
           </tr>
