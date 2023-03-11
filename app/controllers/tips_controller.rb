@@ -129,10 +129,9 @@ class TipsController < ApplicationController
     end
     
   def unflag
-    flagged_tip = FlagTip.find(params[:id])
-    flagged_tip.destroy
+    FlagTip.where(tip_id: params[:id]).destroy_all
     respond_to do |format|
-      format.html { redirect_to request.referer, notice: 'Flag removed.' }
+      format.html { redirect_to request.referer, notice: 'All flag cleared from tip.' }
     end
   end
 
@@ -153,6 +152,19 @@ class TipsController < ApplicationController
       redirect_to root_path and return
     end
     # done checking for unauthorized deletions
+
+    # delete helpful votes
+    HelpfulVote.where(tip_id: params[:id]).destroy_all
+    
+    # delete flag
+    FlagTip.where(tip_id: params[:id]).destroy_all
+
+    # delete tip
+    Tip.where(id: params[:id]).destroy_all
+  end
+  
+  def remoteDelete
+    tip = Tip.find params[:id]
 
     # delete helpful votes
     HelpfulVote.where(tip_id: params[:id]).destroy_all

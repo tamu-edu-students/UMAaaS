@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
   get 'users/:id/ban', to: 'users#ban'
+  get 'users/:id/ban', to: 'users#remoteBan'
   get 'users/:id/unban', to: 'users#unban'
   get 'programss/:id/enable', to: 'programs#enable'
   get 'programss/:id/disable', to: 'programs#disable'
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
   delete 'experience/:id/delete', to: 'experiences#delete'
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
   delete 'tip/:id/delete', to: 'tips#delete'
+  post 'tip/:id/rdelete', to: 'tips#remoteDelete'
+  post 'experience/:id/rdelete', to: 'experiences#remoteDelete'
   root 'portals#index'
   # unflag an experience
   post 'experience/:id/unflag', to: 'experiences#unflag', as: 'unflag_experience'

@@ -179,10 +179,9 @@ class ExperiencesController < ApplicationController
     end
     
     def unflag
-        flagged_experience = FlagExperience.find(params[:id])
-        flagged_experience.destroy
+        FlagExperience.where(experience_id: params[:id]).destroy_all
         respond_to do |format|
-          format.html { redirect_to request.referer, notice: 'Flag removed.' }
+          format.html { redirect_to request.referer, notice: 'All flags cleared from experience.' }
         end
     end
 
@@ -241,6 +240,26 @@ class ExperiencesController < ApplicationController
         
 
         redirect_to root_path and return 
+        
+        # respond_to do |format|
+        #     format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
+        # end
+    end
+    
+    def remoteDelete
+        experience = Experience.find params[:id]
+        
+        # delete flag
+        FlagExperience.where(experience_id: params[:id]).destroy_all
+        
+        # delete comments
+        ExperienceComment.where(experience_id: params[:id]).destroy_all
+        
+        # delete associated location
+        YelpLocation.where(experience_id: params[:id]).destroy_all
+        
+        # delete experience
+        Experience.where(id: params[:id]).destroy_all
         
         respond_to do |format|
             format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
