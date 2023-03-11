@@ -115,6 +115,20 @@ class UsersController < ApplicationController
     end
     redirect_to users_path
   end
+  
+  # ban user
+  def remoteBan
+    user = User.find params[:id]
+    if user.nil?
+      flash[:alert] = 'Error banning user: user not found.'
+    else
+      user.banned = true
+      user.save
+    end
+    respond_to do |format|
+      format.html { redirect_to request.referer, notice: "#{user.name} has been banned." }
+    end
+  end
 
   # unban user
   def unban

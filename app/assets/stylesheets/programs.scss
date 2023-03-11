@@ -121,11 +121,13 @@
   padding: 10px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.delete-button:hover input[type=submit] {
-  background-color: #800000;
+.delete-button input[type=submit]:hover {
+  background-color: #c0392b;
 }
+
 
 
 
