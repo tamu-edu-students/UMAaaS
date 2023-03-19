@@ -14,14 +14,13 @@ class ExperiencesController < ApplicationController
         @program = Program.find params[:id]
         @experience = Experience.new
         program = Program.find params[:id]
-        program_id = @experience.program_id
-        participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
+        program_id = params[:id] 
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
             flash[:warning] = "You are not assigned to this program."
             redirect_to portal_path(program_id) and return 
         end
-        participant = Participant.find_by(email: current_user.email, program_id: program.id)
         @near = program.location
     end
     
