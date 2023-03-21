@@ -14,14 +14,13 @@ class ExperiencesController < ApplicationController
         @program = Program.find params[:id]
         @experience = Experience.new
         program = Program.find params[:id]
-        program_id = @experience.program_id
-        participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
+        program_id = params[:id] 
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
         if participant.nil? and not current_user.admin
             puts "FOUND NIL"
             flash[:warning] = "You are not assigned to this program."
             redirect_to portal_path(program_id) and return 
         end
-        participant = Participant.find_by(email: current_user.email, program_id: program.id)
         @near = program.location
     end
     
@@ -239,6 +238,7 @@ class ExperiencesController < ApplicationController
         Experience.where(id: params[:id]).destroy_all
         
 
+        redirect_to root_path and return 
         
         # respond_to do |format|
         #     format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
@@ -321,7 +321,7 @@ class ExperiencesController < ApplicationController
     
     
     def edit
-        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.yelp_id as yelp_id, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating, yelp_locations.yelp_tags as yelp_tags").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.yelp_id as yelp_id, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating, yelp_locations.yelp_tags as yelp_tags").where(experiences: {id: params[:id]}).first
         program = Program.find @experience.program_id
         @near = program.location
         
