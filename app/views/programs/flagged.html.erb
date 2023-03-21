@@ -40,7 +40,7 @@
             <td><%= flagged_experience.created_at.strftime("%m/%d/%Y") %></td></div></td>
             <td><div class="delete-button"><%= button_to 'Clear', unflag_experience_path(flagged_experience.experience_id), method: :post, data: { confirm: 'Are you sure you want to clear all flags for this experience?' }%>
             <td><div class="delete-button"><%= button_to 'Delete', "/experience/#{flagged_experience.experience.id}/rdelete", method: :post, data: { confirm: 'Are you sure you want to delete this experience?' }%></div></td>
-            <td><div class="delete-button"><%= button_to 'Ban', { controller: 'users', action: 'remoteBan', id: flagged_experience.user.id }, method: :get, data: { confirm: 'Are you sure you want to ban this user?' } %></div></td>
+            <td><div class="delete-button"><%= button_to 'Ban', { controller: 'users', action: 'remoteBan', id: flagged_experience.experience.user.id }, method: :get, data: { confirm: 'Are you sure you want to ban this user?' } %></div></td>
           </tr>
         <% end %>
         <% @tips.reject{ |t| t.user.banned? }.each do |flagged_tip| %>
@@ -53,7 +53,7 @@
             <td><%= flagged_tip.created_at.strftime("%m/%d/%Y") %></td>
             <td><div class="delete-button"><%= button_to 'Clear', unflag_tip_path(flagged_tip.tip_id), method: :post, data: { confirm: 'Are you sure you want to clear all flags for this tip?' }%></div></td>
             <td><div class="delete-button"><%= button_to 'Delete', "/tip/#{flagged_tip.tip.id}/rdelete", method: :post, data: { confirm: 'Are you sure you want to delete this tip?' }%></div></td>
-            <td><div class="delete-button"><%= button_to 'Ban', { controller: 'users', action: 'remoteBan', id: flagged_tip.user.id}, method: :get, data: { confirm: 'Are you sure you want to ban this user?' } %></div></td>
+            <td><div class="delete-button"><%= button_to 'Ban', { controller: 'users', action: 'remoteBan', id: flagged_tip.tip.user.id }, method: :get, data: { confirm: 'Are you sure you want to ban this user?' } %></div></td>
           </tr>
         <% end %>
       </tbody>
