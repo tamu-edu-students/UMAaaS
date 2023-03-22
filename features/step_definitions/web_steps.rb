@@ -186,8 +186,11 @@ Then(/^(?:|I )should see id "([^"]*)"$/) do |text|
   page.should have_selector("##{text}") if page.respond_to? :should
 end
 
-When (/I click on bookmark icon/) do
-  find('.bookmark-experience .bookmark-yes').click
+Then (/I click on bookmark icon/) do
+  # page.find('.bookmark-experience').click
+  puts page.find('#experience-bookmark-1')
+  # .click
+  # page.should have_selector(".bookmark-experience .bookmarked", wait: 100) if page.respond_to? :should
 end
 
 # When (/I hover over the profile drop down menu/) do

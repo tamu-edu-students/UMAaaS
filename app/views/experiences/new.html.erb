@@ -31,8 +31,15 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Location:<div>(optional)</div></td>
-                <td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>
-                <td id="yelp-location-wrapper"></td>
+                <!--<td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>-->
+                <!--<td id="yelp-location-wrapper"></td>-->
+                <div class="address_input">
+                    <input id="name" type="text" placeholder="Place Name"></input>
+                    <input id="street" type="text" placeholder="Street"></input>
+                    <input id="city" type="text" placeholder="City"></input>
+                    <input id="postal_code" type="text" placeholder="Postal Code"></input>
+                    <!--<input id="country" type="text" placeholder="Country" value= <%= :program %>></input>-->
+                </div>
             </tr>
             <tr>
                 <td colspan="2" class="experience-edit-submit"><%= submit_tag 'Save' %></td>
