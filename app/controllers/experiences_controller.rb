@@ -270,7 +270,7 @@ class ExperiencesController < ApplicationController
         redirect_to experience_path(params[:id])
     end
 
-   def bookmarked
+    def bookmarked
         if(params[:bookmarked] == "0")
             puts "destroying bookmark"
             Bookmark.where(experience_id: params[:experience_id]).where(user_id: current_user.id).destroy_all
@@ -289,8 +289,6 @@ class ExperiencesController < ApplicationController
             end
         end
     end
-    
-    private
     
     def experience_params
         params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :image)
