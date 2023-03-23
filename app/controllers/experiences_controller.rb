@@ -35,18 +35,19 @@ class ExperiencesController < ApplicationController
             tagArrayFixed += tag + ","
         end
         
-        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id], :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
         if params[:image]
             newExperience.image.attach(params[:image])
         end
-         flash[:notice] = "Experience was successfully created."
+        
+        flash[:notice] = "Experience was successfully created."
      
 
-        if(params.has_key?(:yelp_id))
-            # has a Yelp location selected
-            YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
-        end
+        # if(params.has_key?(:yelp_id))
+        #     # has a Yelp location selected
+        #     YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        # end
         
         
         redirect_to portal_path(params[:id])
@@ -291,6 +292,6 @@ class ExperiencesController < ApplicationController
     end
     
     def experience_params
-        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :image)
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, :image)
     end
 end
