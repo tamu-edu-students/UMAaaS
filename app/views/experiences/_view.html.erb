@@ -35,8 +35,8 @@
 				<%= locals[:experience].experience%>
 			</div>
 			<div class="portal-experience-location">
-				<% if not locals[:experience].location.nil? %>
-					<p>visit <a href=<%= "http://maps.google.com/?q=" + locals[:experience].location.gsub(' ', '%20') + "+" + locals[:experience].street.gsub(' ', '%20') + "+" + locals[:experience].city.gsub(' ', '%20') + "+" + locals[:experience].postal_code.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%></a> on Google Maps</p>
+				<% if not locals[:experience].location.to_s == "" %>
+					<p>visit <a href=<%= "http://maps.google.com/?q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%></a> on Google Maps</p>
 				<%end%>
 			</div>
 			<div class="portal-experience-info">

@@ -312,6 +312,21 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
       $("#yelp-search-results").empty();
     }
   });
+
+  $(document).off('input', '#yelp-search').on('input', '#experience_location', function(){
+    if($(this).val()) {
+      (document).getElementById("experience_street").disabled = false;
+      (document).getElementById("experience_city").disabled = false;
+      (document).getElementById("experience_postal_code").disabled = false;
+    } else {
+      (document).getElementById("experience_street").value = '';
+      (document).getElementById("experience_street").disabled = true;
+      (document).getElementById("experience_city").value = '';
+      (document).getElementById("experience_city").disabled = true;
+      (document).getElementById("experience_postal_code").value = '';
+      (document).getElementById("experience_postal_code").disabled = true;
+    }
+  });
   
   //when a yelp search result is clicked
   $(document).off('click', '.yelp-search-result').on('click', '.yelp-search-result', function(){

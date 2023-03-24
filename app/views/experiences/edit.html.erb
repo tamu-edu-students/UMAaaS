@@ -33,9 +33,9 @@
                 <td class="experience-edit-label">Location:<div>(optional)</div></td>
                 <td class="location-input">
                     <%= text_field :experience, :location, :placeholder => "Place Name" %><div class="experience-edit-field-tips"></div>
-                    <%= text_field :experience, :street, :placeholder => "Street" %><div class="experience-edit-field-tips"></div>
-                    <%= text_field :experience, :city, :placeholder => "City" %><div class="experience-edit-field-tips"></div>
-                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code" %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :street, :placeholder => "Street", :disabled => @experience.street.nil? %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :city, :placeholder => "City", :disabled => @experience.city.nil? %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code", :disabled => @experience.postal_code.nil? %><div class="experience-edit-field-tips"></div>
                 </td>
                 <!--<td id="yelp-search-wrapper" <% if @experience.yelp_id %>style="display: none;"<% end %>><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>-->
                 <!--<td id="yelp-location-wrapper" <% if @experience.yelp_id %>style="display: table-cell;"<% end %>><% if @experience.yelp_id %>-->

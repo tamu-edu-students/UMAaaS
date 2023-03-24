@@ -34,14 +34,10 @@
                 <!--<td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>-->
                 <!--<td id="yelp-location-wrapper"></td>-->
                 <td class="location-input">
-                    <%= text_field :experience, :location, :placeholder => "Place Name" %><div class="experience-edit-field-tips"></div>
-                    <%= text_field :experience, :street, :placeholder => "Street" %><div class="experience-edit-field-tips"></div>
-                    <%= text_field :experience, :city, :placeholder => "City" %><div class="experience-edit-field-tips"></div>
-                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code" %><div class="experience-edit-field-tips"></div>
-                    <!--<input id="name" type="text" placeholder="Place Name"></input>-->
-                    <!--<input id="street" type="text" placeholder="Street" disabled></input>-->
-                    <!--<input id="city" type="text" placeholder="City" disabled></input>-->
-                    <!--<input id="postal_code" type="text" placeholder="Postal Code" disabled></input>-->
+                    <%= text_field :experience, :location, :placeholder => "Place Name"%><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :street, :placeholder => "Street", :disabled => true %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :city, :placeholder => "City", :disabled => true %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code", :disabled => true %><div class="experience-edit-field-tips"></div>
                 </td>
                     <!--<input id="country" type="text" placeholder="Country" value= <%= :program %>></input>-->
             </tr>
