@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :requireAdmin
+  before_action :requireAdmin, except: [:show]
   
   def show
     @user = User.find(params[:id])
