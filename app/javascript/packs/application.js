@@ -49,15 +49,29 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
   });
   
   // when an experience is clicked on go to the single experience view
-  $(document).off('click', '.portal-experience').on('click', '.portal-experience', function(e){
+  $(document).off('click', '.portal-experience-title').on('click', '.portal-experience-title', function(e){
     if(e.target.getAttribute("class") == "yelp-link") return; // don't redirect if clicking on yelp link
     if(e.target.getAttribute("class") == "tag") return; // don't redirect if clicking on tag
     if(e.target.getAttribute("class") == "portal-experience-delete") return; // don't redirect if clicking on delete
     if(e.target.getAttribute("class") == "bookmark-yes") return; // don't redirect if clicking on bookmark
     if(e.target.getAttribute("class") == ("bookmarked")) return; // don't redirect if clicking on bookmark
+    if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on carousel
+    if(e.target.getAttribute("class") == "carousel-control-prev") return;
+    if(e.target.getAttribute("class") == "carousel-control-prev") return; 
+    if(e.target.getAttribute("class") == "carousel-control-next") return;
     var idParts = this.closest(".portal-experience-outer-wrapper").id.split("-");
     var experienceId = idParts[3];
     window.location.replace("/experience/" + experienceId);
+  });
+  
+  $(document).off('click', '.portal-experience-photo').on('click', '.portal-experience-photo', function(e){ // for carousel on each experience
+    if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on
+    if(e.target.getAttribute("class") == "carouselExampleIndicators") return; // don't redirect if clicking on
+  });
+  
+  $(document).off('click', '.portal-experience-photo').on('click', '.portal-experience-photo', function(){ // for carousel
+    var photo = document.getElementById(this.id);
+    photo.classList = "portal-experience-photo"; // have to have this for image not to take to link on click
   });
   
   // and upvote on a tip

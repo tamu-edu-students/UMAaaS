@@ -37,8 +37,8 @@ class ExperiencesController < ApplicationController
         
         newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
         
-        if params[:image]
-            newExperience.image.attach(params[:image])
+        if params[:images]
+            newExperience.images.attach(params[:images])
         end
          flash[:notice] = "Experience was successfully created."
      
