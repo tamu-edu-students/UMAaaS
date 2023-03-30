@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  config.hosts << "a89825761f314a3da1acbd9dc9ce6c52.vfs.cloud9.us-east-1.amazonaws.com"
-
+  config.hosts << "2dbaedf1c0ce4258818f3f8ba7f64d58.vfs.cloud9.us-east-1.amazonaws.com"
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

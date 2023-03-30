@@ -193,6 +193,10 @@ Then (/I click on bookmark icon/) do
   # page.should have_selector(".bookmark-experience .bookmarked", wait: 100) if page.respond_to? :should
 end
 
+
+# When('I am on the new page') do
+#   visit new_experience_path
+# end
 # When (/I hover over the profile drop down menu/) do
 #   click_link("")
 # end
