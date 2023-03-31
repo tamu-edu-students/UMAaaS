@@ -58,11 +58,11 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(e.target.getAttribute("class") == "yelp-link") return; // don't redirect if clicking on yelp link
     if(e.target.getAttribute("class") == "tag") return; // don't redirect if clicking on tag
     if(e.target.getAttribute("class") == "portal-experience-delete") return; // don't redirect if clicking on delete
-    
-    if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on carousel
-    
+    if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on carouse
+   
     if(e.target.getAttribute("class") == "bookmark-yes") return; // don't redirect if clicking on bookmark
     if(e.target.getAttribute("class") == ("bookmarked")) return; // don't redirect if clicking on bookmark
+    
     var idParts = this.closest(".portal-experience-outer-wrapper").id.split("-");
     var experienceId = idParts[3];
     window.location.replace("/experience/" + experienceId);
