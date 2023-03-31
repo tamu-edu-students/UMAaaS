@@ -23,6 +23,7 @@ class ExperiencesController < ApplicationController
     end
     
     def create
+        params.require(:experience).permit(:title, :experience, :rating, :tags, {images: []})
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
