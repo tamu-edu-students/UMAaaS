@@ -54,7 +54,6 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(e.target.getAttribute("class") == "tag") return; // don't redirect if clicking on tag
     if(e.target.getAttribute("class") == "portal-experience-delete") return; // don't redirect if clicking on delete
     if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on carouse
-    if(e.target.getAttribute("class") == "carousel-control-prev-icon") return;
     if(e.target.getAttribute("class") == "bookmark-yes") return; // don't redirect if clicking on bookmark
     if(e.target.getAttribute("class") == ("bookmarked")) return; // don't redirect if clicking on bookmark
     
