@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  config.hosts << "e0f13ef4e3584e999773685843a8fad8.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << "b4fe469e99a947d3ad34dc4e3c20d491.vfs.cloud9.us-east-1.amazonaws.com"
   # config.hosts << "999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com"
   # config.hosts << "389763a4bd934fd2b31f81763dda423c.vfs.cloud9.ap-northeast-1.amazonaws.com"
   # Settings specified here will take precedence over those in config/application.rb.
