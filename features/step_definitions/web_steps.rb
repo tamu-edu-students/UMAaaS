@@ -52,9 +52,9 @@ Given(/^(?:|I )am on (.+)$/) do |page_name|
 end
 
 And(/^(?:|I )am logged in/) do
-  # page.set_rack_session(:user_id => "4")
-  # page.set_rack_session(:user_admin => false)
-  # page.set_rack_session(:user_program_id => 1 )
+  page.set_rack_session(:user_id => "2")
+  page.set_rack_session(:user_admin => true)
+  page.set_rack_session(:user_program_id => 1 )
   visit root_path
 end
 
@@ -88,6 +88,21 @@ When(/^(?:|I )follow "([^"]*)"$/) do |link|
   click_link(link)
 end
 
+When("I click the {string} link") do |link_text|
+  click_link link_text
+end
+
+Then("I should be redirected to the {string} page") do |page_name|
+  expect(current_path).to eq(page_name)
+end
+
+Then("I should be redirected to the external webpage") do
+  expect(current_url).to start_with("http://maps.google.com")
+end
+
+When('I fill in {string} with {string}') do |string, name|
+  fill_in(string, with: name)
+end
 # When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
 #   fill_in(field, :with => value)
 # end

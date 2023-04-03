@@ -35,6 +35,15 @@ module NavigationHelpers
 
     when /^the singapore\s?search\s?page$/
       'p/1?search=zzzzzz'
+  
+    when /^the new\s?page$/
+      'p/2/experiences/new'
+
+    when /^the edit\s?page$/
+      'experience/2/edit'
+
+    when /^the experience\s?page$/
+      'experience/2'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
