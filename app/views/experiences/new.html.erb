@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Image:</td>
-                <td><%= file_field_tag :image, class: "form-control" %>
+                <td><%= file_field_tag 'images[]', :multiple => true, :accept => 'image/jpeg,image/png', class: "form-control" %>
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>

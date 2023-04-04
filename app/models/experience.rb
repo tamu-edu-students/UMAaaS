@@ -5,7 +5,7 @@ class Experience < ApplicationRecord
   belongs_to :user
   has_many :experience_comments
   has_one :yelp_location
-  has_one_attached :image
+  has_many_attached :images
 
   attr_accessor :comments, :totalComments, :average_rating, :hasUserBookmarked
 
