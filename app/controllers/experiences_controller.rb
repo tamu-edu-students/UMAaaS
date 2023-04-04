@@ -36,18 +36,19 @@ class ExperiencesController < ApplicationController
             tagArrayFixed += tag + ","
         end
         
-        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id], :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
         if params[:images]
             newExperience.images.attach(params[:images])
         end
-         flash[:notice] = "Experience was successfully created."
+        
+        flash[:notice] = "Experience was successfully created."
      
 
-        if(params.has_key?(:yelp_id))
-            # has a Yelp location selected
-            YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
-        end
+        # if(params.has_key?(:yelp_id))
+        #     # has a Yelp location selected
+        #     YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        # end
         
         
         redirect_to portal_path(params[:id])
@@ -253,7 +254,7 @@ class ExperiencesController < ApplicationController
         end
 
         @experience = Experience.find params[:id]
-        @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed)
+        @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
         # if params[:image]
         #     @experience.image.purge
@@ -261,17 +262,17 @@ class ExperiencesController < ApplicationController
         # end
         
         # delete any existing associated location
-        YelpLocation.where(experience_id: params[:id]).destroy_all
+        # YelpLocation.where(experience_id: params[:id]).destroy_all
         
-        # then create new associated location if there is one
-        if(params.has_key?(:yelp_id))
-            # has a Yelp location selected
-            YelpLocation.create(:experience_id => params[:id], :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
-        end
+        # # then create new associated location if there is one
+        # if(params.has_key?(:yelp_id))
+        #     # has a Yelp location selected
+        #     YelpLocation.create(:experience_id => params[:id], :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        # end
         redirect_to experience_path(params[:id])
     end
 
-   def bookmarked
+    def bookmarked
         if(params[:bookmarked] == "0")
             puts "destroying bookmark"
             Bookmark.where(experience_id: params[:experience_id]).where(user_id: current_user.id).destroy_all
@@ -291,9 +292,7 @@ class ExperiencesController < ApplicationController
         end
     end
     
-    private
-    
     def experience_params
-        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :image)
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, :image)
     end
 end

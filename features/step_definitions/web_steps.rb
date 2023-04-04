@@ -52,9 +52,9 @@ Given(/^(?:|I )am on (.+)$/) do |page_name|
 end
 
 And(/^(?:|I )am logged in/) do
-  # page.set_rack_session(:user_id => "4")
-  # page.set_rack_session(:user_admin => false)
-  # page.set_rack_session(:user_program_id => 1 )
+  page.set_rack_session(:user_id => "2")
+  page.set_rack_session(:user_admin => true)
+  page.set_rack_session(:user_program_id => 1 )
   visit root_path
 end
 
@@ -88,6 +88,21 @@ When(/^(?:|I )follow "([^"]*)"$/) do |link|
   click_link(link)
 end
 
+When("I click the {string} link") do |link_text|
+  click_link link_text
+end
+
+Then("I should be redirected to the {string} page") do |page_name|
+  expect(current_path).to eq(page_name)
+end
+
+Then("I should be redirected to the external webpage") do
+  expect(current_url).to start_with("http://maps.google.com")
+end
+
+When('I fill in {string} with {string}') do |string, name|
+  fill_in(string, with: name)
+end
 # When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
 #   fill_in(field, :with => value)
 # end
@@ -185,6 +200,25 @@ end
 Then(/^(?:|I )should see id "([^"]*)"$/) do |text|
   page.should have_selector("##{text}") if page.respond_to? :should
 end
+
+Then (/I click on bookmark icon/) do
+  # page.find('.bookmark-experience').click
+  puts page.find('#experience-bookmark-1')
+  # .click
+  # page.should have_selector(".bookmark-experience .bookmarked", wait: 100) if page.respond_to? :should
+end
+
+
+# When('I am on the new page') do
+#   visit new_experience_path
+# end
+# When (/I hover over the profile drop down menu/) do
+#   click_link("")
+# end
+
+# Then(/I should see "(.*)"/) do |string|
+#   expect(page).to have_content(string)
+# end
 
 #When(/^I click on bookmark icon/) do 
 #  page.driver.browser.execute_script("$(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes')")

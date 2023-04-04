@@ -50,6 +50,16 @@
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>
+			<div class="portal-experience-location">
+				<% if not locals[:experience].location.to_s == "" %>
+					<p>visit <a href=<%= "http://maps.google.com/?q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%></a> on Google Maps</p>
+				<%end%>
+				<br></br>
+				<iframe width="300" height="300" frameborder="0" style="border:0"
+					src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyBZYVMMPTrKi1i_pxf7ByjM2oYl6JRKeeI&q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%>
+					allowfullscreen>
+				</iframe>
+			</div>
 			<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
 				<%= locals[:experience].user_name %>

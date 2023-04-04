@@ -31,8 +31,15 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Location:<div>(optional)</div></td>
-                <td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>
-                <td id="yelp-location-wrapper"></td>
+                <!--<td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>-->
+                <!--<td id="yelp-location-wrapper"></td>-->
+                <td class="location-input">
+                    <%= text_field :experience, :location, :placeholder => "Place Name"%><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :street, :placeholder => "Street", :disabled => true %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :city, :placeholder => "City", :disabled => true %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code", :disabled => true %><div class="experience-edit-field-tips"></div>
+                </td>
+                    <!--<input id="country" type="text" placeholder="Country" value= <%= :program %>></input>-->
             </tr>
             <tr>
                 <td colspan="2" class="experience-edit-submit"><%= submit_tag 'Save' %></td>
