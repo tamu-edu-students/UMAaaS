@@ -10,15 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    if Rails.env.test?
-      cu = User.new
-      cu.admin = false
-      cu.img = nil
-      cu.id = '4'
-      cu.user_program_id = nil
-      return cu
-    end
-
     cu = User.new
     cu.admin = session[:user_admin]
     cu.email = session[:user_email]

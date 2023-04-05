@@ -33,9 +33,9 @@ class ProgramsController < ApplicationController
     
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     
-    # if params[:banner_image]
-    #   @program.banner_image.attach(params[:banner_image])
-    # end
+    if params[:banner_image]
+       @program.banner_image.attach(params[:banner_image])
+     end
         
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path

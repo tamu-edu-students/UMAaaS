@@ -51,11 +51,25 @@ Given(/^(?:|I )am on (.+)$/) do |page_name|
   save_page
 end
 
-And(/^(?:|I )am logged in/) do
-  page.set_rack_session(:user_id => "2")
+#And(/^(?:|I )am logged in/) do
+  # page.set_rack_session(:user_id => "4")
+  # page.set_rack_session(:user_admin => false)
+  # page.set_rack_session(:user_program_id => 1 )
+#  visit "/auth/google_oauth2"
+#end
+
+Given("I am logged in with Google") do
+  # Mock the OmniAuth authentication response
+  # Visit the Google OAuth callback URL with the mocked authentication response
+  visit '/auth/google_oauth2/callback'
   page.set_rack_session(:user_admin => true)
+  page.set_rack_session(:user_email => 'testuser@gmail.com')
   page.set_rack_session(:user_program_id => 1 )
-  visit root_path
+  page.set_rack_session(:user_img => "https://picsum.photos/200/300/?random")
+  page.set_rack_session(:user => 5)
+  page.visit '/p/1'
+  
+  # Verify that the user is redirected to the dashboard page after successful authentication
 end
 
 # When('I click on the selector and choose a program') do
@@ -80,11 +94,17 @@ end
 #   visit path_to(page_name)
 # end
 
+Given('I am assigned a program') do
+  Participant.create(email: 'testuser@gmail.com', program_id: 1)
+end
+
 When(/^(?:|I )press "([^"]*)"$/) do |button|
   click_button(button)
 end
 
-When(/^(?:|I )follow "([^"]*)"$/) do |link|
+When(/^(?:|I )follow "([^"]*?)"$/) do |link|
+  # Visit the Google OAuth callback URL with the mocked authentication response
+  visit '/p/1'
   click_link(link)
 end
 
@@ -103,6 +123,10 @@ end
 When('I fill in {string} with {string}') do |string, name|
   fill_in(string, with: name)
 end
+When('I hover over Profile') do
+  find('.navigation-user-icon').hover
+end
+
 # When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
 #   fill_in(field, :with => value)
 # end

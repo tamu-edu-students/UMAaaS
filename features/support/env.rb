@@ -9,7 +9,6 @@
 require 'cucumber/rails'
 require 'simplecov'
 SimpleCov.start
-
 # frozen_string_literal: true
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -33,7 +32,7 @@ SimpleCov.start
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
-
+Capybara.default_driver = :selenium
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
@@ -61,3 +60,22 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+Before('@omniauth_test') do
+
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:google_oauth2, {
+    uid: '12345',
+    info: {
+      email: 'testuser@gmail.com',
+      name: 'Test User',
+      image: 'https://picsum.photos/200/300/?random'
+    },
+    credentials: {
+      token: 'access_token'
+    }
+  })
+end
+
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end

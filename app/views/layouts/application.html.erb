@@ -46,27 +46,6 @@
                   <%end%>
                 </ul>
               </div>
-           
-
-        <!-- Mobile Drop Down Menu -->
-        <div class="container overlay">
-             <!-- Mobile Menu - only visable under 750px width-->
-            <button class="navbar-toggle pull-right  menu-button" type="button" data-toggle="collapse" data-target="#dropdown-menu">
-                <i class="material-icons b"> menu </i>
-            </button>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse container" id="dropdown-menu">
-                <ul class="m">
-                    <li> <%=link_to "CONTACT", reviews_emergency_path(), :id => "contact_mobile", :class => "dropdown-item"%> </li>
-                    <% if logged_in? %>
-                        <li> <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link dropdown-item"%> </li> 
-                    <%else%>
-                       <li> <%=link_to "LOGIN", login_path(), :id => "login_mobile", :class => "link dropdown-item"%> </li>
-                    <%end%>
-                    
-                </ul>
-            </div>
-        </div>
     </nav>
     <% if flash[:notice] %>
       <%= content_tag :div, flash["notice"], class: "flash-notice" %>

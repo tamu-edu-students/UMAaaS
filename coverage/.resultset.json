@@ -1,7 +1,7 @@
 {
   "Cucumber Features": {
     "coverage": {
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/support/selectors.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/features/support/selectors.rb": {
         "lines": [
           null,
           null,
@@ -51,7 +51,7 @@
           1
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/support/paths.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/features/support/paths.rb": {
         "lines": [
           null,
           null,
@@ -68,6 +68,7 @@
           null,
           null,
           1,
+<<<<<<< HEAD
           5,
           null,
           null,
@@ -75,6 +76,9 @@
           null,
           null,
           0,
+=======
+          2,
+>>>>>>> 12e8551 (Testing)
           null,
           null,
           0,
@@ -95,10 +99,13 @@
           0,
           null,
           null,
-          3,
+          1,
           null,
           null,
           0,
+          null,
+          null,
+          1,
           null,
           null,
           null,
@@ -115,7 +122,7 @@
           1
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/step_definitions/web_steps.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/features/step_definitions/web_steps.rb": {
         "lines": [
           null,
           null,
@@ -166,6 +173,7 @@
           null,
           null,
           1,
+<<<<<<< HEAD
           5,
           5,
           null,
@@ -174,52 +182,8 @@
           1,
           1,
           1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
+=======
           2,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
           2,
           null,
           null,
@@ -230,6 +194,87 @@
           null,
           null,
           null,
+>>>>>>> 12e8551 (Testing)
+          1,
+          null,
+          null,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+<<<<<<< HEAD
+          2,
+=======
+          1,
+>>>>>>> 12e8551 (Testing)
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+<<<<<<< HEAD
+          2,
+          null,
+          null,
+          1,
+          2,
+=======
+          null,
+          1,
+          1,
+>>>>>>> 12e8551 (Testing)
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+<<<<<<< HEAD
+          1,
+          2,
+          null,
+=======
+>>>>>>> 12e8551 (Testing)
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -293,7 +338,11 @@
           null,
           null,
           1,
+<<<<<<< HEAD
           6,
+=======
+          1,
+>>>>>>> 12e8551 (Testing)
           null,
           null,
           null,
@@ -305,7 +354,11 @@
           null,
           null,
           1,
+<<<<<<< HEAD
           0,
+=======
+          2,
+>>>>>>> 12e8551 (Testing)
           null,
           null,
           null,
@@ -487,7 +540,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/portals_controller.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/controllers/portals_controller.rb": {
         "lines": [
           null,
           null,
@@ -618,17 +671,26 @@
           null,
           null,
           4,
+<<<<<<< HEAD
           6,
           6,
           0,
           0,
           6,
+=======
+          12,
+          12,
+          0,
+          0,
+          12,
+>>>>>>> 12e8551 (Testing)
           0,
           0,
           0,
           null,
           null,
           null,
+<<<<<<< HEAD
           6,
           null,
           6,
@@ -636,10 +698,20 @@
           6,
           null,
           6,
+=======
+          12,
+          null,
+          12,
+          null,
+          12,
+          null,
+          12,
+>>>>>>> 12e8551 (Testing)
           0,
           0,
           null,
           null,
+<<<<<<< HEAD
           6,
           6,
           6,
@@ -653,12 +725,32 @@
           6,
           6,
           6,
+=======
+          12,
+          12,
+          12,
+          null,
+          0,
+          null,
+          12,
+          12,
+          12,
+          null,
+          12,
+          12,
+          12,
+>>>>>>> 12e8551 (Testing)
           0,
           0,
           null,
           null,
+<<<<<<< HEAD
           6,
           6,
+=======
+          12,
+          12,
+>>>>>>> 12e8551 (Testing)
           null,
           null,
           null,
@@ -703,7 +795,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/application_controller.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -711,12 +803,17 @@
           1,
           null,
           1,
+<<<<<<< HEAD
           49,
+=======
+          42,
+>>>>>>> 12e8551 (Testing)
           null,
           0,
           null,
           null,
           1,
+<<<<<<< HEAD
           60,
           60,
           60,
@@ -733,11 +830,20 @@
           0,
           0,
           0,
+=======
+          84,
+          84,
+          84,
+          84,
+          84,
+          84,
+          84,
+>>>>>>> 12e8551 (Testing)
           null,
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/application_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -745,7 +851,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/emergency_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/emergency_helper.rb": {
         "lines": [
           null,
           null,
@@ -753,7 +859,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/experinces_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/experinces_helper.rb": {
         "lines": [
           null,
           null,
@@ -761,7 +867,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/portals_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/portals_helper.rb": {
         "lines": [
           null,
           null,
@@ -769,7 +875,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/programs_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/programs_helper.rb": {
         "lines": [
           null,
           null,
@@ -777,7 +883,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/reviews_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/reviews_helper.rb": {
         "lines": [
           null,
           null,
@@ -785,7 +891,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/sessions_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/sessions_helper.rb": {
         "lines": [
           null,
           null,
@@ -793,7 +899,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/tips_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/tips_helper.rb": {
         "lines": [
           null,
           null,
@@ -801,7 +907,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/helpers/users_helper.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/helpers/users_helper.rb": {
         "lines": [
           null,
           null,
@@ -809,7 +915,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/program.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/program.rb": {
         "lines": [
           null,
           null,
@@ -822,7 +928,7 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/application_record.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -831,26 +937,10 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/tip.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/tip.rb": {
         "lines": [
           null,
           null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/user.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
           1,
           1,
           1,
@@ -860,7 +950,23 @@
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/experience.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/user.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/experience.rb": {
         "lines": [
           null,
           null,
@@ -874,6 +980,7 @@
           1,
           null,
           1,
+<<<<<<< HEAD
           14,
           0,
           14,
@@ -881,14 +988,25 @@
           null,
           6,
           6,
+=======
+          24,
+          0,
+          24,
+          24,
+>>>>>>> 12e8551 (Testing)
           null,
           null,
+<<<<<<< HEAD
           14,
+=======
+          null,
+          24,
+>>>>>>> 12e8551 (Testing)
           null,
           null
         ]
       },
-      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/yelp_location.rb": {
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/yelp_location.rb": {
         "lines": [
           null,
           null,
@@ -897,7 +1015,11 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/participant.rb": {
+=======
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/experience_comment.rb": {
+>>>>>>> 12e8551 (Testing)
         "lines": [
           null,
           null,
@@ -906,7 +1028,28 @@
           null
         ]
       },
+<<<<<<< HEAD
       "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/controllers/experiences_controller.rb": {
+=======
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/bookmark.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/models/participant.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/controllers/experiences_controller.rb": {
+>>>>>>> 12e8551 (Testing)
         "lines": [
           1,
           null,
@@ -920,6 +1063,9 @@
           null,
           null,
           null,
+<<<<<<< HEAD
+          1,
+=======
           1,
           0,
           0,
@@ -936,27 +1082,27 @@
           0,
           0,
           0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
           0,
           null,
           null,
           0,
-          null,
+          0,
+          0,
           0,
           0,
           null,
           null,
           0,
           null,
+          0,
+          0,
+          null,
+          0,
           null,
           null,
+          0,
           null,
-          null,
+          0,
           null,
           null,
           null,
@@ -965,6 +1111,221 @@
           null,
           null,
           1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+>>>>>>> 12e8551 (Testing)
+          0,
+          0,
+          0,
+          0,
+          0,
+<<<<<<< HEAD
+          0,
+=======
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+>>>>>>> 12e8551 (Testing)
+          0,
+          null,
+          0,
+          null,
+<<<<<<< HEAD
+=======
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+>>>>>>> 12e8551 (Testing)
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+<<<<<<< HEAD
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+=======
+>>>>>>> 12e8551 (Testing)
+          null,
+          null,
+          null,
+          1,
+<<<<<<< HEAD
           2,
           2,
           2,
@@ -978,73 +1339,65 @@
           0,
           null,
           0,
+=======
+          0,
+          0,
+          null,
+>>>>>>> 12e8551 (Testing)
           null,
           0,
           0,
           0,
           null,
+<<<<<<< HEAD
           0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
+=======
+>>>>>>> 12e8551 (Testing)
           null,
           0,
           0,
           0,
           0,
           0,
-          null,
+<<<<<<< HEAD
+          0,
+          0,
           0,
           null,
-          0,
-          0,
+          null,
+          null,
           null,
           null,
           null,
           1,
           0,
           0,
+          0,
+=======
           null,
+          null,
+>>>>>>> 12e8551 (Testing)
           0,
           0,
           null,
           null,
           null,
-          null,
+<<<<<<< HEAD
           1,
           0,
+          0,
           null,
           0,
           null,
+          0,
           null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
           null,
           0,
           0,
@@ -1052,34 +1405,7 @@
           null,
           null,
           1,
-          null,
           0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
-          0,
-          null,
-          null,
           0,
           null,
           0,
@@ -1089,7 +1415,84 @@
           null,
           null,
           1,
+          0,
+=======
           null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+>>>>>>> 12e8551 (Testing)
+          null,
+          0,
+          null,
+          null,
+<<<<<<< HEAD
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
+=======
+          1,
+>>>>>>> 12e8551 (Testing)
+          0,
+          0,
+          0,
+          null,
+<<<<<<< HEAD
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+=======
+>>>>>>> 12e8551 (Testing)
+          0,
+          0,
+          null,
+          null,
+<<<<<<< HEAD
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+=======
+          0,
+          null,
+          0,
+          0,
+          0,
+>>>>>>> 12e8551 (Testing)
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+<<<<<<< HEAD
           0,
           0,
           0,
@@ -1201,18 +1604,25 @@
           null,
           null,
           null,
+=======
+>>>>>>> 12e8551 (Testing)
           1,
           0,
           null,
           null
         ]
       },
+<<<<<<< HEAD
       "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/experience_comment.rb": {
+=======
+      "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/controllers/sessions_controller.rb": {
+>>>>>>> 12e8551 (Testing)
         "lines": [
           null,
           null,
           1,
           1,
+<<<<<<< HEAD
           1,
           null
         ]
@@ -1222,11 +1632,57 @@
           1,
           1,
           1,
+=======
+          2,
+          null,
+          null,
+          2,
+          0,
+          0,
+          null,
+          null,
+          2,
+          2,
+          0,
+          null,
+          2,
+          0,
+          0,
+          null,
+          null,
+          null,
+          2,
+          0,
+          0,
+          null,
+          null,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          2,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+>>>>>>> 12e8551 (Testing)
           null
         ]
       }
     },
+<<<<<<< HEAD
     "timestamp": 1680563321
+=======
+    "timestamp": 1680723946
+>>>>>>> 12e8551 (Testing)
   },
   "RSpec": {
     "coverage": {

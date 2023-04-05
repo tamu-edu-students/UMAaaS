@@ -44,6 +44,9 @@ module NavigationHelpers
 
     when /^the experience\s?page$/
       'experience/2'
+    
+    when /^the bookmarks\s?page$/
+      'experience/bookmarks/5' 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
