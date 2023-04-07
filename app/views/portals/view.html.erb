@@ -37,7 +37,7 @@
      <div class="portal-column-title">
      <p>Tips</p>
      <% if logged_in? and has_program? %>
-      <%= link_to 'Add', new_tip_path, class: 'header-button'%> 
+      <%= link_to 'Add Tip', new_tip_path, class: 'header-button'%> 
     <% end %>
         <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
      </div>

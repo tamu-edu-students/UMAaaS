@@ -23,7 +23,7 @@ class ExperiencesController < ApplicationController
     end
     
     def create
-        params.require(:experience).permit(:title, :experience, :rating, :tags, {images: []})
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, {images: []})
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:alert] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
@@ -118,28 +118,7 @@ class ExperiencesController < ApplicationController
         respond_to do |format|
             format.js {}  # code in views/experiences/create_comment.js.erb will return
         end
-    end
-    
-    def yelp_search
-        @results = search(params[:yelpTerm], params[:yelpLocation])
-        puts @results
-        
-        respond_to do |format|
-            format.json  { render :json => @results }
-        end
-    end
-    
-    
-    def search(term, location)
-        url = "#{Rails.configuration.YELP_API_HOST}#{Rails.configuration.YELP_SEARCH_PATH}"
-        params = {
-            term: term,
-            location: location,
-            limit: 10,
-        }
-        response = HTTP.auth("Bearer #{Rails.configuration.YELP_API_KEY}").get(url, params: params)
-        response.parse
-    end
+    end    
     
     # deletes a whole experience
     def delete

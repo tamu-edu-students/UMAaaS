@@ -8,6 +8,8 @@
 
 require 'cucumber/rails'
 require 'simplecov'
+require 'webdrivers'
+require 'selenium-webdriver'
 SimpleCov.start
 # frozen_string_literal: true
 
@@ -32,11 +34,19 @@ SimpleCov.start
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
-Capybara.default_driver = :selenium
+Capybara.register_driver :selenium_chrome do |app|
+  Selenium::WebDriver::Chrome::Service.driver_path = '/Users/tejaboppana/Downloads/chromedriver_mac_arm64/chromedriver'
+  chrome_options = Selenium::WebDriver::Chrome::Options.new
+  chrome_options.add_argument("--disable-popup-blocking")
+  driver = Selenium::WebDriver.for :chrome
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+ end
+Capybara.default_driver = :selenium_chrome
+
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :deletion
 rescue NameError
   raise 'You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it.'
 end
@@ -59,7 +69,7 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+Cucumber::Rails::Database.javascript_strategy = :deletion
 Before('@omniauth_test') do
 
   OmniAuth.config.test_mode = true

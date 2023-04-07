@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user
 
   def logged_in?
-    return true if Rails.env.test?
-
     !current_user.id.nil? && current_user.id.positive?
   end
 
