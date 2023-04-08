@@ -42,7 +42,7 @@ Capybara.register_driver :selenium_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
  end
 Capybara.default_driver = :selenium_chrome
-
+Capybara.default_max_wait_time = 10
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
@@ -69,7 +69,7 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :deletion
+Cucumber::Rails::Database.javascript_strategy = :truncation
 Before('@omniauth_test') do
 
   OmniAuth.config.test_mode = true

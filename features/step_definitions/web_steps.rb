@@ -172,6 +172,11 @@ When('I hover over Admin') do
   find_link(href: "", title: 'Admin').hover
 end
 
+When('I hover over bookmark icon') do
+  find('.bookmark-yes').hover
+  page.save_screenshot
+end
+
 When('I choose 5 rating') do 
   find('label[for="experience_rating_5"]').click
 end
@@ -244,8 +249,8 @@ When(/^(?:|I )choose "([^"]*)"$/) do |field|
 end
 
 When(/^(?:|I )click on "([^"]*)"$/) do |icon|
-  page.save_screenshot
   tip = Tip.find_by(tip: 'Test Tip')
+  experience_1 = Experience.find_by(title: 'test')
   experience_2 = Experience.find_by(title: 'Test Experience 2')
   experience_comment = ExperienceComment.find_by(comment: 'test comment')
   if icon == "delete-tip"
@@ -259,14 +264,25 @@ When(/^(?:|I )click on "([^"]*)"$/) do |icon|
     page.find(id: 'portal-experience-delete-' + experience_2.id.to_s).click
     page.driver.browser.switch_to.alert.accept
   elsif icon == "comment-experience"
-    experience_1 = Experience.find_by(title: 'test')
     page.find(class: 'portal-experience-leave-comment').click
   elsif icon == "delete-comment-experience"
     page.find(id: 'portal-experience-comment-delete-' + experience_comment.id.to_s).click
     page.driver.browser.switch_to.alert.accept
   elsif icon == "view-comments"
     page.find(class: 'portal-experience-comment-count', visible: false).click
+  elsif icon == "bookmark-icon"
+    page.find(id: 'experience-bookmark-' + experience_1.id.to_s).click
   end
+end
+
+Then("the experience should be bookmarked") do
+  experience_1 = Experience.find_by(title: 'test')
+  id = '#experience-bookmark-' + experience_1.id.to_s
+  expect(page).to have_css(id, text: "1")
+end
+
+Then("the experience should not be bookmarked") do
+  expect(page).to have_css(".bookmark-yes", text: "0")
 end
 
 When('I refresh the page') do

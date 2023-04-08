@@ -25,6 +25,7 @@ Scenario: Test for viewing all of your saved bookmarks
 Scenario: Bookmark an experience and see if the bookmark is present in the bookmarks page
     Given I am logged in with Google
     Given I am on the singapore page
+    Then the experience should not be bookmarked
     When I click on "bookmark-icon"
-    Then the experience should be bookmarked  
+    Then the experience should be bookmarked
 
