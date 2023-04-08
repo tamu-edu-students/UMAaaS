@@ -20,7 +20,4 @@ User.create!(admin: true, program: singapore, id: 1, img: 'https://picsum.photos
              email: 'testuser@gmail.com')
 User.create!(admin: true, program: singapore, id: 2, img: nil, name: 'Tejasri Swaroop Boppana',
              email: 'tejasriboppana22@gmail.com')
-test_user = User.find_or_create_by(email: 'testuser@gmail.com')
-Participant.create(email: 'testuser@gmail.com', program: singapore)
 Participant.create(email: 'tejasriboppana22@gmail.com', program: singapore)
-Experience.create(title: "test", experience: "test experience", rating: 5, user: test_user, program: singapore)
