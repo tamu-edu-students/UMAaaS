@@ -43,9 +43,12 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'selenium-webdriver'
+gem 'webdrivers'
 
-group :test do
+group :development, :test do
   gem 'rack_session_access'
+  gem "puma"
 end
 
 group :development, :test do
@@ -73,11 +76,8 @@ end
 group :production do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'pg'
   gem 'rails_12factor'
-  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

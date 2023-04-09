@@ -33,9 +33,9 @@ class ProgramsController < ApplicationController
     
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     
-    # if params[:banner_image]
-    #   @program.banner_image.attach(params[:banner_image])
-    # end
+    if params[:banner_image]
+       @program.banner_image.attach(params[:banner_image])
+     end
         
     flash[:notice] = "#{@program.name} was successfully created."
     redirect_to programs_path
@@ -52,14 +52,6 @@ class ProgramsController < ApplicationController
     @program.update_attributes(name: params[:program][:name], location: params[:program][:location],
                               region: params[:program][:region])
     flash[:notice] = "#{@program.name} was successfully updated."
-    redirect_to programs_path
-  end
-
-  # this is no longer called anywhere, programs aren't deleted, just disabled
-  def destroy
-    @program = Program.find(params[:id])
-    @program.destroy
-    flash[:notice] = "Program ’#{@program.name}’ deleted."
     redirect_to programs_path
   end
 

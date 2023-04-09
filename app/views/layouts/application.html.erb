@@ -46,11 +46,9 @@
                   <%end%>
                 </ul>
               </div>
-           
-
         <!-- Mobile Drop Down Menu -->
         <div class="container overlay">
-             <!-- Mobile Menu - only visable under 750px width-->
+              <!-- Mobile Menu - only visable under 750px width-->
             <button class="navbar-toggle pull-right  menu-button" type="button" data-toggle="collapse" data-target="#dropdown-menu">
                 <i class="material-icons b"> menu </i>
             </button>
@@ -61,7 +59,7 @@
                     <% if logged_in? %>
                         <li> <%=link_to "LOGOUT", logout_path(), :id => "logout", :class => "link dropdown-item"%> </li> 
                     <%else%>
-                       <li> <%=link_to "LOGIN", login_path(), :id => "login_mobile", :class => "link dropdown-item"%> </li>
+                        <li> <%=link_to "LOGIN", login_path(), :id => "login_mobile", :class => "link dropdown-item"%> </li>
                     <%end%>
                     
                 </ul>
