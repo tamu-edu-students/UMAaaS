@@ -1,13 +1,20 @@
-<div id="portal-switch-programs"></br><%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option value=0 disabled selected>--View Another Program--</option>
-                <% @programs.each do |program| %>
-                    <% if program.id != @program.id then %>
-                       <option id="OPTION" value="<%= program.id %>"><%= program.name %></option>
-                    <%end%>
-                <% end %>
-            </select><% end %></div>
-<div id="page-header"> <%= @program.name %> </div>
 
-<div id="search-wrapper">
+<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+  <%= @program.name %>
+</div>
+
+<div id="search-wrapper" style="margin-bottom: 25px;">
+<div id="portal-switch-programs">
+       <div class="program-dropdown-middle">
+        <%= form_tag program_view_path(), :method => :get, :id => "portal-switch-programs-form" do %><select name="program_id"><option class="program-selector" value=0 disabled selected>View Another Program</option>
+            <% @programs.each do |program| %>
+                <% if program.id != @program.id then %>
+                   <option class="program-options" id="OPTION" value="<%= program.id %>"><%= program.name %></option>
+                <%end%>
+            <% end %>
+        </select><% end %>
+    </div> 
+</div>
     <div class="search-border-outer">
         <div class="search-border-inner">
             <%= form_tag portal_path(), :method => :get, :id => "search-form" do %>
@@ -15,46 +22,41 @@
             <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %>
         </div>
     </div>
-   <% if current_user.admin then %> 
-        <div style="" class="header-button">
-            <%= link_to "Add Participants", new_program_participant_path(@program.id) %>
-        </div>
+    <% if current_user.admin then %>
+    <div class="admin-buttons">
+        <!--<div style="" class="participant-button">-->
+            <%= link_to "Participants", new_program_participant_path(@program), class: "header-button-2"%>
+        <!--</div>-->
+        <!--<div style="" class="participant-button">-->
+            <%= link_to "Flags", flagged_program_path(@program), :id => "flagged", class: "header-button-2"%>
+        <!--</div>-->
     <% end %>
+    </div>
 </div>
 
-<!--This block theoretically can has the potential to update the search results everytime it detects a keystroke. However, this is not possible given the current way the search was written since Javascript cannot directly call on a Ruby function so I will leave this for future teams to figure out-->
-<!--<%= javascript_tag do %>-->
-<!--    document.addEventListener("DOMContentLoaded", function() {-->
-<!--      const searchInput = document.getElementById("search-field");-->
-<!--      searchInput.addEventListener("keyup", function() {-->
-<!--        console.log("Update search results");-->
-<!--      });-->
-<!--    });-->
-<!--<% end %>-->
-
 <div id="flex-container">
- <div id="column_1_of_2" class="flex-item">
+ <div id="column_1_of_2" class="flex-item stickyboi">
      <div class="portal-column-title">
      <p>Tips</p>
-     <% if logged_in? and has_program? %>
+     <% if logged_in? and (has_program? or current_user.admin?) %>
       <%= link_to 'Add Tip', new_tip_path, class: 'header-button'%> 
     <% end %>
         <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
      </div>
- <% @tips.each do |tip| %>
+ <% @tips.reject{ |t| t.user.banned }.each do |tip| %>
     <div class="portal-tip-wrapper" id="portal-tip-wrapper-<%= tip.id %>"><%= render 'tips/view' , locals: {tip: tip} %></div>
- <% end %>
+<% end %>
  <% if @tips.size == 0 then %><div class="portal-tips-none"><% if params[:search].blank? then %>No tips added yet!<% else %>No search results!<% end %></div><% end %></div>
- <div id="column_2_of_2" class="flex-item">
+ <div id="column_2_of_2" class="flex-item stickyboi">
      <div class="portal-column-title">
          <p>Experiences</p>
-         <% if logged_in? and has_program? %>
+         <% if logged_in? and (has_program? or current_user.admin?)  %>
           <%= link_to 'Add Experience', new_experience_path, class: 'header-button'%> 
          <% end %>
          <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>avg rating - best to worst</option><option value="avg_rating_asc" <%= if @experience_sort_by == "avg_rating_asc" then "selected" end %>>avg rating - worst to best</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
      </div>
- <% @experiences.each_with_index do |experience, index| %>
- 	<div class="portal-experience-outer-wrapper" id="portal-experience-wrapper-<%= experience.id %>"><%= render 'experiences/view' , locals: {experience: experience} %></div>
+ <% @experiences.reject{ |e| e.user.banned }.each_with_index do |experience, index| %>
+    <div class="portal-experience-outer-wrapper" id="portal-experience-wrapper-<%= experience.id %>"><%= render 'experiences/view' , locals: {experience: experience} %></div>
     <% if index < @experiences.size - 1 then %><div class="experience-div"></div><% end %>
  <% end %>
  <% if @experiences.size == 0 then %><div class="portal-experiences-none"><% if params[:search].blank? then %>No experiences added yet!<% else %>No search results!<% end %></div><% end %></div>

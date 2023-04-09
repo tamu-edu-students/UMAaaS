@@ -49,6 +49,7 @@ gem 'webdrivers'
 group :development, :test do
   gem 'rack_session_access'
   gem "puma"
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do

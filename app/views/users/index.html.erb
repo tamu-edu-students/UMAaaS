@@ -39,10 +39,10 @@
         <tr>
             <td>Name</td>
             <td>Email</td>
-            <td>Study Abroad Program</td>
+            <td>Home Program</td>
             <td>Admin</td>
             <td <%= if not @showBanned then "class=users-hide-banned-column" end %>>Banned</td>
-            <td></td>
+            <td> Edit </td>
         </tr>
     </thead>
     <tbody>
@@ -69,3 +69,14 @@
     </tbody>
 </table></div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#search-field').on('keyup', function() {
+      var query = $(this).val().toLowerCase();
+      $('.users-list tbody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(query) > -1)
+      });
+    });
+  });
+</script>

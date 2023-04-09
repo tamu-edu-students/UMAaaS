@@ -1,4 +1,8 @@
-<div id="page-header">Edit Study Abroad Program</div>
+<div onclick="window.location.href = '/p/<%= @program.id %>';">
+<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+  Edit Study Abroad Program
+</div>
+</div>
 <div id="flex-container">
  <div id="column1" class="flex-item"><table class="program-admin">
      <thead>
@@ -18,7 +22,7 @@
  </table>
  </div>
  <div id="column2" class="flex-item">
-    <%= form_tag program_path(@program), :method => :put do %>
+    <%= form_tag program_path(@program), :method => :put, enctype: "multipart/form-data" do  %>
         <table class="program-edit-table">
             <tbody>
                 <tr>
@@ -35,7 +39,7 @@
                 </tr>
                  <tr>
                     <td class="experience-edit-label">Banner Image:</td>
-                    <td><%= file_field_tag :banner_image, class: "form-control" %>
+                    <td><%= file_field_tag :banner, class: "form-control" %>
                 </tr>
                 <tr>
                     <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>

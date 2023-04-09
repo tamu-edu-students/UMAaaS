@@ -28,25 +28,35 @@ class ParticipantsController < ApplicationController
 
   def create
     puts params
-    email = params[:participant][:email]
+    emails = params[:emails].split("\n").map(&:strip)
     is_faculty = params[:participant][:is_faculty]
     pid = params['program_id']
-    if email.blank? || is_faculty.blank? # required fields
+    if emails.empty? || is_faculty.blank? # required fields
       flash[:alert] = 'All fields are required'
       redirect_to new_program_participant_path(pid) and return
-
     end
 
-    # Check existence
-    if Participant.find_by(email:, program_id: pid) != nil
-      flash[:alert] = 'Participant Already exists'
-      redirect_to new_program_participant_path(pid) and return
+    # Check existence and create new participants
+    errors = []
+    created_participants = []
+    emails.each do |email|
+      if Participant.find_by(email: email, program_id: pid).present? or !(email =~ URI::MailTo::EMAIL_REGEXP)
+        errors << "#{email}"
+      else
+        Participant.create(email: email, is_faculty: is_faculty, program_id: pid)
+        created_participants << email
+      end
     end
+    
+    if errors.any?
+      flash[:warning] = "Participant(s) already exist or invalid format: #{errors.join(', ')}"
+    elsif created_participants.any?
+      flash[:notice] = "Participant(s) successfully created!"
+    end
+    
 
-    @participant = Participant.create(email:, is_faculty:, program_id: pid)
-    flash[:notice] = 'Participant was successfully created.'
 
-    puts(/LENGTH: #{Participant.all.length}/)
+
     redirect_to new_program_participant_path(pid)
   end
 

@@ -11,13 +11,15 @@ class ExperiencesController < ApplicationController
     # end
 
     def new
+        @program = Program.find params[:id]
         @experience = Experience.new
         program = Program.find params[:id]
-        participant = Participant.find_by(email: current_user.email, program_id: program.id)
-        if participant.nil?
+        program_id = params[:id] 
+        participant = Participant.find_by(email: current_user.email, program_id: params[:id])
+        if participant.nil? and not current_user.admin
             puts "FOUND NIL"
-            flash[:alert] = "You are not assigned to this program."
-            redirect_to portal_path(params[:id]) and return 
+            flash[:warning] = "You are not assigned to this program."
+            redirect_to portal_path(program_id) and return 
         end
         @near = program.location
     end
@@ -25,9 +27,10 @@ class ExperiencesController < ApplicationController
     def create
         params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, {images: []})
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
-            flash[:alert] = "Cannot create experience"
+            flash[:notice] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
         end
+        
         
         tagArray = params[:experience][:tags].split(",")
         tagArrayFixed = ","   # list of tags in database will begin and end with a comma, and no spaces around the commas
@@ -50,18 +53,29 @@ class ExperiencesController < ApplicationController
         #     YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
         # end
         
-        
         redirect_to portal_path(params[:id])
     end
     
     
     def view
-        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:id]}).first
+        
+        puts "VIEWING!"
+        #@experience = Experience.left_outer_joins(:user).all.where(experiences: {id: params[:id]}).where(users: {banned: false}).first
         participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
-        if participant.nil? 
+        if participant.nil? and not current_user.admin
             puts "FOUND NIL"
-            flash[:alert] = "You are not assigned to this program."
-            redirect_to portal_path(params[:id]) and return 
+            flash[:warning] = "You are not assigned to this program."
+            redirect_to portal_path(@experience.program_id) and return 
+        end
+        
+        @experience.commented = false
+        comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: @experience.id)
+        if !comment.nil?
+            puts "commented true"
+            @experience.commented = true
+        else 
+            puts "commented false"
         end
 
         @program = Program.find @experience.program_id
@@ -87,6 +101,21 @@ class ExperiencesController < ApplicationController
             end
         end
         
+        
+        flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if flag_sum.blank? 
+            flag_sum = 0
+        end                 
+        @experience.flagCount = flag_sum
+        puts(@experience.flagCount)
+
+        @experience.hasUserFlagged = 0
+        flagged = FlagExperience.select("flag").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not flagged.nil?
+            if flagged.flag == 1
+                @experience.hasUserFlagged = 1
+            end
+        end
     end
     
     
@@ -100,6 +129,13 @@ class ExperiencesController < ApplicationController
     end
 
     def create_comment
+        # participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
+        # if participant.nil? and not current_user.admin
+        #     puts "FOUND NIL"
+        #     flash[:alert] = "You are not assigned to this program."
+        #     redirect_to portal_path(program_id) and return 
+        # end
+        
         ExperienceComment.create(:comment => params[:commentText], :rating => params[:rating], :user_id => current_user.id, :experience_id => params[:experienceId])
         @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating").where(experiences: {id: params[:experienceId]}).first
         
@@ -112,19 +148,92 @@ class ExperiencesController < ApplicationController
         rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:experienceId]).where(users: {banned: false}).where.not(rating: nil).count(:id)
         rating_count +=1 #add 1 for the original rating
         @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+        @experience.commented = true
         
         @experienceDivId = "portal-experience-wrapper-" + params[:experienceId]
         
         respond_to do |format|
             format.js {}  # code in views/experiences/create_comment.js.erb will return
         end
+<<<<<<< HEAD
     end    
+=======
+    end
+    
+    def flagged 
+        puts("STARTED FLAGGING")
+        puts(params)
+        if(params[:flag] == "0")
+            
+            # puts "destroying flag"
+            FlagExperience.where(experience_id: params[:expId]).where(user_id: current_user.id).destroy_all
+        else 
+            # puts "params of flag" + params[:flag].to_s
+            FlagExperience.create(:flag => params[:flag], :user_id => current_user.id, :experience_id => params[:expId])
+        end
+        
+        @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:expId]}).first
+        
+        # str = "number of experience: " 
+        # puts str + @experience.to_s 
+
+        flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if flag_sum.blank? 
+            flag_sum = 0
+        end                 
+        @experience.flagCount = flag_sum
+
+        @experience.hasUserFlagged = 0
+        flagged = FlagExperience.select("flag").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not flagged.nil?
+            if flagged.flag == 1
+                @experience.hasUserFlagged = 1
+            end
+        end
+        
+        @experienceDivId = "portal-experience-wrapper-" + params[:expId]
+        
+        
+        respond_to do |format|
+            format.js {}
+        end
+    end
+    
+    def unflag
+        FlagExperience.where(experience_id: params[:id]).destroy_all
+        respond_to do |format|
+          format.html { redirect_to request.referer, notice: 'All flags cleared from experience.' }
+        end
+    end
+
+    
+    def yelp_search
+        @results = search(params[:yelpTerm], params[:yelpLocation])
+        puts @results
+        
+        respond_to do |format|
+            format.json  { render :json => @results }
+        end
+    end
+    
+    
+    def search(term, location)
+        url = "#{Rails.configuration.YELP_API_HOST}#{Rails.configuration.YELP_SEARCH_PATH}"
+        params = {
+            term: term,
+            location: location,
+            limit: 10,
+        }
+        response = HTTP.auth("Bearer #{Rails.configuration.YELP_API_KEY}").get(url, params: params)
+        response.parse
+    end
+>>>>>>> 1948b3b0fe1315ad33c3135489b87d17e932d7b4
     
     # deletes a whole experience
     def delete
         # prevent unauthorized deletions
         if(not logged_in? or not current_user.admin)
-           flash[:alert] = "You are not authorized to delete this post!"
+           flash[:warning] = "You are not authorized to delete this post!"
            redirect_to root_path and return 
         end
         
@@ -134,11 +243,36 @@ class ExperiencesController < ApplicationController
             flash[:alert] = "Post not found, error deleting!"
             redirect_to root_path and return
         elsif((experience.user_id != current_user.id) && (not current_user.admin))
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return
         end
         # done checking for unauthorized deletions
         
+        # delete flag
+        FlagExperience.where(experience_id: params[:id]).destroy_all
+        
+        # delete comments
+        ExperienceComment.where(experience_id: params[:id]).destroy_all
+        
+        # delete associated location
+        YelpLocation.where(experience_id: params[:id]).destroy_all
+        
+        # delete experience
+        Experience.where(id: params[:id]).destroy_all
+        
+
+        redirect_to root_path and return 
+        
+        # respond_to do |format|
+        #     format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
+        # end
+    end
+    
+    def remoteDelete
+        experience = Experience.find params[:id]
+        
+        # delete flag
+        FlagExperience.where(experience_id: params[:id]).destroy_all
         
         # delete comments
         ExperienceComment.where(experience_id: params[:id]).destroy_all
@@ -153,7 +287,7 @@ class ExperiencesController < ApplicationController
         Experience.where(id: params[:id]).destroy_all
         
         respond_to do |format|
-            format.js {}
+            format.html { redirect_to request.referer, notice: 'Experience was successfully deleted.' }
         end
     end
     
@@ -161,17 +295,17 @@ class ExperiencesController < ApplicationController
     def delete_comment
         # prevent unauthorized deletions
          if(not logged_in?)
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return 
          end
         
         experienceComment = ExperienceComment.find params[:id]
     
         if(experienceComment.nil?)
-            flash[:alert] = "Post not found, error deleting!"
+            flash[:warning] = "Post not found, error deleting!"
             redirect_to root_path and return
         elsif((experienceComment.user_id != current_user.id) && (not current_user.admin))
-            flash[:alert] = "You are not authorized to delete this post!"
+            flash[:warning] = "You are not authorized to delete this post!"
             redirect_to root_path and return
         end
         # done checking for unauthorized deletions
@@ -197,7 +331,14 @@ class ExperiencesController < ApplicationController
         
         @experienceDivId = "portal-experience-wrapper-" + @experience.id.to_s
         
-        
+        @experience.commented = false
+        comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: @experience.id)
+        if !comment.nil?
+            puts "commented true"
+            @experience.commented = true
+        else 
+            puts "commented false"
+        end
 
         respond_to do |format|
             format.js {}   # code in views/experiences/delete_comment.js.erb will return
@@ -206,7 +347,7 @@ class ExperiencesController < ApplicationController
     
     
     def edit
-        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.yelp_id as yelp_id, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating, yelp_locations.yelp_tags as yelp_tags").where(experiences: {id: params[:id]}).where(users: {banned: false}).first
+        @experience = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select("experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.yelp_id as yelp_id, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating, yelp_locations.yelp_tags as yelp_tags").where(experiences: {id: params[:id]}).first
         program = Program.find @experience.program_id
         @near = program.location
         
@@ -235,10 +376,9 @@ class ExperiencesController < ApplicationController
         @experience = Experience.find params[:id]
         @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
-        # if params[:image]
-        #     @experience.image.purge
-        #     @experience.image.attach(params[:image])
-        # end
+        if params[:image]
+            @experience.image.attach(params[:image])
+        end
         
         # delete any existing associated location
         # YelpLocation.where(experience_id: params[:id]).destroy_all
