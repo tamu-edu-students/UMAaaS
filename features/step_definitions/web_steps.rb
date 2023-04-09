@@ -165,7 +165,7 @@ When('I fill in {string} with {string}') do |string, name|
 end
 
 When('I hover over Profile') do
-  find('.navigation-user-icon').hover
+  find('.navigation-user-icon', visible: false).hover
 end
 
 When('I hover over Admin') do
