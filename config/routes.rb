@@ -47,7 +47,6 @@ Rails.application.routes.draw do
   post 'tip/:id/rdelete', to: 'tips#remoteDelete'
   post 'experience/:id/rdelete', to: 'experiences#remoteDelete'
   root 'portals#index'
-end
   # unflag an experience
   post 'experience/:id/unflag', to: 'experiences#unflag', as: 'unflag_experience'
   # unflag a tip

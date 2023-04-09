@@ -2,29 +2,17 @@
      	<div class="portal-experience">
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
-<<<<<<< HEAD
-					<div class="portal-experience-icons">
-						<div class = "bookmark-experience">
-								<div class="<%= if current_user.id then "bookmark-yes" end %>
-									<%= if locals[:experience].hasUserBookmarked == 1 then "bookmarked" end %>" id="experience-bookmark-<%= locals[:experience].id %>">
-									<%= locals[:experience].hasUserBookmarked %>
-								</div>
-						</div>
-	
-						<div>
-							<%if current_user.admin || locals[:experience].user_id == current_user.id %>
-								<div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; 
-								</div>
-							<% end %>
+				<div class="portal-experience-icons">
+					<div class = "bookmark-experience">
+						<div class="<%= if current_user.id then "bookmark-yes" end %>
+							<%= if locals[:experience].hasUserBookmarked == 1 then "bookmarked" end %>" id="experience-bookmark-<%= locals[:experience].id %>">
+							<%= locals[:experience].hasUserBookmarked %>
 						</div>
 					</div>
-=======
-				<div class="portal-experience-icons">
 					<div>
 						<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
 					</div>
 				</div>
->>>>>>> 1948b3b0fe1315ad33c3135489b87d17e932d7b4
 			</div>
 			<% if not locals[:experience].tagArray.nil? %>
 			<div class="portal-experience-tags">
@@ -32,9 +20,9 @@
 					<div class="portal-experience-tag">
 						#<%= tag %>
 					</div>
-<<<<<<< HEAD
-					<% end end %>
+				<% end %>
 			</div>
+			<% end %>
 			<div class="portal-experience-photo">
 				<% if locals[:experience].images.attached? %>
 					<div id="imageCarousel" class="carousel slide" data-ride="carousel">
@@ -55,16 +43,7 @@
 					  	</a>
 					</div>
 				<%end%>
-=======
-					<% end %>
->>>>>>> 1948b3b0fe1315ad33c3135489b87d17e932d7b4
 			</div>
-			<% end %>
-			<% if locals[:experience].image.attached? %>
-				<div class="portal-experience-photo">
-					<%= image_tag locals[:experience].image, style: "width: 400px; "%>
-				</div>
-			<%end%>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>

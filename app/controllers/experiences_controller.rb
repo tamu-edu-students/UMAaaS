@@ -155,9 +155,6 @@ class ExperiencesController < ApplicationController
         respond_to do |format|
             format.js {}  # code in views/experiences/create_comment.js.erb will return
         end
-<<<<<<< HEAD
-    end    
-=======
     end
     
     def flagged 
@@ -227,7 +224,6 @@ class ExperiencesController < ApplicationController
         response = HTTP.auth("Bearer #{Rails.configuration.YELP_API_KEY}").get(url, params: params)
         response.parse
     end
->>>>>>> 1948b3b0fe1315ad33c3135489b87d17e932d7b4
     
     # deletes a whole experience
     def delete
