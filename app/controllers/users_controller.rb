@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :requireAdmin
-
+  before_action :requireAdmin, except: [:show]
+  
+  def show
+    @user = User.find(params[:id])
+    @experiences = @user.experiences
+  end 
+  
   def requireAdmin
     if logged_in?
       redirect_to root_path and return unless current_user.admin || session[:user].to_i == params[:id].to_i
@@ -58,8 +63,12 @@ class UsersController < ApplicationController
       @user.update_attributes(program_id: nil)
       session[:user_program_id] = nil
     end
+    
+    if params[:avatar]
+      @user.avatar.attach(params[:avatar])
+    end
     flash[:notice] = "#{@user.name} was successfully updated."
-    redirect_to users_path
+    redirect_to user_path(@user)
   end
 
   def destroy; end
@@ -106,6 +115,20 @@ class UsersController < ApplicationController
     end
     redirect_to users_path
   end
+  
+  # ban user
+  def remoteBan
+    user = User.find params[:id]
+    if user.nil?
+      flash[:alert] = 'Error banning user: user not found.'
+    else
+      user.banned = true
+      user.save
+    end
+    respond_to do |format|
+      format.html { redirect_to request.referer, notice: "#{user.name} has been banned." }
+    end
+  end
 
   # unban user
   def unban
@@ -119,4 +142,9 @@ class UsersController < ApplicationController
     end
     redirect_to users_path
   end
+  
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar)
+  end
+
 end

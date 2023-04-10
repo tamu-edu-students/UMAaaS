@@ -1,6 +1,8 @@
-<div id="page-header">New Study Abroad Program</div>
+<div id="page-header">
+  New Study Abroad Program
+</div>
 <div id="flex-container">
- <div id="column2" class="flex-item"><%= form_tag programs_path, :method => :post do %>
+ <div id="column2" class="flex-item"><%= form_tag programs_path, :method => :post, enctype: "multipart/form-data" do %>
     <table class="program-edit-table">
         <tbody>
             <tr>
@@ -15,10 +17,10 @@
                 <td class="program-edit-label"><%= label :program, :region, 'Region' %></td>
                 <td><%= text_field :program, :region, :required => true %></td>
             </tr>
-            <!--<tr>-->
-            <!--    <td class="experience-edit-label">Banner Image:</td>-->
-            <!--    <td><%= file_field_tag :banner_image, class: "form-control" %>-->
-            <!--</tr>-->
+            <tr>
+                <td class="experience-edit-label">Banner Image:</td>
+                <td><%= file_field_tag :banner, class: "form-control" %>
+            </tr>
             <tr>
                 <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
             </tr>

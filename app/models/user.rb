@@ -6,7 +6,9 @@ class User < ApplicationRecord
   has_many :experiences
   has_many :experience_comments
   has_many :tips, through: :helpful_votes
+  has_many :bookmarks
   has_many :experiences, through: :bookmarks
+  has_one_attached :avatar 
 
   attr_accessor :img, :user_program_id
 end

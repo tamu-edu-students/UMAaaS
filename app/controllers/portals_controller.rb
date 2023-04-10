@@ -57,9 +57,7 @@ class PortalsController < ApplicationController
 
   def view
     # get this specific program
-
     @program = Program.find params[:id]
-
     # get list of all programs to display in drop down list for switching between
     @programs = Program.where(disabled: false)
 
@@ -97,6 +95,12 @@ class PortalsController < ApplicationController
         downvote_sum = HelpfulVote.left_outer_joins(:user).where(tip_id: tip.id).where(users: { banned: false }).where(vote: -1).group(:tip_id).count(:vote).values[0]
         downvote_sum = 0 if downvote_sum.blank?
         tip.downvoteCount = downvote_sum
+                
+        flag_sum = FlagTip.left_outer_joins(:user).where(tip_id: tip.id).where(users: {banned: false}).where(flag: 1).group(:tip_id).count(:flag).values[0]
+        if flag_sum.blank? 
+          flag_sum = 0
+        end                 
+        tip.flagCount = flag_sum
 
         tip.hasUserUpvoted = 0
         tip.hasUserDownvoted = 0
@@ -110,6 +114,14 @@ class PortalsController < ApplicationController
           end
         end
 
+        tip.hasUserFlagged = 0
+        flagged = FlagTip.select("flag").where(tip_id: tip.id).where(user_id: current_user.id).first
+        if not flagged.nil?
+          if flagged.flag == 1
+            tip.hasUserFlagged = 1
+          end
+        end
+
         if found
           searchResults.push(tip) # only records matching the search term, if there is one, will be added to searchResults
         end
@@ -120,9 +132,14 @@ class PortalsController < ApplicationController
       @tips = []
     end
 
+  
     # get all experiences for this program
-    @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select('experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating').where(experiences: { program_id: params[:id] }).where(users: { banned: false }).order(rating: :desc)
+    @experiences = Experience.left_outer_joins(:user).select('experiences.*,users.name as user_name').where(experiences: { program_id: params[:id] })
+    #@experiences = Experience.all
+  # @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select('experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating').where(experiences: { program_id: params[:id] }).where(users: { banned: false }).order(rating: :desc)
 
+
+puts("Hello")
     searchResults = []
 
     # for each experience get the comments associated with it and calculate the average rating
@@ -133,12 +150,37 @@ class PortalsController < ApplicationController
         found = true if exp.tags =~ /,#{searchTerm},/i
       elsif !searchTerm.nil?
         found = false
-        if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.yelp_name =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i)
+        if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i)
           found = true
         end
       end
-
+      
+      exp_flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: exp.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
+        if exp_flag_sum.blank? 
+          exp_flag_sum = 0
+        end                 
+      exp.flagCount = exp_flag_sum
+      
+      exp.hasUserFlagged = 0
+      exp_flagged = FlagExperience.select("flag").where(experience_id: exp.id).where(user_id: current_user.id).first
+      if not exp_flagged.nil?
+        if exp_flagged.flag == 1
+          exp.hasUserFlagged = 1
+        end
+      end
+      
       exp.tagArray
+      
+      comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: exp.id)
+      if !comment.nil?
+          puts "commented true"
+          exp.commented = true
+      else 
+          puts "commented false"
+          exp.commented = false
+      end
+      
+      
 
       exp.comments = ExperienceComment.left_outer_joins(:user).select('experience_comments.*,users.name as user_name').where(experience_id: exp.id).where(users: { banned: false }).order(created_at: :desc).limit(Rails.configuration.max_comments_shown)
 
@@ -188,11 +230,11 @@ class PortalsController < ApplicationController
       @experiences = @experiences.sort_by(&:rating)
     when 'avg_rating_asc'
       @experiences = @experiences.sort_by(&:average_rating)
-    when 'date'
       @experiences = @experiences.sort_by(&:created_at).reverse!
     when 'comments'
       @experiences = @experiences.sort_by(&:totalComments).reverse!
     end
+    
 
     # for sorting the tips
     @tip_sort_by = if params[:sort_tip].nil?

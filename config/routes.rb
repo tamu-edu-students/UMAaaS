@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
   get 'users/:id/ban', to: 'users#ban'
+  get 'users/:id/ban', to: 'users#remoteBan'
   get 'users/:id/unban', to: 'users#unban'
   get 'programss/:id/enable', to: 'programs#enable'
   get 'programss/:id/disable', to: 'programs#disable'
+  get '/programs/:id/flagged', to: 'programs#flagged', as: 'flagged_program'
   get 'p', to: 'portals#index', as: 'portals'
   get 'p/select', to: 'portals#program_select', as: 'program_select'
   get 'p/view', to: 'portals#program_view', as: 'program_view'
@@ -37,8 +39,16 @@ Rails.application.routes.draw do
   post 'experience/bookmarked', to: 'experiences#bookmarked'
   post 'tip/helpful', to: 'tips#helpful'
   get 'experience/bookmarks/:id', to: 'experiences#bookmark_view', as: 'bookmarks_view'
+  post 'tip/flagged', to: 'tips#flagged'
+  post 'experience/flagged', to: 'experiences#flagged'
   delete 'experience/:id/delete', to: 'experiences#delete'
   delete 'experience/:id/delete_comment', to: 'experiences#delete_comment'
   delete 'tip/:id/delete', to: 'tips#delete'
+  post 'tip/:id/rdelete', to: 'tips#remoteDelete'
+  post 'experience/:id/rdelete', to: 'experiences#remoteDelete'
   root 'portals#index'
+  # unflag an experience
+  post 'experience/:id/unflag', to: 'experiences#unflag', as: 'unflag_experience'
+  # unflag a tip
+  post 'tip/:id/unflag', to: 'tips#unflag', as: 'unflag_tip'
 end

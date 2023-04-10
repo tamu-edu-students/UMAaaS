@@ -1,30 +1,28 @@
     <div class="portal-experience-wrapper" id="test">
-     <div class="portal-experience">
+     	<div class="portal-experience">
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
-					<div class="portal-experience-icons">
-						<div class = "bookmark-experience">
-								<div class="<%= if current_user.id then "bookmark-yes" end %>
-									<%= if locals[:experience].hasUserBookmarked == 1 then "bookmarked" end %>" id="experience-bookmark-<%= locals[:experience].id %>">
-									<%= locals[:experience].hasUserBookmarked %>
-								</div>
-						</div>
-	
-						<div>
-							<%if current_user.admin || locals[:experience].user_id == current_user.id %>
-								<div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; 
-								</div>
-							<% end %>
+				<div class="portal-experience-icons">
+					<div class = "bookmark-experience">
+						<div class="<%= if current_user.id then "bookmark-yes" end %>
+							<%= if locals[:experience].hasUserBookmarked == 1 then "bookmarked" end %>" id="experience-bookmark-<%= locals[:experience].id %>">
+							<%= locals[:experience].hasUserBookmarked %>
 						</div>
 					</div>
+					<div>
+						<%if current_user.admin || locals[:experience].user_id == current_user.id %><div class="portal-experience-delete" id="portal-experience-delete-<%= locals[:experience].id %>">&#10006; </div><% end %>
+					</div>
+				</div>
 			</div>
+			<% if not locals[:experience].tagArray.nil? %>
 			<div class="portal-experience-tags">
-				<% if not locals[:experience].tagArray.nil? then locals[:experience].tagArray.each do |tag| %>
+				<% locals[:experience].tagArray.each do |tag| %>
 					<div class="portal-experience-tag">
 						#<%= tag %>
 					</div>
-					<% end end %>
+				<% end %>
 			</div>
+			<% end %>
 			<div class="portal-experience-photo">
 				<% if locals[:experience].images.attached? %>
 					<div id="imageCarousel" class="carousel slide" data-ride="carousel">
@@ -46,7 +44,6 @@
 					</div>
 				<%end%>
 			</div>
-			</br>
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>
@@ -62,7 +59,16 @@
 			</div>
 			<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
-				<%= locals[:experience].user_name %>
+				<% if locals[:experience].user.avatar.attached? %>
+				  <%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
+				    <%= image_tag(locals[:experience].user.avatar, class: "profile-circle", height: '30', width: '30') %>
+				  <% end %>
+				  <% else %>
+				  	<%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
+				    <%= image_tag(asset_path("profile.jpg"), class: "profile-circle", height: '30', width: '30') %>
+				  <% end %>
+				<% end %>
+			<%= link_to locals[:experience].user.name, user_path(locals[:experience].user), data: { turbolinks: false } %>
 			</span>
 			<span class="portal-experience-info-date">
 				<%= locals[:experience].created_at.strftime("%b %-d, '%y") %>
@@ -89,24 +95,36 @@
          </div>
      </div>
      <div class="portal-experience-comments">
-     	<% if locals[:experience].comments.size > 0 then %><div class="portal-experience-comment-count<%if locals[:single] == true %>-single<% end %>">Comments: <%= locals[:experience].totalComments %> <span class="down-arrow"><i></i></span></div><% end %>
-     	<% if logged_in? then %><div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= locals[:experience].id %>"><textarea id="add_comment_<%= locals[:experience].id %>" name="add_comment" placeholder="Leave a comment"></textarea><input id="submit_add_comment_<%= locals[:experience].id %>" class="submit_add_comment" type="submit" value="Save Comment"><div class="comment_rating_wrapper"><%= label :rating, "Rating:", :class => "comment_label" %>
+     	<% if locals[:experience].comments&.size.to_i > 0 then %><div class="portal-experience-comment-count<%if locals[:single] == true %>-single<% end %>">Comments: <%= locals[:experience].totalComments %> <span class="down-arrow"><i></i></span></div><% end %>
+     	<% if logged_in? then %><div class="portal-experience-leave-comment" id="wrapper_add_comment_<%= locals[:experience].id %>">
+     		<textarea id="add_comment_<%= locals[:experience].id %>" name="add_comment" placeholder="Leave a comment"></textarea>
+     			<input id="submit_add_comment_<%= locals[:experience].id %>" class="submit_add_comment" type="submit" value="Save Comment">
+     			<% if not @commented and not locals[:experience].commented then %>
+     			<div class="comment_rating_wrapper">
+     				<%= label :rating, "Rating: ", :class => "comment_label" %>
 					<fieldset class="rating">
 						<input type="radio" value="5" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_5_<%= locals[:experience].id %>" /> <label for="comment_rating_5_<%= locals[:experience].id %>">Rating 5</label> 
 						<input type="radio" value="4" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_4_<%= locals[:experience].id %>" /> <label for="comment_rating_4_<%= locals[:experience].id %>">Rating 4</label> 
 						<input type="radio" value="3" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_3_<%= locals[:experience].id %>" /> <label for="comment_rating_3_<%= locals[:experience].id %>">Rating 3</label> 
 						<input type="radio" value="2" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_2_<%= locals[:experience].id %>" /> <label for="comment_rating_2_<%= locals[:experience].id %>">Rating 2</label> 
 						<input type="radio" value="1" name="comment_rating_<%= locals[:experience].id %>" id="comment_rating_1_<%= locals[:experience].id %>" /> <label for="comment_rating_1_<%= locals[:experience].id %>">Rating 1</label>
-					</fieldset></div></div><% end %>
+					</fieldset>
+					
+				</div>
+				<% end %>
+			</div><% end %>
+        <% if locals[:experience].comments&.size.to_i > 0 then %>
         <div class="portal-experience-comments-list<%if locals[:single] == true %>-single<% end %>">
         	<% locals[:experience].comments.each do |comment| %>
         		<div class="portal-experience-comment"><%= comment.comment %>
         			<%if current_user.admin || comment.user_id == current_user.id %><div class="portal-experience-comment-delete" id="portal-experience-comment-delete-<%= comment.id %>">&#10006; </div><% end %>
         			<div class="comment-author"><%= comment.user_name %> | <%= comment.created_at.strftime("%b %-d, '%y") %></div>
-        			<div class="comment-rating"><%if comment.rating != nil %><img src="<%=asset_path(comment.rating.to_s + "_thumb2.png")%>" height="16"><% end %></div>
+        			<div class="comment-rating"><%if comment.rating != nil %><img src="<%=asset_path(comment.rating.to_s + "_star2.png")%>" height="16"><% end %></div>
         		</div>
         	<% end %>
+        	
         	<% if locals[:experience].comments.size != locals[:experience].totalComments %><div class="portal-experience-comment-more"><a href="/experience/<%= locals[:experience].id %>">see <%= locals[:experience].totalComments - locals[:experience].comments.size%> more comments</a></div><% end %>
         </div>
+        <% end %>
      </div>
     </div>

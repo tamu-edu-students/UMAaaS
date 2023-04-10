@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'open-uri'
 
 class SessionsController < ApplicationController
   def create
@@ -23,6 +24,11 @@ class SessionsController < ApplicationController
     if user_info['info']['email'] == Rails.configuration.admin_email
       dbUser.admin = true
       dbUser.save
+    end
+    
+     # Attach the user's profile picture to their avatar
+    if user_info['info']['image'].present? && !dbUser.avatar.attached?
+      dbUser.avatar.attach(io: URI.open(user_info['info']['image']), filename: "#{dbUser.name}_avatar.jpg")
     end
 
     session[:user] = dbUser.id

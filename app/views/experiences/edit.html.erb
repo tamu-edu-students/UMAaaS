@@ -1,6 +1,8 @@
-<div id="page-header">Edit Your Experience</div>
+<div id="page-header">
+  Edit Your Experience
+</div>
 <div id="flex-container">
- <div id="column2" class="flex-item"><%= form_tag experience_path(@experience), :method => :put do %>
+ <div id="column2" class="flex-item"><%= form_tag experience_path(@experience), :method => :put, enctype: "multipart/form-data" do %>
     <table class="experience-edit-table">
         <tbody>
             <tr>
@@ -11,11 +13,11 @@
                 <td class="experience-edit-label">Experience:</td>
                 <td><%= text_area :experience, :experience, :required => true %><div class="experience-edit-field-tips">&nbsp;</div></td>
             </tr>
-            <!--<tr>-->
-            <!--    <td class="experience-edit-label">Image:</td>-->
-            <!--    <td><%= file_field_tag :image, class: "form-control" %>-->
-            <!--</tr>-->
-            <!--<tr>-->
+            <tr>
+                <td class="experience-edit-label">Image:</td>
+                <td><%= file_field_tag :image, class: "form-control" %>
+            </tr>
+            <tr>
                 <td class="experience-edit-label">Rating:</td>
                 <td><fieldset class="rating">
                       <%= radio_button :experience, :rating, "5", :required => true %> <%= label(:experience, :rating.to_s + "_5" ) %> 
