@@ -59,7 +59,6 @@ end
 
 Given(/^(?:|I )am on (.+)$/) do |page_name|
   visit path_to(page_name)
-  save_page
 end
 
 #And(/^(?:|I )am logged in/) do
@@ -98,7 +97,6 @@ end
 Then('I choose a program_id') do
   within('#index-search-box')
   select 'Greece CSCE Wintermester', from: 'program_id'
-  page.find_button("Submit", visible: :hidden, wait: 5).execute_script('this.click()')
 end
 
 Given(/If ^(?:|I )am on (.+)$/) do |page_name|
@@ -174,7 +172,6 @@ end
 
 When('I hover over bookmark icon') do
   find('.bookmark-yes').hover
-  page.save_screenshot
 end
 
 When('I choose 5 rating') do 
@@ -272,6 +269,13 @@ When(/^(?:|I )click on "([^"]*)"$/) do |icon|
     page.find(class: 'portal-experience-comment-count', visible: false).click
   elsif icon == "bookmark-icon"
     page.find(id: 'experience-bookmark-' + experience_1.id.to_s).click
+  elsif icon == "flag"
+    page.find(id: 'tip-flag-' + tip.id.to_s).click
+  elsif icon == "unflag"
+    page.find(id: 'tip-flag-' + tip.id.to_s).click
+  elsif icon == "remote-delete-tip"
+    click_button("Delete")
+    page.driver.browser.switch_to.alert.accept
   end
 end
 
