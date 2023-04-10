@@ -272,6 +272,13 @@ When(/^(?:|I )click on "([^"]*)"$/) do |icon|
     page.find(class: 'portal-experience-comment-count', visible: false).click
   elsif icon == "bookmark-icon"
     page.find(id: 'experience-bookmark-' + experience_1.id.to_s).click
+  elsif icon == "flag"
+    page.find(id: 'tip-flag-' + tip.id.to_s).click
+  elsif icon == "unflag"
+    page.find(id: 'tip-flag-' + tip.id.to_s).click
+  elsif icon == "remote-delete-tip"
+    click_button("Delete")
+    page.driver.browser.switch_to.alert.accept
   end
 end
 
