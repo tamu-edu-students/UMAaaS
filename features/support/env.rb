@@ -34,14 +34,24 @@ SimpleCov.start
 # recommended as it will mask a lot of errors for you!
 #
 ActionController::Base.allow_rescue = false
-Capybara.register_driver :selenium_chrome do |app|
-  Selenium::WebDriver::Chrome::Service.driver_path = '/Users/tejaboppana/Downloads/chromedriver_mac_arm64/chromedriver'
-  chrome_options = Selenium::WebDriver::Chrome::Options.new
-  chrome_options.add_argument("--disable-popup-blocking")
-  driver = Selenium::WebDriver.for :chrome
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
- end
-Capybara.default_driver = :selenium_chrome
+
+########################################################################################################################################
+###### commenting out for multiple images and gallery cucumber tests... this Selenium line creates an error if you don't have the file itself (which I don't) -- Kylee
+  
+# Capybara.register_driver :selenium_chrome do |app|
+#   Selenium::WebDriver::Chrome::Service.driver_path = '/Users/tejaboppana/Downloads/chromedriver_mac_arm64/chromedriver'
+#   chrome_options = Selenium::WebDriver::Chrome::Options.new
+#   chrome_options.add_argument("--disable-popup-blocking")
+#   driver = Selenium::WebDriver.for :chrome
+#   Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+# end
+# Capybara.default_driver = :selenium_chrome
+
+########################################################################################################################################
+
+
+
+
 Capybara.default_max_wait_time = 10
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.

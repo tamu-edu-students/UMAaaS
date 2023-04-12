@@ -501,3 +501,34 @@ end
 # Then /^show me the page$/ do
 #   save_and_open_page
 # end
+
+### Unique to multiple images and gallery features ###
+When("I select multiple images to upload") do
+  attach_file("images[]", Rails.root.join("spec/fixtures/files/image1.jpg"))
+  attach_file("images[]", Rails.root.join("spec/fixtures/files/image2.jpg"))
+end
+
+When("I do not select any images to upload") do
+  # do nothing
+end
+
+When("I select an invalid file type to upload") do
+  attach_file("images[]", Rails.root.join("spec/fixtures/files/invalid.txt"))
+end
+
+When("I click on the upload button") do
+  click_button "Upload"
+end
+
+Then("I should see a success message") do
+  expect(page).to have_content("Images uploaded successfully.")
+end
+
+Then("I should see an error message") do
+  expect(page).to have_content("There was an error uploading your images.")
+end
+
+Then("I should see the uploaded images on the index page") do
+  expect(page).to have_selector("img[src$='image1.jpg']")
+  expect(page).to have_selector("img[src$='image2.jpg']")
+end
