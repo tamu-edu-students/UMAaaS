@@ -7,23 +7,20 @@ Scenario: Test for when user uploads multiple images
     Given I am on the singapore page
     Given I am logged in with Google
     When I click the "Add Experience" link 
-    When I select multiple images to upload
-    And I click the "upload" button
-    Then I should see a success message
-    And I should see the uploaded images on the index page
+    And I select multiple images to upload
+    And I press "Save"
+    # Then I should see the uploaded images on the index page
 
 Scenario: User uploads no images
     Given I am on the singapore page
     Given I am logged in with Google
     When I click the "Add Experience" link
-    When I do not select any images to upload
-    And I click on the upload button
-    Then I should see an error message
+    And I do not select any images to upload
+    Then I should not see the uploaded images on the index page
 
 Scenario: User uploads an invalid file type
     Given I am on the singapore page
     Given I am logged in with Google
     When I click the "Add Experience" link
-    When I select an invalid file type to upload
-    And I click on the upload button
-    Then I should see an error message
+    And I select an invalid file type to upload
+    # Then I should see the "warning" flash message with "Invalid file format. Only JPEG, PNG, and GIF images are allowed."

@@ -36,7 +36,7 @@ SimpleCov.start
 ActionController::Base.allow_rescue = false
 
 ########################################################################################################################################
-###### commenting out for multiple images and gallery cucumber tests... this Selenium line creates an error if you don't have the file itself (which I don't) -- Kylee
+###### commenting out for multiple images and gallery cucumber tests... this Selenium stuff creates an error if you don't have the file itself (which I don't) -- Kylee
   
 # Capybara.register_driver :selenium_chrome do |app|
 #   Selenium::WebDriver::Chrome::Service.driver_path = '/Users/tejaboppana/Downloads/chromedriver_mac_arm64/chromedriver'
