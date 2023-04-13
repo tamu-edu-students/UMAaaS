@@ -41,6 +41,18 @@ class ExperiencesController < ApplicationController
         
         newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id], :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
+        
+   
+        images = params[:images]
+        valid_formats = ["image/jpeg", "image/png", "image/gif"]
+        
+        images.each do |image|
+            unless valid_formats.include? image.content_type
+                flash[:warning] = "Invalid file format. Only JPEG, PNG, and GIF images are allowed."
+                redirect_to portal_path(params[:id]) and return
+            end
+        end
+
         if params[:images]
             newExperience.images.attach(params[:images])
         end

@@ -501,3 +501,70 @@ end
 # Then /^show me the page$/ do
 #   save_and_open_page
 # end
+
+### Unique to multiple images and gallery features ###
+When("I select multiple images to upload") do
+  attach_file("images[]", Rails.root.join("test/fixtures/files/cat.PNG"))
+  attach_file("images[]", Rails.root.join("test/fixtures/files/amongus.jpg"))
+end
+
+When("I do not select any images to upload") do
+  # do nothing
+end
+
+When("I select an invalid file type to upload") do
+  attach_file("images[]", Rails.root.join("test/fixtures/files/invalid.txt"))
+end
+
+
+
+And("I should see a success message") do
+  # expect(page).to have_content("Images uploaded successfully.")
+  expect(page).to have_content('Experience was successfully created.')
+end
+
+# Then("I should see an error message") do
+#   expect(page).to have_content("Invalid file format. Only JPEG, PNG, and GIF images are allowed.")
+# end
+
+# Then("I should see the warning flash message with {string}") do |type, message|
+#   expect(page).to have_selector('.flash-warning', text: message)
+# end
+
+
+
+
+# Then /^I should see the "(\w+)" flash message with "([^"]+)"$/ do |key, message|
+#   expect(page).to have_css("div.flash-#{key}", text: message)
+# end
+
+Then /^I should see the "(\w+)" flash message with "([^"]+)"$/ do |key, message|
+  expect(page).to have_css("div.flash-#{key}", text: message)
+end
+
+
+
+
+Then(/^I should not see the uploaded images on the index page$/) do
+  images = page.all('.image')
+  expect(images.count).to eq(0) #assuming you uploaded 3 images
+  images.each do |image|
+    expect(image).to have_css('img')
+  end
+end
+
+# Then("I should see the uploaded images on the index page") do
+#   expect(page).to have_content("img[src$='cat.PNG']")
+#   expect(page).to have_content("img[src$='amongus.jpg']")
+# end
+
+
+# Then(/^I should see the uploaded images on the index page$/) do
+#   images = [
+#     Rails.root.join("test/fixtures/files/cat.PNG"),
+#     Rails.root.join("test/fixtures/files/amongus.jpg")
+#   ]
+#   images.each do |image|
+#     expect(page).to have_selector("img[src='#{image}']")
+#   end
+# end
