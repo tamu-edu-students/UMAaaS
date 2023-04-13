@@ -58,7 +58,9 @@ Before do
 end
 
 Given(/^(?:|I )am on (.+)$/) do |page_name|
-  visit path_to(page_name)
+  using_wait_time 2 do
+    visit path_to(page_name)
+  end
 end
 
 #And(/^(?:|I )am logged in/) do
@@ -97,10 +99,6 @@ end
 Then('I choose a program_id') do
   within('#index-search-box')
   select 'Greece CSCE Wintermester', from: 'program_id'
-end
-
-Given(/If ^(?:|I )am on (.+)$/) do |page_name|
-  visit path_to(page_name)
 end
 
 Then("I switch programs") do
@@ -170,10 +168,6 @@ When('I hover over Admin') do
   find_link(href: "", title: 'Admin').hover
 end
 
-When('I hover over bookmark icon') do
-  find('.bookmark-yes').hover
-end
-
 When('I choose 5 rating') do 
   find('label[for="experience_rating_5"]').click
 end
@@ -223,10 +217,6 @@ Given(/^an experience with tags=,/) do
   @experience1 = Experience.new(program: nil, user: nil, tags: ',')
 end
 
-Given(/^an experience with tags "([^"]*)"$/) do |stringVal|
-  @experience1 = Experience.new(program: nil, user: nil, tags: stringVal)
-end
-
 
 When(/^I ask for the tag array/) do
   @resultVal = @experience1.tagArray
@@ -234,15 +224,6 @@ end
 
 Then(/^I should get nil$/) do
   expect(@resultVal.nil?)
-end
-
-Then(/^I should get an tag array "([^"]*)"$/) do |array|
-  @expected = array.split(',')
-  expect(@expected == @resultVal)
-end
-
-When(/^(?:|I )choose "([^"]*)"$/) do |field|
-  choose(field)
 end
 
 When(/^(?:|I )click on "([^"]*)"$/) do |icon|
@@ -276,6 +257,18 @@ When(/^(?:|I )click on "([^"]*)"$/) do |icon|
   elsif icon == "remote-delete-tip"
     click_button("Delete")
     page.driver.browser.switch_to.alert.accept
+  elsif icon == "Test Experience"
+    page.find('.portal-experience-title').click
+  elsif icon == "flag-experience"
+    page.find(id: 'experience-flagged-' + experience_1.id.to_s).click
+  elsif icon == "unflag-experience"
+    page.find(id: 'experience-flagged-' + experience_1.id.to_s).click
+  elsif icon == "remote-delete-experience"
+    click_button("Delete")
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "clear-flags"
+    click_button("Clear")
+    page.driver.browser.switch_to.alert.accept
   end
 end
 
@@ -293,21 +286,18 @@ When('I refresh the page') do
   visit current_path
 end
 
-When('I ') do
-
-end
 # When /I click on the "(.+)" link/ do |locator|
 #   page.click_link locator
 # end
 
 Then(/^(?:|I )should see "([^"]*)"$/) do |text|
-  using_wait_time 10 do
+  using_wait_time 3 do
     page.should have_content(text) if page.respond_to? :should
   end
 end
 
 Then(/^(?:|I )should not see "([^"]*)"$/) do |text|
-  using_wait_time 10 do
+  using_wait_time 3 do
     page.should_not have_content(text) if page.respond_to? :should
   end
 end
@@ -335,14 +325,6 @@ end
 Then(/^(?:|I )should see id "([^"]*)"$/) do |text|
   page.should have_selector("##{text}") if page.respond_to? :should
 end
-
-Then (/I click on bookmark icon/) do
-  # page.find('.bookmark-experience').click
-  puts page.find('#experience-bookmark-1')
-  # .click
-  # page.should have_selector(".bookmark-experience .bookmarked", wait: 100) if page.respond_to? :should
-end
-
 
 # When('I am on the new page') do
 #   visit new_experience_path
