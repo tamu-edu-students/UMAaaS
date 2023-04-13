@@ -22,9 +22,6 @@ module NavigationHelpers
     when /^the test search\s?page$/
       '/p/' + singapore.id.to_s + '?search=test&z.x=0&z.y=0'
 
-    when /^the home\s?page$/
-      '/'
-
     when /^the emergency\s?page$/
       '/reviews/emergency'
 
@@ -58,6 +55,7 @@ module NavigationHelpers
 
     when /^the Add new participants on Singapore\s?page$/
       '/programs/' + singapore.id.to_s + '/participants/new'
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" \
             "Now, go and add a mapping in #{__FILE__}"

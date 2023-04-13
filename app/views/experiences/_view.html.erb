@@ -2,7 +2,7 @@
      	<div class="portal-experience">
 		 	<div class="portal-experience-title">
 				<%= locals[:experience].title %>
-				<div class="portal-experience-icons">
+				<div class="portal-experience-icons">			
 					<div class = "bookmark-experience">
 						<div class="<%= if current_user.id then "bookmark-yes" end %>
 							<%= if locals[:experience].hasUserBookmarked == 1 then "bookmarked" end %>" id="experience-bookmark-<%= locals[:experience].id %>">

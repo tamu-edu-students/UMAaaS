@@ -60,4 +60,15 @@ Scenario: Flag a tip and then Admin deletes it
     Given I am on the singapore page
     Then I should not see "Test Tip"
 
+Scenario: Flag a tip and then Admin clears the flag
+    Given I am logged in with Google as an Admin
+    When I follow "Add Tip"
+    When I fill in "Tip" with "Test Tip"
+    And I press "Save"
+    When I click on "flag"
+    When I follow "Flags"
+    Then I should see "Test Tip"
+    When I click on "clear-flags"
+    When I refresh the page
+    Then I should not see "Test Tip"
     
