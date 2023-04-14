@@ -143,6 +143,11 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
   
+  def ban_comment
+    @user = User.find params[:id]
+    @programs = Program.all
+  end
+  
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar)
   end
