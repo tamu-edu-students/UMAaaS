@@ -27,8 +27,7 @@
 			
 		  
 		  
-		 
-		  <!-- Approved cp !! Things are centered! All that's left is to make the controls not overlap the images...-->
+		 <!-- Carousel controls outside of image! -->
 		  
 		  <style>
 		    .portal-experience-wrapper {
@@ -60,17 +59,27 @@
 		        overflow: hidden;
 		    }
 		
+		    /*.carousel-item img {*/
+		    /*    max-height: 500px;*/
+		    /*    width: auto;*/
+		    /*    margin: 0 auto;*/
+		    /*}*/
+		    
 		    .carousel-item img {
-		        max-height: 500px;
-		        width: auto;
-		        margin: 0 auto;
-		    }
+				max-height: 500px;
+				max-width: 600px;
+				width: auto;
+				margin: 0 auto;
+				object-fit: cover;
+				}
+		    
+		    
 		
 		    .carousel-control-prev,
 		    .carousel-control-next {
 		        position: absolute;
-		        width: 5%;
-		        height: 7%;
+		        width: 30px;
+		        height: 30px;
 		        display: flex;
 		        
 		        flex-direction: column;
@@ -99,11 +108,13 @@
 		    }
 		
 		    .carousel-control-prev {
-		        left: 2%;
+		        /*left: 2%;*/
+		        margin-left: -35px;
 		    }
 		
 		    .carousel-control-next {
-		        right: 2%;
+		        /*right: 2%;*/
+		        margin-right: -35px;
 		    }
 		
 		    .carousel-wrap {
@@ -112,6 +123,9 @@
 		        align-items: center;
 		        height: 100%;
 		    }
+		    
+	
+		    
 		</style>
 		<div class="center">
 			<div class="portal-experience-photo">
