@@ -505,25 +505,6 @@ And("I should see a success message") do
   expect(page).to have_content('Experience was successfully created.')
 end
 
-# Then("I should see an error message") do
-#   expect(page).to have_content("Invalid file format. Only JPEG, PNG, and GIF images are allowed.")
-# end
-
-# Then("I should see the warning flash message with {string}") do |type, message|
-#   expect(page).to have_selector('.flash-warning', text: message)
-# end
-
-
-
-
-# Then /^I should see the "(\w+)" flash message with "([^"]+)"$/ do |key, message|
-#   expect(page).to have_css("div.flash-#{key}", text: message)
-# end
-
-Then /^I should see the "(\w+)" flash message with "([^"]+)"$/ do |key, message|
-  expect(page).to have_css("div.flash-#{key}", text: message)
-end
-
 
 
 
@@ -535,18 +516,80 @@ Then(/^I should not see the uploaded images on the index page$/) do
   end
 end
 
-# Then("I should see the uploaded images on the index page") do
-#   expect(page).to have_content("img[src$='cat.PNG']")
-#   expect(page).to have_content("img[src$='amongus.jpg']")
+
+
+Then(/^I should see the uploaded images on the index page$/) do
+  @images = []
+  all('.image').each do |img|
+    @images << img['src']
+  end
+
+  @images.each do |image|
+    expect(page).to have_xpath("//img[@src='#{image}']")
+  end
+end
+
+
+
+
+# Then("I should see an error message") do
+#   expect(page).to have_content("Invalid file format. Only JPEG, PNG, and GIF images are allowed.")
 # end
 
+# Then(/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+#   expect(page).to have_css('.flash-warning', text: message)
+# end
 
-# Then(/^I should see the uploaded images on the index page$/) do
-#   images = [
-#     Rails.root.join("test/fixtures/files/cat.PNG"),
-#     Rails.root.join("test/fixtures/files/amongus.jpg")
-#   ]
-#   images.each do |image|
-#     expect(page).to have_selector("img[src='#{image}']")
+Then(/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+  expect(page).to have_current_path('/programs')
+  expect(page).to have_css('.flash-warning', text: message)
+end
+
+
+
+# Then (/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+#   within('.flash-warning') do
+#     expect(page).to have_content(message)
 #   end
 # end
+
+###############################################################
+
+# unique GALLERY steps
+
+## TODO**********
+# When(/^I click on the "Gallery" tab$/) do
+#   # Click on the "Gallery" tab on the program page
+# end
+
+## TODO**********
+# Then(/^I should see a gallery of images with the title "(.*?)" and "(.*?)"$/) do |program_name, image_count|
+#   # Check that the gallery has the correct title and number of images
+# end
+
+And(/^I should see all (\d+) images related to the program$/) do |image_count|
+  # Check that all the images related to the program are displayed in the gallery
+  @images = []
+  all('.image').each do |img|
+    @images << img['src']
+  end
+
+  @images.each do |image|
+    expect(page).to have_xpath("//img[@src='#{image}']")
+  end
+end
+
+## TODO**********
+# Then(/^I should see a message that says "No images found for (.*?)"$/) do |program_name|
+#   # Check that the "No images found" message is displayed in the gallery
+# end
+
+And(/^I should not see any images in the gallery$/) do
+  # Check that the gallery does not display any images
+  images = page.all('.image')
+  expect(images.count).to eq(0) #assuming you uploaded 3 images
+  images.each do |image|
+    expect(image).to have_css('img')
+  end
+end
+

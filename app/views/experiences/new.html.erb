@@ -27,7 +27,13 @@
                     </form>
                 </td>
 
-                
+             
+                <% if flash[:warning] %>
+                  <div class="alert alert-warning">
+                    <%= flash[:warning] %>
+                  </div>
+                <% end %>
+
 
                 
             </tr>
