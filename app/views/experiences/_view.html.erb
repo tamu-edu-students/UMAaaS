@@ -14,6 +14,11 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+			
 			<% if not locals[:experience].tagArray.nil? %>
 			<div class="portal-experience-tags">
 				<% locals[:experience].tagArray.each do |tag| %>
@@ -25,7 +30,7 @@
 			<% end %>
 			<div class="portal-experience-photo">
 				<% if locals[:experience].images.attached? %>
-					<div id="imageCarousel" class="carousel slide" data-ride="carousel">
+					<div id="imageCarousel" class="carousel slide" data-interval="false">
 						 <div class="carousel-inner">
 						 	<% locals[:experience].images.each.with_index do |image, i| %>
 						 		<div class="carousel-item <%= 'active' if i == 0 %>">
@@ -44,6 +49,11 @@
 					</div>
 				<%end%>
 			</div>
+			
+			
+			<!--checkpoint original-->
+			
+			
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
 			</div>
