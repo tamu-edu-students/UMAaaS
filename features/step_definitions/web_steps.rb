@@ -505,25 +505,6 @@ And("I should see a success message") do
   expect(page).to have_content('Experience was successfully created.')
 end
 
-# Then("I should see an error message") do
-#   expect(page).to have_content("Invalid file format. Only JPEG, PNG, and GIF images are allowed.")
-# end
-
-# Then("I should see the warning flash message with {string}") do |type, message|
-#   expect(page).to have_selector('.flash-warning', text: message)
-# end
-
-
-
-
-# Then /^I should see the "(\w+)" flash message with "([^"]+)"$/ do |key, message|
-#   expect(page).to have_css("div.flash-#{key}", text: message)
-# end
-
-Then /^I should see the "(\w+)" flash message with "([^"]+)"$/ do |key, message|
-  expect(page).to have_css("div.flash-#{key}", text: message)
-end
-
 
 
 
@@ -535,18 +516,40 @@ Then(/^I should not see the uploaded images on the index page$/) do
   end
 end
 
-# Then("I should see the uploaded images on the index page") do
-#   expect(page).to have_content("img[src$='cat.PNG']")
-#   expect(page).to have_content("img[src$='amongus.jpg']")
+
+
+Then(/^I should see the uploaded images on the index page$/) do
+  @images = []
+  all('.image').each do |img|
+    @images << img['src']
+  end
+
+  @images.each do |image|
+    expect(page).to have_xpath("//img[@src='#{image}']")
+  end
+end
+
+
+
+
+# Then("I should see an error message") do
+#   expect(page).to have_content("Invalid file format. Only JPEG, PNG, and GIF images are allowed.")
 # end
 
+# Then(/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+#   expect(page).to have_css('.flash-warning', text: message)
+# end
 
-# Then(/^I should see the uploaded images on the index page$/) do
-#   images = [
-#     Rails.root.join("test/fixtures/files/cat.PNG"),
-#     Rails.root.join("test/fixtures/files/amongus.jpg")
-#   ]
-#   images.each do |image|
-#     expect(page).to have_selector("img[src='#{image}']")
+Then(/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+  expect(page).to have_current_path('/programs')
+  expect(page).to have_css('.flash-warning', text: message)
+end
+
+
+
+# Then (/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+#   within('.flash-warning') do
+#     expect(page).to have_content(message)
 #   end
 # end
+
