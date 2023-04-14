@@ -1,35 +1,38 @@
-<div id="page-header">User: <%= @user.name %></div>
-<form>
-  <h1>Ban Reasons</h1>
-
-  <label>
-    <input type="checkbox" name="option1">
-    Violation of Community guidelines:
-  </label>
-
-  <label>
-    <input type="checkbox" name="option2">
-    Inappropriate Post:
-  </label>
-
-  <label>
-    <input type="checkbox" name="option3">
-    Repeated Violations:
-  </label>
-
-  <label>
-    <input type="checkbox" name="option4">
-    Other:
-  </label>
-
-  <label for="comment">Comment:</label>
-  <textarea id="comment" name="comment"></textarea>
-
+<div id="page-header">User: <%= @user.name %></div
+<div class="admin-buttons">
+  <form>
+    <h1>Ban Reasons</h1>
   
-  <%= link_to 'Submit', :controller => :users, :action => :ban, :class => 'btn'  %>
-  <%= link_to 'Cancel', users_path %>
+    <label>
+      <input type="checkbox" name="option1">
+      Violation of Community guidelines
+    </label>
+  
+    <label>
+      <input type="checkbox" name="option2">
+      Inappropriate Post
+    </label>
+  
+    <label>
+      <input type="checkbox" name="option3">
+      Repeated Violations
+    </label>
+  
+    <label>
+      <input type="checkbox" name="option4">
+      Other:
+    </label>
+  
+    <label for="comment">Comment:</label>
+    <textarea id="comment" name="comment", :required></textarea>
+  
+    
+    <%= link_to 'Submit', {:controller => :users, :action => :ban}, class: 'header-button-2' %>
+    
+    <%= link_to 'Cancel', users_path(), class: 'header-button-2' %>
+  </form>
+</div>
 
-</form>
 
 <style>
     form {
@@ -60,22 +63,6 @@
       padding: 10px;
       border-radius: 5px;
       border: 1px solid #ccc;
-    }
-
-    
-    .btn {
-      display: inline-block;
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 4px;
-      padding: 8px 16px;
-      text-decoration: none;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-    }
-    
-    .btn:hover {
-      background-color: #0069d9;
+      margin-bottom: 20px;
     }
 </style>
