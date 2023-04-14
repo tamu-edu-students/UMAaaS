@@ -15,10 +15,6 @@
 				</div>
 			</div>
 			
-			
-			
-			
-			
 			<% if not locals[:experience].tagArray.nil? %>
 			<div class="portal-experience-tags">
 				<% locals[:experience].tagArray.each do |tag| %>
@@ -29,42 +25,115 @@
 			</div>
 			<% end %>
 			
-			<!-- Approved CP: multiple carousels-->
-			<style>
-				.carousel-container {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
-			</style>
-			
-			<div class="portal-experience-photo">
-				<% if locals[:experience].images.attached? %>
-					<div class="carousel-container">
-						<div id="imageCarousel<%= locals[:experience].id %>" class="carousel slide" data-interval="false">
-							<div class="carousel-wrap" style="text-align: center;">
-								<div class="carousel-inner">
-									<% locals[:experience].images.each.with_index do |image, i| %>
-										<div class="carousel-item <%= 'active' if i == 0 %>">
-											<%= image_tag(image, alt: SecureRandom.uuid, style: 'max-height: 500px; width: auto; margin: 0 auto;') %>
-										</div>  	
-									<% end %>
-								</div>
-							</div>
-							<a class="carousel-control-prev" href="#imageCarousel<%= locals[:experience].id %>" role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
-							</a>
-							<a class="carousel-control-next" href="#imageCarousel<%= locals[:experience].id %>" role="button" data-slide="next">
-								<span class="carousel-control-next-icon" aria-hidden="true"></span>
-									<span class="sr-only">Next</span>
-							</a>
-						</div>
-					</div>
-				<% end %>
-			</div>
+		  
+		  
+		  <!-- approved checkpoint -->
+		  
+		  
+		  <style>
+		    .portal-experience-wrapper {
+		        position: relative;
+		    }
+		
+		    .carousel-container {
+		        display: flex;
+		        justify-content: center;
+		        align-items: center;
+		        flex-direction: column;
+		        height: 100%;
+		    }
+		
+		    .carousel-inner {
+		        display: flex;
+		        position: relative;
+		        height: 400px;
+		        overflow: hidden;
+		    }
+		
+		    .carousel-item img {
+		        max-height: 500px;
+		        width: auto;
+		        margin: 0 auto;
+		    }
+		
+		    .carousel-control-prev,
+		    .carousel-control-next {
+		        position: absolute;
+		        width: 5%;
+		        height: 7%;
+		        display: flex;
+		        
+		        flex-direction: column;
+		        
+		        justify-content: center;
+		        align-items: center;
+		        background-color: rgba(0, 0, 0, 0.5);
+		        color: white;
+		        font-size: 1.5rem;
+		        border: none;
+		        cursor: pointer;
+		        opacity: 0.5;
+		        transition: opacity 0.2s ease-in-out;
+		        z-index: 1; /* added z-index */
+	            border-radius: 50%; /* added border-radius */
+	            top: 50%; /* added top property */
+        		transform: translateY(-50%); /* added transform property */
+		    }
+		
+		
 
-			
+		
+		    .carousel-control-prev:hover,
+		    .carousel-control-next:hover {
+		        opacity: 1;
+		    }
+		
+		    .carousel-control-prev {
+		        left: 2%;
+		    }
+		
+		    .carousel-control-next {
+		        right: 2%;
+		    }
+		
+		    .carousel-wrap {
+		        display: flex;
+		        justify-content: center;
+		        align-items: center;
+		        height: 100%;
+		    }
+		</style>
+		
+		<div class="portal-experience-photo">
+		    <% if locals[:experience].images.attached? %>
+		    <div class="carousel-container">
+		        <div id="imageCarousel<%= locals[:experience].id %>" class="carousel slide" data-interval="false">
+		            <div class="carousel-wrap" style="text-align: center;">
+		                <div class="carousel-inner">
+		                    <% locals[:experience].images.each.with_index do |image, i| %>
+		                    <div class="carousel-item <%= 'active' if i == 0 %>">
+		                        <%= image_tag(image, alt: SecureRandom.uuid) %>
+		                    </div>
+		                    <% end %>
+		                </div>
+		            </div>
+		            <a class="carousel-control-prev" href="#imageCarousel<%= locals[:experience].id %>" role="button" data-slide="prev">
+		                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		                <span class="sr-only">Previous</span>
+		            </a>
+		            <a class="carousel-control-next" href="#imageCarousel<%= locals[:experience].id %>" role="button" data-slide="next">
+		                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		                <span class="sr-only">Next</span>
+		            </a>
+		        </div>
+		    </div>
+		    <% end %>
+		</div>
+
+	
+	
+	
+				
 
 			
 			
