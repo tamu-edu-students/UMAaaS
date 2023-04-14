@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/login', to: redirect('/auth/google_oauth2')
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+
   resource :session, only: %i[create destroy]
   resources :reviews
   resources :users
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   get 'users/:id/demote', to: 'users#demote'
   get 'users/:id/ban', to: 'users#ban'
   get 'users/:id/ban', to: 'users#remoteBan'
+  get 'users/:id/ban_comment', to: 'users#ban_comment', as: 'ban_comment'
   get 'users/:id/unban', to: 'users#unban'
   get 'programss/:id/enable', to: 'programs#enable'
   get 'programss/:id/disable', to: 'programs#disable'
