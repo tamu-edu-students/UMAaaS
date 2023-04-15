@@ -1,0 +1,45 @@
+.bookmarks-list ul {
+  font-size:20px;
+  margin-left:0;
+  list-style: none;
+  padding-left:80px;
+
+}
+
+.bookmarks-list li {
+  position: relative;
+  padding-left: 40px;
+  margin: 10px 0;
+  list-style: ' ★ ';
+  line-height: 1.8em;
+  font-size:20px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.bookmarks-list li:hover {
+  color: #2693ff;
+}
+
+.bookmarks-list li:after {
+  position: absolute;
+  top: 2.1em;
+  left: 0.9em;
+  width: 2px;
+  height: calc(100% - 2em);
+  content: '';
+  z-index: 0;
+}
+
+.bookmarks-list li li {
+  font-size:20px;
+}
+
+.bookmarks-none{
+    padding-top: 50px;
+    font-style: italic;
+    color: #666666;
+    font-size: 80px;
+    text-align: center;
+}

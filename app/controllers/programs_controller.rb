@@ -58,14 +58,6 @@ class ProgramsController < ApplicationController
     redirect_to programs_path
   end
 
-  # this is no longer called anywhere, programs aren't deleted, just disabled
-  def destroy
-    @program = Program.find(params[:id])
-    @program.destroy
-    flash[:notice] = "Program ’#{@program.name}’ deleted."
-    redirect_to programs_path
-  end
-
   # disable program
   def disable
     program = Program.find params[:id]

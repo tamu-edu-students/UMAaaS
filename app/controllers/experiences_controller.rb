@@ -25,6 +25,7 @@ class ExperiencesController < ApplicationController
     end
     
     def create
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, {images: []})
         if(params[:experience][:experience].blank? || params[:experience][:rating].blank?) # experience and rating are required
             flash[:notice] = "Cannot create experience"
             redirect_to portal_path(params[:id]) and return
@@ -38,18 +39,32 @@ class ExperiencesController < ApplicationController
             tagArrayFixed += tag + ","
         end
         
-        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id])
+        newExperience = Experience.create(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :user_id => current_user.id, :program_id => params[:id], :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
-        if params[:image]
-            newExperience.image.attach(params[:image])
+        
+   
+        images = params[:images]
+        valid_formats = ["image/jpeg", "image/png", "image/gif"]
+        
+        
+
+        if params[:images]
+            images.each do |image|
+                unless valid_formats.include? image.content_type
+                    flash[:warning] = "Invalid file format. Only JPEG, PNG, and GIF images are allowed."
+                    redirect_to portal_path(params[:id]) and return
+                end
+            end
+            newExperience.images.attach(params[:images])
         end
-         flash[:notice] = "Experience was successfully created."
+        
+        flash[:notice] = "Experience was successfully created."
      
 
-        if(params.has_key?(:yelp_id))
-            # has a Yelp location selected
-            YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
-        end
+        # if(params.has_key?(:yelp_id))
+        #     # has a Yelp location selected
+        #     YelpLocation.create(:experience_id => newExperience.id, :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        # end
         
         redirect_to portal_path(params[:id])
     end
@@ -91,6 +106,14 @@ class ExperiencesController < ApplicationController
         rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: params[:id]).where(users: {banned: false}).where.not(rating: nil).count(:id)
         rating_count +=1 #add 1 for the original rating
         @experience.average_rating = (rating_sum.to_f / rating_count).round(1)
+        @experience.hasUserBookmarked = 0
+        bookmarked = Bookmark.select("bookmarked").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not bookmarked.nil?
+            if bookmarked.bookmarked == 1
+                @experience.hasUserBookmarked = 1
+            end
+        end
+        
         
         flag_sum = FlagExperience.left_outer_joins(:user).where(experience_id: @experience.id).where(users: {banned: false}).where(flag: 1).group(:experience_id).count(:flag).values[0]
         if flag_sum.blank? 
@@ -109,6 +132,15 @@ class ExperiencesController < ApplicationController
     end
     
     
+    def bookmark_view
+      @user = User.find params[:id]
+      @bookmarks = Bookmark.left_outer_joins(:user).select("bookmarks.*").where(users: { id: params[:id]})
+      @experiences = Array.new
+      @bookmarks.each do |item|
+        @experiences.append(Experience.find(item.experience_id))
+      end
+    end
+
     def create_comment
         # participant = Participant.find_by(email: current_user.email, program_id: @experience.program_id)
         # if participant.nil? and not current_user.admin
@@ -184,28 +216,6 @@ class ExperiencesController < ApplicationController
         end
     end
 
-    
-    def yelp_search
-        @results = search(params[:yelpTerm], params[:yelpLocation])
-        puts @results
-        
-        respond_to do |format|
-            format.json  { render :json => @results }
-        end
-    end
-    
-    
-    def search(term, location)
-        url = "#{Rails.configuration.YELP_API_HOST}#{Rails.configuration.YELP_SEARCH_PATH}"
-        params = {
-            term: term,
-            location: location,
-            limit: 10,
-        }
-        response = HTTP.auth("Bearer #{Rails.configuration.YELP_API_KEY}").get(url, params: params)
-        response.parse
-    end
-    
     # deletes a whole experience
     def delete
         # prevent unauthorized deletions
@@ -256,6 +266,9 @@ class ExperiencesController < ApplicationController
         
         # delete associated location
         YelpLocation.where(experience_id: params[:id]).destroy_all
+        
+        #delete bookmark
+        Bookmark.where(experience_id: params[:id]).destroy_all
         
         # delete experience
         Experience.where(id: params[:id]).destroy_all
@@ -348,28 +361,44 @@ class ExperiencesController < ApplicationController
         end
 
         @experience = Experience.find params[:id]
-        @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed)
+        @experience.update_attributes(:title => params[:experience][:title], :experience => params[:experience][:experience], :rating => params[:experience][:rating], :tags => tagArrayFixed, :location => params[:experience][:location], :street => params[:experience][:street], :city => params[:experience][:city], :postal_code => params[:experience][:postal_code])
         
         if params[:image]
             @experience.image.attach(params[:image])
         end
         
         # delete any existing associated location
-        YelpLocation.where(experience_id: params[:id]).destroy_all
+        # YelpLocation.where(experience_id: params[:id]).destroy_all
         
-        # then create new associated location if there is one
-        if(params.has_key?(:yelp_id))
-            # has a Yelp location selected
-            YelpLocation.create(:experience_id => params[:id], :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
-        end
-        
-        
+        # # then create new associated location if there is one
+        # if(params.has_key?(:yelp_id))
+        #     # has a Yelp location selected
+        #     YelpLocation.create(:experience_id => params[:id], :name => params[:yelp_name], :address => params[:yelp_address], :alias => params[:yelp_alias], :yelp_id => params[:yelp_id], :url => params[:yelp_url], :image_url => params[:yelp_image_url], :rating => params[:yelp_rating], :yelp_tags => params[:yelp_tags])
+        # end
         redirect_to experience_path(params[:id])
     end
-    
-    private
+
+    def bookmarked
+        if(params[:bookmarked] == "0")
+            puts "destroying bookmark"
+            Bookmark.where(experience_id: params[:experience_id]).where(user_id: current_user.id).destroy_all
+        else
+            puts "params of bookmark" + params[:bookmarked].to_s
+            Bookmark.find_or_create_by(:bookmarked => params[:bookmarked], :user_id => current_user.id, :experience_id => params[:experience_id])
+        end
+
+        @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:experience_id]}).first
+
+        @experience.hasUserBookmarked = 0
+        bookmarked = Bookmark.select("bookmarked").where(experience_id: @experience.id).where(user_id: current_user.id).first
+        if not bookmarked.nil?
+            if bookmarked.bookmarked == 1
+                @experience.hasUserBookmarked = 1
+            end
+        end
+    end
     
     def experience_params
-        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :image)
+        params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, :image)
     end
 end

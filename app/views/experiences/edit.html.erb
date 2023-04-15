@@ -15,7 +15,15 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Image:</td>
-                <td><%= file_field_tag :image, class: "form-control" %>
+                <!--<td>< %= file_field_tag :image, class: "form-control" %>-->
+                <!--<td>< %= file_field_tag 'images[]', :multiple => true, :accept => 'image/jpeg,image/png', class: "form-control" %></td>-->
+                <td>
+                  <form action="your-post-url" method="post" enctype="multipart/form-data">
+                      <input type="file" id="file-input" name="images[]" accept="image/*" multiple>
+                      <button type="button" class="form-control" id="customFile" onclick="document.getElementById('file-input').click();" style="display:none;">Choose Images</button>
+                      <br>
+                    </form>
+                </td>
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>
@@ -33,18 +41,24 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Location:<div>(optional)</div></td>
-                <td id="yelp-search-wrapper" <% if @experience.yelp_id %>style="display: none;"<% end %>><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>
-                <td id="yelp-location-wrapper" <% if @experience.yelp_id %>style="display: table-cell;"<% end %>><% if @experience.yelp_id %>
-                    <div id="yelp-selected-location"><div id="yelp-remove-selected-location">✖</div><%= @experience.yelp_name %></div>
-                    <input type="text" name="yelp_name" class="yelp-hidden-field" value="<%= @experience.yelp_name %>">
-                    <input type="text" name="yelp_address" class="yelp-hidden-field" value="<%= @experience.yelp_address %>">
-                    <input type="text" name="yelp_alias" class="yelp-hidden-field" value="<%= @experience.yelp_alias %>">
-                    <input type="text" name="yelp_id" class="yelp-hidden-field" value="<%= @experience.yelp_id %>">
-                    <input type="text" name="yelp_url" class="yelp-hidden-field" value="<%= @experience.yelp_url %>">
-                    <input type="text" name="yelp_image_url" class="yelp-hidden-field" value="<%= @experience.yelp_image_url %>">
-                    <input type="text" name="yelp_rating" class="yelp-hidden-field" value="<%= @experience.yelp_rating %>">
-                    <input type="text" name="yelp_tags" class="yelp-hidden-field" value="<%= @experience.yelp_tags %>">
-                <% end %></td>
+                <td class="location-input">
+                    <%= text_field :experience, :location, :placeholder => "Place Name" %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :street, :placeholder => "Street", :disabled => @experience.street.nil? %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :city, :placeholder => "City", :disabled => @experience.city.nil? %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code", :disabled => @experience.postal_code.nil? %><div class="experience-edit-field-tips"></div>
+                </td>
+                <!--<td id="yelp-search-wrapper" <% if @experience.yelp_id %>style="display: none;"<% end %>><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>-->
+                <!--<td id="yelp-location-wrapper" <% if @experience.yelp_id %>style="display: table-cell;"<% end %>><% if @experience.yelp_id %>-->
+                <!--    <div id="yelp-selected-location"><div id="yelp-remove-selected-location">✖</div><%= @experience.yelp_name %></div>-->
+                <!--    <input type="text" name="yelp_name" class="yelp-hidden-field" value="<%= @experience.yelp_name %>">-->
+                <!--    <input type="text" name="yelp_address" class="yelp-hidden-field" value="<%= @experience.yelp_address %>">-->
+                <!--    <input type="text" name="yelp_alias" class="yelp-hidden-field" value="<%= @experience.yelp_alias %>">-->
+                <!--    <input type="text" name="yelp_id" class="yelp-hidden-field" value="<%= @experience.yelp_id %>">-->
+                <!--    <input type="text" name="yelp_url" class="yelp-hidden-field" value="<%= @experience.yelp_url %>">-->
+                <!--    <input type="text" name="yelp_image_url" class="yelp-hidden-field" value="<%= @experience.yelp_image_url %>">-->
+                <!--    <input type="text" name="yelp_rating" class="yelp-hidden-field" value="<%= @experience.yelp_rating %>">-->
+                <!--    <input type="text" name="yelp_tags" class="yelp-hidden-field" value="<%= @experience.yelp_tags %>">-->
+                <!--<% end %></td>-->
             </tr>
             <tr>
                 <td colspan="2" class="experience-edit-submit"><%= submit_tag 'Save' %> &nbsp;&nbsp;&nbsp;&nbsp; <%= submit_tag "Cancel", :class => 'cancel' %></td>

@@ -348,6 +348,30 @@ a {
     opacity:0;
 }
 
+.bookmark-experience {
+    color: transparent;
+}
+
+.bookmark-experience .bookmark-yes{
+    padding-left: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(asset_path("bookmark-no.png")); 
+}
+
+.bookmark-experience .bookmark-yes:hover{
+    padding-left: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(asset_path("bookmark-yes.png"));
+}
+
+.bookmark-experience .bookmarked{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(asset_path("bookmark-yes.png"));    
+}
+
 .portal-experience-delete{
     background: #f00;
     margin-top: 5px;

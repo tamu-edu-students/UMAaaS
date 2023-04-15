@@ -60,19 +60,6 @@ class ParticipantsController < ApplicationController
     redirect_to new_program_participant_path(pid)
   end
 
-  def edit
-    @program = Program.find params[:id]
-    @users = User.where(program_id: params[:id])
-  end
-
-  def update
-    @program = Program.find params[:id]
-    @program.update_attributes(name: params[:program][:name], location: params[:program][:location],
-                               region: params[:program][:region])
-    flash[:notice] = "#{@program.name} was successfully updated."
-    redirect_to programs_path
-  end
-
   def destroy
     @participant = Participant.find_by(id: params['id'])
     @participant.destroy
@@ -80,29 +67,4 @@ class ParticipantsController < ApplicationController
     redirect_to new_program_participant_path(params['program_id'])
   end
 
-  # disable program
-  def disable
-    program = Program.find params[:id]
-    if program.nil?
-      flash[:alert] = 'Error disabling program: program not found.'
-    else
-      program.disabled = true
-      program.save
-      flash[:notice] = "#{program.name} has been disabled."
-    end
-    redirect_to programs_path
-  end
-
-  # enable program
-  def enable
-    program = Program.find params[:id]
-    if program.nil?
-      flash[:alert] = 'Error enabling program: program not found.'
-    else
-      program.disabled = false
-      program.save
-      flash[:notice] = "#{program.name} has been enabled."
-    end
-    redirect_to programs_path
-  end
 end

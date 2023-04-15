@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_21_230942) do
+ActiveRecord::Schema.define(version: 2023_03_23_033352) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2023_02_21_230942) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "experience_id"
+    t.integer "user_id"
+    t.integer "bookmarked", default: 0
+    t.index ["experience_id"], name: "index_bookmarks_on_experience_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "experience_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "rating"
@@ -53,6 +61,10 @@ ActiveRecord::Schema.define(version: 2023_02_21_230942) do
     t.integer "user_id"
     t.string "tags"
     t.string "title"
+    t.string "location"
+    t.string "street"
+    t.string "city"
+    t.string "postal_code"
     t.index ["program_id"], name: "index_experiences_on_program_id"
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
@@ -155,6 +167,8 @@ ActiveRecord::Schema.define(version: 2023_02_21_230942) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "experiences"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "experience_comments", "experiences"
   add_foreign_key "experience_comments", "users"
   add_foreign_key "experiences", "programs"

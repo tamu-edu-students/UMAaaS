@@ -5,14 +5,13 @@ class Experience < ApplicationRecord
   belongs_to :user
   has_many :experience_comments
   has_one :yelp_location
-  has_one_attached :image
-  has_many :users, through: :flag_experiences
-    
+  has_many_attached :images
+  has_many :users, through: :flag_experiences  
   attr_accessor :hasUserFlagged
   attr_accessor :flagCount
     
 
-  attr_accessor :comments, :totalComments, :average_rating, :commented
+  attr_accessor :comments, :totalComments, :average_rating, :commented, :hasUserBookmarked
 
   def tagArray
     if tags.nil?
