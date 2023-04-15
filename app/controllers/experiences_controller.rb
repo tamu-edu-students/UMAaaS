@@ -46,14 +46,15 @@ class ExperiencesController < ApplicationController
         images = params[:images]
         valid_formats = ["image/jpeg", "image/png", "image/gif"]
         
-        images.each do |image|
-            unless valid_formats.include? image.content_type
-                flash[:warning] = "Invalid file format. Only JPEG, PNG, and GIF images are allowed."
-                redirect_to portal_path(params[:id]) and return
-            end
-        end
+        
 
         if params[:images]
+            images.each do |image|
+                unless valid_formats.include? image.content_type
+                    flash[:warning] = "Invalid file format. Only JPEG, PNG, and GIF images are allowed."
+                    redirect_to portal_path(params[:id]) and return
+                end
+            end
             newExperience.images.attach(params[:images])
         end
         
