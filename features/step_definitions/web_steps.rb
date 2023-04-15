@@ -144,8 +144,8 @@ When("I click the {string} link") do |link_text|
 end
 
 Then(/^(?:|I )should be redirected to (.+)$/) do |page_name|
-  expect(page).to have_current_path(path_to(page_name))
-#  expect(current_path).to eq(path_to(page_name))
+#  expect(page).to have_current_path(path_to(page_name))
+  expect(current_path).to eq(path_to(page_name))
 end
 
 Then(/^I should see an external link to maps with text (.+)$/) do |name|
