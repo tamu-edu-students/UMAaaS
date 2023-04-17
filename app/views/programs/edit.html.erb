@@ -1,7 +1,11 @@
 <div onclick="window.location.href = '/p/<%= @program.id %>';">
-<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+   
+
+<div id="page-header" style="background-image: url('<%= @program.banners.attached? ? url_for(@program.banners.sample) : asset_path('header-background.jpg') %>');">
   Edit Study Abroad Program
 </div>
+
+
 </div>
 <div id="flex-container">
  <div id="column1" class="flex-item"><table class="program-admin">
@@ -39,7 +43,7 @@
                 </tr>
                  <tr>
                     <td class="experience-edit-label">Banner Image:</td>
-                    <td><%= file_field_tag :banner, class: "form-control" %>
+                    <td><%= file_field_tag :'banners[]', :multiple => true, :accept => 'image/jpeg,image/png', class: "form-control" %>
                 </tr>
                 <tr>
                     <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
@@ -56,4 +60,3 @@
 </div>
 
 </div>
-

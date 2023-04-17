@@ -33,8 +33,8 @@ class ProgramsController < ApplicationController
     
     @program = Program.create(:name => params[:program][:name], :location => params[:program][:location], :region => params[:program][:region])
     
-    if params[:banner]
-      @program.banner.attach(params[:banner])
+    if params[:banners]
+      @program.banners.attach(params[:banners])
     end
         
     flash[:notice] = "#{@program.name} was successfully created."
@@ -45,14 +45,15 @@ class ProgramsController < ApplicationController
     @participants = Participant.where(program_id: params[:id])
     @program = Program.find params[:id]
     @users = User.where(program_id: params[:id])
+    
   end
 
   def update
     @program = Program.find params[:id]
     @program.update_attributes(name: params[:program][:name], location: params[:program][:location],
                               region: params[:program][:region])
-    if params[:banner]
-      @program.banner.attach(params[:banner])
+    if params[:banners]
+      @program.banners.attach(params[:banners])
     end
     flash[:notice] = "#{@program.name} was successfully updated."
     redirect_to programs_path
@@ -91,7 +92,7 @@ class ProgramsController < ApplicationController
   end
   
   def program_params
-        params.require(:experience).permit(:name, :location, :region, :banner)
+        params.require(:experience).permit(:name, :location, :region, {banners: []})
   end
     
 end
