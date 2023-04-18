@@ -18,7 +18,24 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Image:</td>
-                <td><%= file_field_tag 'images[]', :multiple => true, :accept => 'image/jpeg,image/png', class: "form-control" %>
+                <!--<td>< %= file_field_tag 'images[]', :multiple => true, :accept => 'image/jpeg,image/png, image/jpg, image/gif', class: "form-control" %>-->
+                <td>
+                  <form action="your-post-url" method="post" enctype="multipart/form-data">
+                      <input type="file" id="file-input" name="images[]" accept="image/*" multiple>
+                      <button type="button" class="form-control" id="customFile" onclick="document.getElementById('file-input').click();" style="display:none;">Choose Images</button>
+                      <br>
+                    </form>
+                </td>
+
+             
+                <% if flash[:warning] %>
+                  <div class="alert alert-warning">
+                    <%= flash[:warning] %>
+                  </div>
+                <% end %>
+
+
+                
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>
