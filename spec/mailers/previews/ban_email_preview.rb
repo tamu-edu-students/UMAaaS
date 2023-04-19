@@ -3,7 +3,8 @@ class BanEmailPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/ban_email/banned
   def banned
-    BanEmailMailer.banned
+    user = User.third
+    BanEmailMailer.banned(user)
   end
 
 end
