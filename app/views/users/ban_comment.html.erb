@@ -1,4 +1,4 @@
-<div id="page-header">User: <%= @user.name %></div
+<div id="page-header">User: <%= @user.name %></div>
 <div class="admin-buttons">
   <form>
     <h1>Ban Reasons</h1>
@@ -19,50 +19,29 @@
     </label>
   
     <label>
-      <input type="checkbox" name="option4">
+      <input type="checkbox" name="option4" id="other_cb">
       Other:
+      <input type="text" name="other" id="other_tf" disabled>
     </label>
-  
-    <label for="comment">Comment:</label>
-    <textarea id="comment" name="comment", :required></textarea>
-  
     
-    <%= link_to 'Submit', {:controller => :users, :action => :ban}, class: 'header-button-2' %>
+    <label>
+      Comment:
+      <textarea id="comment" name="comment", :required></textarea>
+    </label>
     
-    <%= link_to 'Cancel', users_path(), class: 'header-button-2' %>
+    <%= link_to 'Submit', {:controller => :users, :action => :ban}, class: 'header-button-2'%>
+    
+    <%= link_to 'Cancel', edit_user_path(@user), class: 'header-button-2'%>
   </form>
 </div>
 
-
-<style>
-    form {
-      width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      border: transparent;
-      border-radius: 5px;
+<script>
+  $('input[name="option4"]').on('click', function() {
+    if ($(this).is(':checked')) {
+      $('#other_tf').prop('disabled', false);
+    } else {
+      $('#other_tf').prop('disabled', true);
+      $('#other_tf').val('');
     }
-    
-    h1 {
-      margin-top: 40px;
-      text-align: center;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 10px;
-    }
-    
-    input[type="checkbox"] {
-      margin-right: 10px;
-    }
-    
-    textarea {
-      width: 100%;
-      height: 150px;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin-bottom: 20px;
-    }
-</style>
+  });
+</script>
