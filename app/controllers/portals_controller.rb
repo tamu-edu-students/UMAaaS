@@ -151,7 +151,7 @@ class PortalsController < ApplicationController
         found = true if exp.tags =~ /,#{searchTerm},/i
       elsif !searchTerm.nil?
         found = false
-        if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i)
+        if (exp.title =~ /#{searchTerm}/i) || (exp.experience =~ /#{searchTerm}/i) || (exp.tags =~ /#{searchTerm}/i) || (exp.location =~ /#{searchTerm}/i) || (exp.street =~ /#{searchTerm}/i) || (exp.city =~ /#{searchTerm}/i) || (exp.postal_code =~ /#{searchTerm}/i)
           found = true
         end
       end
