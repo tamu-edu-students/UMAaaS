@@ -2,7 +2,9 @@
 
 Rails.application.configure do
 
-  config.hosts << "a89825761f314a3da1acbd9dc9ce6c52.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << "2dbaedf1c0ce4258818f3f8ba7f64d58.vfs.cloud9.us-east-1.amazonaws.com"
+  config.action_mailer.default_url_options = { host: '2dbaedf1c0ce4258818f3f8ba7f64d58.vfs.cloud9.us-east-1.amazonaws.com' }
+
 
 
   # config.hosts << "999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com"
@@ -46,6 +48,16 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            'yijinfang@gmail.com',
+    password:             'fyj000611',
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

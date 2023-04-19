@@ -111,6 +111,7 @@ class UsersController < ApplicationController
     else
       user.banned = true
       user.save
+      BanEmailMailer.banned(user).deliver_now
       flash[:notice] = "#{user.name} has been banned."
     end
     redirect_to users_path
