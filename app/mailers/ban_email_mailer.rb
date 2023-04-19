@@ -1,6 +1,6 @@
 
 class BanEmailMailer < ApplicationMailer
-  default from: 'yijinfang611@gmail.com'
+  default from: ENV["GMAIL_USERNAME"]
 
   def banned(user)
     @user = user
