@@ -111,3 +111,34 @@
 .user-edit-submit input:focus{
     outline: 0;
 }
+
+.admin-buttons form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: transparent;
+    border-radius: 5px;
+}
+
+.admin-buttons h1 {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.admin-buttons label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.admin-buttons input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.admin-buttons textarea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
