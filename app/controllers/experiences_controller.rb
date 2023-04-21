@@ -46,8 +46,6 @@ class ExperiencesController < ApplicationController
         images = params[:images]
         valid_formats = ["image/jpeg", "image/png", "image/gif"]
         
-        
-
         if params[:images]
             images.each do |image|
                 unless valid_formats.include? image.content_type
@@ -397,6 +395,36 @@ class ExperiencesController < ApplicationController
             end
         end
     end
+    
+    
+    
+    
+    require 'aws-sdk-s3'
+
+    def image_gallery
+    #   s3 = Aws::S3::Resource.new(region: 'us-east-1')
+    #   bucket = s3.bucket('tripagvisor2')
+    #   @images = []
+    #   bucket.objects.each do |obj|
+    #     if obj.key.start_with?("uploads/#{params[:id]}")
+    #       @images << obj.presigned_url(:get)
+    #     end
+    #   end
+    #   @program = Experience.find(params[:id]).program
+        # @program = Program.find params[:id]
+        render 'image_gallery'
+    end
+
+
+
+
+
+    
+    
+    
+    
+    
+    
     
     def experience_params
         params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, :image)

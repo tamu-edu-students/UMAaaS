@@ -15,6 +15,9 @@
         </select><% end %>
     </div> 
 </div>
+
+
+
     <div class="search-border-outer">
         <div class="search-border-inner">
             <%= form_tag portal_path(), :method => :get, :id => "search-form" do %>
@@ -22,6 +25,14 @@
             <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %>
         </div>
     </div>
+    
+    <div class="gallery-button">
+      <% if logged_in? and (has_program? or current_user.admin?) %>
+        <%= link_to "Image Gallery", image_gallery_path(id: @program.id), class: 'header-button' %> 
+      <% end %>
+    </div>
+
+    
     <% if current_user.admin then %>
     <div class="admin-buttons">
         <!--<div style="" class="participant-button">-->
