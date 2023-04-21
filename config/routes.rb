@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
   get 'users/:id/ban', to: 'users#ban'
+  post 'users/:id/ban', to: 'users#ban'
+
   get 'users/:id/ban', to: 'users#remoteBan'
   get 'users/:id/ban_comment', to: 'users#ban_comment', as: 'ban_comment'
   get 'users/:id/unban', to: 'users#unban'

@@ -110,8 +110,8 @@ class UsersController < ApplicationController
       flash[:alert] = 'Error banning user: user not found.'
     else
       user.banned = true
-      user.save
       user.update(ban_reason: params[:ban_reason])
+      user.save
       BanEmailMailer.banned(user, params[:ban_reason]).deliver_now
       flash[:notice] = "#{user.name} has been banned."
     end

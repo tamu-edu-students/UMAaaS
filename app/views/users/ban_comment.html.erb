@@ -1,48 +1,9 @@
 <div id="page-header">User: <%= @user.name %></div>
 <div class="admin-buttons">
-  <form>
-    <h1>Ban Reasons</h1>
-  
-    <label>
-      <input type="checkbox" name="option1">
-      Violation of Community guidelines
-    </label>
-  
-    <label>
-      <input type="checkbox" name="option2">
-      Inappropriate Post
-    </label>
-  
-    <label>
-      <input type="checkbox" name="option3">
-      Repeated Violations
-    </label>
-  
-    <label>
-      <input type="checkbox" name="option4" id="other_cb">
-      Other:
-      <input type="text" name="other" id="other_tf" disabled>
-    </label>
-    
-    <label>
-      Comment:
-      <%= text_area :user, :ban_reason, :placeholder => "Ban Reasons" %><div class="experience-edit-field-tips"></div>
-      <!--<textarea id="comment" name="comment", :required></textarea>-->
-    </label>
-    
-    <%= link_to 'Submit', {:controller => :users, :action => :ban}, class: 'header-button-2'%>
-    
+  <%= form_tag({ controller: 'users', action: 'ban' }, method: :post) do %> 
+    <%= label_tag :ban_reason, 'Reason for ban:' %> 
+    <%= text_area_tag :ban_reason, nil, required: true%> 
+    <%= submit_tag 'Ban User', class: 'header-button-2' %> 
     <%= link_to 'Cancel', edit_user_path(@user), class: 'header-button-2'%>
-  </form>
+  <% end %>
 </div>
-
-<script>
-  $('input[name="option4"]').on('click', function() {
-    if ($(this).is(':checked')) {
-      $('#other_tf').prop('disabled', false);
-    } else {
-      $('#other_tf').prop('disabled', true);
-      $('#other_tf').val('');
-    }
-  });
-</script>
