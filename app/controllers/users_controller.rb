@@ -111,7 +111,8 @@ class UsersController < ApplicationController
     else
       user.banned = true
       user.save
-      BanEmailMailer.banned(user).deliver_now
+      user.update(ban_reason: params[:ban_reason])
+      BanEmailMailer.banned(user, params[:ban_reason]).deliver_now
       flash[:notice] = "#{user.name} has been banned."
     end
     redirect_to users_path
@@ -139,6 +140,7 @@ class UsersController < ApplicationController
     else
       user.banned = false
       user.save
+      user.update(ban_reason: nil)
       flash[:notice] = "#{user.name} has been unbanned."
     end
     redirect_to users_path
@@ -150,7 +152,7 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar, :ban_reason)
   end
 
 end
