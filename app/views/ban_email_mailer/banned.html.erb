@@ -1,11 +1,19 @@
-<h2><%= @user.name %></h2>
-
-<p>
-  Sorry You Have Been Banned, Here is the Ban Reason
-</p>
-
-<br><%= @user.ban_reason %></br>
-
-<p>
-  TripAgvisor Team
-</p>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h2>Your TripAgvisor Account has been suspended</h2>
+    <p>Hi <b><%= @user.name %></b>,<br>
+    <br>
+    An admin has suspended your account, <b><%= @user.email %></b>, because of a violation of the community guidelines.<br>
+    <br>
+    Here is a comment from the admin:<br>
+    <b><%= @user.ban_reason %></b><br>
+    <br>
+    If you think this is a mistake, you can contact us at <a href = "mailto:tripagvisor2@gmail.com">tripagvisor2@gmail.com</a>.<br>
+    <br>
+    Best,<br>
+    TripAgvisor Team</p >
+  </body>
+</html>
