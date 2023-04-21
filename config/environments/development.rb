@@ -3,8 +3,6 @@
 Rails.application.configure do
 
   config.hosts << "4dc109ee20f44dfca27f253cac174393.vfs.cloud9.us-east-1.amazonaws.com"
-
-
   # config.hosts << "999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com"
   # config.hosts << "389763a4bd934fd2b31f81763dda423c.vfs.cloud9.ap-northeast-1.amazonaws.com"
   # Settings specified here will take precedence over those in config/application.rb.

@@ -1,5 +1,5 @@
 <div onclick="window.location.href = '/p/<%= @program.id %>';">
-<div id="page-header" style="background-image: url('<%= @program.banner.attached? ? url_for(@program.banner) : asset_path('header-background.jpg') %>');">
+<div id="page-header" style="background-image: url('<%= @program.banners.attached? ? url_for(@program.banners.sample) : asset_path('header-background.jpg') %>');">
   Flagged Items for <%= @program.name %>
 </div>
 </div>

@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Banner Image:</td>
-                <td><%= file_field_tag :banner, class: "form-control" %>
+                <td><%= file_field_tag :'banners[]', :multiple => true, :accept => 'image/jpeg,image/png', class: "form-control" %>
             </tr>
             <tr>
                 <td colspan="2" class="program-edit-submit"><%= submit_tag 'Save' %></td>
