@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_23_033352) do
+ActiveRecord::Schema.define(version: 2023_04_20_052738) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 2023_03_23_033352) do
     t.integer "program_id"
     t.boolean "admin", default: false
     t.boolean "banned", default: false
+    t.string "ban_reason"
     t.index ["program_id"], name: "index_users_on_program_id"
   end
 

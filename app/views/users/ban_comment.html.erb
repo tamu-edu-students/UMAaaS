@@ -26,7 +26,8 @@
     
     <label>
       Comment:
-      <textarea id="comment" name="comment", :required></textarea>
+      <%= text_area :user, :ban_reason, :placeholder => "Ban Reasons" %><div class="experience-edit-field-tips"></div>
+      <!--<textarea id="comment" name="comment", :required></textarea>-->
     </label>
     
     <%= link_to 'Submit', {:controller => :users, :action => :ban}, class: 'header-button-2'%>
