@@ -36,7 +36,7 @@ module NavigationHelpers
 
     when /^the Greece\s?page$/
       "/p/" + greece.id.to_s
-  
+
     when /^the new\s?page$/
       '/p/' + singapore.id.to_s + '/experiences/new'
 
@@ -45,7 +45,13 @@ module NavigationHelpers
 
     when /^the experience\s?page$/
       '/experience/' + experience.id.to_s
-    
+
+    when /^the user\s?page$/
+      '/users/' + test_user.id.to_s + '/edit'
+
+    when /^the ban_comment\s?page$/
+      '/users/' + test_user.id.to_s + '/ban_comment'
+
     when /^the bookmarks\s?page$/
       '/experience/bookmarks/' + test_user.id.to_s
     # Add more mappings here.

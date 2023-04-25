@@ -35,7 +35,7 @@ SimpleCov.start
 #
 ActionController::Base.allow_rescue = false
 Capybara.register_driver :selenium_chrome do |app|
-  Selenium::WebDriver::Chrome::Service.driver_path = '/Users/tejaboppana/Downloads/chromedriver_mac_arm64/chromedriver'
+  Selenium::WebDriver::Chrome::Service.driver_path = '/Users/Yijin Fang/Downloads/1/chromedriver.exe'
   chrome_options = Selenium::WebDriver::Chrome::Options.new
   chrome_options.add_argument("--disable-popup-blocking")
   driver = Selenium::WebDriver.for :chrome
