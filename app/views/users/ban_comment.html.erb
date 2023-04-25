@@ -6,7 +6,7 @@
   <%= form_tag({ controller: 'users', action: 'ban' }, method: :post) do %> 
     <center><h1><%= label_tag :ban_reason, 'Reason For ban:' %></h1></center>
     <%= text_area_tag :ban_reason, nil, required: true%> 
-    <%= submit_tag 'Ban User', class: 'header-button-2' %> 
-    <%= link_to 'Cancel', edit_user_path(@user), class: 'header-button-2'%>
+    <%= submit_tag 'Ban User' %> 
+    <%= link_to 'Cancel', edit_user_path(@user), class: 'cancle-button'%>
   <% end %>
 </div>
