@@ -10,6 +10,7 @@ class PortalsController < ApplicationController
 
   def index
     @programs = Program.where(disabled: false)
+    @program = @programs.sample
     print("ON PROGRAM PAGE\n")
     print('Logged in: ', logged_in?)
     return unless logged_in?
