@@ -14,11 +14,28 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Experience:</td>
-                <td><%= text_area :experience, :experience, :required => true%><div class="experience-edit-field-tips">&nbsp;</div></td>
+                <td><%= text_area :experience, :experience, :required => true, :placeholder => "Describe your experience" %><div class="experience-edit-field-tips">&nbsp;</div></td>
             </tr>
             <tr>
                 <td class="experience-edit-label">Image:</td>
-                <td><%= file_field_tag :image, class: "form-control" %>
+                <!--<td>< %= file_field_tag 'images[]', :multiple => true, :accept => 'image/jpeg,image/png, image/jpg, image/gif', class: "form-control" %>-->
+                <td>
+                  <form action="your-post-url" method="post" enctype="multipart/form-data">
+                      <input type="file" id="file-input" name="images[]" accept="image/*" multiple>
+                      <button type="button" class="form-control" id="customFile" onclick="document.getElementById('file-input').click();" style="display:none;">Choose Images</button>
+                      <br>
+                    </form>
+                </td>
+
+             
+                <% if flash[:warning] %>
+                  <div class="alert alert-warning">
+                    <%= flash[:warning] %>
+                  </div>
+                <% end %>
+
+
+                
             </tr>
             <tr>
                 <td class="experience-edit-label">Rating:</td>
@@ -36,8 +53,15 @@
             </tr>
             <tr>
                 <td class="experience-edit-label">Location:<div>(optional)</div></td>
-                <td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>
-                <td id="yelp-location-wrapper"></td>
+                <!--<td id="yelp-search-wrapper"><input id="yelp-search" type="text" placeholder="search for business"> &nbsp; <span class="experience-edit-label">Near:</span><input id="yelp-near" type="text" value="<%= @near %>"><div id="yelp-search-results"></div></td>-->
+                <!--<td id="yelp-location-wrapper"></td>-->
+                <td class="location-input">
+                    <%= text_field :experience, :location, :placeholder => "Place Name"%><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :street, :placeholder => "Street", :disabled => true %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :city, :placeholder => "City", :disabled => true %><div class="experience-edit-field-tips"></div>
+                    <%= text_field :experience, :postal_code, :placeholder => "Postal Code", :disabled => true %><div class="experience-edit-field-tips"></div>
+                </td>
+                    <!--<input id="country" type="text" placeholder="Country" value= <%= :program %>></input>-->
             </tr>
             <tr>
                 <td colspan="2" class="experience-edit-submit"><%= submit_tag 'Save' %></td>

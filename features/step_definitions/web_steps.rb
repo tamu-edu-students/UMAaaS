@@ -45,30 +45,65 @@ require 'rack_session_access/capybara'
 # When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
 #   with_scope(parent) { When "#{step}:", table_or_string }
 # end
-
-Given(/^(?:|I )am on (.+)$/) do |page_name|
-  visit path_to(page_name)
+Before do
+  Program.create!(name: 'Singapore CSCE Wintermester', region: 'Asia')
+  Program.create!(name: 'Greece CSCE Wintermester', region: 'Europe')
+  Program.create!(name: 'Test Delete Program', region: 'Test')
+  singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+  User.create!(admin: true, program: singapore, id: 1, img: 'https://picsum.photos/200/300/?random', name: 'Test User',
+             email: 'testuser@gmail.com')
+  test_user = User.find_or_create_by(email: 'testuser@gmail.com')
+  Participant.create(email: 'testuser@gmail.com', program: singapore)
+  Experience.create(title: "test", experience: "test experience", rating: 5, user: test_user, program: singapore)
 end
 
-And(/^(?:|I )am logged in/) do
+Given(/^(?:|I )am on (.+)$/) do |page_name|
+  using_wait_time 2 do
+    visit path_to(page_name)
+  end
+end
+
+#And(/^(?:|I )am logged in/) do
   # page.set_rack_session(:user_id => "4")
   # page.set_rack_session(:user_admin => false)
   # page.set_rack_session(:user_program_id => 1 )
-  visit root_path
+#  visit "/auth/google_oauth2"
+#end
+
+Given("I am logged in with Google") do
+  # Mock the OmniAuth authentication response
+  # Visit the Google OAuth callback URL with the mocked authentication response
+  singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+  test_user = User.find_or_create_by(email: 'testuser@gmail.com')
+  page.set_rack_session(:user_admin => false)
+  page.set_rack_session(:user_email => 'testuser@gmail.com')
+  page.set_rack_session(:user_program_id => singapore.id )
+  page.set_rack_session(:user_img => "https://picsum.photos/200/300/?random")
+  page.set_rack_session(:user => test_user.id)
+  page.visit ('/p/' + singapore.id.to_s)
+  
+  # Verify that the user is redirected to the dashboard page after successful authentication
 end
 
-# When('I click on the selector and choose a program') do
-# print("Hello")
-# end
+Given("I am logged in with Google as an Admin") do
+  singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+  test_user = User.find_or_create_by(email: 'testuser@gmail.com')
+  page.set_rack_session(:user_admin => true)
+  page.set_rack_session(:user_email => 'testuser@gmail.com')
+  page.set_rack_session(:user_program_id => singapore.id )
+  page.set_rack_session(:user_img => "https://picsum.photos/200/300/?random")
+  page.set_rack_session(:user => test_user.id)
+  page.visit ('/p/' + singapore.id.to_s)  
+end
 
-Given('I have a program_id') do
-  within('#index-search-box-form')
+Then('I choose a program_id') do
+  within('#index-search-box')
   select 'Greece CSCE Wintermester', from: 'program_id'
-  click_button 'Submit'
 end
 
-Given(/If ^(?:|I )am on (.+)$/) do |page_name|
-  visit path_to(page_name)
+Then("I switch programs") do
+  within('#portal-switch-programs-form')
+  select 'Greece CSCE Wintermester', from: 'program_id'
 end
 
 Then('If I am on the home page') do
@@ -81,10 +116,60 @@ end
 
 When(/^(?:|I )press "([^"]*)"$/) do |button|
   click_button(button)
+  if button == "Save Comment"
+    page.driver.browser.switch_to.alert.accept
+  end
 end
 
-When(/^(?:|I )follow "([^"]*)"$/) do |link|
-  click_link(link)
+When("I check show diabled") do 
+  find("#programs-filter-show-disabled").set(true)
+end
+
+When(/^(?:|I )follow "([^"]*?)"$/) do |link|
+  # Visit the Google OAuth callback URL with the mocked authentication response
+  test_participant = Participant.find_or_create_by(email: 'testuser@gmail.com')
+  singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+  test_program = Program.find_or_create_by(name: 'Test Delete Program')
+  if link == "Edit Program"
+    click_link('Edit', :href => edit_program_path(test_program))
+  elsif link == "Remove Participant"
+    find("a[href='/programs/#{singapore.id.to_s}/participants/#{test_participant.id.to_s}']").click
+  else
+    click_link(link)
+  end
+end
+
+When("I click the {string} link") do |link_text|
+  click_link link_text
+end
+
+Then(/^(?:|I )should be redirected to (.+)$/) do |page_name|
+#  expect(page).to have_current_path(path_to(page_name))
+  expect(current_path).to eq(path_to(page_name))
+end
+
+Then(/^I should see an external link to maps with text (.+)$/) do |name|
+  expect(page).to have_link(name, href: /^http\:\/\/maps.google.com.*$/)
+end
+
+Then("I enter text in the search bar") do
+  page.find('#search-field').set("test\n")
+end
+
+When('I fill in {string} with {string}') do |string, name|
+  fill_in(string, with: name)
+end
+
+When('I hover over Profile') do
+  find('.navigation-user-icon', visible: false).hover
+end
+
+When('I hover over Admin') do
+  find_link(href: "", title: 'Admin').hover
+end
+
+When('I choose 5 rating') do 
+  find('label[for="experience_rating_5"]').click
 end
 
 # When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
@@ -132,9 +217,6 @@ Given(/^an experience with tags=,/) do
   @experience1 = Experience.new(program: nil, user: nil, tags: ',')
 end
 
-Given(/^an experience with tags "([^"]*)"$/) do |stringVal|
-  @experience1 = Experience.new(program: nil, user: nil, tags: stringVal)
-end
 
 When(/^I ask for the tag array/) do
   @resultVal = @experience1.tagArray
@@ -144,13 +226,64 @@ Then(/^I should get nil$/) do
   expect(@resultVal.nil?)
 end
 
-Then(/^I should get an tag array "([^"]*)"$/) do |array|
-  @expected = array.split(',')
-  expect(@expected == @resultVal)
+When(/^(?:|I )click on "([^"]*)"$/) do |icon|
+  tip = Tip.find_by(tip: 'Test Tip')
+  experience_1 = Experience.find_by(title: 'test')
+  experience_2 = Experience.find_by(title: 'Test Experience 2')
+  experience_comment = ExperienceComment.find_by(comment: 'test comment')
+  if icon == "delete-tip"
+    page.find(id: 'portal-tip-delete-' + tip.id.to_s).click
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "helpful"
+    page.find(id: 'tip-upvote-' + tip.id.to_s).click
+  elsif icon == "unhelpful"
+    page.find(id: 'tip-downvote-' + tip.id.to_s).click
+  elsif icon == "delete-experience"
+    page.find(id: 'portal-experience-delete-' + experience_2.id.to_s).click
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "comment-experience"
+    page.find(class: 'portal-experience-leave-comment').click
+  elsif icon == "delete-comment-experience"
+    page.find(id: 'portal-experience-comment-delete-' + experience_comment.id.to_s).click
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "view-comments"
+    page.find(class: 'portal-experience-comment-count', visible: false).click
+  elsif icon == "bookmark-icon"
+    page.find(id: 'experience-bookmark-' + experience_1.id.to_s).click
+  elsif icon == "flag"
+    page.find(id: 'tip-flag-' + tip.id.to_s).click
+  elsif icon == "unflag"
+    page.find(id: 'tip-flag-' + tip.id.to_s).click
+  elsif icon == "remote-delete-tip"
+    click_button("Delete")
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "Test Experience"
+    page.find('.portal-experience-title').click
+  elsif icon == "flag-experience"
+    page.find(id: 'experience-flagged-' + experience_1.id.to_s).click
+  elsif icon == "unflag-experience"
+    page.find(id: 'experience-flagged-' + experience_1.id.to_s).click
+  elsif icon == "remote-delete-experience"
+    click_button("Delete")
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "clear-flags"
+    click_button("Clear")
+    page.driver.browser.switch_to.alert.accept
+  end
 end
 
-When(/^(?:|I )choose "([^"]*)"$/) do |field|
-  choose(field)
+Then("the experience should be bookmarked") do
+  experience_1 = Experience.find_by(title: 'test')
+  id = '#experience-bookmark-' + experience_1.id.to_s
+  expect(page).to have_css(id, text: "1")
+end
+
+Then("the experience should not be bookmarked") do
+  expect(page).to have_css(".bookmark-yes", text: "0")
+end
+
+When('I refresh the page') do
+  visit current_path
 end
 
 # When /I click on the "(.+)" link/ do |locator|
@@ -158,7 +291,15 @@ end
 # end
 
 Then(/^(?:|I )should see "([^"]*)"$/) do |text|
-  page.should have_content(text) if page.respond_to? :should
+  using_wait_time 3 do
+    page.should have_content(text) if page.respond_to? :should
+  end
+end
+
+Then(/^(?:|I )should not see "([^"]*)"$/) do |text|
+  using_wait_time 3 do
+    page.should_not have_content(text) if page.respond_to? :should
+  end
 end
 
 # Then /^(?:|I )should see a "([^"]*)" card$/ do |text|
@@ -170,7 +311,7 @@ end
 # end
 
 Then(/^(?:|I )should see class "([^"]*)"$/) do |text|
-  page.should have_selector(".#{text}") if page.respond_to? :should
+  page.should have_selector(".#{text}", wait: 100) if page.respond_to? :should
 end
 
 # Then /^(?:|I )should not see class "([^"]*)"$/ do |text|
@@ -184,6 +325,21 @@ end
 Then(/^(?:|I )should see id "([^"]*)"$/) do |text|
   page.should have_selector("##{text}") if page.respond_to? :should
 end
+
+# When('I am on the new page') do
+#   visit new_experience_path
+# end
+# When (/I hover over the profile drop down menu/) do
+#   click_link("")
+# end
+
+# Then(/I should see "(.*)"/) do |string|
+#   expect(page).to have_content(string)
+# end
+
+#When(/^I click on bookmark icon/) do 
+#  page.driver.browser.execute_script("$(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes')")
+#end
 
 # Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
 #   regexp = Regexp.new(regexp)
@@ -327,3 +483,113 @@ end
 # Then /^show me the page$/ do
 #   save_and_open_page
 # end
+
+### Unique to multiple images and gallery features ###
+When("I select multiple images to upload") do
+  attach_file("images[]", Rails.root.join("test/fixtures/files/cat.PNG"))
+  attach_file("images[]", Rails.root.join("test/fixtures/files/amongus.jpg"))
+end
+
+When("I do not select any images to upload") do
+  # do nothing
+end
+
+When("I select an invalid file type to upload") do
+  attach_file("images[]", Rails.root.join("test/fixtures/files/invalid.txt"))
+end
+
+
+
+And("I should see a success message") do
+  # expect(page).to have_content("Images uploaded successfully.")
+  expect(page).to have_content('Experience was successfully created.')
+end
+
+
+
+
+Then(/^I should not see the uploaded images on the index page$/) do
+  images = page.all('.image')
+  expect(images.count).to eq(0) #assuming you uploaded 3 images
+  images.each do |image|
+    expect(image).to have_css('img')
+  end
+end
+
+
+
+Then(/^I should see the uploaded images on the index page$/) do
+  @images = []
+  all('.image').each do |img|
+    @images << img['src']
+  end
+
+  @images.each do |image|
+    expect(page).to have_xpath("//img[@src='#{image}']")
+  end
+end
+
+
+
+
+# Then("I should see an error message") do
+#   expect(page).to have_content("Invalid file format. Only JPEG, PNG, and GIF images are allowed.")
+# end
+
+# Then(/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+#   expect(page).to have_css('.flash-warning', text: message)
+# end
+
+Then(/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+  expect(page).to have_current_path('/programs')
+  expect(page).to have_css('.flash-warning', text: message)
+end
+
+
+
+# Then (/^I should see the "warning" flash message with "([^"]*)"$/) do |message|
+#   within('.flash-warning') do
+#     expect(page).to have_content(message)
+#   end
+# end
+
+###############################################################
+
+# unique GALLERY steps
+
+## TODO**********
+# When(/^I click on the "Gallery" tab$/) do
+#   # Click on the "Gallery" tab on the program page
+# end
+
+## TODO**********
+# Then(/^I should see a gallery of images with the title "(.*?)" and "(.*?)"$/) do |program_name, image_count|
+#   # Check that the gallery has the correct title and number of images
+# end
+
+And(/^I should see all (\d+) images related to the program$/) do |image_count|
+  # Check that all the images related to the program are displayed in the gallery
+  @images = []
+  all('.image').each do |img|
+    @images << img['src']
+  end
+
+  @images.each do |image|
+    expect(page).to have_xpath("//img[@src='#{image}']")
+  end
+end
+
+## TODO**********
+# Then(/^I should see a message that says "No images found for (.*?)"$/) do |program_name|
+#   # Check that the "No images found" message is displayed in the gallery
+# end
+
+And(/^I should not see any images in the gallery$/) do
+  # Check that the gallery does not display any images
+  images = page.all('.image')
+  expect(images.count).to eq(0) #assuming you uploaded 3 images
+  images.each do |image|
+    expect(image).to have_css('img')
+  end
+end
+

@@ -13,33 +13,48 @@ module NavigationHelpers
   # step definition in web_steps.rb
   #
   def path_to(page_name)
+    singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+    greece = Program.find_or_create_by(name: 'Greece CSCE Wintermester')
+    test_user = User.find_or_create_by(email: 'testuser@gmail.com')
+    experience = Experience.find_by(program_id: singapore.id, user_id: test_user.id)
     case page_name
 
-    when /^the home\s?page$/
-      '/'
+    when /^the test search\s?page$/
+      '/p/' + singapore.id.to_s + '?search=test&z.x=0&z.y=0'
 
     when /^the emergency\s?page$/
       '/reviews/emergency'
 
     when /^the programs\s?page$/
-      '/programs/index'
-
-    when /^the review\s?page$/
-      'reviews/leave_review/os-fZ4atEmOxbIo36kG9gA'
-
-    when /^the show_mad_taco\s?page$/
-      'reviews/os-fZ4atEmOxbIo36kG9gA'
+      '/programs'
 
     when /^the singapore\s?page$/
-      'p/1'
+      "/p/" + singapore.id.to_s
 
-    when /^the singapore\s?search\s?page$/
-      'p/1?search=zzzzzz'
+    when /^the Greece\s?page$/
+      "/p/" + greece.id.to_s
+  
+    when /^the new\s?page$/
+      '/p/' + singapore.id.to_s + '/experiences/new'
+
+    when /^the edit\s?page$/
+      '/experience/' + experience.id.to_s + '/edit'
+
+    when /^the experience\s?page$/
+      '/experience/' + experience.id.to_s
+    
+    when /^the bookmarks\s?page$/
+      '/experience/bookmarks/' + test_user.id.to_s
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    when /^the Add new participants on Greece\s?page$/
+      '/programs/' + greece.id.to_s + '/participants/new'
+
+    when /^the Add new participants on Singapore\s?page$/
+      '/programs/' + singapore.id.to_s + '/participants/new'
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" \

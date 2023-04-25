@@ -15,6 +15,9 @@
         </select><% end %>
     </div> 
 </div>
+
+
+
     <div class="search-border-outer">
         <div class="search-border-inner">
             <%= form_tag portal_path(), :method => :get, :id => "search-form" do %>
@@ -22,6 +25,14 @@
             <input type="image" name="z" src="<%= asset_path("magnifying-glass.jpg") %>"><% end %>
         </div>
     </div>
+    
+    <div class="gallery-button">
+      <% if logged_in? and (has_program? or current_user.admin?) %>
+        <%= link_to "Image Gallery", image_gallery_path(@program.id), class: 'header-button' %> 
+      <% end %>
+    </div>
+
+    
     <% if current_user.admin then %>
     <div class="admin-buttons">
         <!--<div style="" class="participant-button">-->
@@ -39,7 +50,7 @@
      <div class="portal-column-title">
      <p>Tips</p>
      <% if logged_in? and (has_program? or current_user.admin?) %>
-      <%= link_to 'Add', new_tip_path, class: 'header-button'%> 
+      <%= link_to 'Add Tip', new_tip_path, class: 'header-button'%> 
     <% end %>
         <div class="portal-column-title-sort">sort by: <select id="portal-sort-tips" name="tip_sort_by"><option value="helpful" <%= if @tip_sort_by == "rating" then "selected" end %>>most helpful</option><option value="date" <%= if @tip_sort_by == "date" then "selected" end %>>date</option></select></div>
      </div>
@@ -51,7 +62,7 @@
      <div class="portal-column-title">
          <p>Experiences</p>
          <% if logged_in? and (has_program? or current_user.admin?)  %>
-          <%= link_to 'Add', new_experience_path, class: 'header-button'%> 
+          <%= link_to 'Add Experience', new_experience_path, class: 'header-button'%> 
          <% end %>
          <div class="portal-column-title-sort">sort by: <select id="portal-sort-experiences" name="experience_sort_by"><option value="avg_rating" <%= if @experience_sort_by == "avg_rating" then "selected" end %>>avg rating - best to worst</option><option value="avg_rating_asc" <%= if @experience_sort_by == "avg_rating_asc" then "selected" end %>>avg rating - worst to best</option><option value="date" <%= if @experience_sort_by == "date" then "selected" end %>>date</option><option value="comments" <%= if @experience_sort_by == "comments" then "selected" end %>>most comments</option></select></div>
      </div>
@@ -61,4 +72,4 @@
  <% end %>
  <% if @experiences.size == 0 then %><div class="portal-experiences-none"><% if params[:search].blank? then %>No experiences added yet!<% else %>No search results!<% end %></div><% end %></div>
 </div>
-<%if not logged_in? %><div class="arrow-box">Login to share your tips and experiences!</div><% end %>
+<%if not logged_in? %><div class="arrow-box">Login to share your tips and experiences!</div><% end %> 

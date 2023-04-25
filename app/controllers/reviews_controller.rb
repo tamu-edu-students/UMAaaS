@@ -9,10 +9,6 @@ class ReviewsController < ApplicationController
 
   def index; end
 
-  def leave_review
-    @review = Review.new
-  end
-
   def show; end
 
   def emergency; end

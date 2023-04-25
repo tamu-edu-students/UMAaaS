@@ -15,6 +15,9 @@
 
 Program.create!(name: 'Singapore CSCE Wintermester', region: 'Asia')
 Program.create!(name: 'Greece CSCE Wintermester', region: 'Europe')
-
-User.create!(admin: false, program_id: nil, id: 5, img: nil, name: 'Arkaprabho Bose',
-             email: 'abose0267@tamu.edu')
+singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+User.create!(admin: true, program: singapore, id: 1, img: 'https://picsum.photos/200/300/?random', name: 'Test User',
+             email: 'testuser@gmail.com')
+User.create!(admin: true, program: singapore, id: 2, img: nil, name: 'Tejasri Swaroop Boppana',
+             email: 'tejasriboppana22@gmail.com')
+Participant.create(email: 'tejasriboppana22@gmail.com', program: singapore)

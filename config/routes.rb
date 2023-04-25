@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-
 Rails.application.routes.draw do
+  get 'gallery/index'
   get 'programs', to: 'programs#index'
   get 'reviews/index'
   get 'reviews/leave_review/:id', to: 'reviews#leave_review', as: 'leave_review'
@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   get '/login', to: redirect('/auth/google_oauth2')
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get 'p/:id/image_gallery', to: 'programs#image_gallery', as: 'image_gallery'
   resource :session, only: %i[create destroy]
   resources :reviews
   resources :users
   resources :programs do
     resources :participants
   end
-
   # resources :tips
   get 'users/:id/promote', to: 'users#promote'
   get 'users/:id/demote', to: 'users#demote'
@@ -32,13 +32,15 @@ Rails.application.routes.draw do
   get 'p/:id/tips/new', to: 'tips#new', as: 'new_tip'
   post 'p/:id/tips', to: 'tips#create', as: 'tips'
   get 'p/:id/experiences/new', to: 'experiences#new', as: 'new_experience'
-  get 'experience/:id', to: 'experiences#view'
+  get 'experience/:id', to: 'experiences#view', as: 'exeprience_view'
   get 'experience/:id/edit', to: 'experiences#edit', as: 'edit_experience'
   put 'experience/:id', to: 'experiences#update', as: 'experience'
   post 'p/:id/experiences', to: 'experiences#create', as: 'experiences'
   post 'experience/:id/comment', to: 'experiences#create_comment'
   post 'experience/yelp_search', to: 'experiences#yelp_search'
+  post 'experience/bookmarked', to: 'experiences#bookmarked'
   post 'tip/helpful', to: 'tips#helpful'
+  get 'experience/bookmarks/:id', to: 'experiences#bookmark_view', as: 'bookmarks_view'
   post 'tip/flagged', to: 'tips#flagged'
   post 'experience/flagged', to: 'experiences#flagged'
   delete 'experience/:id/delete', to: 'experiences#delete'

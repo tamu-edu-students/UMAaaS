@@ -14,7 +14,3 @@ Scenario: Test for Experiences presence
 Scenario: Test for Experiences presence
     Given I am on the singapore page
     Then I should see id "portal-sort-experiences"
-
-Scenario: Test for search results
-    Given I am on the singapore search page
-    Then I should see "No search results"

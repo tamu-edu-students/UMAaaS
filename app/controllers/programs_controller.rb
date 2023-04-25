@@ -58,14 +58,6 @@ class ProgramsController < ApplicationController
     redirect_to programs_path
   end
 
-  # this is no longer called anywhere, programs aren't deleted, just disabled
-  def destroy
-    @program = Program.find(params[:id])
-    @program.destroy
-    flash[:notice] = "Program ’#{@program.name}’ deleted."
-    redirect_to programs_path
-  end
-
   # disable program
   def disable
     program = Program.find params[:id]
@@ -97,6 +89,35 @@ class ProgramsController < ApplicationController
     @tips = FlagTip.joins(:tip).where(tips: { program_id: @program.id })
     @experiences = FlagExperience.joins(:experience).where(experiences: { program_id: @program.id })
   end
+  
+  
+  
+  
+  require 'aws-sdk-s3'
+
+    def image_gallery
+        @program = Program.find params[:id]
+        @experiences = Experience.where(experiences: { program_id: @program.id }) # array of all experiences
+        
+        
+        # s3 = Aws::S3::Resource.new(region: 'us-east-1')
+        # bucket = s3.bucket('tripagvisor2')
+        # @images = []
+        # bucket.objects.each do |obj|
+        # if obj.key.start_with?("uploads/#{params[:id]}")
+        #   @images << obj.presigned_url(:get)
+        # end
+        # end
+        
+       
+        render 'image_gallery'
+    end
+
+
+  
+  
+  
+  
   
   def program_params
         params.require(:experience).permit(:name, :location, :region, :banner)

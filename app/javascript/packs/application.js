@@ -17,7 +17,7 @@ require("jquery")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 /*global $*/
-
+/*global location*/
 //$(function(){
 document.addEventListener("turbolinks:load", function() {  // the site uses turbolinks so have to use this instead of regular jquery opening
 
@@ -48,14 +48,29 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     if(selectedId != 0) $("#portal-switch-programs-form").submit();
   });
   
+  $(document).off('click', '.portal-experience-photo').on('click', '.portal-experience-photo', function(e){ // for carousel on each experience
+    if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on
+    if(e.target.getAttribute("class") == "carouselExampleIndicators") return; // don't redirect if clicking on
+  });
+  
   // when an experience is clicked on go to the single experience view
   $(document).off('click', '.portal-experience').on('click', '.portal-experience', function(e){
     if(e.target.getAttribute("class") == "yelp-link") return; // don't redirect if clicking on yelp link
     if(e.target.getAttribute("class") == "tag") return; // don't redirect if clicking on tag
     if(e.target.getAttribute("class") == "portal-experience-delete") return; // don't redirect if clicking on delete
+    if(e.target.getAttribute("class") == "portal-experience-photo") return; // don't redirect if clicking on carouse
+   
+    if(e.target.getAttribute("class") == "bookmark-yes") return; // don't redirect if clicking on bookmark
+    if(e.target.getAttribute("class") == ("bookmarked")) return; // don't redirect if clicking on bookmark
+    
     var idParts = this.closest(".portal-experience-outer-wrapper").id.split("-");
     var experienceId = idParts[3];
     window.location.replace("/experience/" + experienceId);
+  });
+  
+  $(document).off('click', '.portal-experience-photo').on('click', '.portal-experience-photo', function(){ // for carousel
+    var photo = document.getElementById(this.id);
+    photo.classList = "portal-experience-photo"; // have to have this for image not to take to link on click
   });
   
   // and upvote on a tip
@@ -120,6 +135,42 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     }    
   });
   
+      // bookmark an experience
+  $(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes', function(){
+
+    var idParts = this.id.split("-");
+    var experience_id = idParts[2];
+
+    if($(this).hasClass("bookmarked")){
+      console.log("Remove bookmark!")
+      $.ajax({
+        type: "POST", 
+        url: "/experience/bookmarked",
+        data: {experience_id: experience_id, bookmarked: 0}, //0 means no bookmark
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+          console.log("unbookmark successful");
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }else{
+      console.log("Bookmarked")
+      $.ajax({
+        type: "POST", 
+        url: "/experience/bookmarked",
+        data: {experience_id: experience_id, bookmarked: 1},
+        dataType: "script",
+        success: function(data, textStatus, jqXHR){
+          console.log("bookmark successful");
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+        }
+      });
+    }
+  });
   // add flag on a tip
     $(document).off('click', '.tip-flagged-yes').on('click', '.tip-flagged-yes', function(){
     
@@ -344,6 +395,21 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     }else{
       $("#yelp-search-results").hide();
       $("#yelp-search-results").empty();
+    }
+  });
+
+  $(document).off('input', '#yelp-search').on('input', '#experience_location', function(){
+    if($(this).val()) {
+      (document).getElementById("experience_street").disabled = false;
+      (document).getElementById("experience_city").disabled = false;
+      (document).getElementById("experience_postal_code").disabled = false;
+    } else {
+      (document).getElementById("experience_street").value = '';
+      (document).getElementById("experience_street").disabled = true;
+      (document).getElementById("experience_city").value = '';
+      (document).getElementById("experience_city").disabled = true;
+      (document).getElementById("experience_postal_code").value = '';
+      (document).getElementById("experience_postal_code").disabled = true;
     }
   });
   
