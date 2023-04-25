@@ -120,5 +120,10 @@ else
   exit 1
 fi
 
+
+
+sudo yum install -y ImageMagick
+
+
 # Start the Rails server
 rails server

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/login', to: redirect('/auth/google_oauth2')
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/experiences/image_gallery', to: 'experiences#image_gallery', as: 'image_gallery'
+  get 'p/:id/image_gallery', to: 'programs#image_gallery', as: 'image_gallery'
   resource :session, only: %i[create destroy]
   resources :reviews
   resources :users

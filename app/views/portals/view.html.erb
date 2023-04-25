@@ -28,7 +28,7 @@
     
     <div class="gallery-button">
       <% if logged_in? and (has_program? or current_user.admin?) %>
-        <%= link_to "Image Gallery", image_gallery_path(id: @program.id), class: 'header-button' %> 
+        <%= link_to "Image Gallery", image_gallery_path(@program.id), class: 'header-button' %> 
       <% end %>
     </div>
 
