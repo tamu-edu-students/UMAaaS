@@ -1,4 +1,4 @@
-<div class="index-background">
+<div class="index-background" style="background-image: url('<%= @program.banners.attached? ? url_for(@program.banners.sample) : asset_path('supertrees.jpg') %>');">
     <%= form_tag program_select_path(), :method => :get, :id => "index-search-box-form" do %>
      <div id="index-search-box" style="">
          <select id="program_id" name="program_id">
