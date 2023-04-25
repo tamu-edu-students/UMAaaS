@@ -6,13 +6,13 @@ Feature: View all images of a program in a gallery
 Scenario: User views gallery tab of a program with multiple images
     Given I am on the singapore page
     Given I am logged in with Google
-    When I click on the "Gallery" tab
-    Then I should see a gallery of images with the title "Gallery for Singapore" and "2 images"
+    When I click on the "Image Gallery" tab
+    Then I should see a gallery of images with the title "Gallery for Singapore CSCE Wintermester" and "2 images"
     And I should see all 2 images related to the program
 
   Scenario: User views gallery tab of a program with no images
     Given I am on the singapore page
     Given I am logged in with Google
-    When I click on the "Gallery" tab
+    When I click on the "Image Gallery" tab
     Then I should see a message that says "No images found for this program"
     And I should not see any images in the gallery

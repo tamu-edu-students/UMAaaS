@@ -12,11 +12,16 @@
   </div>
 </div>
 
+
+
 <div class="gallery">
-  <% @experiences.each do |experience| %>
-    <% if experience.images.attached? %>
-      <% experience.images.each do |image| %>
-        <%= link_to image_tag(image.variant(resize: "300x300", quality: 150).processed, class: "gallery-image"), experience_path(experience) %>
+  <% if @experiences.size == 0 then %><div>No images found for this program</div>
+  <% else %>
+    <% @experiences.each do |experience| %>
+      <% if experience.images.attached? %>
+        <% experience.images.each do |image| %>
+          <%= link_to image_tag(image.variant(resize: "300x300", quality: 150).processed, class: "gallery-image"), experience_path(experience) %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
