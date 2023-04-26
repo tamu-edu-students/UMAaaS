@@ -1,0 +1,67 @@
+<div onclick="window.location.href = '/p/<%= @program.id %>';">
+  <div id="page-header" style="background-image: url('<%= @program.banners.attached? ? url_for(@program.banners.sample) : asset_path('header-background.jpg') %>');">
+    <%= @program.name %>
+  </div>
+</div>
+
+<h1 class="text-center">Gallery for <%= @program.name %></h1>
+
+<div class="flex-header mb-4">
+  <div class="header_column_1_of_1">
+    <div class="header-return-link">&#x21D0;<%= link_to 'Return', url_for(:back)%></div>
+  </div>
+</div>
+
+
+
+<div class="gallery">
+  <% if @experiences.size == 0 then %><div>No images found for this program</div>
+  <% else %>
+    <% @experiences.each do |experience| %>
+      <% if experience.images.attached? %>
+        <% experience.images.each do |image| %>
+          <%= link_to image_tag(image.variant(resize: "300x300", quality: 150).processed, class: "gallery-image"), experience_path(experience) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<style>
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gallery a {
+    margin: 5px;
+  }
+
+  .gallery img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .flex-header {
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-return-link {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+</style>
+
+<!-- For "preloading" images, otherwise larger/higher quality images have a hard time quickly loading on the page -->
+<script>
+  const images = document.querySelectorAll('.gallery img');
+  images.forEach(image => {
+    const img = new Image();
+    img.src = image.src;
+  });
+</script>
