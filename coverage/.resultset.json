@@ -69,12 +69,15 @@
           null,
           1,
 <<<<<<< HEAD
+<<<<<<< HEAD
           51,
           51,
           51,
           51,
           51,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           1,
           1,
           1,
@@ -92,6 +95,7 @@
           null,
           null,
           0,
+<<<<<<< HEAD
           null,
           null,
           1,
@@ -209,11 +213,14 @@
           null,
           null,
           null,
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           1,
           null,
           null,
+<<<<<<< HEAD
           24,
           24,
           24,
@@ -1392,12 +1399,104 @@
           4,
           null,
 >>>>>>> aa5d605 (create ban page)
+=======
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1
+        ]
+      },
+      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/features/step_definitions/web_steps.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          4,
+          4,
+          4,
+          4,
+          4,
+          null,
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           4,
           4,
           4,
           null,
           null,
           1,
+<<<<<<< HEAD
 <<<<<<< HEAD
           null,
           null,
@@ -1436,6 +1535,8 @@
           1,
           2,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           1,
           null,
           null,
@@ -1457,12 +1558,16 @@
           0,
           0,
           0,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           null,
           null,
           1,
+<<<<<<< HEAD
 <<<<<<< HEAD
           null,
           0,
@@ -1478,6 +1583,11 @@
           0,
           0,
 >>>>>>> aa5d605 (create ban page)
+=======
+          0,
+          0,
+          0,
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           0,
           0,
@@ -1485,6 +1595,7 @@
           0,
           null,
           null,
+<<<<<<< HEAD
 <<<<<<< HEAD
           null,
           null,
@@ -1501,6 +1612,8 @@
           null,
           null,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           1,
           0,
           0,
@@ -1516,7 +1629,10 @@
           null,
           null,
           1,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           null,
           null,
@@ -1525,6 +1641,7 @@
           null,
           null,
           1,
+<<<<<<< HEAD
 <<<<<<< HEAD
           1,
           null,
@@ -1567,10 +1684,15 @@
           0,
           0,
 >>>>>>> aa5d605 (create ban page)
+=======
+          0,
+          0,
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           null,
           null,
           null,
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
           1,
@@ -1611,6 +1733,14 @@
           1,
           null,
 =======
+=======
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           0,
           0,
@@ -1620,11 +1750,15 @@
           0,
           null,
           0,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           null,
           1,
+<<<<<<< HEAD
 <<<<<<< HEAD
           3,
           3,
@@ -1633,16 +1767,22 @@
           null,
           3,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           null,
           null,
           1,
           0,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           null,
           1,
+<<<<<<< HEAD
 <<<<<<< HEAD
           2,
           0,
@@ -1665,6 +1805,8 @@
           null,
           2,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           null,
           null,
@@ -1689,7 +1831,10 @@
           null,
           null,
           1,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           0,
           null,
           null,
@@ -1701,6 +1846,7 @@
           null,
           null,
           null,
+<<<<<<< HEAD
 <<<<<<< HEAD
           2,
           null,
@@ -1722,6 +1868,11 @@
           1,
           1,
 =======
+=======
+          null,
+          null,
+          null,
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           null,
@@ -1747,14 +1898,18 @@
           null,
           null,
           null,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
           null,
           null,
           null,
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           1,
           0,
           null,
+<<<<<<< HEAD
 <<<<<<< HEAD
           null
         ]
@@ -1789,6 +1944,8 @@
           null,
           1,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           1,
           0,
@@ -1863,15 +2020,21 @@
           1,
           0,
           null,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           1,
           null,
           null,
           null,
 <<<<<<< HEAD
+<<<<<<< HEAD
           1,
 =======
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           null,
@@ -2073,12 +2236,16 @@
           null,
           null,
           null,
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           null,
           null,
           null
         ]
       },
+<<<<<<< HEAD
 <<<<<<< HEAD
       "/Users/tejaboppana/Desktop/TripAgvisor-GradVersion_Spring2023/app/controllers/programs_controller.rb": {
         "lines": [
@@ -2453,6 +2620,9 @@
 =======
       "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/program.rb": {
 >>>>>>> aa5d605 (create ban page)
+=======
+      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/program.rb": {
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
         "lines": [
           null,
           null,
@@ -2463,6 +2633,7 @@
           1,
           1,
           1,
+<<<<<<< HEAD
           null
         ]
 <<<<<<< HEAD
@@ -2484,6 +2655,24 @@
         "lines": [
           null,
           null,
+=======
+          null
+        ]
+      },
+      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/home/ec2-user/environment/TripAgvisor-GradVersion_Spring2023/app/models/user.rb": {
+        "lines": [
+          null,
+          null,
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
           1,
           1,
           1,
@@ -2540,6 +2729,9 @@
       }
     },
     "timestamp": 1681165333
+<<<<<<< HEAD
 >>>>>>> aa5d605 (create ban page)
+=======
+>>>>>>> d587baec7a1e58e2a54b4f92724d8c4119cf5935
   }
 }
