@@ -46,8 +46,6 @@ class ExperiencesController < ApplicationController
         images = params[:images]
         valid_formats = ["image/jpeg", "image/png", "image/gif"]
         
-        
-
         if params[:images]
             images.each do |image|
                 unless valid_formats.include? image.content_type
@@ -397,6 +395,20 @@ class ExperiencesController < ApplicationController
             end
         end
     end
+    
+    
+    
+    
+    
+
+
+
+    
+    
+    
+    
+    
+    
     
     def experience_params
         params.require(:experience).permit(:title, :experience, :rating, :tags, :location, :street, :city, :postal_code, :image)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  get 'gallery/index'
   get 'programs', to: 'programs#index'
   get 'reviews/index'
   get 'reviews/leave_review/:id', to: 'reviews#leave_review', as: 'leave_review'
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   get '/login', to: redirect('/auth/google_oauth2')
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get 'p/:id/image_gallery', to: 'programs#image_gallery', as: 'image_gallery'
   resource :session, only: %i[create destroy]
   resources :reviews
   resources :users
