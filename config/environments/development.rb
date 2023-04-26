@@ -48,7 +48,7 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: '2dbaedf1c0ce4258818f3f8ba7f64d58.vfs.cloud9.us-east-1.amazonaws.com' }
+  config.action_mailer.default_url_options = { host: 'tripagvisor2.herokuapp.com' }
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :smtp
