@@ -171,6 +171,22 @@ a {
     color: white;
 }
 
+
+.cancle-button {
+    margin-left: 120px;
+    margin-top: 20px;
+    padding: 5px 30px;
+    font: inherit;
+    color: #fff;
+    background-color: #008;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #002;
+    box-shadow: 2px 2px 2px #666;
+    width: 122.36px; 
+    height: 34px;
+}
+
 .participant-button {
     border: 2px solid #6495ed;
     color: #6495ed;
@@ -184,6 +200,7 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
 
 .participant-button:hover {
     background-color: #6495ed;

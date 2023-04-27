@@ -81,7 +81,7 @@ Given("I am logged in with Google") do
   page.set_rack_session(:user_img => "https://picsum.photos/200/300/?random")
   page.set_rack_session(:user => test_user.id)
   page.visit ('/p/' + singapore.id.to_s)
-  
+
   # Verify that the user is redirected to the dashboard page after successful authentication
 end
 
@@ -93,7 +93,7 @@ Given("I am logged in with Google as an Admin") do
   page.set_rack_session(:user_program_id => singapore.id )
   page.set_rack_session(:user_img => "https://picsum.photos/200/300/?random")
   page.set_rack_session(:user => test_user.id)
-  page.visit ('/p/' + singapore.id.to_s)  
+  page.visit ('/p/' + singapore.id.to_s)
 end
 
 Then('I choose a program_id') do
@@ -121,7 +121,7 @@ When(/^(?:|I )press "([^"]*)"$/) do |button|
   end
 end
 
-When("I check show diabled") do 
+When("I check show diabled") do
   find("#programs-filter-show-disabled").set(true)
 end
 
@@ -168,7 +168,11 @@ When('I hover over Admin') do
   find_link(href: "", title: 'Admin').hover
 end
 
-When('I choose 5 rating') do 
+When('I hover over bookmark icon') do
+  find('.bookmark-yes').hover
+end
+
+When('I choose 5 rating') do
   find('label[for="experience_rating_5"]').click
 end
 
@@ -337,7 +341,7 @@ end
 #   expect(page).to have_content(string)
 # end
 
-#When(/^I click on bookmark icon/) do 
+#When(/^I click on bookmark icon/) do
 #  page.driver.browser.execute_script("$(document).off('click', '.bookmark-yes').on('click', '.bookmark-yes')")
 #end
 

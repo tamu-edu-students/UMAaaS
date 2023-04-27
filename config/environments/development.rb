@@ -2,7 +2,10 @@
 
 Rails.application.configure do
 
-  config.hosts << "4dc109ee20f44dfca27f253cac174393.vfs.cloud9.us-east-1.amazonaws.com"
+  config.hosts << "2dbaedf1c0ce4258818f3f8ba7f64d58.vfs.cloud9.us-east-1.amazonaws.com"
+
+
+
   # config.hosts << "999663bc4eee4a0cb47c75a9aaa9268b.vfs.cloud9.us-east-1.amazonaws.com"
   # config.hosts << "389763a4bd934fd2b31f81763dda423c.vfs.cloud9.ap-northeast-1.amazonaws.com"
   # Settings specified here will take precedence over those in config/application.rb.
@@ -41,9 +44,19 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'tripagvisor2.herokuapp.com' }
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    user_name:            ENV["GMAIL_USERNAME"],
+    password:             ENV["GMAIL_PASSWORD"],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

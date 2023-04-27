@@ -110,7 +110,9 @@ class UsersController < ApplicationController
       flash[:alert] = 'Error banning user: user not found.'
     else
       user.banned = true
+      user.update(ban_reason: params[:ban_reason])
       user.save
+      BanEmailMailer.banned(user, params[:ban_reason]).deliver_now
       flash[:notice] = "#{user.name} has been banned."
     end
     redirect_to users_path
@@ -138,13 +140,19 @@ class UsersController < ApplicationController
     else
       user.banned = false
       user.save
+      user.update(ban_reason: nil)
       flash[:notice] = "#{user.name} has been unbanned."
     end
     redirect_to users_path
   end
   
+  def ban_comment
+    @user = User.find params[:id]
+    @programs = Program.all
+  end
+  
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin, :banned, :program_id, :avatar, :ban_reason)
   end
 
 end

@@ -1,0 +1,12 @@
+<div id="page-header">User: <%= @user.name %></div>
+<br>
+
+<br>
+<div class="admin-buttons">
+  <%= form_tag({ controller: 'users', action: 'ban' }, method: :post) do %> 
+    <center><h1><%= label_tag :ban_reason, 'Reason For ban:' %></h1></center>
+    <%= text_area_tag :ban_reason, nil, required: true%> 
+    <%= submit_tag 'Ban User' %> 
+    <%= link_to 'Cancel', edit_user_path(@user), class: 'cancle-button'%>
+  <% end %>
+</div>

@@ -18,7 +18,7 @@
              <td><%= if @user.banned then
                     link_to 'Unban User', :controller => :users, :action => :unban
                 else
-                    link_to 'Ban User', :controller => :users, :action => :ban
+                    link_to 'Ban User', ban_comment_path(@user)
                 end%></td>
          </tr>
      </tbody>
