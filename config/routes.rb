@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get 'users/:id/ban', to: 'users#ban'
   post 'users/:id/ban', to: 'users#ban'
 
-  get 'users/:id/ban', to: 'users#remoteBan'
+  get 'users/:id/rban', to: 'users#remoteBan'
   get 'users/:id/ban_comment', to: 'users#ban_comment', as: 'ban_comment'
   get 'users/:id/unban', to: 'users#unban'
   get 'programss/:id/enable', to: 'programs#enable'
