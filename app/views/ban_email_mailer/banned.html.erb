@@ -9,11 +9,11 @@
     An admin has suspended your account, <b><%= @user.email %></b>, because of a violation of the community guidelines.<br>
     <br>
     Here is a comment from the admin:<br>
-    <%= if @user.ban_reason == nil then
+    <b><%= if @user.ban_reason == nil then
                     "You Have Been Banned Due to Inappropriate Post"
                 else
                     @user.ban_reason
-                end%></td>
+                end%></td></b>
     <br>
     <br>
     If you think this is a mistake, you can contact us at <a href = "mailto:tripagvisor2@gmail.com">tripagvisor2@gmail.com</a>.<br>
