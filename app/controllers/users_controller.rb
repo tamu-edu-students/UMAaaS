@@ -126,6 +126,7 @@ class UsersController < ApplicationController
     else
       user.banned = true
       user.save
+      BanEmailMailer.banned(user, params[:ban_reason]).deliver_now
     end
     respond_to do |format|
       format.html { redirect_to request.referer, notice: "#{user.name} has been banned." }
