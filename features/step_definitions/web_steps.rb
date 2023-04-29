@@ -52,8 +52,12 @@ Before do
   singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
   User.create!(admin: true, program: singapore, id: 1, img: 'https://picsum.photos/200/300/?random', name: 'Test User',
              email: 'testuser@gmail.com')
+  User.create!(admin: false, program: singapore, id: 2, img: 'https://picsum.photos/200/300/?random', name: 'Test User 2',
+             email: 'testuser2@gmail.com')
   test_user = User.find_or_create_by(email: 'testuser@gmail.com')
+  test_user2 = User.find_or_create_by(email: 'testuser2@gmail.com')
   Participant.create(email: 'testuser@gmail.com', program: singapore)
+  Participant.create(email: 'testuser2@gmail.com', program: singapore)
   Experience.create(title: "test", experience: "test experience", rating: 5, user: test_user, program: singapore)
 end
 
@@ -82,7 +86,22 @@ Given("I am logged in with Google") do
   page.set_rack_session(:user => test_user.id)
   page.visit ('/p/' + singapore.id.to_s)
 
-  # Verify that the user is redirected to the dashboard page after successful authentication
+  # Verify that the user is redirected to the dashboard page after successful authenticatioann
+end
+
+Given("I am logged in with Google as User 2" ) do
+  # Mock the OmniAuth authentication response
+  # Visit the Google OAuth callback URL with the mocked authentication response
+  singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
+  test_user2 = User.find_or_create_by(email: 'testuser2@gmail.com')
+  page.set_rack_session(:user_admin => false)
+  page.set_rack_session(:user_email => 'testuser2@gmail.com')
+  page.set_rack_session(:user_program_id => singapore.id )
+  page.set_rack_session(:user_img => "https://picsum.photos/200/300/?random")
+  page.set_rack_session(:user => test_user2.id)
+  page.visit ('/p/' + singapore.id.to_s)
+
+  # Verify that the user is redirected to the dashboard page after successful authenticatioann
 end
 
 Given("I am logged in with Google as an Admin") do
@@ -103,6 +122,11 @@ end
 
 Then("I switch programs") do
   within('#portal-switch-programs-form')
+  select 'Greece CSCE Wintermester', from: 'program_id'
+end
+
+Then('I choose user program id') do
+  within('.user-program')
   select 'Greece CSCE Wintermester', from: 'program_id'
 end
 
@@ -128,12 +152,15 @@ end
 When(/^(?:|I )follow "([^"]*?)"$/) do |link|
   # Visit the Google OAuth callback URL with the mocked authentication response
   test_participant = Participant.find_or_create_by(email: 'testuser@gmail.com')
+  test_user2 = User.find_or_create_by(email: 'testuser2@gmail.com')
   singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
   test_program = Program.find_or_create_by(name: 'Test Delete Program')
   if link == "Edit Program"
     click_link('Edit', :href => edit_program_path(test_program))
   elsif link == "Remove Participant"
     find("a[href='/programs/#{singapore.id.to_s}/participants/#{test_participant.id.to_s}']").click
+  elsif link == "Edit User"
+    click_link('Edit', :href => edit_user_path(test_user2))
   else
     click_link(link)
   end
@@ -145,16 +172,21 @@ end
 
 Then(/^(?:|I )should be redirected to (.+)$/) do |page_name|
 #  expect(page).to have_current_path(path_to(page_name))
-  expect(current_path).to eq(path_to(page_name))
+  expect(page).to have_current_path(path_to(page_name))
 end
 
 Then(/^I should see an external link to maps with text (.+)$/) do |name|
   expect(page).to have_link(name, href: /^http\:\/\/maps.google.com.*$/)
 end
 
-Then("I enter text in the search bar") do
-  page.find('#search-field').set("test\n")
+Then("I enter {string} in the search bar") do |text|
+  page.find('#search-field').set(text + "\n")
 end
+
+Then('I should see the {alert}') do |alert|
+  text = page.driver.browser.switch_to.alert.text
+  expect(text).to eq alert
+end 
 
 When('I fill in {string} with {string}') do |string, name|
   fill_in(string, with: name)
@@ -273,6 +305,11 @@ When(/^(?:|I )click on "([^"]*)"$/) do |icon|
   elsif icon == "clear-flags"
     click_button("Clear")
     page.driver.browser.switch_to.alert.accept
+  elsif icon == "ban"
+    click_button("Ban")
+    page.driver.browser.switch_to.alert.accept
+  elsif icon == "show-banned-users"
+    page.find(id: 'users-filter-show-banned').click
   end
 end
 

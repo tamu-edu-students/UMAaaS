@@ -37,7 +37,7 @@
             <tr>
                 <% if current_user.admin %>
                 <td class="user-edit-label">Abroad Program:</td>
-                <td><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
+                <td class ="user-program"><select name="program_id"><option value=0>--Select Study Abroad Program--</option>
                     <%= @programs.each do |program| %>
                         <option value="<%= program.id %>" <%= if @user.program_id == program.id then "selected" end %>><%= program.name %></option>
                     <% end %>

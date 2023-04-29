@@ -16,11 +16,20 @@ module NavigationHelpers
     singapore = Program.find_or_create_by(name: 'Singapore CSCE Wintermester')
     greece = Program.find_or_create_by(name: 'Greece CSCE Wintermester')
     test_user = User.find_or_create_by(email: 'testuser@gmail.com')
+    test_user2 = User.find_or_create_by(email: 'testuser2@gmail.com')
     experience = Experience.find_by(program_id: singapore.id, user_id: test_user.id)
     case page_name
 
     when /^the test search\s?page$/
       '/p/' + singapore.id.to_s + '?search=test&z.x=0&z.y=0'
+    
+    when /^the user\s?page$/
+      '/users/' + test_user.id.to_s
+    when /^the tag search\s?page$/
+      '/p/' + singapore.id.to_s + '?search=%23test&z.x=0&z.y=0'
+    
+    when /^the test user search\s?page$/
+      '/users?search=test&z.x=0&z.y=0'    
 
     when /^the emergency\s?page$/
       '/reviews/emergency'
@@ -43,11 +52,11 @@ module NavigationHelpers
     when /^the experience\s?page$/
       '/experience/' + experience.id.to_s
 
-    when /^the user\s?page$/
-      '/users/' + test_user.id.to_s + '/edit'
+    when /^the users\s?page$/
+      '/users'
 
     when /^the ban_comment\s?page$/
-      '/users/' + test_user.id.to_s + '/ban_comment'
+      '/users/' + test_user2.id.to_s + '/ban_comment'
 
     when /^the bookmarks\s?page$/
       '/experience/bookmarks/' + test_user.id.to_s

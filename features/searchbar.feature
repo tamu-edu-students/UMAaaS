@@ -10,5 +10,12 @@ Scenario: Test for search bar presence
 Scenario: Test search works correctly 
     Given I am logged in with Google
     Given I am on the singapore page
-    Then I enter text in the search bar
+    Then I enter "test" in the search bar
     Then I should be redirected to the test search page
+
+Scenario: Test search works for tags
+    Given I am logged in with Google
+    Given I am on the singapore page
+    Then I enter "#test" in the search bar
+    Then I should be redirected to the tag search page 
+
