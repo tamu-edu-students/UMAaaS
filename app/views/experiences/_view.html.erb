@@ -201,17 +201,17 @@
 		          <div class="carousel-wrap" style="text-align: center;">
 		            <div class="carousel-inner<%= ' no-controls' if locals[:experience].images.size <= 1 %>">
 		              <% locals[:experience].images.each.with_index do |image, i| %>
-		                <div class="carousel-item <%= 'active' if i == 0 %>">
-		                	<% if current_user.admin %>
-	                    		<label style="margin-left: -50px; font-size: 15px; background: rgba(255, 255, 255, .5); padding: 0px 3px 0px 3px" for=<%= "img-#{i+1}" %>><%= "img-#{i+1}"%></label>
-	                    	<% end %>
-	              			<div  class="portal-experience-flag">
-						       	<div class="<%= if current_user.id || 1==1 then "experience-flagged-yes img" else "experience-flagged-yes-nologin img" end %>
-							           	<%= if locals[:experience].hasUserFlagged == 1 then "flagged" end %>" id="experience-flagged-<%= locals[:experience].id %>-<%= i %>">
-							           	<%= locals[:experience].flagCount %>
-						       	</div>
-					    	</div>
-					    	<%= link_to image_tag(image, id: "img-#{i+1}", alt: SecureRandom.uuid), experience_path(locals[:experience]), class: 'modalLink', data: { target: '#myModal', image_url: url_for(image) } %>
+		            	<div class="carousel-item <%= 'active' if i == 0 %>">
+							<% if current_user.admin %>
+								<label style="margin-left: -50px; font-size: 15px; background: rgba(255, 255, 255, .5); padding: 0px 3px 0px 3px" for=<%= "img-#{i+1}" %>><%= "img-#{i+1}"%></label>
+							<% end %>
+							<div  class="portal-experience-flag">
+								<div class="<%= if current_user.id || 1==1 then "experience-flagged-yes img" else "experience-flagged-yes-nologin img" end %>
+									<%= if locals[:experience].hasUserFlagged == 1 then "flagged" end %>" id="experience-flagged-<%= locals[:experience].id %>-<%= i %>">
+									<%= locals[:experience].flagCount %>
+								</div>
+							</div>
+							<%= link_to image_tag(image, id: "img-#{i+1}", alt: SecureRandom.uuid), experience_path(locals[:experience]), class: 'modalLink', data: { target: '#myModal', image_url: url_for(image) } %>
 		                </div>
 		              <% end %>
 		            </div>
@@ -266,6 +266,16 @@
 			});
 
 		</script>
+
+		
+
+
+	
+	
+	
+				
+
+			
 			
 			<div class="portal-experience-description">
 				<%= locals[:experience].experience%>
