@@ -136,7 +136,16 @@
 			                <div class="carousel-inner">
 			                    <% locals[:experience].images.each.with_index do |image, i| %>
 			                    <div class="carousel-item <%= 'active' if i == 0 %>">
-			                        <%= image_tag(image, alt: SecureRandom.uuid) %>
+			                    	<% if current_user.admin %>
+			                    		<label for=<%= "img-#{i+1}" %>><%= "img-#{i+1}" %></label>
+			                    	<% end %>
+							  		<div  class="portal-experience-flag">
+								       	<div class="<%= if current_user.id || 1==1 then "experience-flagged-yes img" else "experience-flagged-yes-nologin img" end %>
+									           	<%= if locals[:experience].hasUserFlagged == 1 then "flagged" end %>" id="experience-flagged-<%= locals[:experience].id %>-<%= i %>">
+									           	<%= locals[:experience].flagCount %>
+								       	</div>
+							    	</div>
+			                        <%= image_tag(image, id: "img-#{i+1}", alt: SecureRandom.uuid)%>
 			                    </div>
 			                    <% end %>
 			                </div>

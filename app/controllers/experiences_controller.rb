@@ -171,13 +171,19 @@ class ExperiencesController < ApplicationController
     def flagged 
         puts("STARTED FLAGGING")
         puts(params)
+        category = ""
+        if(params[:category] == "0")
+            category = "Experience"
+        else
+            category = "Image-"+params[:category]
+        end
+        
         if(params[:flag] == "0")
-            
             # puts "destroying flag"
             FlagExperience.where(experience_id: params[:expId]).where(user_id: current_user.id).destroy_all
         else 
             # puts "params of flag" + params[:flag].to_s
-            FlagExperience.create(:flag => params[:flag], :user_id => current_user.id, :experience_id => params[:expId])
+            FlagExperience.create(:flag => params[:flag], :user_id => current_user.id, :experience_id => params[:expId], :category => category)
         end
         
         @experience = Experience.left_outer_joins(:user).select("experiences.*,users.name as user_name").where(experiences: {id: params[:expId]}).first

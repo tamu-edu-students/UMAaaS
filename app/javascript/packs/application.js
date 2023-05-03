@@ -171,6 +171,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
       });
     }
   });
+  
   // add flag on a tip
     $(document).off('click', '.tip-flagged-yes').on('click', '.tip-flagged-yes', function(){
     
@@ -210,17 +211,20 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
     
     // and flag on an experience
     $(document).off('click', '.experience-flagged-yes').on('click', '.experience-flagged-yes', function(){
-    
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
-      
       var idParts = this.id.split("-");
       var expId = idParts[2];
+      var category = -1;
+      if($(this).hasClass("img")){
+        category = parseInt(idParts[3])+1;
+      } else {
+        category = 0;
+      }
       if($(this).hasClass("flagged")){
         console.log("marking flag as not flagged")
         $.ajax({
           type: "POST", 
           url: "/experience/flagged",
-          data: {expId: expId, flag: 0}, //0 means no flag 
+          data: {expId: expId, flag: 0, category: category}, //0 means no flag 
           dataType: "script",
           success: function(data, textStatus, jqXHR){
             window.location.reload();
@@ -233,7 +237,7 @@ document.addEventListener("turbolinks:load", function() {  // the site uses turb
         $.ajax({
           type: "POST", 
           url: "/experience/flagged",
-          data: {expId: expId, flag: 1},
+          data: {expId: expId, flag: 1, category: category},
           dataType: "script",
           success: function(data, textStatus, jqXHR){
             window.location.reload();

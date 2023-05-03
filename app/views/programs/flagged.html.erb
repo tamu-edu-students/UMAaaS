@@ -34,7 +34,7 @@
           <tr>
             <td><%= link_to "#{flagged_experience.experience.title}", experience_path(flagged_experience.experience) %></td>
             <td><%= link_to flagged_experience.experience.user.name, user_path(flagged_experience.experience.user) %></td>
-            <td>Experience</td>
+            <td><%= flagged_experience.category %></td>
             <td><%= flagged_experience.experience.created_at.strftime("%m/%d/%Y") %></td>
             <td><%= flagged_experience.user.name %></td>
             <td><%= flagged_experience.created_at.strftime("%m/%d/%Y") %></td></div></td>
