@@ -24,10 +24,7 @@
 				<% end %>
 			</div>
 			<% end %>
-			
-		  
-		  
-		  
+
 		 <style>
 		    .portal-experience-wrapper {
 			    position: relative;
@@ -179,12 +176,20 @@
 			  height: auto;
 			}
 
-			
+			.flag-elements {
+			    position: absolute;
+			    top: 0;
+			    right: 0;
+			    margin: 5px 5px 0px 0px;
+			    padding-right: 3px;
+			    display: flex;
+			    justify-content: space-between;
+			    align-items: center;
+			    background-color: rgba(255, 255, 255, 1);
+			}
 		
 		</style>
-
-				
-	
+		
 		<div id="myModal" class="modal">
 		  <div class="modal-content">
 		    <span class="close">&times;</span>
@@ -202,16 +207,18 @@
 		            <div class="carousel-inner<%= ' no-controls' if locals[:experience].images.size <= 1 %>">
 		              <% locals[:experience].images.each.with_index do |image, i| %>
 		            	<div class="carousel-item <%= 'active' if i == 0 %>">
-							<% if current_user.admin %>
-								<label style="margin-left: -50px; font-size: 15px; background: rgba(255, 255, 255, .5); padding: 0px 3px 0px 3px" for=<%= "img-#{i+1}" %>><%= "img-#{i+1}"%></label>
-							<% end %>
-							<div  class="portal-experience-flag">
-								<div class="<%= if current_user.id || 1==1 then "experience-flagged-yes img" else "experience-flagged-yes-nologin img" end %>
-									<%= if locals[:experience].hasUserFlagged == 1 then "flagged" end %>" id="experience-flagged-<%= locals[:experience].id %>-<%= i %>">
-									<%= locals[:experience].flagCount %>
+							<%= link_to image_tag(image, id: "img-#{i+1}", alt: SecureRandom.uuid), experience_path(locals[:experience]), class: 'modalLink', data: { target: '#myModal', image_url: url_for(image) } %>
+							<div class="flag-elements">
+								<% if current_user.admin %>
+									<label style="font-size: 15px; padding: 0px 8px 0px 3px; font-weight: bold;" for=<%= "img-#{i+1}" %>><%= "img-#{i+1}"%></label>
+								<% end %>
+								<div  class="portal-experience-flag">
+									<div class="<%= if current_user.id || 1==1 then "experience-flagged-yes img" else "experience-flagged-yes-nologin img" end %>
+										<%= if locals[:experience].hasUserFlagged == 1 then "flagged" end %>" id="experience-flagged-<%= locals[:experience].id %>-<%= i %>">
+										<%= locals[:experience].flagCount %>
+									</div>
 								</div>
 							</div>
-							<%= link_to image_tag(image, id: "img-#{i+1}", alt: SecureRandom.uuid), experience_path(locals[:experience]), class: 'modalLink', data: { target: '#myModal', image_url: url_for(image) } %>
 		                </div>
 		              <% end %>
 		            </div>
@@ -231,8 +238,6 @@
 		    <% end %>
 		  </div>
 		</div>
-		
-		
 		
 		<!-- Script for modal -->
 		<script>
@@ -266,31 +271,21 @@
 			});
 
 		</script>
-
-		
-
-
-	
-	
-	
-				
-
 			
-			
-			<div class="portal-experience-description">
-				<%= locals[:experience].experience%>
-			</div>
-			<div class="portal-experience-location">
-				<% if not locals[:experience].location.to_s == "" %>
-					<p>visit <a href=<%= "http://maps.google.com/?q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%></a> on Google Maps</p>
-					<br></br>
-					<iframe width="300" height="300" frameborder="0" style="border:0"
-						src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyBZYVMMPTrKi1i_pxf7ByjM2oYl6JRKeeI&q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%>
-						allowfullscreen>
-					</iframe>
-				<%end%>
-			</div>
-			<div class="portal-experience-info">
+		<div class="portal-experience-description">
+			<%= locals[:experience].experience%>
+		</div>
+		<div class="portal-experience-location">
+			<% if not locals[:experience].location.to_s == "" %>
+				<p>visit <a href=<%= "http://maps.google.com/?q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%></a> on Google Maps</p>
+				<br></br>
+				<iframe width="300" height="300" frameborder="0" style="border:0"
+					src=<%= "https://www.google.com/maps/embed/v1/place?key=AIzaSyBZYVMMPTrKi1i_pxf7ByjM2oYl6JRKeeI&q=" + locals[:experience].location.to_s.gsub(' ', '%20') + "+" + locals[:experience].street.to_s.gsub(' ', '%20') + "+" + locals[:experience].city.to_s.gsub(' ', '%20') + "+" + locals[:experience].postal_code.to_s.gsub(' ', '%20') %> target="_blank"><%= locals[:experience].location%>
+					allowfullscreen>
+				</iframe>
+			<%end%>
+		</div>
+		<div class="portal-experience-info">
 			<span class="portal-experience-info-user">
 				<% if locals[:experience].user.avatar.attached? %>
 				  <%= link_to user_path(locals[:experience].user), data: { turbolinks: false } do %>
@@ -314,17 +309,17 @@
 			<div class="portal-experience-rating-average">
 				Average: <%= locals[:experience].average_rating %>
 			</div>
-			</div>
+		</div>
          <div class="portal-experience-rating">
-								<% if locals[:experience].rating.nil? %>
-									<%= content_tag :h4, " "%>
-								<% elsif locals[:experience].rating == 0 %>
-								<% elsif locals[:experience].rating == 1 %>
-								<% elsif locals[:experience].rating == 2 %>
-								<% elsif locals[:experience].rating == 3 %>
-								<% elsif locals[:experience].rating == 4 %>
-								<% elsif locals[:experience].rating == 5 %>
-								<% end %>
+			<% if locals[:experience].rating.nil? %>
+				<%= content_tag :h4, " "%>
+			<% elsif locals[:experience].rating == 0 %>
+			<% elsif locals[:experience].rating == 1 %>
+			<% elsif locals[:experience].rating == 2 %>
+			<% elsif locals[:experience].rating == 3 %>
+			<% elsif locals[:experience].rating == 4 %>
+			<% elsif locals[:experience].rating == 5 %>
+			<% end %>
          </div>
      </div>
      <div class="portal-experience-comments">
