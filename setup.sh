@@ -18,6 +18,16 @@ else
   exit 1
 fi
 
+# Update the rvm to the latest version 
+echo -e "\033[32mInstalling latest rvm version...\033[0m"
+rvm get stable --auto
+if [ $? -eq 0 ]; then
+  echo -e "\033[32mLatest rvm installed successfully\033[0m"
+else
+  echo -e "\033[31mFailed to install rvm.\033[0m"
+  exit 1
+fi
+
 # Load use Ruby 3.1.3 with either RVM or RBENV
 if source "$HOME/.rvm/scripts/rvm" ; then
   echo -e "\033[32mRVM detected, installing Ruby 3.1.3 with RVM...\033[0m"
@@ -64,8 +74,9 @@ else
   exit 1
 fi
 
-echo -e "\033[32mInstalling SQLite3 and its dependencies with apt-get...\033[0m"
-sudo apt-get install sqlite3 libsqlite3-dev
+echo -e "\033[32mInstalling SQLite3 and its dependencies with yum...\033[0m"
+sudo yum install postgresql-devel
+sudo amazon-linux-extras install postgresql10
 if [ $? -eq 0 ]; then
   echo -e "\033[32mSQLite3 and its dependencies installed successfully!\033[0m"
 else

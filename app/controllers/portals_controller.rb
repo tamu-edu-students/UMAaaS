@@ -3,7 +3,7 @@
 class PortalsController < ApplicationController
   helper_method :has_program?,
                 def has_program?
-                  puts params
+                  # puts params
                   participant = Participant.find_by(email: current_user.email, program_id: params[:id])
                   !participant.nil?
                 end
@@ -139,7 +139,7 @@ class PortalsController < ApplicationController
   # @experiences = Experience.left_outer_joins(:user).left_outer_joins(:yelp_location).select('experiences.*,users.name as user_name,yelp_locations.name as yelp_name, yelp_locations.address as yelp_address, yelp_locations.alias as yelp_alias, yelp_locations.url as yelp_url, yelp_locations.image_url as yelp_image_url, yelp_locations.rating as yelp_rating').where(experiences: { program_id: params[:id] }).where(users: { banned: false }).order(rating: :desc)
 
 
-puts("Hello")
+# puts("Hello")
     searchResults = []
 
     # for each experience get the comments associated with it and calculate the average rating
@@ -173,10 +173,10 @@ puts("Hello")
       
       comment = ExperienceComment.where.not(rating: nil).find_by(user_id: current_user.id, experience_id: exp.id)
       if !comment.nil?
-          puts "commented true"
+          # puts "commented true"
           exp.commented = true
       else 
-          puts "commented false"
+          # puts "commented false"
           exp.commented = false
       end
       
@@ -200,7 +200,14 @@ puts("Hello")
       rating_count = ExperienceComment.left_outer_joins(:user).where(experience_id: exp.id).where(users: { banned: false }).where.not(rating: nil).count(:id)
       rating_count += 1 # add 1 for the original rating
       exp.average_rating = (rating_sum.to_f / rating_count).round(1)
-
+      
+      exp.hasUserBookmarked = 0
+      bookmarked = Bookmark.select("bookmarked").where(experience_id: exp.id).where(user_id: current_user.id).first
+      if not bookmarked.nil?
+          if bookmarked.bookmarked == 1
+              exp.hasUserBookmarked = 1
+          end
+      end
       if found
         searchResults.push(exp) # only records matching the search term, if there is one, will be added to searchResults
       end
